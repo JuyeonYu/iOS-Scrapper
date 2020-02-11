@@ -29,13 +29,33 @@ class KeywordViewController: UIViewController {
         
         // MARK: - get data for tableview
         for i in 0...10 {
-            let keyword: Keyword = Keyword(keyword: "keyword\(i)", desc: "desc", publishDate: nil, link: nil, image: nil)
+            let keyword: Keyword = Keyword(keyword: "keyword\(i)")
             keywordList.append(keyword)
         }
     }
     
     @objc func rightBarButtonDidClick() {
-        print(1)
+        let title = "키워드"
+                let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+                
+                alert.addTextField { (tf) in
+                    tf.placeholder = "키워드를 입력하세요"
+                }
+                
+                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let ok = UIAlertAction(title: "추가", style: .default) { (_) in
+                    
+        //            TODO: - guard let 구문 사용 불가? 어떻게 사용해야 할지 모르겠음
+                    let text = alert.textFields?[0].text
+                    if text?.count != 0 {
+                        let keyword = Keyword(keyword: text!)
+                        self.keywordList.append(keyword)
+                        self.tableView.reloadData()
+                    }
+                }
+                alert.addAction(cancel)
+                alert.addAction(ok)
+                self.present(alert, animated: true)
     }
 }
 

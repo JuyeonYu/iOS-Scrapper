@@ -10,16 +10,7 @@ import UIKit
 
 class Keyword: NSObject {
     let keyword: String
-    let desc: String
-    let publishDate: Date?
-    let link: URL?
-    let image: URL?
-    
-    init(keyword: String, desc: String, publishDate: Date?, link:URL?, image: URL?) {
+    init(keyword: String) {
         self.keyword = keyword
-        self.desc = desc
-        self.publishDate = publishDate
-        self.link = link
-        self.image = image
     }
 }

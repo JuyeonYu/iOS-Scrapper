@@ -35,7 +35,27 @@ class CategortyViewController: UIViewController {
     }
     
     @objc func rightBarButtonDidClick() {
-        print(1)
+        let title = "카테고리"
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { (tf) in
+            tf.placeholder = "카테고리를 입력하세요"
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let ok = UIAlertAction(title: "추가", style: .default) { (_) in
+            
+//            TODO: - guard let 구문 사용 불가? 어떻게 사용해야 할지 모르겠음
+            let text = alert.textFields?[0].text
+            if text?.count != 0 {
+                let category = Category(category: text!)
+                self.categoryList.append(category)
+                self.tableView.reloadData()
+            }
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true)
     }
 }
 
