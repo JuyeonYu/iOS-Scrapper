@@ -17,6 +17,8 @@ class KeywordViewController: UIViewController {
         
         // MARK: - Navigation setting
         self.navigationItem.title = "키워드"
+        let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(rightBarButtonDidClick))
+        self.navigationItem.rightBarButtonItem = rightButtonItem
 
         // MARK: - Tableview setting
         tableView.delegate = self
@@ -30,6 +32,10 @@ class KeywordViewController: UIViewController {
             let keyword: Keyword = Keyword(keyword: "keyword\(i)", desc: "desc", publishDate: nil, link: nil, image: nil)
             keywordList.append(keyword)
         }
+    }
+    
+    @objc func rightBarButtonDidClick() {
+        print(1)
     }
 }
 

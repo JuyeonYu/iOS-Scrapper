@@ -12,26 +12,26 @@ class NewsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var newsList: [News] = []
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            // MARK: - Navigation setting
-            self.navigationItem.title = "뉴스"
-            
-            // MARK: - Tableview setting
-            tableView.delegate = self
-            tableView.dataSource = self
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // MARK: - Navigation setting
+        self.navigationItem.title = "뉴스"
+        
+        // MARK: - Tableview setting
+        tableView.delegate = self
+        tableView.dataSource = self
 
-            let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
-            tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
+        let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
 //
 //            // MARK: - get data for tableview
-            for i in 0...10 {
-                let news: News = News(title: "news\(i)")
-                newsList.append(news)
-            }
+        for i in 0...10 {
+            let news: News = News(title: "news\(i)")
+            newsList.append(news)
         }
     }
+}
 
     extension NewsViewController: UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

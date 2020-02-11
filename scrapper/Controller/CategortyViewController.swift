@@ -16,8 +16,9 @@ class CategortyViewController: UIViewController {
         super.viewDidLoad()
         
         // MARK: - Navigation setting
-//        self.navigationController?.navigationBar.topItem?.title = "카테고리"
         self.navigationItem.title = "카테고리"
+        let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(rightBarButtonDidClick))
+        self.navigationItem.rightBarButtonItem = rightButtonItem
         
         // MARK: - Tableview setting
         tableView.delegate = self
@@ -31,6 +32,10 @@ class CategortyViewController: UIViewController {
             let category: Category = Category(category: "category\(i)")
             categoryList.append(category)
         }
+    }
+    
+    @objc func rightBarButtonDidClick() {
+        print(1)
     }
 }
 
