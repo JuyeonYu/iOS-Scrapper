@@ -114,6 +114,9 @@
                         <viewLayoutGuide key="safeArea" id="DIB-vK-X4O"/>
                     </view>
                     <navigationItem key="navigationItem" id="5qp-XE-ZZf"/>
+                    <connections>
+                        <outlet property="tableView" destination="VJl-N4-RX1" id="d3S-Jl-bPF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag4-H3-3yc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -150,7 +153,7 @@
         <!--category-->
         <scene sceneID="jkH-1I-EF6">
             <objects>
-                <viewController id="Z0P-JE-GtP" userLabel="category" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategortyViewController" id="Z0P-JE-GtP" userLabel="category" customClass="CategortyViewController" customModule="scrapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCt-9N-CJ8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,6 +168,9 @@
                         <viewLayoutGuide key="safeArea" id="CjJ-Lj-Svb"/>
                     </view>
                     <navigationItem key="navigationItem" id="LHr-zg-8G6"/>
+                    <connections>
+                        <outlet property="tableView" destination="UMy-7I-qPj" id="IL6-fR-Yew"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roj-oI-KOU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -173,7 +179,7 @@
         <!--news-->
         <scene sceneID="PrQ-oH-MK5">
             <objects>
-                <viewController id="Wpy-5F-Dus" userLabel="news" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsViewController" id="Wpy-5F-Dus" userLabel="news" customClass="NewsViewController" customModule="scrapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LPs-DP-0sH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,6 +193,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="JeZ-5q-RWv"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="dgu-8s-VA3" id="VkA-OT-S9o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mN-OR-wOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -225,12 +234,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="1T2-33-RiP" kind="relationship" relationship="rootViewController" id="1NA-ze-weV"/>
+                        <segue destination="1T2-33-RiP" kind="relationship" relationship="rootViewController" id="vf6-KK-62C"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LD1-XA-hpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1885.5072463768117" y="-172.09821428571428"/>
+            <point key="canvasLocation" x="1886" y="-172"/>
         </scene>
         <!--Item4-->
         <scene sceneID="iOB-TR-Da3">
