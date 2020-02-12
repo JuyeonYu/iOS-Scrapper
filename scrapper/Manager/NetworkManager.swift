@@ -15,11 +15,10 @@ class NetworkManager {
     init() {}
     
     func requestKeywordList(completion: @escaping ([String]?) -> Void) {
-        let url = "http://15.164.97.144:5000/mainKeyword"
-        let param = ["userid":"jill"]
+        let url = Constants.baseURL + Constants.mainKeyword
+        let param = [Constants.userid:"jill"]
         
-        AF.request(url, parameters: param, encoder: URLEncodedFormParameterEncoder(destination: .methodDependent)).responseJSON { response in
-//            debugPrint("Response: \(response)")
+        AF.request(url, parameters: param).responseJSON { response in
             switch response.result {
             case .success(let obj):
                 guard let keywordList = obj as? Array<String> else {

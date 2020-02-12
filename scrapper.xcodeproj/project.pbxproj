@@ -10,6 +10,7 @@
 		2B423B631B6B93871935275B /* Pods_scrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B8B73B69D0B14133E5E3B2C /* Pods_scrapper.framework */; };
 		B520381123F30A280025B571 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520381023F30A280025B571 /* NetworkManager.swift */; };
 		B520381823F3CE500025B571 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520381723F3CE500025B571 /* APIConstant.swift */; };
+		B520383723F3D99A0025B571 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520383623F3D99A0025B571 /* Constant.swift */; };
 		B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5460C2123F28A20002A199E /* KeywordViewController.swift */; };
 		B5460C2923F28BE2002A199E /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5460C2823F28BE2002A199E /* Keyword.swift */; };
 		B5460C2E23F28EB9002A199E /* KeywordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5460C2C23F28EB9002A199E /* KeywordTableViewCell.swift */; };
@@ -36,6 +37,7 @@
 		9F87F1596BC1A78054548C59 /* Pods-scrapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scrapper.release.xcconfig"; path = "Target Support Files/Pods-scrapper/Pods-scrapper.release.xcconfig"; sourceTree = "<group>"; };
 		B520381023F30A280025B571 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B520381723F3CE500025B571 /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
+		B520383623F3D99A0025B571 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B5460C2123F28A20002A199E /* KeywordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewController.swift; sourceTree = "<group>"; };
 		B5460C2823F28BE2002A199E /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		B5460C2C23F28EB9002A199E /* KeywordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordTableViewCell.swift; sourceTree = "<group>"; };
@@ -174,9 +176,10 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
-		B520382E23F3D0D30025B571 /* Common */ = {
+		B520383323F3D5D70025B571 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B520383623F3D99A0025B571 /* Constant.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -206,8 +209,8 @@
 				B520381923F3CF180025B571 /* Login */,
 				B520382123F3D00C0025B571 /* News */,
 				B520380F23F309900025B571 /* Manager */,
-				B520382E23F3D0D30025B571 /* Common */,
 				B520382D23F3D0930025B571 /* Support Files */,
+				B520383323F3D5D70025B571 /* Common */,
 			);
 			path = scrapper;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			files = (
 				B5460C3123F2A45B002A199E /* CategortyViewController.swift in Sources */,
 				B5460C3C23F2B0DA002A199E /* NewsTableViewCell.swift in Sources */,
+				B520383723F3D99A0025B571 /* Constant.swift in Sources */,
 				B5486D8F23F23461008A5ABD /* LoginViewController.swift in Sources */,
 				B520381123F30A280025B571 /* NetworkManager.swift in Sources */,
 				B5460C2923F28BE2002A199E /* Keyword.swift in Sources */,

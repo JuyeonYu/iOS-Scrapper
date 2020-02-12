@@ -28,12 +28,17 @@ class KeywordViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
         
         // MARK: - get data for tableview
-        for i in 0...10 {
-            let keyword: Keyword = Keyword(keyword: "keyword\(i)")
-            keywordList.append(keyword)
+        NetworkManager.sharedInstance.requestKeywordList { (response) in
+            guard let keywordListFromDB = response else {
+                return
+            }
+            
+            for keyword in keywordListFromDB {
+                let keyword: Keyword = Keyword(keyword: keyword)
+                self.keywordList.append(keyword)
+                self.tableView.reloadData()
+            }
         }
-        
-//        NetworkManager.sharedInstance.requestKeywordList
     }
     
     @objc func rightBarButtonDidClick() {
@@ -52,7 +57,7 @@ class KeywordViewController: UIViewController {
                     }
                     let keyword = Keyword(keyword: text!)
                     self.keywordList.append(keyword)
-                    self.tableView.reloadData()                    
+                    self.tableView.reloadData()
                 }
                 alert.addAction(cancel)
                 alert.addAction(ok)
