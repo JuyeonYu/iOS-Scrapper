@@ -28,15 +28,22 @@ class KeywordViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
         
         // MARK: - get data for tableview
-        NetworkManager.sharedInstance.requestKeywordList { (response) in
-            guard let keywordListFromDB = response else {
+        NetworkManager.sharedInstance.requestKeywordList2(userid: "jill") { (response) in
+            guard let restAPIResponse = response else {
                 return
             }
             
-            for keyword in keywordListFromDB {
-                let keyword: Keyword = Keyword(keyword: keyword)
-                self.keywordList.append(keyword)
-                self.tableView.reloadData()
+            if restAPIResponse.isSuccess {
+                guard let keywordList = restAPIResponse.keywordList else {
+                    return
+                }
+                for keyword in keywordList {
+                    let keyword: Keyword = Keyword(keyword: keyword.keyword, idx_keyword: keyword.idx_keyword)
+                    self.keywordList.append(keyword)
+                    self.tableView.reloadData()
+                }
+            } else {
+                // TODO: fail case
             }
         }
     }
@@ -55,8 +62,8 @@ class KeywordViewController: UIViewController {
                     guard (text != "") else {
                         return
                     }
-                    let keyword = Keyword(keyword: text!)
-                    self.keywordList.append(keyword)
+//                    let keyword = Keyword(keyword: text!, index: nil)
+//                    self.keywordList.append(keyword)
                     self.tableView.reloadData()
                 }
                 alert.addAction(cancel)

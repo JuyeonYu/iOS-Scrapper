@@ -8,7 +8,7 @@
 
 import UIKit
 
-class News: NSObject {
+class News: Codable {
     let title: String
     
     init(title: String) {
