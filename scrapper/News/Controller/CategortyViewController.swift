@@ -47,11 +47,12 @@ class CategortyViewController: UIViewController {
             
 //            TODO: - guard let 구문 사용 불가? 어떻게 사용해야 할지 모르겠음
             let text = alert.textFields?[0].text
-            if text?.count != 0 {
-                let category = Category(category: text!)
-                self.categoryList.append(category)
-                self.tableView.reloadData()
+            guard (text != "") else {
+                return
             }
+            let category = Category(category: text!)
+            self.categoryList.append(category)
+            self.tableView.reloadData()  
         }
         alert.addAction(cancel)
         alert.addAction(ok)

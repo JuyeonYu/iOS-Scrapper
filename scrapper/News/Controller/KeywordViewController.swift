@@ -32,6 +32,8 @@ class KeywordViewController: UIViewController {
             let keyword: Keyword = Keyword(keyword: "keyword\(i)")
             keywordList.append(keyword)
         }
+        
+//        NetworkManager.sharedInstance.requestKeywordList
     }
     
     @objc func rightBarButtonDidClick() {
@@ -44,14 +46,13 @@ class KeywordViewController: UIViewController {
                 
                 let cancel = UIAlertAction(title: "취소", style: .cancel)
                 let ok = UIAlertAction(title: "추가", style: .default) { (_) in
-                    
-        //            TODO: - guard let 구문 사용 불가? 어떻게 사용해야 할지 모르겠음
                     let text = alert.textFields?[0].text
-                    if text?.count != 0 {
-                        let keyword = Keyword(keyword: text!)
-                        self.keywordList.append(keyword)
-                        self.tableView.reloadData()
+                    guard (text != "") else {
+                        return
                     }
+                    let keyword = Keyword(keyword: text!)
+                    self.keywordList.append(keyword)
+                    self.tableView.reloadData()                    
                 }
                 alert.addAction(cancel)
                 alert.addAction(ok)
