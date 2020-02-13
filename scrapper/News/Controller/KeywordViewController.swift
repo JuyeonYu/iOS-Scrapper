@@ -91,7 +91,13 @@ class KeywordViewController: UIViewController {
 
 extension KeywordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc: UIViewController = self.storyboard?.instantiateViewController(identifier: "CategortyViewController") as! CategortyViewController
+        let row = indexPath.row
+        let keyword = self.keywordListRealm[row].keyword
+        
+        let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
+        vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
+        vc.searchKeyword = keyword
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
         
@@ -123,15 +129,5 @@ extension KeywordViewController: UITableViewDataSource {
         let row = indexPath.row
         cell.titleLabel.text = keywordListRealm[row].keyword
         return cell
-    }
-}
-
-extension Realm {
-    public func safeWrite(_ block: (() throws -> Void)) throws {
-        if isInWriteTransaction {
-            try block()
-        } else {
-            try write(block)
-        }
     }
 }

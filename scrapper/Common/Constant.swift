@@ -12,4 +12,11 @@ struct Constants {
     static let baseURL = "http://15.164.97.144:5000/"
     static let mainKeyword = "mainKeyword"
     static let userid = "userid"
+    
+    static let naverNewsAPIBaseURL = "https://openapi.naver.com/v1/search/news.json?query="
+    static let naverNewsAPDisplayParameter = "&display="
+    static let naverNewsAPIStartPageParameter = "&start="
+    static let naverNewsAPIStartSortParameter = "&sort="
 }
+
+

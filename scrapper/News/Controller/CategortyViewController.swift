@@ -62,7 +62,7 @@ class CategortyViewController: UIViewController {
 
 extension CategortyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc: UIViewController = self.storyboard?.instantiateViewController(identifier: "NewsViewController") as! NewsViewController
+        let vc: UIViewController = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -72,4 +72,40 @@ class NetworkManager {
             }
         }
     }
+    
+    func requestNaverNewsList(keyword: String, completion: @escaping ([String]?) -> Void) {
+        let url = "https://openapi.naver.com/v1/search/news.json"
+        let param = ["query":keyword, "display":"10", "start":"1", "sort":"date"]
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "X-Naver-Client-Id": "zmO4KBQdHToxqh6FfuDv",
+            "X-Naver-Client-Secret": "88YmMc4b62"
+        ]
+        
+        AF.request(url, parameters: param, headers: headers).responseJSON { response in
+            switch response.result {
+            case .success(let obj):
+                debugPrint(response)
+            case .failure(let e):
+                print(e.localizedDescription)
+            }
+        }
+        
+//        AF.request(url, parameters: param).responseJSON { response in
+//            switch response.result {
+//            case .success(let obj):
+//                guard let keywordList = obj as? Array<String> else {
+//                    return
+//                }
+//                completion(keywordList)
+//
+//                break
+//
+//            case .failure(let e):
+//                print(e.localizedDescription)
+//                break
+//            }
+//        }
+    }
+    
 }
