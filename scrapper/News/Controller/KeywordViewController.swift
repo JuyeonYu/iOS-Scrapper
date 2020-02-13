@@ -31,10 +31,9 @@ class KeywordViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
         
         // MARK: - get data for tableview
-        let keywordInRealm = realm.objects(KeywordRealm.self)
-        
-        for keyword in keywordInRealm {
+        for keyword in realm.objects(KeywordRealm.self) {
             print(keyword.keyword)
+            keywordListRealm.append(keyword)
         }
         
         // TODO: 네트워크는 나중에 추가
@@ -95,6 +94,23 @@ extension KeywordViewController: UITableViewDelegate {
         let vc: UIViewController = self.storyboard?.instantiateViewController(identifier: "CategortyViewController") as! CategortyViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+        
+    // 오른쪽으로 밀어서 메뉴 보는 함수
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            // realm에서 먼저 삭제 한다.
+            try! self.realm.write{
+                self.realm.delete(self.keywordListRealm[indexPath.row])
+            }
+            
+            // 리스트에서 삭제한다.
+            self.keywordListRealm.remove(at: indexPath.row)
+            tableView.reloadData()
+            success(true)
+        })
+        return UISwipeActionsConfiguration(actions:[deleteAction])
+    }
 }
 
 extension KeywordViewController: UITableViewDataSource {
@@ -107,5 +123,15 @@ extension KeywordViewController: UITableViewDataSource {
         let row = indexPath.row
         cell.titleLabel.text = keywordListRealm[row].keyword
         return cell
+    }
+}
+
+extension Realm {
+    public func safeWrite(_ block: (() throws -> Void)) throws {
+        if isInWriteTransaction {
+            try block()
+        } else {
+            try write(block)
+        }
     }
 }
