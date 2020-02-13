@@ -8,5 +8,6 @@ target 'scrapper' do
   # Pods for scrapper
 
 pod 'Alamofire', '~> 5.0.0-rc.3'
+pod 'RealmSwift'
 
 end

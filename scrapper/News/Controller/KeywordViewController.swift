@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class KeywordViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var keywordList: [Keyword] = []
+    var keywordListRealm: [KeywordRealm] = []
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,24 +31,31 @@ class KeywordViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
         
         // MARK: - get data for tableview
-        NetworkManager.sharedInstance.requestKeywordList2(userid: "jill") { (response) in
-            guard let restAPIResponse = response else {
-                return
-            }
-            
-            if restAPIResponse.isSuccess {
-                guard let keywordList = restAPIResponse.keywordList else {
-                    return
-                }
-                for keyword in keywordList {
-                    let keyword: Keyword = Keyword(keyword: keyword.keyword, idx_keyword: keyword.idx_keyword)
-                    self.keywordList.append(keyword)
-                    self.tableView.reloadData()
-                }
-            } else {
-                // TODO: fail case
-            }
+        let keywordInRealm = realm.objects(KeywordRealm.self)
+        
+        for keyword in keywordInRealm {
+            print(keyword.keyword)
         }
+        
+        // TODO: 네트워크는 나중에 추가
+//        NetworkManager.sharedInstance.requestKeywordList2(userid: "jill") { (response) in
+//            guard let restAPIResponse = response else {
+//                return
+//            }
+//
+//            if restAPIResponse.isSuccess {
+//                guard let keywordList = restAPIResponse.keywordList else {
+//                    return
+//                }
+//                for keyword in keywordList {
+//                    let keyword: Keyword = Keyword(keyword: keyword.keyword, idx_keyword: keyword.idx_keyword)
+//                    self.keywordList.append(keyword)
+//                    self.tableView.reloadData()
+//                }
+//            } else {
+//                // TODO: fail case
+//            }
+//        }
     }
     
     @objc func rightBarButtonDidClick() {
@@ -64,6 +74,13 @@ class KeywordViewController: UIViewController {
                     }
 //                    let keyword = Keyword(keyword: text!, index: nil)
 //                    self.keywordList.append(keyword)
+                    
+                    let keywordRealm = KeywordRealm()
+                    keywordRealm.keyword = text!
+                    try! self.realm.write {
+                        self.realm.add(keywordRealm)
+                    }
+                    self.keywordListRealm.append(keywordRealm)
                     self.tableView.reloadData()
                 }
                 alert.addAction(cancel)
@@ -82,13 +99,13 @@ extension KeywordViewController: UITableViewDelegate {
 
 extension KeywordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return keywordList.count
+        return keywordListRealm.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "KeywordTableViewCell", for: indexPath) as! KeywordTableViewCell
         let row = indexPath.row
-        cell.titleLabel.text = keywordList[row].keyword
+        cell.titleLabel.text = keywordListRealm[row].keyword
         return cell
     }
 }
