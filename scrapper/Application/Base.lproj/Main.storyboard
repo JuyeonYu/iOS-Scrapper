@@ -207,8 +207,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ue3-rF-5hW">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
@@ -217,10 +217,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Ano-Vz-ruI" firstAttribute="trailing" secondItem="Ue3-rF-5hW" secondAttribute="trailing" constant="20" id="2E8-Ga-R6X"/>
-                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="top" secondItem="Ano-Vz-ruI" secondAttribute="top" id="abQ-h1-DBy"/>
-                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="leading" secondItem="Ano-Vz-ruI" secondAttribute="leading" constant="20" id="cYH-jl-1EY"/>
-                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="bottom" secondItem="Ano-Vz-ruI" secondAttribute="bottom" id="keI-f1-NIO"/>
+                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="bottom" secondItem="Ano-Vz-ruI" secondAttribute="bottom" id="GYI-zb-YEm"/>
+                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="trailing" secondItem="Ano-Vz-ruI" secondAttribute="trailing" id="qee-Q2-He6"/>
+                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="leading" secondItem="Ano-Vz-ruI" secondAttribute="leading" id="u46-3U-gd3"/>
+                            <constraint firstItem="Ue3-rF-5hW" firstAttribute="top" secondItem="Ano-Vz-ruI" secondAttribute="top" id="yML-Oa-vPu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ano-Vz-ruI"/>
                     </view>

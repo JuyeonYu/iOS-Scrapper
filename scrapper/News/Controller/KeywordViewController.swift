@@ -32,7 +32,6 @@ class KeywordViewController: UIViewController {
         
         // MARK: - get data for tableview
         for keyword in realm.objects(KeywordRealm.self) {
-            print(keyword.keyword)
             keywordListRealm.append(keyword)
         }
         
