@@ -1,85 +1,82 @@
 //
-//  NewsListViewController.swift
+//  BookMarkViewController.swift
 //  scrapper
 //
-//  Created by 주연  유 on 2020/02/11.
+//  Created by 주연  유 on 2020/02/14.
 //  Copyright © 2020 johnny. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-class NewsListViewController: UIViewController {
+class BookMarkViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var newsList: [News] = []
-    var searchKeyword: String?
     let realm = try! Realm()
-        
+    var newsListRealm: [NewsRealm] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - Tableview setting
         tableView.delegate = self
         tableView.dataSource = self
+        self.navigationController?.tabBarController?.delegate = self
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
         
-        // 키워드 페이지에서 검색할 키워드를 줌
-        guard let keyword = searchKeyword else {
-            return
-        }
-
-        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword) { (result) in
-            guard let naverNews = result as? NaverNews else {
-                return
-            }
-            
-            for news in naverNews.items {
-                let news: News = News(title: news.title, urlString: news.link)
-                self.newsList.append(news)
-                self.tableView.reloadData()
-            }
+        // MARK: - get data for tableview
+        for news in realm.objects(NewsRealm.self) {
+            newsListRealm.append(news)
         }
     }
 }
 
-extension NewsListViewController: UITableViewDelegate {
+extension BookMarkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(identifier: "NewsViewController") as! NewsViewController
-        vc.newsURLString = newsList[indexPath.row].urlString
+        vc.newsURLString = newsListRealm[indexPath.row].urlString
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .normal, title:  "즐겨찾기", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            let news = self.newsList[indexPath.row]
-            let newsRealm = NewsRealm()
-            newsRealm.title = news.title
-            newsRealm.urlString = news.urlString
+        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
+            // realm에서 먼저 삭제 한다.
             try! self.realm.write {
-                self.realm.add(newsRealm)
+                self.realm.delete(self.newsListRealm[indexPath.row])
             }
             
+            // 리스트에서 삭제한다.
+            self.newsListRealm.remove(at: indexPath.row)
+            tableView.reloadData()
             success(true)
         })
         return UISwipeActionsConfiguration(actions:[deleteAction])
     }
 }
 
-extension NewsListViewController: UITableViewDataSource {
+extension BookMarkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsList.count
+        return newsListRealm.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         let row = indexPath.row
-        
-        cell.titleLabel.text = newsList[row].title
+        cell.titleLabel.text = newsListRealm[row].title
         return cell
     }
-    
-    
+}
+
+extension BookMarkViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 1 {
+            for news in realm.objects(NewsRealm.self) {
+                newsListRealm.append(news)
+            }
+        } else {
+            newsListRealm.removeAll()
+        }
+        self.tableView.reloadData()
+    }
 }

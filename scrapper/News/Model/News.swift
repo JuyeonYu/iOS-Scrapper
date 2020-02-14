@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import RealmSwift
 
 class News: Codable {
     let title: String
@@ -16,4 +18,9 @@ class News: Codable {
         self.title = title
         self.urlString = urlString
     }
+}
+
+class NewsRealm: Object {
+    @objc dynamic var title: String = ""
+    @objc dynamic var urlString: String = ""
 }

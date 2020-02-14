@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v0v-Y8-9E1">
-                                <rect key="frame" x="20" y="20" width="374" height="793"/>
+                                <rect key="frame" x="20" y="20" width="374" height="842"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -69,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iRJ-bo-qen">
-                                <rect key="frame" x="20" y="88" width="374" height="725"/>
+                                <rect key="frame" x="20" y="88" width="374" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -119,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="2653.6231884057975" y="-172.09821428571428"/>
         </scene>
-        <!--View Controller-->
+        <!--BookMarkViewController-->
         <scene sceneID="bdW-Ma-pqm">
             <objects>
-                <viewController id="g34-2a-8eI" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookMarkViewController" id="g34-2a-8eI" userLabel="BookMarkViewController" customClass="BookMarkViewController" customModule="scrapper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jPq-Ws-j71">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,6 +142,9 @@
                         <viewLayoutGuide key="safeArea" id="jvS-xV-0Ng"/>
                     </view>
                     <navigationItem key="navigationItem" id="sgY-hT-bpi"/>
+                    <connections>
+                        <outlet property="tableView" destination="90o-n0-YvT" id="CSL-PM-sfd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KY5-CN-mgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -245,19 +248,17 @@
                     <connections>
                         <segue destination="RFI-TM-lZk" kind="relationship" relationship="viewControllers" id="ome-5o-u0U"/>
                         <segue destination="ZVn-kA-M2k" kind="relationship" relationship="viewControllers" id="2oo-m5-c2b"/>
-                        <segue destination="37P-9y-OEe" kind="relationship" relationship="viewControllers" id="bqS-A8-zfT"/>
-                        <segue destination="FZI-Gf-YBX" kind="relationship" relationship="viewControllers" id="FMl-eP-LmH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gI-Lf-mSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="958" y="139"/>
         </scene>
-        <!--Item 1-->
+        <!--Navigation Controller-->
         <scene sceneID="RXl-q0-Qw1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RFI-TM-lZk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="HO6-DD-C4h"/>
+                    <tabBarItem key="tabBarItem" title="" image="house.fill" catalog="system" id="HO6-DD-C4h"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nsq-Vt-89n">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -291,11 +292,11 @@
             </objects>
             <point key="canvasLocation" x="1898.5507246376812" y="1871.6517857142856"/>
         </scene>
-        <!--Item2-->
+        <!--Navigation Controller-->
         <scene sceneID="Kol-UL-ceY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZVn-kA-M2k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item2" id="eEW-8h-D23"/>
+                    <tabBarItem key="tabBarItem" title="" image="bookmark.fill" catalog="system" id="eEW-8h-D23"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s9w-kN-ZAd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -330,4 +331,8 @@
             <point key="canvasLocation" x="1886" y="1167"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bookmark.fill" catalog="system" width="56" height="64"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+    </resources>
 </document>

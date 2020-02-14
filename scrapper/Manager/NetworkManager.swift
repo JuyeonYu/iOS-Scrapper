@@ -75,7 +75,7 @@ class NetworkManager {
     
     func requestNaverNewsList(keyword: String, completion: @escaping (Any) -> Void) {
         let url = "https://openapi.naver.com/v1/search/news.json"
-        let param = ["query":keyword, "display":"30", "start":"1", "sort":"date"]
+        let param = ["query":keyword, "display":"100", "start":"1", "sort":"date"]
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "X-Naver-Client-Id": "zmO4KBQdHToxqh6FfuDv",

@@ -105,7 +105,7 @@ extension KeywordViewController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             // realm에서 먼저 삭제 한다.
-            try! self.realm.write{
+            try! self.realm.write {
                 self.realm.delete(self.keywordListRealm[indexPath.row])
             }
             
