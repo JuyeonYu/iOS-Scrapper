@@ -29,6 +29,7 @@
 		B5486D9223F23461008A5ABD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5486D9023F23461008A5ABD /* Main.storyboard */; };
 		B5486D9423F23463008A5ABD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5486D9323F23463008A5ABD /* Assets.xcassets */; };
 		B5486D9723F23463008A5ABD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5486D9523F23463008A5ABD /* LaunchScreen.storyboard */; };
+		B565A5BD23F58726001055CF /* NaverNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5BC23F58726001055CF /* NaverNews.swift */; };
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		B5486D9323F23463008A5ABD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5486D9623F23463008A5ABD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5486D9823F23463008A5ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B565A5BC23F58726001055CF /* NaverNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverNews.swift; sourceTree = "<group>"; };
 		B57E879123F2EA2B002FC196 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				B5460C2823F28BE2002A199E /* Keyword.swift */,
+				B565A5BC23F58726001055CF /* NaverNews.swift */,
 				B5460C3423F2A6EC002A199E /* Category.swift */,
 				B57E879123F2EA2B002FC196 /* News.swift */,
 			);
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5460C3123F2A45B002A199E /* CategortyViewController.swift in Sources */,
+				B565A5BD23F58726001055CF /* NaverNews.swift in Sources */,
 				B5460C3C23F2B0DA002A199E /* NewsTableViewCell.swift in Sources */,
 				B520383723F3D99A0025B571 /* Constant.swift in Sources */,
 				B5486D8F23F23461008A5ABD /* LoginViewController.swift in Sources */,

@@ -9,24 +9,26 @@
 import UIKit
 import WebKit
 
-class NewsViewController: UIViewController {
-    
+class NewsViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     @IBOutlet weak var webview: WKWebView!
+    var newsURLString: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        webview.uiDelegate = self
+        webview.navigationDelegate = self
         
-        // Do any additional setup after loading the view.
+        let test = "http://www.naver.com"
+        let testURL = URL(string: test)!
+        let urlRequest = URLRequest(url: testURL)
+        webview.load(urlRequest)
+//        if let encoded = newsURLString!.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),let myURL = URL(string: encoded){
+//            print(myURL)
+//            let urlRequest = URLRequest(url: myURL)
+//            wkWebview.load(urlRequest)
+//        }
+
+
+        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

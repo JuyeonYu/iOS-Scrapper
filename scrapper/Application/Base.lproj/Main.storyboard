@@ -225,8 +225,7 @@
                         <viewLayoutGuide key="safeArea" id="Ano-Vz-ruI"/>
                     </view>
                     <connections>
-                        <outlet property="webview" destination="Ue3-rF-5hW" id="vBZ-jR-Z6Q"/>
-                        <outlet property="wkWebView" destination="Ue3-rF-5hW" id="4Kh-Up-K6T"/>
+                        <outlet property="webview" destination="Ue3-rF-5hW" id="mJC-Zg-f4S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McI-QC-Ijz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

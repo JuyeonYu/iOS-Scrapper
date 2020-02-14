@@ -10,8 +10,10 @@ import UIKit
 
 class News: Codable {
     let title: String
+    let urlString: String
     
-    init(title: String) {
+    init(title: String, urlString: String) {
         self.title = title
+        self.urlString = urlString
     }
 }
