@@ -51,7 +51,20 @@ extension BookMarkViewController: UITableViewDelegate {
             tableView.reloadData()
             success(true)
         })
-        return UISwipeActionsConfiguration(actions:[deleteAction])
+                
+        let shareAction = UIContextualAction(style: .normal, title:  "공유", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let row = indexPath.row
+            let newsTitle = self.newsListRealm[row].title
+            let newsURL = self.newsListRealm[row].urlString
+            let newsArray = [newsTitle, newsURL]
+            
+            let activityViewController = UIActivityViewController(activityItems: newsArray, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+                        
+            success(true)
+        })
+        return UISwipeActionsConfiguration(actions:[deleteAction, shareAction])
     }
 }
 

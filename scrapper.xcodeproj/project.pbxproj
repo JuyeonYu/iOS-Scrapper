@@ -31,6 +31,7 @@
 		B5486D9723F23463008A5ABD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5486D9523F23463008A5ABD /* LaunchScreen.storyboard */; };
 		B565A5BD23F58726001055CF /* NaverNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5BC23F58726001055CF /* NaverNews.swift */; };
 		B565A5BF23F64243001055CF /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5BE23F64243001055CF /* BookMarkViewController.swift */; };
+		B565A5C123F669FA001055CF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5C023F669FA001055CF /* Util.swift */; };
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		B5486D9823F23463008A5ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B565A5BC23F58726001055CF /* NaverNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverNews.swift; sourceTree = "<group>"; };
 		B565A5BE23F64243001055CF /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
+		B565A5C023F669FA001055CF /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B57E879123F2EA2B002FC196 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 			children = (
 				B520383623F3D99A0025B571 /* Constant.swift */,
 				B520383A23F3F0DC0025B571 /* RestAPIResponse.swift */,
+				B565A5C023F669FA001055CF /* Util.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */,
 				B565A5BF23F64243001055CF /* BookMarkViewController.swift in Sources */,
 				B57E879223F2EA2B002FC196 /* News.swift in Sources */,
+				B565A5C123F669FA001055CF /* Util.swift in Sources */,
 				B5460C3823F2B0CA002A199E /* CategoryTableViewCell.swift in Sources */,
 				B50126FA23F550980063797E /* NewsViewController.swift in Sources */,
 				B5460C3523F2A6EC002A199E /* Category.swift in Sources */,

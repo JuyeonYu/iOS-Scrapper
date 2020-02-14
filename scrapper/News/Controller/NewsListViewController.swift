@@ -24,8 +24,8 @@ class NewsListViewController: UIViewController {
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
-        
-        // 키워드 페이지에서 검색할 키워드를 줌
+
+//        키워드 페이지에서 검색할 키워드를 줌
         guard let keyword = searchKeyword else {
             return
         }
@@ -34,7 +34,7 @@ class NewsListViewController: UIViewController {
             guard let naverNews = result as? NaverNews else {
                 return
             }
-            
+
             for news in naverNews.items {
                 let news: News = News(title: news.title, urlString: news.link)
                 self.newsList.append(news)
@@ -48,11 +48,12 @@ extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(identifier: "NewsViewController") as! NewsViewController
         vc.newsURLString = newsList[indexPath.row].urlString
+        vc.hidesBottomBarWhenPushed = true // 이동 시 하단 탭바 가림
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .normal, title:  "즐겨찾기", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let bookMarkAction = UIContextualAction(style: .normal, title:  "즐겨찾기", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let news = self.newsList[indexPath.row]
             let newsRealm = NewsRealm()
             newsRealm.title = news.title
@@ -64,7 +65,15 @@ extension NewsListViewController: UITableViewDelegate {
             
             success(true)
         })
-        return UISwipeActionsConfiguration(actions:[deleteAction])
+        
+        let shareAction = UIContextualAction(style: .normal, title:  "공유", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let row = indexPath.row
+            let newsTitle = self.newsList[row].title
+            let newsURL = self.newsList[row].urlString
+            Util.sharedInstance.showShareActivity(viewController: self, msg: newsTitle, image: nil, url: newsURL, sourceRect: nil)
+            success(true)
+        })
+        return UISwipeActionsConfiguration(actions:[bookMarkAction, shareAction])
     }
 }
 
