@@ -10,10 +10,14 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var publishTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        titleLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
+        titleLabel.numberOfLines = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -97,15 +97,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VJl-N4-RX1">
-                                <rect key="frame" x="20" y="88" width="374" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VJl-N4-RX1" firstAttribute="leading" secondItem="DIB-vK-X4O" secondAttribute="leading" constant="20" id="NHL-oi-wFL"/>
+                            <constraint firstItem="VJl-N4-RX1" firstAttribute="leading" secondItem="DIB-vK-X4O" secondAttribute="leading" id="GtN-yE-VFY"/>
+                            <constraint firstItem="VJl-N4-RX1" firstAttribute="trailing" secondItem="DIB-vK-X4O" secondAttribute="trailing" id="Xt2-oL-0BI"/>
                             <constraint firstItem="VJl-N4-RX1" firstAttribute="top" secondItem="DIB-vK-X4O" secondAttribute="top" id="ffy-g1-m3b"/>
-                            <constraint firstItem="DIB-vK-X4O" firstAttribute="trailing" secondItem="VJl-N4-RX1" secondAttribute="trailing" constant="20" id="jdb-J1-z0P"/>
                             <constraint firstItem="VJl-N4-RX1" firstAttribute="bottom" secondItem="DIB-vK-X4O" secondAttribute="bottom" id="qtG-BQ-YJi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DIB-vK-X4O"/>
@@ -158,13 +158,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UMy-7I-qPj">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UMy-7I-qPj">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="UMy-7I-qPj" firstAttribute="trailing" secondItem="CjJ-Lj-Svb" secondAttribute="trailing" id="E5c-9T-Zr8"/>
+                            <constraint firstItem="UMy-7I-qPj" firstAttribute="leading" secondItem="CjJ-Lj-Svb" secondAttribute="leading" id="YiI-mE-sLF"/>
+                            <constraint firstItem="UMy-7I-qPj" firstAttribute="bottom" secondItem="CjJ-Lj-Svb" secondAttribute="bottom" id="cxZ-Kh-MaI"/>
+                            <constraint firstItem="UMy-7I-qPj" firstAttribute="top" secondItem="CjJ-Lj-Svb" secondAttribute="top" id="nao-2z-KgT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CjJ-Lj-Svb"/>
                     </view>
                     <navigationItem key="navigationItem" id="LHr-zg-8G6"/>
@@ -174,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roj-oI-KOU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3422" y="-172"/>
+            <point key="canvasLocation" x="3421.739130434783" y="-172.09821428571428"/>
         </scene>
         <!--news list-->
         <scene sceneID="PrQ-oH-MK5">
@@ -184,13 +189,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dgu-8s-VA3">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dgu-8s-VA3">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dgu-8s-VA3" firstAttribute="leading" secondItem="JeZ-5q-RWv" secondAttribute="leading" id="aSq-mt-cN2"/>
+                            <constraint firstItem="dgu-8s-VA3" firstAttribute="trailing" secondItem="JeZ-5q-RWv" secondAttribute="trailing" id="gnp-hH-GN2"/>
+                            <constraint firstItem="dgu-8s-VA3" firstAttribute="top" secondItem="JeZ-5q-RWv" secondAttribute="top" id="qZK-JD-xL7"/>
+                            <constraint firstItem="dgu-8s-VA3" firstAttribute="bottom" secondItem="JeZ-5q-RWv" secondAttribute="bottom" id="tGV-5o-HZR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JeZ-5q-RWv"/>
                     </view>
                     <connections>
@@ -199,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mN-OR-wOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4228" y="-172"/>
+            <point key="canvasLocation" x="4227.536231884058" y="-172.09821428571428"/>
         </scene>
         <!--news webview-->
         <scene sceneID="98G-LG-qq2">

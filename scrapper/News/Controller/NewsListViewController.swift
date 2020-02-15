@@ -14,6 +14,9 @@ class NewsListViewController: UIViewController {
     var newsList: [News] = []
     var searchKeyword: String?
     let realm = try! Realm()
+    let naverDateFormatter = DateFormatter()
+    let dateFormatter = DateFormatter()
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,11 @@ class NewsListViewController: UIViewController {
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
+        
+        // 시간 포멧 변경 세팅
+        naverDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z" // 네이버 api에서 넘어오는 시간 포멧
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm" // 내가 뿌리고 싶은 시간 포멧
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // 네이버 포멧에서 gmt + 9 값으로 주기 때문에 로컬로 변경 필요
 
 //        키워드 페이지에서 검색할 키워드를 줌
         guard let keyword = searchKeyword else {
@@ -34,9 +42,10 @@ class NewsListViewController: UIViewController {
             guard let naverNews = result as? NaverNews else {
                 return
             }
-
+            
             for news in naverNews.items {
-                let news: News = News(title: news.title, urlString: news.link)
+                let publishDate = self.naverDateFormatter.date(from: news.pubDate)!
+                let news: News = News(title: news.title, urlString: news.link, publishTime: publishDate)
                 self.newsList.append(news)
                 self.tableView.reloadData()
             }
@@ -87,6 +96,8 @@ extension NewsListViewController: UITableViewDataSource {
         let row = indexPath.row
         
         cell.titleLabel.text = newsList[row].title
+        cell.publishTimeLabel.text = self.dateFormatter.string(from: newsList[row].publishTime)
+        
         return cell
     }
     
