@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import SafariServices
+
 
 class NewsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -57,10 +59,8 @@ class NewsListViewController: UIViewController {
 
 extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(identifier: "NewsViewController") as! NewsViewController
-        vc.newsURLString = newsList[indexPath.row].urlString
-        vc.hidesBottomBarWhenPushed = true // 이동 시 하단 탭바 가림
-        self.navigationController?.pushViewController(vc, animated: true)
+        let safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!)
+        present(safariVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -85,6 +85,8 @@ extension NewsListViewController: UITableViewDelegate {
             Util.sharedInstance.showShareActivity(viewController: self, msg: newsTitle, image: nil, url: newsURL, sourceRect: nil)
             success(true)
         })
+        
+        bookMarkAction.backgroundColor = UIColor.blue
         return UISwipeActionsConfiguration(actions:[bookMarkAction, shareAction])
     }
 }

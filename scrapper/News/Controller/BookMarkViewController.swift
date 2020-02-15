@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SafariServices
 
 class BookMarkViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +25,9 @@ class BookMarkViewController: UIViewController {
         
         self.navigationController?.tabBarController?.delegate = self
         
+        // MARK: - Navigation setting
+        self.navigationItem.title = "북마크"
+        
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
         
@@ -36,9 +40,8 @@ class BookMarkViewController: UIViewController {
 
 extension BookMarkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(identifier: "NewsViewController") as! NewsViewController
-        vc.newsURLString = newsListRealm[indexPath.row].urlString
-        self.navigationController?.pushViewController(vc, animated: true)
+        let safariVC = SFSafariViewController(url: URL(string: newsListRealm[indexPath.row].urlString)!)
+        present(safariVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

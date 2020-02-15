@@ -18,6 +18,7 @@ class NewsTableViewCell: UITableViewCell {
         
         titleLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
         titleLabel.numberOfLines = 0
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
