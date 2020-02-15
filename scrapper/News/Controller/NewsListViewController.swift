@@ -44,8 +44,8 @@ class NewsListViewController: UIViewController {
             }
             
             for news in naverNews.items {
-                let publishDate = self.naverDateFormatter.date(from: news.pubDate)!
-                let news: News = News(title: news.title, urlString: news.link, publishTime: publishDate)
+//                let publishDate = self.naverDateFormatter.date(from: news.pubDate)!
+                let news: News = News(title: news.title, urlString: news.link, publishTime: news.pubDate)
                 self.newsList.append(news)
                 self.tableView.reloadData()
             }
@@ -67,6 +67,7 @@ extension NewsListViewController: UITableViewDelegate {
             let newsRealm = NewsRealm()
             newsRealm.title = news.title
             newsRealm.urlString = news.urlString
+            newsRealm.publishTime = news.publishTime
             
             try! self.realm.write {
                 self.realm.add(newsRealm)
@@ -96,7 +97,7 @@ extension NewsListViewController: UITableViewDataSource {
         let row = indexPath.row
         
         cell.titleLabel.text = newsList[row].title
-        cell.publishTimeLabel.text = self.dateFormatter.string(from: newsList[row].publishTime)
+        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsList[row].publishTime)
         
         return cell
     }

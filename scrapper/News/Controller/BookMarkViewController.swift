@@ -77,6 +77,7 @@ extension BookMarkViewController: UITableViewDataSource {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         let row = indexPath.row
         cell.titleLabel.text = newsListRealm[row].title
+        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsListRealm[row].publishTime)
         return cell
     }
 }

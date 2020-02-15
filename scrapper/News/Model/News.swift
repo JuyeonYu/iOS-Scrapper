@@ -13,9 +13,9 @@ import RealmSwift
 class News: Codable {
     var title: String
     let urlString: String
-    let publishTime: Date
+    let publishTime: String
     
-    init(title: String, urlString: String, publishTime: Date) {
+    init(title: String, urlString: String, publishTime: String) {
         if title.contains("&quot;") {
             self.title = title.replacingOccurrences(of: "&quot;", with: "\"")
         } else if title.contains("<b>") {
@@ -34,4 +34,5 @@ class News: Codable {
 class NewsRealm: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var urlString: String = ""
+    @objc dynamic var publishTime: String = ""
 }

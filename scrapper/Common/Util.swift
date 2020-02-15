@@ -40,4 +40,15 @@ class Util {
 
         viewController.present(activityVC, animated: true, completion: nil)
     }
+    
+    func naverTimeFormatToNormal(date: String) -> String {
+        let naverDateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
+        
+        // 시간 포멧 변경 세팅
+        naverDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z" // 네이버 api에서 넘어오는 시간 포멧
+        let beforeDate = naverDateFormatter.date(from: date)!
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a" // 내가 뿌리고 싶은 시간 포멧
+        return dateFormatter.string(from: beforeDate)
+    }
 }
