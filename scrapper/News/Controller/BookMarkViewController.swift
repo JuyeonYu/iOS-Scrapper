@@ -19,6 +19,9 @@ class BookMarkViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
+        
         self.navigationController?.tabBarController?.delegate = self
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)

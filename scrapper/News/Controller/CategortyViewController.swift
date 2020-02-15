@@ -24,6 +24,8 @@ class CategortyViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
+        
         let nibName = UINib(nibName: "CategoryTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "CategoryTableViewCell")
         
