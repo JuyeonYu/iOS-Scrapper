@@ -27,6 +27,10 @@ class KeywordViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        if keywordList.count == 0 {
+            rightBarButtonDidClick()
+        }
+
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
         let nibName = UINib(nibName: "KeywordTableViewCell", bundle: nil)
@@ -59,11 +63,11 @@ class KeywordViewController: UIViewController {
     }
     
     @objc func rightBarButtonDidClick() {
-        let title = "키워드"
+        let title = "뉴스키워드"
                 let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
                 
                 alert.addTextField { (tf) in
-                    tf.placeholder = "키워드를 입력하세요"
+                    tf.placeholder = "관심있는 뉴스키워드를 입력해보세요"
                 }
                 
                 let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -122,6 +126,12 @@ extension KeywordViewController: UITableViewDelegate {
 
 extension KeywordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if keywordListRealm.count == 0 {
+            self.tableView.setEmptyMessage("관심있는 뉴스키워드가 없습니다.")
+        } else {
+            self.tableView.restore()
+        }
+
         return keywordListRealm.count
     }
     
@@ -130,5 +140,25 @@ extension KeywordViewController: UITableViewDataSource {
         let row = indexPath.row
         cell.titleLabel.text = keywordListRealm[row].keyword
         return cell
+    }
+}
+
+extension UITableView {
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .black
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel
+        self.separatorStyle = .none
+    }
+
+    func restore() {
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
     }
 }
