@@ -67,7 +67,7 @@ class NewsListViewController: UIViewController {
         let actionSheet = UIAlertController(title: "어떤 순서로 뉴스를 보여드릴까요?", message: "", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "최신순", style: .default, handler: { result in
             self.navigationItem.rightBarButtonItem?.title = "최신순"
-            self.seachSort = "sim"
+            self.seachSort = "date"
             
 //            키워드 페이지에서 검색할 키워드를 줌
             guard let keyword = self.searchKeyword else {
