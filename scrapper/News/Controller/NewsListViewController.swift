@@ -79,7 +79,7 @@ class NewsListViewController: UIViewController {
         }))
         actionSheet.addAction(UIAlertAction(title: "관련도순", style: .default, handler: { result in
             self.navigationItem.rightBarButtonItem?.title = "관련도순"
-            self.seachSort = "date"
+            self.seachSort = "sim"
             
 //            키워드 페이지에서 검색할 키워드를 줌
             guard let keyword = self.searchKeyword else {

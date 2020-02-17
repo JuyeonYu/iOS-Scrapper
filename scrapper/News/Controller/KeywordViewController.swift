@@ -26,11 +26,6 @@ class KeywordViewController: UIViewController {
         // MARK: - Tableview setting
         tableView.delegate = self
         tableView.dataSource = self
-        
-        if keywordList.count == 0 {
-            rightBarButtonDidClick()
-        }
-
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
         let nibName = UINib(nibName: "KeywordTableViewCell", bundle: nil)
@@ -40,6 +35,11 @@ class KeywordViewController: UIViewController {
         for keyword in realm.objects(KeywordRealm.self) {
             keywordListRealm.append(keyword)
         }
+        
+        if keywordListRealm.count == 0 {
+            rightBarButtonDidClick()
+        }
+
         
         // TODO: 네트워크는 나중에 추가
 //        NetworkManager.sharedInstance.requestKeywordList2(userid: "jill") { (response) in
