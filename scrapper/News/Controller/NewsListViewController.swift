@@ -18,10 +18,14 @@ class NewsListViewController: UIViewController {
     let realm = try! Realm()
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
+    var seachSort = "date"
     
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let rightButtonItem = UIBarButtonItem.init(title: "최신순", style: .plain, target: self, action: #selector(rightBarButtonDidClick))
+        self.navigationItem.rightBarButtonItem = rightButtonItem
         
         // MARK: - Tableview setting
         tableView.delegate = self
@@ -42,18 +46,54 @@ class NewsListViewController: UIViewController {
             return
         }
 
-        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword) { (result) in
+        requestNaverNewsList(keyword: keyword, sort: seachSort)
+    }
+    
+    func requestNaverNewsList(keyword: String, sort: String) {
+        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: sort) { (result) in
             guard let naverNews = result as? NaverNews else {
                 return
             }
-            
+                    
             for news in naverNews.items {
-//                let publishDate = self.naverDateFormatter.date(from: news.pubDate)!
                 let news: News = News(title: news.title, urlString: news.link, publishTime: news.pubDate)
                 self.newsList.append(news)
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    @objc func rightBarButtonDidClick() {
+        let actionSheet = UIAlertController(title: "어떤 순서로 뉴스를 보여드릴까요?", message: "", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "최신순", style: .default, handler: { result in
+            self.navigationItem.rightBarButtonItem?.title = "최신순"
+            self.seachSort = "sim"
+            
+//            키워드 페이지에서 검색할 키워드를 줌
+            guard let keyword = self.searchKeyword else {
+                return
+            }
+            self.newsList.removeAll()
+            self.requestNaverNewsList(keyword: keyword, sort: self.seachSort)
+            self.tableView.reloadData()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "관련도순", style: .default, handler: { result in
+            self.navigationItem.rightBarButtonItem?.title = "관련도순"
+            self.seachSort = "date"
+            
+//            키워드 페이지에서 검색할 키워드를 줌
+            guard let keyword = self.searchKeyword else {
+                return
+            }
+            self.newsList.removeAll()
+            self.requestNaverNewsList(keyword: keyword, sort: self.seachSort)
+            self.tableView.reloadData()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+        
+        
+
     }
 }
 
