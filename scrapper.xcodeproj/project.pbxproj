@@ -31,6 +31,7 @@
 		B565A5BD23F58726001055CF /* NaverNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5BC23F58726001055CF /* NaverNews.swift */; };
 		B565A5BF23F64243001055CF /* BookMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5BE23F64243001055CF /* BookMarkViewController.swift */; };
 		B565A5C123F669FA001055CF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5C023F669FA001055CF /* Util.swift */; };
+		B56D0D5B23FA6BA7001E466D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B56D0D5A23FA6BA7001E466D /* logo.png */; };
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		B565A5BC23F58726001055CF /* NaverNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverNews.swift; sourceTree = "<group>"; };
 		B565A5BE23F64243001055CF /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		B565A5C023F669FA001055CF /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		B56D0D5A23FA6BA7001E466D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = "../../../../../Downloads/AppIcons (7)/Assets.xcassets/AppIcon.appiconset/logo.png"; sourceTree = "<group>"; };
 		B57E879123F2EA2B002FC196 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				B5486D9823F23463008A5ABD /* Info.plist */,
+				B56D0D5A23FA6BA7001E466D /* logo.png */,
 				B5486D9323F23463008A5ABD /* Assets.xcassets */,
 			);
 			path = "Support Files";
@@ -304,6 +307,7 @@
 				B5486D9723F23463008A5ABD /* LaunchScreen.storyboard in Resources */,
 				B5460C3923F2B0CA002A199E /* CategoryTableViewCell.xib in Resources */,
 				B5460C2F23F28EB9002A199E /* KeywordTableViewCell.xib in Resources */,
+				B56D0D5B23FA6BA7001E466D /* logo.png in Resources */,
 				B5486D9423F23463008A5ABD /* Assets.xcassets in Resources */,
 				B5460C3D23F2B0DA002A199E /* NewsTableViewCell.xib in Resources */,
 				B5486D9223F23461008A5ABD /* Main.storyboard in Resources */,
