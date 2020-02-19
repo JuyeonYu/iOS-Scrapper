@@ -16,12 +16,11 @@ class News: Codable {
     let publishTime: String
     
     init(title: String, urlString: String, publishTime: String) {
-        if title.contains("&quot;") {
-            self.title = title.replacingOccurrences(of: "&quot;", with: "\"")
-        } else if title.contains("<b>") {
-            self.title = title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        } else if title.contains("&lt;") {
-            self.title = title.replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">")
+        if title.contains("&quot;") || title.contains("<b>") || title.contains("&lt;") {
+            let temp1 = title.replacingOccurrences(of: "&quot;", with: "\"")
+            let temp2 = temp1.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+            let temp3 = temp2.replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">")
+            self.title = temp3
         } else {
             self.title = title
         }
