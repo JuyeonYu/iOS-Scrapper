@@ -19,7 +19,7 @@ class NewsListViewController: UIViewController {
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
     var seachSort = "date"
-    
+    var newsTitleListRealm: [String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,6 @@ class NewsListViewController: UIViewController {
         // MARK: - Tableview setting
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
@@ -47,6 +46,18 @@ class NewsListViewController: UIViewController {
         }
 
         requestNaverNewsList(keyword: keyword, sort: seachSort)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // realm에 저장되어 있는 이미 읽은 뉴스 기사 제목을 리스트로 저장.
+        // 기사를 보고 뒤로 돌아오는 경우 읽은 기사 표시를 하기 위해 이 시점에 저장.
+        for news in realm.objects(ReadNewsRealm.self) {
+            newsTitleListRealm.append(news.title)
+        }
+        
+        tableView.reloadData()
     }
     
     func requestNaverNewsList(keyword: String, sort: String) {
@@ -99,6 +110,19 @@ class NewsListViewController: UIViewController {
 
 extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let news = self.newsList[indexPath.row]
+        
+        // 뉴스를 누르면 읽은 뉴스로 저장
+        let readNews = ReadNewsRealm()
+        readNews.title = news.title
+        readNews.urlString = news.urlString
+
+        if !newsTitleListRealm.contains(readNews.title) {
+            try! self.realm.write({
+                self.realm.add(readNews)
+            })
+        }
+                
         let safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!)
         present(safariVC, animated: true, completion: nil)
     }
@@ -143,6 +167,13 @@ extension NewsListViewController: UITableViewDataSource {
         cell.titleLabel.text = newsList[row].title
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsList[row].publishTime)
         
+        // 이미 읽은 기사를 체크하기 위해
+        if self.newsTitleListRealm.contains(newsList[row].title) {
+            print("이미 읽은 뉴스 기사 제목 \(newsList[row].title)")
+            cell.titleLabel.textColor = UIColor.lightGray
+            cell.publishTimeLabel.textColor = UIColor.lightGray
+        }
+
         return cell
     }
     

@@ -14,6 +14,7 @@ class BookMarkViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let realm = try! Realm()
     var newsListRealm: [NewsRealm] = []
+    var newsTitleListRealm: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +37,36 @@ class BookMarkViewController: UIViewController {
             newsListRealm.append(news)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // realm에 저장되어 있는 이미 읽은 뉴스 기사 제목을 리스트로 저장.
+        // 기사를 보고 뒤로 돌아오는 경우 읽은 기사 표시를 하기 위해 이 시점에 저장.
+        for news in realm.objects(ReadNewsRealm.self) {
+            newsTitleListRealm.append(news.title)
+        }
+        
+        tableView.reloadData()
+    }
+
 }
 
 extension BookMarkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let news = self.newsListRealm[indexPath.row]
+        
+        // 뉴스를 누르면 읽은 뉴스로 저장
+        let readNews = ReadNewsRealm()
+        readNews.title = news.title
+        readNews.urlString = news.urlString
+
+        if !newsTitleListRealm.contains(readNews.title) {
+            try! self.realm.write({
+                self.realm.add(readNews)
+            })
+        }
+        
         let safariVC = SFSafariViewController(url: URL(string: newsListRealm[indexPath.row].urlString)!)
         present(safariVC, animated: true, completion: nil)
     }
@@ -84,6 +111,13 @@ extension BookMarkViewController: UITableViewDataSource {
         let row = indexPath.row
         cell.titleLabel.text = newsListRealm[row].title
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsListRealm[row].publishTime)
+        
+        // 이미 읽은 기사를 체크하기 위해
+        if self.newsTitleListRealm.contains(newsListRealm[row].title) {
+            print("이미 읽은 뉴스 기사 제목 \(newsListRealm[row].title)")
+            cell.titleLabel.textColor = UIColor.lightGray
+            cell.publishTimeLabel.textColor = UIColor.lightGray
+        }
         return cell
     }
 }

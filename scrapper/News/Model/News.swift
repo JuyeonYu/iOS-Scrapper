@@ -36,3 +36,8 @@ class NewsRealm: Object {
     @objc dynamic var urlString: String = ""
     @objc dynamic var publishTime: String = ""
 }
+
+class ReadNewsRealm: Object {
+    @objc dynamic var title: String = ""
+    @objc dynamic var urlString: String = ""
+}
