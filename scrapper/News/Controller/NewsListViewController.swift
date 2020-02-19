@@ -19,7 +19,8 @@ class NewsListViewController: UIViewController {
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
     var seachSort = "sim" // 기본값은 관련도 검색
-    var newsTitleListRealm: [String] = []
+    var newsTitleListRealmForCheckRead: [String] = []
+    var newsTitleListRealmForCheckBookMark: [String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,11 @@ class NewsListViewController: UIViewController {
         // realm에 저장되어 있는 이미 읽은 뉴스 기사 제목을 리스트로 저장.
         // 기사를 보고 뒤로 돌아오는 경우 읽은 기사 표시를 하기 위해 이 시점에 저장.
         for news in realm.objects(ReadNewsRealm.self) {
-            newsTitleListRealm.append(news.title)
+            newsTitleListRealmForCheckRead.append(news.title)
+        }
+        
+        for news in realm.objects(NewsRealm.self) {
+            newsTitleListRealmForCheckBookMark.append(news.title)
         }
         
         tableView.reloadData()
@@ -102,9 +107,6 @@ class NewsListViewController: UIViewController {
         }))
         actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
-        
-        
-
     }
 }
 
@@ -117,7 +119,7 @@ extension NewsListViewController: UITableViewDelegate {
         readNews.title = news.title
         readNews.urlString = news.urlString
 
-        if !newsTitleListRealm.contains(readNews.title) {
+        if !newsTitleListRealmForCheckRead.contains(readNews.title) {
             try! self.realm.write({
                 self.realm.add(readNews)
             })
@@ -130,15 +132,20 @@ extension NewsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let bookMarkAction = UIContextualAction(style: .normal, title:  "즐겨찾기", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let news = self.newsList[indexPath.row]
-            let newsRealm = NewsRealm()
-            newsRealm.title = news.title
-            newsRealm.urlString = news.urlString
-            newsRealm.publishTime = news.publishTime
             
-            try! self.realm.write {
-                self.realm.add(newsRealm)
+            // 중복된 기사면 저장 안해야함
+            if !self.newsTitleListRealmForCheckBookMark.contains(news.title) {
+                let newsRealm = NewsRealm()
+                newsRealm.title = news.title
+                newsRealm.urlString = news.urlString
+                newsRealm.publishTime = news.publishTime
+                
+                try! self.realm.write {
+                    self.realm.add(newsRealm)
+                }
+            } else {
+                print("이미 북마크된 기사입니다.")
             }
-            
             success(true)
         })
         
@@ -168,7 +175,7 @@ extension NewsListViewController: UITableViewDataSource {
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsList[row].publishTime)
         
         // 이미 읽은 기사를 체크하기 위해
-        if self.newsTitleListRealm.contains(newsList[row].title) {
+        if self.newsTitleListRealmForCheckRead.contains(newsList[row].title) {
             print("이미 읽은 뉴스 기사 제목 \(newsList[row].title)")
             cell.titleLabel.textColor = UIColor.lightGray
             cell.publishTimeLabel.textColor = UIColor.lightGray
