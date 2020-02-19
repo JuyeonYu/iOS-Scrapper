@@ -18,13 +18,13 @@ class NewsListViewController: UIViewController {
     let realm = try! Realm()
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
-    var seachSort = "date"
+    var seachSort = "sim" // 기본값은 관련도 검색
     var newsTitleListRealm: [String] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rightButtonItem = UIBarButtonItem.init(title: "최신순", style: .plain, target: self, action: #selector(rightBarButtonDidClick))
+        let rightButtonItem = UIBarButtonItem.init(title: "관련도순", style: .plain, target: self, action: #selector(rightBarButtonDidClick))
         self.navigationItem.rightBarButtonItem = rightButtonItem
         
         // MARK: - Tableview setting
