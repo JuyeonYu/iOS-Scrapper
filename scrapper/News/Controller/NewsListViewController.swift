@@ -21,7 +21,11 @@ class NewsListViewController: UIViewController {
     var seachSort = "sim" // 기본값은 관련도 검색
     var newsTitleListRealmForCheckRead: [String] = []
     var newsTitleListRealmForCheckBookMark: [String] = []
-        
+    var filteredNews: [News] = []
+    var dataList: [News] = []
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +36,9 @@ class NewsListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
+        
+        searchBar.delegate = self
+        searchBar.placeholder = "뉴스를 검색해보세요."
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
@@ -143,8 +150,6 @@ extension NewsListViewController: UITableViewDelegate {
                 try! self.realm.write {
                     self.realm.add(newsRealm)
                 }
-            } else {
-                print("이미 북마크된 기사입니다.")
             }
             success(true)
         })
@@ -164,25 +169,51 @@ extension NewsListViewController: UITableViewDelegate {
 
 extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsList.count
+        if searchBar.text != "" && searchBar.text != nil && searchBar.isFirstResponder {
+            return filteredNews.count
+        } else {
+            return newsList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         let row = indexPath.row
         
-        cell.titleLabel.text = newsList[row].title
-        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsList[row].publishTime)
+        
+        if searchBar.text != "" && searchBar.isFirstResponder {
+            dataList = filteredNews
+        } else {
+            dataList = newsList
+        }
+        cell.titleLabel.text = dataList[row].title
+        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
         // 이미 읽은 기사를 체크하기 위해
-        if self.newsTitleListRealmForCheckRead.contains(newsList[row].title) {
-            print("이미 읽은 뉴스 기사 제목 \(newsList[row].title)")
+        if self.newsTitleListRealmForCheckRead.contains(dataList[row].title) {
+            print("이미 읽은 뉴스 기사 제목 \(dataList[row].title)")
             cell.titleLabel.textColor = UIColor.lightGray
             cell.publishTimeLabel.textColor = UIColor.lightGray
         }
 
         return cell
     }
+}
+
+extension NewsListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredNews.removeAll()
+        
+        for news in newsList {
+            if news.title.contains(searchText) {
+                print(news.title)
+                filteredNews.append(news)
+            }
+        }
+        tableView.reloadData()
+    }
     
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+    }
 }

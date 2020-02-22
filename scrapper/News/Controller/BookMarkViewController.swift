@@ -12,17 +12,22 @@ import SafariServices
 
 class BookMarkViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     let realm = try! Realm()
     var newsListRealm: [NewsRealm] = []
     var newsTitleListRealm: [String] = []
+    var filteredNews: [NewsRealm] = []
+    var dataList: [NewsRealm] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
+        
+        searchBar.delegate = self
+        searchBar.placeholder = "뉴스를 검색해보세요."
         
         self.navigationController?.tabBarController?.delegate = self
         
@@ -103,18 +108,28 @@ extension BookMarkViewController: UITableViewDelegate {
 
 extension BookMarkViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsListRealm.count
+        if searchBar.text != "" && searchBar.text != nil && searchBar.isFirstResponder {
+            return filteredNews.count
+        } else {
+            return newsListRealm.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         let row = indexPath.row
-        cell.titleLabel.text = newsListRealm[row].title
-        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: newsListRealm[row].publishTime)
+        
+        if searchBar.text != "" && searchBar.isFirstResponder {
+            dataList = filteredNews
+        } else {
+            dataList = newsListRealm
+        }
+        cell.titleLabel.text = dataList[row].title
+        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
         // 이미 읽은 기사를 체크하기 위해
-        if self.newsTitleListRealm.contains(newsListRealm[row].title) {
-            print("이미 읽은 뉴스 기사 제목 \(newsListRealm[row].title)")
+        if self.newsTitleListRealm.contains(dataList[row].title) {
+            print("이미 읽은 뉴스 기사 제목 \(dataList[row].title)")
             cell.titleLabel.textColor = UIColor.lightGray
             cell.publishTimeLabel.textColor = UIColor.lightGray
         }
@@ -132,5 +147,23 @@ extension BookMarkViewController: UITabBarControllerDelegate {
             newsListRealm.removeAll()
         }
         self.tableView.reloadData()
+    }
+}
+
+extension BookMarkViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredNews.removeAll()
+        
+        for news in newsListRealm {
+            if news.title.contains(searchText) {
+                print("검색된 뉴스:  \(news.title)")
+                filteredNews.append(news)
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
     }
 }
