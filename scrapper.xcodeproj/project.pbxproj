@@ -521,7 +521,8 @@
 			baseConfigurationReference = 9536FFA7805617997291493C /* Pods-scrapper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DUV8UP2WXU;
 				INFOPLIST_FILE = "scrapper/Support Files/Info.plist";
@@ -529,8 +530,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper.dev;
 				PRODUCT_NAME = "뉴스스크랩";
+				PROVISIONING_PROFILE_SPECIFIER = johnny_newScrapper_provosioning_profile_dev;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -541,7 +543,8 @@
 			baseConfigurationReference = 9F87F1596BC1A78054548C59 /* Pods-scrapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DUV8UP2WXU;
 				INFOPLIST_FILE = "scrapper/Support Files/Info.plist";
@@ -551,6 +554,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = "뉴스스크랩";
+				PROVISIONING_PROFILE_SPECIFIER = johnny_newScrapper_provosioning_profile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
