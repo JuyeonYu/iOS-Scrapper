@@ -55,15 +55,14 @@ class Util {
     func showToast(controller: UIViewController, message: String) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.view.alpha = 0.6
-        alert.view.layer.cornerRadius = 15
+        alert.view.layer.cornerRadius = 30
         
         controller.present(alert, animated: true, completion: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             alert.dismiss(animated: true, completion: nil)
         }
     }
-    
 }
 
 public extension String {
