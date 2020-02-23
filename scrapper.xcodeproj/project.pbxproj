@@ -52,7 +52,7 @@
 		B5460C3723F2B0CA002A199E /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		B5460C3A23F2B0DA002A199E /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		B5460C3B23F2B0DA002A199E /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
-		B5486D8723F23461008A5ABD /* 뉴스스크랩.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "뉴스스크랩.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5486D8723F23461008A5ABD /* 뉴스스크랩 dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "뉴스스크랩 dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5486D8A23F23461008A5ABD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5486D8C23F23461008A5ABD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B5486D8E23F23461008A5ABD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		B5486D8823F23461008A5ABD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B5486D8723F23461008A5ABD /* 뉴스스크랩.app */,
+				B5486D8723F23461008A5ABD /* 뉴스스크랩 dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,7 +260,7 @@
 			);
 			name = scrapper;
 			productName = scrapper;
-			productReference = B5486D8723F23461008A5ABD /* 뉴스스크랩.app */;
+			productReference = B5486D8723F23461008A5ABD /* 뉴스스크랩 dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -531,7 +531,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper.dev;
-				PRODUCT_NAME = "뉴스스크랩";
+				PRODUCT_NAME = "뉴스스크랩 dev";
 				PROVISIONING_PROFILE_SPECIFIER = johnny_newScrapper_provosioning_profile_dev;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -553,7 +553,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
-				PRODUCT_NAME = "뉴스스크랩";
+				PRODUCT_NAME = "뉴스스크랩 dev";
 				PROVISIONING_PROFILE_SPECIFIER = johnny_newScrapper_provosioning_profile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
