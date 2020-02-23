@@ -18,7 +18,9 @@ class NewsListViewController: UIViewController {
     let realm = try! Realm()
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
-    var seachSort = "sim" // 기본값은 관련도 검색
+    var searchSort = "sim" // 기본값은 관련도 검색
+    var naverNewsAPIStartPoint = 1 // 기본값은 1번 기사부터 불러옴
+    var naverNewsAPICallCount = 0 // 네이버 뉴스 api를 호출한 횟수. 이 값으로 naverNewsAPIStartPoint를 조정
     var newsTitleListRealmForCheckRead: [String] = []
     var newsTitleListRealmForCheckBookMark: [String] = []
     var filteredNews: [News] = []
@@ -53,7 +55,7 @@ class NewsListViewController: UIViewController {
             return
         }
 
-        requestNaverNewsList(keyword: keyword, sort: seachSort)
+        requestNaverNewsList(keyword: keyword, sort: searchSort)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +75,10 @@ class NewsListViewController: UIViewController {
     }
     
     func requestNaverNewsList(keyword: String, sort: String) {
-        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: sort) { (result) in
+        naverNewsAPICallCount = naverNewsAPICallCount + 1
+        naverNewsAPIStartPoint = naverNewsAPICallCount + 100
+        
+        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: sort, start: naverNewsAPIStartPoint) { (result) in
             guard let naverNews = result as? NaverNews else {
                 return
             }
@@ -90,26 +95,26 @@ class NewsListViewController: UIViewController {
         let actionSheet = UIAlertController(title: "어떤 순서로 뉴스를 보여드릴까요?", message: "", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "최신순", style: .default, handler: { result in
             self.navigationItem.rightBarButtonItem?.title = "최신순"
-            self.seachSort = "date"
+            self.searchSort = "date"
             
 //            키워드 페이지에서 검색할 키워드를 줌
             guard let keyword = self.searchKeyword else {
                 return
             }
             self.newsList.removeAll()
-            self.requestNaverNewsList(keyword: keyword, sort: self.seachSort)
+            self.requestNaverNewsList(keyword: keyword, sort: self.searchSort)
             self.tableView.reloadData()
         }))
         actionSheet.addAction(UIAlertAction(title: "관련도순", style: .default, handler: { result in
             self.navigationItem.rightBarButtonItem?.title = "관련도순"
-            self.seachSort = "sim"
+            self.searchSort = "sim"
             
 //            키워드 페이지에서 검색할 키워드를 줌
             guard let keyword = self.searchKeyword else {
                 return
             }
             self.newsList.removeAll()
-            self.requestNaverNewsList(keyword: keyword, sort: self.seachSort)
+            self.requestNaverNewsList(keyword: keyword, sort: self.searchSort)
             self.tableView.reloadData()
         }))
         actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
@@ -179,6 +184,11 @@ extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
         let row = indexPath.row
+        print("index path: \(row) / list count: \(newsList.count) ")
+        if row == newsList.count-1 {
+            print("마지막 셀을 그림")
+            requestNaverNewsList(keyword: self.searchKeyword!, sort: self.searchSort)
+        }
         
         
         if searchBar.text != "" && searchBar.isFirstResponder {
