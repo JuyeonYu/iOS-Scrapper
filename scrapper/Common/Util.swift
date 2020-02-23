@@ -51,4 +51,31 @@ class Util {
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a" // 내가 뿌리고 싶은 시간 포멧
         return dateFormatter.string(from: beforeDate)
     }
+    
+    func showToast(controller: UIViewController, message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.view.alpha = 0.6
+        alert.view.layer.cornerRadius = 15
+        
+        controller.present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+}
+
+public extension String {
+    func stripOutHtml() -> String? {
+        do {
+            guard let data = self.data(using: .unicode) else {
+                return nil
+            }
+            let attributed = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return attributed.string
+        } catch {
+            return nil
+        }
+    }
 }
