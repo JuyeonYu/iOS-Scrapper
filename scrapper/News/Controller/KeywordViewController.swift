@@ -39,27 +39,6 @@ class KeywordViewController: UIViewController {
         if keywordListRealm.count == 0 {
             rightBarButtonDidClick()
         }
-
-        
-        // TODO: 네트워크는 나중에 추가
-//        NetworkManager.sharedInstance.requestKeywordList2(userid: "jill") { (response) in
-//            guard let restAPIResponse = response else {
-//                return
-//            }
-//
-//            if restAPIResponse.isSuccess {
-//                guard let keywordList = restAPIResponse.keywordList else {
-//                    return
-//                }
-//                for keyword in keywordList {
-//                    let keyword: Keyword = Keyword(keyword: keyword.keyword, idx_keyword: keyword.idx_keyword)
-//                    self.keywordList.append(keyword)
-//                    self.tableView.reloadData()
-//                }
-//            } else {
-//                // TODO: fail case
-//            }
-//        }
     }
     
     @objc func rightBarButtonDidClick() {
@@ -76,9 +55,7 @@ class KeywordViewController: UIViewController {
                     guard (text != "") else {
                         return
                     }
-//                    let keyword = Keyword(keyword: text!, index: nil)
-//                    self.keywordList.append(keyword)
-                    
+
                     let keywordRealm = KeywordRealm()
                     keywordRealm.keyword = text!
                     try! self.realm.write {
