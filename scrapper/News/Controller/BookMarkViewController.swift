@@ -89,7 +89,6 @@ extension BookMarkViewController: UITableViewDelegate {
 //        let newsList = realm.objects(BookMarkNewsRealm.self)
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let news = self.realm.objects(BookMarkNewsRealm.self)[indexPath.row]
-//            let news = self.realm.objects(BookMarkNewsRealm.self).filter("title = '\(title)'")
 
             // realm에서 먼저 삭제 한다.
             try! self.realm.write {

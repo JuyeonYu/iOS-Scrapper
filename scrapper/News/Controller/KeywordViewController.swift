@@ -18,12 +18,12 @@ class KeywordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - Navigation setting
+        // Navigation setting
         self.navigationItem.title = "키워드"
-        let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(rightBarButtonDidClick))
+        let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(didTapAddKeywordButton))
         self.navigationItem.rightBarButtonItem = rightButtonItem
 
-        // MARK: - Tableview setting
+        // Tableview setting
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
@@ -31,42 +31,47 @@ class KeywordViewController: UIViewController {
         let nibName = UINib(nibName: "KeywordTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
         
-        // MARK: - get data for tableview
-        for keyword in realm.objects(KeywordRealm.self) {
-            keywordListRealm.append(keyword)
-        }
-        
-        if keywordListRealm.count == 0 {
-            rightBarButtonDidClick()
+        // get data for tableview
+        if realm.objects(KeywordRealm.self).count == 0 {
+            didTapAddKeywordButton()
         }
     }
     
-    @objc func rightBarButtonDidClick() {
-        let title = "뉴스키워드"
-                let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-                
-                alert.addTextField { (tf) in
-                    tf.placeholder = "관심있는 뉴스키워드를 입력해보세요"
-                }
-                
-                let cancel = UIAlertAction(title: "취소", style: .cancel)
-                let ok = UIAlertAction(title: "추가", style: .default) { (_) in
-                    let text = alert.textFields?[0].text
-                    guard (text != "") else {
-                        return
-                    }
+    @objc func didTapAddKeywordButton() {
+        let alert = UIAlertController(title: "뉴스키워드", message: "관심있는 키워드를 등록해보세요.", preferredStyle: .alert)
+        
+        alert.addTextField { (tf) in
+            tf.placeholder = "관심있는 뉴스키워드를 입력해보세요"
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let ok = UIAlertAction(title: "추가", style: .default) { (_) in
+            let text = alert.textFields?[0].text
 
-                    let keywordRealm = KeywordRealm()
-                    keywordRealm.keyword = text!
-                    try! self.realm.write {
-                        self.realm.add(keywordRealm)
-                    }
-                    self.keywordListRealm.append(keywordRealm)
-                    self.tableView.reloadData()
-                }
-                alert.addAction(cancel)
+            guard let keyword = text else {
+                return
+            }
+            
+            // [1.1-NS003] @juyeon / 중복 키워드 방지
+            guard (self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").isEmpty) else {
+                let alert = UIAlertController(title: "중복키워드", message: "다른 뉴스를 찾아볼까요?", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
                 alert.addAction(ok)
                 self.present(alert, animated: true)
+                return
+            }
+
+            let keywordRealm = KeywordRealm()
+            keywordRealm.keyword = text!
+            try! self.realm.write {
+                self.realm.add(keywordRealm)
+            }
+            self.keywordListRealm.append(keywordRealm)
+            self.tableView.reloadData()
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true)
     }
 }
 
@@ -74,7 +79,8 @@ class KeywordViewController: UIViewController {
 extension KeywordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        let keyword = self.keywordListRealm[row].keyword
+        let keywordList = Array(realm.objects(KeywordRealm.self))
+        let keyword = keywordList[row].keyword
         
         let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
         vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
@@ -87,13 +93,12 @@ extension KeywordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
+            let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row]
+
             // realm에서 먼저 삭제 한다.
             try! self.realm.write {
-                self.realm.delete(self.keywordListRealm[indexPath.row])
+                self.realm.delete(keyword)
             }
-            
-            // 리스트에서 삭제한다.
-            self.keywordListRealm.remove(at: indexPath.row)
             tableView.reloadData()
             success(true)
         })
@@ -103,39 +108,20 @@ extension KeywordViewController: UITableViewDelegate {
 
 extension KeywordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if keywordListRealm.count == 0 {
+        if realm.objects(KeywordRealm.self).count == 0 {
             self.tableView.setEmptyMessage("관심있는 뉴스키워드가 없습니다.")
         } else {
             self.tableView.restore()
         }
-
-        return keywordListRealm.count
+        return self.realm.objects(KeywordRealm.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "KeywordTableViewCell", for: indexPath) as! KeywordTableViewCell
         let row = indexPath.row
-        cell.titleLabel.text = keywordListRealm[row].keyword
+        let keywordList = Array(realm.objects(KeywordRealm.self))
+        let keyword = keywordList[row].keyword
+        cell.titleLabel.text = keyword
         return cell
-    }
-}
-
-extension UITableView {
-    func setEmptyMessage(_ message: String) {
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
-        messageLabel.text = message
-        messageLabel.textColor = .black
-        messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = .center
-        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
-        messageLabel.sizeToFit()
-
-        self.backgroundView = messageLabel
-        self.separatorStyle = .none
-    }
-
-    func restore() {
-        self.backgroundView = nil
-        self.separatorStyle = .singleLine
     }
 }
