@@ -530,6 +530,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper.dev;
 				PRODUCT_NAME = "뉴스스크랩 dev";
 				PROVISIONING_PROFILE_SPECIFIER = johnny_newScrapper_provosioning_profile_dev;
@@ -552,6 +553,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper.dev;
 				PRODUCT_NAME = "뉴스스크랩 dev";
 				PROVISIONING_PROFILE_SPECIFIER = johnny_newScrapper_provosioning_profile_dev;
