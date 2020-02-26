@@ -37,5 +37,4 @@ class BookMarkNewsRealm: Object {
 
 class ReadNewsRealm: Object {
     @objc dynamic var title: String = ""
-    @objc dynamic var urlString: String = ""
 }

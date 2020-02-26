@@ -11,12 +11,15 @@ import RealmSwift
 
 class KeywordViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var keywordList: [Keyword] = []
-    var keywordListRealm: [KeywordRealm] = []
-    let realm = try! Realm()
+    
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         // Navigation setting
         self.navigationItem.title = "키워드"
@@ -32,11 +35,12 @@ class KeywordViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
         
         // get data for tableview
+        
         if realm.objects(KeywordRealm.self).count == 0 {
             didTapAddKeywordButton()
         }
     }
-    
+        
     @objc func didTapAddKeywordButton() {
         let alert = UIAlertController(title: "뉴스키워드", message: "관심있는 키워드를 등록해보세요.", preferredStyle: .alert)
         
@@ -66,7 +70,6 @@ class KeywordViewController: UIViewController {
             try! self.realm.write {
                 self.realm.add(keywordRealm)
             }
-            self.keywordListRealm.append(keywordRealm)
             self.tableView.reloadData()
         }
         alert.addAction(cancel)
@@ -82,6 +85,7 @@ extension KeywordViewController: UITableViewDelegate {
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
         
+        
         let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
         vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
         vc.searchKeyword = keyword
@@ -92,7 +96,6 @@ extension KeywordViewController: UITableViewDelegate {
     // 오른쪽으로 밀어서 메뉴 보는 함수
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
             let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row]
 
             // realm에서 먼저 삭제 한다.
@@ -113,7 +116,7 @@ extension KeywordViewController: UITableViewDataSource {
         } else {
             self.tableView.restore()
         }
-        return self.realm.objects(KeywordRealm.self).count
+        return realm.objects(KeywordRealm.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

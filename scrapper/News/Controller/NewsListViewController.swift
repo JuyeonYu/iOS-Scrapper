@@ -17,11 +17,14 @@ class NewsListViewController: UIViewController {
     var filteredNews: [News] = []
     var dataList: [News] = []
     var searchKeyword: String?
-    let realm = try! Realm()
+    
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
+    
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
     var searchSort = "sim" // 기본값은 관련도 검색
-    var newsTitleListRealmForCheckRead: [String] = []
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
@@ -53,19 +56,7 @@ class NewsListViewController: UIViewController {
 
         requestNaverNewsList(keyword: keyword, sort: searchSort, start: 1)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         
-        // realm에 저장되어 있는 이미 읽은 뉴스 기사 제목을 리스트로 저장.
-        // 기사를 보고 뒤로 돌아오는 경우 읽은 기사 표시를 하기 위해 이 시점에 저장.
-        for news in realm.objects(ReadNewsRealm.self) {
-            newsTitleListRealmForCheckRead.append(news.title)
-        }
-        
-        tableView.reloadData()
-    }
-    
     func requestNaverNewsList(keyword: String, sort: String, start: Int) {
         NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: sort, start: start) { (result) in
             guard let naverNews = result as? NaverNews else {
@@ -116,17 +107,17 @@ extension NewsListViewController: UITableViewDelegate {
         let news = self.newsList[indexPath.row]
         
         // 뉴스를 누르면 읽은 뉴스로 저장
-        let readNews = ReadNewsRealm()
-        readNews.title = news.title
-        readNews.urlString = news.urlString
-
-        if !newsTitleListRealmForCheckRead.contains(readNews.title) {
-            try! self.realm.write({
-                self.realm.add(readNews)
+        let readNewsRealm = ReadNewsRealm()
+        readNewsRealm.title = news.title
+        
+        if realm.objects(ReadNewsRealm.self).filter("title = '\(news.title)'").isEmpty {
+            try! realm.write({
+                realm.add(readNewsRealm)
             })
         }
                 
         let safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!)
+        safariVC.delegate = self
         present(safariVC, animated: true, completion: nil)
     }
     
@@ -137,7 +128,6 @@ extension NewsListViewController: UITableViewDelegate {
          3. 북마크된 적 없는 기사에 북마크 버튼을 누르면 realm에 해당 기사를 저장한다.
          4. 북마크된 적이 없는 기사면 북마트 버튼 색을 파란색으로 한다.
         */
-        
         let news = self.newsList[indexPath.row]
         // 1, 2
         let isBookmarked = !realm.objects(BookMarkNewsRealm.self).filter("title = '\(news.title)'").isEmpty
@@ -206,12 +196,11 @@ extension NewsListViewController: UITableViewDataSource {
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
         // 이미 읽은 기사를 체크하기 위해
-        if self.newsTitleListRealmForCheckRead.contains(dataList[row].title) {
+        if !realm.objects(ReadNewsRealm.self).filter("title = '\(dataList[row].title)'").isEmpty {
             print("이미 읽은 뉴스 기사 제목 \(dataList[row].title)")
             cell.titleLabel.textColor = UIColor.lightGray
             cell.publishTimeLabel.textColor = UIColor.lightGray
         }
-
         return cell
     }
 }
@@ -234,3 +223,8 @@ extension NewsListViewController: UISearchBarDelegate {
     }
 }
 
+extension NewsListViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        self.tableView.reloadData()
+    }
+}
