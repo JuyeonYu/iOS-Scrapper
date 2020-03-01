@@ -14,68 +14,9 @@ class NetworkManager {
 
     init() {}
     
-    func requestKeywordList(completion: @escaping ([String]?) -> Void) {
-        let url = Constants.baseURL + Constants.mainKeyword
-        let param = [Constants.userid:"jill"]
-        
-        AF.request(url, parameters: param).responseJSON { response in
-            switch response.result {
-            case .success(let obj):
-                guard let keywordList = obj as? Array<String> else {
-                    return
-                }
-                completion(keywordList)
-
-                for keyword in keywordList {
-                    print(keyword)
-                }
-                break
-            
-            case .failure(let e):
-                print(e.localizedDescription)
-                break
-            }
-        }
-    }
-    
-    func requestKeywordList2(userid:String, completion: @escaping (RestAPIResponse?) -> Void) {
-        let url = Constants.baseURL + Constants.mainKeyword
-        let param = [Constants.userid:userid]
-        
-        AF.request(url, parameters: param).responseJSON { response in
-
-            switch response.result {
-            case .success(let obj):
-//                if let json = obj as? [Dictionary<String, NSObject>] {
-//                    print(json)
-//                }
-                completion(nil)
-                
-                if let nsDictList = obj as? [NSDictionary] {
-                    var keywordList: [Keyword] = []
-                    for dict in nsDictList {
-                        guard let keyword = dict["keyword"], let index = dict["idx_keyword"] else {
-                            return
-                        }
-                        let keywordFromDB: Keyword = Keyword(keyword: keyword as? String, idx_keyword: index as? Int)
-                        
-                        keywordList.append(keywordFromDB)
-                    }
-                    let restAPIResponse: RestAPIResponse = RestAPIResponse(isSucces: true, message: "", keywordList: keywordList)
-                    completion(restAPIResponse)
-                }
-                break
-            
-            case .failure(let e):
-                print(e.localizedDescription)
-                break
-            }
-        }
-    }
-    
-    func requestNaverNewsList(keyword: String, sort: String, completion: @escaping (Any) -> Void) {
+    func requestNaverNewsList(keyword: String, sort: String, start: Int, completion: @escaping (Any) -> Void) {
         let url = "https://openapi.naver.com/v1/search/news.json"
-        let param = ["query":keyword, "display":"100", "start":"1", "sort":sort]
+        let param = ["query":keyword, "display":100, "start":start, "sort":sort] as [String : Any]
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "X-Naver-Client-Id": "zmO4KBQdHToxqh6FfuDv",

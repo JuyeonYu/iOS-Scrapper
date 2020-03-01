@@ -51,4 +51,50 @@ class Util {
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a" // 내가 뿌리고 싶은 시간 포멧
         return dateFormatter.string(from: beforeDate)
     }
+    
+    func showToast(controller: UIViewController, message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.view.alpha = 0.6
+        alert.view.layer.cornerRadius = 30
+        
+        controller.present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            alert.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+public extension String {
+    func stripOutHtml() -> String? {
+        do {
+            guard let data = self.data(using: .unicode) else {
+                return nil
+            }
+            let attributed = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return attributed.string
+        } catch {
+            return nil
+        }
+    }
+}
+
+public extension UITableView {
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .black
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel
+        self.separatorStyle = .none
+    }
+
+    func restore() {
+        self.backgroundView = nil
+        self.separatorStyle = .singleLine
+    }
 }

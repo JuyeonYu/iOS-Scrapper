@@ -13,14 +13,22 @@ import SafariServices
 class BookMarkViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    let realm = try! Realm()
-    var newsListRealm: [NewsRealm] = []
-    var newsTitleListRealm: [String] = []
-    var filteredNews: [NewsRealm] = []
-    var dataList: [NewsRealm] = []
+    
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
+    
+    var filteredNews: [BookMarkNewsRealm] = []
+    var dataList: [BookMarkNewsRealm] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+         1. realm에서 북마크된 뉴스 목록을 가져온다.
+         2. tableview에 1에서 가져온 목록을 뿌린다.
+         3. 북마크 삭제시 realm에서도 삭제해준다.
+         */
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,64 +44,46 @@ class BookMarkViewController: UIViewController {
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
-        
-        // MARK: - get data for tableview
-        for news in realm.objects(NewsRealm.self) {
-            newsListRealm.append(news)
-        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        // realm에 저장되어 있는 이미 읽은 뉴스 기사 제목을 리스트로 저장.
-        // 기사를 보고 뒤로 돌아오는 경우 읽은 기사 표시를 하기 위해 이 시점에 저장.
-        for news in realm.objects(ReadNewsRealm.self) {
-            newsTitleListRealm.append(news.title)
-        }
-        
-        tableView.reloadData()
-    }
-
 }
 
 extension BookMarkViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let news = self.newsListRealm[indexPath.row]
+//        뉴스리스트 중 하나를 누르면 그 뉴스를 읽은 뉴스로 저장해야함
+        let row = indexPath.row
+        let news = Array(realm.objects(BookMarkNewsRealm.self))[row]
         
-        // 뉴스를 누르면 읽은 뉴스로 저장
-        let readNews = ReadNewsRealm()
-        readNews.title = news.title
-        readNews.urlString = news.urlString
-
-        if !newsTitleListRealm.contains(readNews.title) {
-            try! self.realm.write({
-                self.realm.add(readNews)
+        let readNewsRealm = ReadNewsRealm()
+        readNewsRealm.title = news.title
+        
+        if realm.objects(ReadNewsRealm.self).filter("title = '\(news.title)'").isEmpty {
+            try! realm.write({
+                realm.add(readNewsRealm)
             })
         }
         
-        let safariVC = SFSafariViewController(url: URL(string: newsListRealm[indexPath.row].urlString)!)
+        let safariVC = SFSafariViewController(url: URL(string: realm.objects(BookMarkNewsRealm.self)[row].urlString)!)
+        safariVC.delegate = self
         present(safariVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            
+            let news = self.realm.objects(BookMarkNewsRealm.self)[indexPath.row]
+
             // realm에서 먼저 삭제 한다.
             try! self.realm.write {
-                self.realm.delete(self.newsListRealm[indexPath.row])
+                self.realm.delete(news)
             }
             
-            // 리스트에서 삭제한다.
-            self.newsListRealm.remove(at: indexPath.row)
             tableView.reloadData()
             success(true)
         })
                 
         let shareAction = UIContextualAction(style: .normal, title:  "공유", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let row = indexPath.row
-            let newsTitle = self.newsListRealm[row].title
-            let newsURL = self.newsListRealm[row].urlString
+            let newsTitle = self.realm.objects(BookMarkNewsRealm.self)[row].title
+            let newsURL = self.realm.objects(BookMarkNewsRealm.self)[row].urlString
             let newsArray = [newsTitle, newsURL]
             
             let activityViewController = UIActivityViewController(activityItems: newsArray, applicationActivities: nil)
@@ -111,7 +101,7 @@ extension BookMarkViewController: UITableViewDataSource {
         if searchBar.text != "" && searchBar.text != nil && searchBar.isFirstResponder {
             return filteredNews.count
         } else {
-            return newsListRealm.count
+            return realm.objects(BookMarkNewsRealm.self).count
         }
     }
     
@@ -122,13 +112,13 @@ extension BookMarkViewController: UITableViewDataSource {
         if searchBar.text != "" && searchBar.isFirstResponder {
             dataList = filteredNews
         } else {
-            dataList = newsListRealm
+            let bookmarkNewsList = Array(realm.objects(BookMarkNewsRealm.self))
+            dataList = bookmarkNewsList
         }
-        cell.titleLabel.text = dataList[row].title
+        cell.titleLabel.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
-        // 이미 읽은 기사를 체크하기 위해
-        if self.newsTitleListRealm.contains(dataList[row].title) {
+        if !realm.objects(ReadNewsRealm.self).filter("title = '\(dataList[row].title)'").isEmpty {
             print("이미 읽은 뉴스 기사 제목 \(dataList[row].title)")
             cell.titleLabel.textColor = UIColor.lightGray
             cell.publishTimeLabel.textColor = UIColor.lightGray
@@ -140,13 +130,8 @@ extension BookMarkViewController: UITableViewDataSource {
 extension BookMarkViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if tabBarController.selectedIndex == 1 {
-            for news in realm.objects(NewsRealm.self) {
-                newsListRealm.append(news)
-            }
-        } else {
-            newsListRealm.removeAll()
+            self.tableView.reloadData()
         }
-        self.tableView.reloadData()
     }
 }
 
@@ -154,7 +139,7 @@ extension BookMarkViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredNews.removeAll()
         
-        for news in newsListRealm {
+        for news in realm.objects(BookMarkNewsRealm.self) {
             if news.title.contains(searchText) {
                 print("검색된 뉴스:  \(news.title)")
                 filteredNews.append(news)
@@ -165,5 +150,11 @@ extension BookMarkViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
+    }
+}
+
+extension BookMarkViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        self.tableView.reloadData()
     }
 }
