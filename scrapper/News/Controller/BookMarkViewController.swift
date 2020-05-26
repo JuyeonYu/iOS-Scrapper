@@ -35,12 +35,13 @@ class BookMarkViewController: UIViewController {
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
         searchBar.delegate = self
-        searchBar.placeholder = "뉴스를 검색해보세요."
+        searchBar.placeholder = NSLocalizedString("Please search news", comment: "")
+        
         
         self.navigationController?.tabBarController?.delegate = self
         
         // MARK: - Navigation setting
-        self.navigationItem.title = "북마크"
+        self.navigationItem.title = NSLocalizedString("Bookmark", comment: "")
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
@@ -68,7 +69,9 @@ extension BookMarkViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title:  "삭제",
+                                              handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let news = self.realm.objects(BookMarkNewsRealm.self)[indexPath.row]
 
             // realm에서 먼저 삭제 한다.
@@ -80,7 +83,9 @@ extension BookMarkViewController: UITableViewDelegate {
             success(true)
         })
                 
-        let shareAction = UIContextualAction(style: .normal, title:  "공유", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let shareAction = UIContextualAction(style: .normal,
+                                             title:  NSLocalizedString("share", comment: ""),
+                                             handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let row = indexPath.row
             let newsTitle = self.realm.objects(BookMarkNewsRealm.self)[row].title
             let newsURL = self.realm.objects(BookMarkNewsRealm.self)[row].urlString

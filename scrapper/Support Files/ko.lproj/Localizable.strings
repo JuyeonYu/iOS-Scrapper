@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  scrapper
+
+  Created by 주연  유 on 2020/05/26.
+  Copyright © 2020 johnny. All rights reserved.
+*/
+
+
+"Keyword" = "키워드";
+"News Keyword" = "뉴스키워드";
+"Cancel" = "취소";
+"Add" = "추가";
+"Reduplication" = "중복키워드";
+"Ok" = "확인";
+"Delete" = "삭제";
+"Category" = "카테고리";
+"Related order" = "관련도순";
+"Latest order" = "최신순";
+"Bookmark" = "즐겨찾기";
+"Share" = "공유";
+"Bookmark" = "북마크";
+
+"Please enter keyword which make you interting" = "관심있는 키워드를 등록해보세요.";
+"Let's search another news!" = "다른 뉴스를 찾아볼까요?";
+"Why don't you add some new keyword?" = "관심있는 뉴스키워드가 없습니다";
+"Please enter category" = "카테고리를 입력하세요";
+"Please search news" = "뉴스를 검색해보세요";
+"You can choose the order" = "어떤 순서로 뉴스를 보여드릴까요?";
+"It is added in bookmark." = "즐겨찾기에 추가되었어요";
+"You already added this news." = "이미 추가된 기사에요";

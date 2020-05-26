@@ -30,7 +30,7 @@ class NewsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rightButtonItem = UIBarButtonItem.init(title: "관련도순", style: .plain, target: self, action: #selector(rightBarButtonDidClick))
+        let rightButtonItem = UIBarButtonItem.init(title: NSLocalizedString("Related order", comment: ""), style: .plain, target: self, action: #selector(rightBarButtonDidClick))
         self.navigationItem.rightBarButtonItem = rightButtonItem
         
         // MARK: - Tableview setting
@@ -39,7 +39,7 @@ class NewsListViewController: UIViewController {
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
         searchBar.delegate = self
-        searchBar.placeholder = "뉴스를 검색해보세요."
+        searchBar.placeholder = NSLocalizedString("Please search news", comment: "")
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
@@ -73,9 +73,9 @@ class NewsListViewController: UIViewController {
     
     @objc func rightBarButtonDidClick() {
         
-        let actionSheet = UIAlertController(title: "어떤 순서로 뉴스를 보여드릴까요?", message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "최신순", style: .default, handler: { result in
-            self.navigationItem.rightBarButtonItem?.title = "최신순"
+        let actionSheet = UIAlertController(title: NSLocalizedString("You can choose the order", comment: ""), message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Latest order", comment: ""), style: .default, handler: { result in
+            self.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Latest order", comment: "")
             self.searchSort = "date"
             
 //            키워드 페이지에서 검색할 키워드를 줌
@@ -86,8 +86,8 @@ class NewsListViewController: UIViewController {
             self.requestNaverNewsList(keyword: keyword, sort: self.searchSort, start: 1)
             self.tableView.reloadData()
         }))
-        actionSheet.addAction(UIAlertAction(title: "관련도순", style: .default, handler: { result in
-            self.navigationItem.rightBarButtonItem?.title = "관련도순"
+        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Related order", comment: ""), style: .default, handler: { result in
+            self.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Related order", comment: "")
             self.searchSort = "sim"
             
 //            키워드 페이지에서 검색할 키워드를 줌
@@ -98,7 +98,7 @@ class NewsListViewController: UIViewController {
             self.requestNaverNewsList(keyword: keyword, sort: self.searchSort, start: 1)
             self.tableView.reloadData()
         }))
-        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         
         if UIDevice.current.userInterfaceIdiom == .pad { //디바이스 타입이 iPad일때
             if let popoverController = actionSheet.popoverPresentationController { // ActionSheet가 표현되는 위치를 저장해줍니다.
@@ -143,7 +143,7 @@ extension NewsListViewController: UITableViewDelegate {
         // 1, 2
         let isBookmarked = !realm.objects(BookMarkNewsRealm.self).filter("title = '\(news.title)'").isEmpty
 
-        let bookMarkAction = UIContextualAction(style: .normal, title:  "즐겨찾기", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let bookMarkAction = UIContextualAction(style: .normal, title: NSLocalizedString("Bookmark", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // 3
             if !isBookmarked {
                 let bookMarkNewsRealm = BookMarkNewsRealm()
@@ -153,10 +153,10 @@ extension NewsListViewController: UITableViewDelegate {
                 
                 try! self.realm.write {
                     self.realm.add(bookMarkNewsRealm)
-                    Util.sharedInstance.showToast(controller: self, message: "즐겨찾기에 추가되었어요.")
+                    Util.sharedInstance.showToast(controller: self, message: NSLocalizedString("It is added in bookmark", comment: ""))
                 }
             } else {
-                Util.sharedInstance.showToast(controller: self, message: "이미 추가된 기사에요.")
+                Util.sharedInstance.showToast(controller: self, message: NSLocalizedString("You already added this news", comment: ""))
             }
             success(true)
         })

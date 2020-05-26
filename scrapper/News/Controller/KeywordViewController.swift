@@ -16,14 +16,17 @@ class KeywordViewController: UIViewController {
         return try! Realm()
     }()
     
+    let keywordCellID = "KeywordTableViewCell"
+    let newsListViewControllerID = "NewsListViewController"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         // Navigation setting
-        self.navigationItem.title = "키워드"
-        let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(didTapAddKeywordButton))
+        self.navigationItem.title = NSLocalizedString("Keyword", comment: "")
+        let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add,
+                                                   target: self,
+                                                   action: #selector(didTapAddKeywordButton))
         self.navigationItem.rightBarButtonItem = rightButtonItem
 
         // Tableview setting
@@ -31,8 +34,8 @@ class KeywordViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
-        let nibName = UINib(nibName: "KeywordTableViewCell", bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: "KeywordTableViewCell")
+        let nibName = UINib(nibName: keywordCellID, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: keywordCellID)
         
         // get data for tableview
         
@@ -42,14 +45,16 @@ class KeywordViewController: UIViewController {
     }
         
     @objc func didTapAddKeywordButton() {
-        let alert = UIAlertController(title: "뉴스키워드", message: "관심있는 키워드를 등록해보세요.", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
+                                      message: NSLocalizedString("Please enter keyword which make you interting", comment: ""),
+                                      preferredStyle: .alert)
         
         alert.addTextField { (tf) in
-            tf.placeholder = "관심있는 뉴스키워드를 입력해보세요"
+            tf.placeholder = NSLocalizedString("Please enter keyword which make you interting", comment: "")
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-        let ok = UIAlertAction(title: "추가", style: .default) { (_) in
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
+        let ok = UIAlertAction(title: NSLocalizedString("Add", comment: ""), style: .default) { (_) in
             let text = alert.textFields?[0].text
 
             guard let keyword = text else {
@@ -58,8 +63,10 @@ class KeywordViewController: UIViewController {
             
             // [1.1-NS003] @juyeon / 중복 키워드 방지
             guard (self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").isEmpty) else {
-                let alert = UIAlertController(title: "중복키워드", message: "다른 뉴스를 찾아볼까요?", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default)
+                let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
+                                              message: NSLocalizedString("Let's search another news!", comment: ""),
+                                              preferredStyle: .alert)
+                let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
                 alert.addAction(ok)
                 self.present(alert, animated: true)
                 return
@@ -86,7 +93,7 @@ extension KeywordViewController: UITableViewDelegate {
         let keyword = keywordList[row].keyword
         
         
-        let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: newsListViewControllerID as! NewsListViewController
         vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
         vc.searchKeyword = keyword
         
@@ -95,7 +102,7 @@ extension KeywordViewController: UITableViewDelegate {
         
     // 오른쪽으로 밀어서 메뉴 보는 함수
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title:  "삭제", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row]
 
             // realm에서 먼저 삭제 한다.
@@ -112,7 +119,7 @@ extension KeywordViewController: UITableViewDelegate {
 extension KeywordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if realm.objects(KeywordRealm.self).count == 0 {
-            self.tableView.setEmptyMessage("관심있는 뉴스키워드가 없습니다.")
+            self.tableView.setEmptyMessage(NSLocalizedString("Why don't you add some new keyword?", comment: ""))
         } else {
             self.tableView.restore()
         }
@@ -120,7 +127,7 @@ extension KeywordViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "KeywordTableViewCell", for: indexPath) as! KeywordTableViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
         let row = indexPath.row
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
