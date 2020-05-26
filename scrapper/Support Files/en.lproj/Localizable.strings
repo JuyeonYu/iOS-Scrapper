@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  scrapper
+
+  Created by 주연  유 on 2020/05/26.
+  Copyright © 2020 johnny. All rights reserved.
+*/
+
+
+"Keyword" = "Keyword";
+"News Keyword" = "News Keyword";
+"Cancel" = "Cancel";
+"Add" = "Add";
+"Reduplication" = "Reduplication";
+"Ok" = "Ok";
+"Delete" = "Delete";
+"Category" = "Category";
+"Related order" = "Related order";
+"Latest order" = "Latest order";
+"Bookmark" = "Bookmark";
+"Share" = "Share";
+"Bookmark" = "Bookmark";
+
+"Please enter keyword which make you interting" = "Please enter keyword which make you interting";
+"Let's search another news!" = "Let's search another news!";
+"Why don't you add some new keyword?" = "Why don't you add some new keyword?";
+"Please enter category" = "Please enter category";
+"Please search news" = "Please search news";
+"You can choose the order" = "You can choose the order";
+"It is added in bookmark" = "It is added in bookmark";
+"You already added this news" = "You already added this news";
+
