@@ -30,7 +30,10 @@ class NewsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rightButtonItem = UIBarButtonItem.init(title: NSLocalizedString("Related order", comment: ""), style: .plain, target: self, action: #selector(rightBarButtonDidClick))
+        let rightButtonItem = UIBarButtonItem.init(title: NSLocalizedString("Related order", comment: ""),
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(rightBarButtonDidClick))
         self.navigationItem.rightBarButtonItem = rightButtonItem
         
         // MARK: - Tableview setting
