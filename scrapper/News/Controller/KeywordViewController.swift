@@ -93,7 +93,7 @@ extension KeywordViewController: UITableViewDelegate {
         let keyword = keywordList[row].keyword
         
         
-        let vc = self.storyboard?.instantiateViewController(identifier: newsListViewControllerID as! NewsListViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: newsListViewControllerID) as! NewsListViewController
         vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
         vc.searchKeyword = keyword
         

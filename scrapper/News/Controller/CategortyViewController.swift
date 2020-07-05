@@ -11,6 +11,7 @@ import UIKit
 class CategortyViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var categoryList: [Category] = []
+    let newsListViewControllerID = "NewsListViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,7 @@ class CategortyViewController: UIViewController {
 
 extension CategortyViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let vc: UIViewController = self.storyboard?.instantiateViewController(identifier: newsListViewControllerID) as! NewsListViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
