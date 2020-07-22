@@ -4,7 +4,7 @@
 //
 //  Created by Juyeon on 2020/07/22.
 //  Copyright © 2020 johnny. All rights reserved.
-//  test
+//
 
 import UIKit
 
@@ -26,10 +26,8 @@ class RootViewController: UIViewController {
         }
         
         viewController?.modalPresentationStyle = .fullScreen
-        self.present(viewController!, animated: false, completion: saveLogin)
-    }
-    
-    func saveLogin() {
-        UserDefaultsManager.setLogin(login: true)
+        self.present(viewController!, animated: false, completion: {
+            UserDefaultsManager.setLogin(login: true)
+        })
     }
 }

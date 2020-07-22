@@ -12,6 +12,10 @@ import AuthenticationServices
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginStackView: UIStackView!
+    @IBOutlet weak var useAsNoMember: UIButton!
+    @IBAction func didTapUseAsNoMember(_ sender: Any) {
+        goMainController()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        useAsNoMember.titleLabel?.text = NSLocalizedString("Use as non-member(no alarm feature)", comment: "")
         
         if UserDefaultsManager.getLogin() {
             goMainController()

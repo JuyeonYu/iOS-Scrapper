@@ -20,7 +20,10 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lh-JF-2EE">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Use without login (no alarm feature)"/>
+                                        <connections>
+                                            <action selector="didTapUseAsNoMember:" destination="BYZ-38-t0r" eventType="touchUpInside" id="whc-G5-oK3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -36,6 +39,7 @@
                     <navigationItem key="navigationItem" id="LQt-PX-zNd"/>
                     <connections>
                         <outlet property="loginStackView" destination="xuH-a9-yww" id="22C-WW-Inj"/>
+                        <outlet property="useAsNoMember" destination="6lh-JF-2EE" id="nM4-r7-alN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
