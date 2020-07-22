@@ -34,6 +34,7 @@
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 		B5872F04247D11F300F12A8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5872F06247D11F300F12A8F /* Localizable.strings */; };
 		B5A2D93824C2F1EF00AC0BBE /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A2D93724C2F1EF00AC0BBE /* UserDefaultsManager.swift */; };
+		CE6E9D5324C8684C00BDA08D /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E9D5224C8684C00BDA08D /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		B5872F09247D120000F12A8F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5A2D93624C2E1A900AC0BBE /* 뉴스스크랩.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "뉴스스크랩.entitlements"; sourceTree = "<group>"; };
 		B5A2D93724C2F1EF00AC0BBE /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		CE6E9D5224C8684C00BDA08D /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				B5486D8E23F23461008A5ABD /* LoginViewController.swift */,
+				CE6E9D5224C8684C00BDA08D /* RootViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				B5460C2923F28BE2002A199E /* Keyword.swift in Sources */,
 				B5486D8B23F23461008A5ABD /* AppDelegate.swift in Sources */,
 				B520383B23F3F0DC0025B571 /* RestAPIResponse.swift in Sources */,
+				CE6E9D5324C8684C00BDA08D /* RootViewController.swift in Sources */,
 				B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */,
 				B565A5BF23F64243001055CF /* BookMarkViewController.swift in Sources */,
 				B57E879223F2EA2B002FC196 /* News.swift in Sources */,
@@ -561,7 +565,7 @@
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper.dev;
 				PRODUCT_NAME = "뉴스스크랩";
-				PROVISIONING_PROFILE_SPECIFIER = profile_dev_com.johnny.scrapper.dev;
+				PROVISIONING_PROFILE_SPECIFIER = "dev-scrapper.dev profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

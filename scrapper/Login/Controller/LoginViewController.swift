@@ -15,8 +15,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self .setupProviderLoginView()
+        self.setupProviderLoginView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,23 +45,24 @@ class LoginViewController: UIViewController {
       authorizationController.performRequests()
     }
     
+    func goMainController() {
+        let mainViewController = self.storyboard?.instantiateViewController(identifier: "mainViewController")
+        mainViewController?.modalPresentationStyle = .fullScreen
+        self.present(mainViewController!, animated: false, completion: saveLogin)
+    }
+    
     func saveLogin() {
         UserDefaultsManager.setLogin(login: true)
     }
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
-    fileprivate func goMainController() {
-        let mainViewController = self.storyboard?.instantiateViewController(identifier: "mainViewController")
-        mainViewController?.modalPresentationStyle = .fullScreen
-        self.present(mainViewController!, animated: true, completion: saveLogin)
-    }
-    
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             // Create an account in your system.
             let userIdentifier = appleIDCredential.user
+            UserDefaultsManager.setUserID(userID: userIdentifier)
             goMainController()
             
         } else if let passwordCredential = authorization.credential as? ASPasswordCredential {

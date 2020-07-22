@@ -16,4 +16,12 @@ class UserDefaultsManager {
     static func getLogin() -> Bool {
         return UserDefaults.standard.bool(forKey: Constants.UserDefault.login)
     }
+    
+    static func setUserID(userID: String) {
+        UserDefaults.standard.set(userID, forKey: Constants.UserDefault.userID)
+    }
+    
+    static func getUserID() -> String? {
+        return UserDefaults.standard.string(forKey: Constants.UserDefault.userID) ?? nil
+    }
 }

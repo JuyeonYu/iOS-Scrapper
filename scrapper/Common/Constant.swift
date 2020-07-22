@@ -20,6 +20,7 @@ struct Constants {
     
     struct UserDefault {
         static let login = "UserDefaultLogin"
+        static let userID = "UserDefaultUserID"
     }
 }
 
