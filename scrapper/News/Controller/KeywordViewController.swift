@@ -85,13 +85,11 @@ class KeywordViewController: UIViewController {
     }
 }
 
-
 extension KeywordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
-        
         
         let vc = self.storyboard?.instantiateViewController(identifier: newsListViewControllerID) as! NewsListViewController
         vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
@@ -100,9 +98,31 @@ extension KeywordViewController: UITableViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
         
-    // 오른쪽으로 밀어서 메뉴 보는 함수
+    fileprivate func setTimePicker(keyword: String) {
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250,height: 250)
+        let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+        pickerView.datePickerMode = .time
+        vc.view.addSubview(pickerView)
+        
+        let editRadiusAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.alert)
+        editRadiusAlert.setValue(vc, forKey: "contentViewController")
+        editRadiusAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(alert: UIAlertAction!) in
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+            dateFormatter.timeStyle = DateFormatter.Style.short
+            
+            let date = pickerView.date
+            let strTime = date.dateStringWith(strFormat: "HH:mm")
+            print(keyword, strTime)
+        }))
+        editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(editRadiusAlert, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+        let deleteAction = UIContextualAction(style: .destructive, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row]
 
             // realm에서 먼저 삭제 한다.
@@ -112,7 +132,19 @@ extension KeywordViewController: UITableViewDelegate {
             tableView.reloadData()
             success(true)
         })
-        return UISwipeActionsConfiguration(actions:[deleteAction])
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        
+        let alarmAction = UIContextualAction(style: .normal,
+                                             title: "",
+                                             handler: {(ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            self.setTimePicker(keyword: Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)
+            success(true)
+        })
+        
+        alarmAction.image = UIImage(systemName: "alarm")
+        return UISwipeActionsConfiguration(actions:[deleteAction, alarmAction])
     }
 }
 
@@ -133,5 +165,15 @@ extension KeywordViewController: UITableViewDataSource {
         let keyword = keywordList[row].keyword
         cell.titleLabel.text = keyword
         return cell
+    }
+}
+
+extension Date {
+ func dateStringWith(strFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = Calendar.current.timeZone
+        dateFormatter.locale = Calendar.current.locale
+        dateFormatter.dateFormat = strFormat
+        return dateFormatter.string(from: self)
     }
 }
