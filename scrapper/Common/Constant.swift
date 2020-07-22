@@ -17,6 +17,10 @@ struct Constants {
     static let naverNewsAPDisplayParameter = "&display="
     static let naverNewsAPIStartPageParameter = "&start="
     static let naverNewsAPIStartSortParameter = "&sort="
+    
+    struct UserDefault {
+        static let login = "UserDefaultLogin"
+    }
 }
 
 

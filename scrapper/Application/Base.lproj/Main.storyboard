@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,32 +10,42 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="뉴스스크랩_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LlD-LY-P14">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xuH-a9-yww">
+                                <rect key="frame" x="10" y="822" width="394" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lh-JF-2EE">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="LlD-LY-P14" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4sF-tG-b7T"/>
-                            <constraint firstItem="LlD-LY-P14" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="O73-9H-baK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xuH-a9-yww" secondAttribute="bottom" constant="10" id="7cp-yU-vsE"/>
+                            <constraint firstItem="xuH-a9-yww" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="9Wh-xS-SLf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xuH-a9-yww" secondAttribute="trailing" constant="10" id="N4n-Up-9mJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="LQt-PX-zNd"/>
+                    <connections>
+                        <outlet property="loginStackView" destination="xuH-a9-yww" id="22C-WW-Inj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204.34782608695653" y="138.61607142857142"/>
+            <point key="canvasLocation" x="705.79710144927537" y="138.61607142857142"/>
         </scene>
         <!--keyword-->
         <scene sceneID="Hfc-Qn-3wV">
             <objects>
-                <viewController id="1T2-33-RiP" userLabel="keyword" customClass="KeywordViewController" customModule="뉴스스크랩_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1T2-33-RiP" userLabel="keyword" customClass="KeywordViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dPj-TA-Y5F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,12 +71,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag4-H3-3yc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653.6231884057975" y="-172.09821428571428"/>
+            <point key="canvasLocation" x="3563.7681159420295" y="-172.09821428571428"/>
         </scene>
         <!--BookMarkViewController-->
         <scene sceneID="bdW-Ma-pqm">
             <objects>
-                <viewController storyboardIdentifier="BookMarkViewController" id="g34-2a-8eI" userLabel="BookMarkViewController" customClass="BookMarkViewController" customModule="뉴스스크랩_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookMarkViewController" id="g34-2a-8eI" userLabel="BookMarkViewController" customClass="BookMarkViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jPq-Ws-j71">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,12 +108,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KY5-CN-mgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653.6231884057975" y="501.5625"/>
+            <point key="canvasLocation" x="3563.7681159420295" y="501.5625"/>
         </scene>
         <!--category-->
         <scene sceneID="jkH-1I-EF6">
             <objects>
-                <viewController storyboardIdentifier="CategortyViewController" id="Z0P-JE-GtP" userLabel="category" customClass="CategortyViewController" customModule="뉴스스크랩_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategortyViewController" id="Z0P-JE-GtP" userLabel="category" customClass="CategortyViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCt-9N-CJ8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -134,7 +144,7 @@
         <!--news list-->
         <scene sceneID="PrQ-oH-MK5">
             <objects>
-                <viewController storyboardIdentifier="NewsListViewController" id="Wpy-5F-Dus" userLabel="news list" customClass="NewsListViewController" customModule="뉴스스크랩_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsListViewController" id="Wpy-5F-Dus" userLabel="news list" customClass="NewsListViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LPs-DP-0sH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,12 +179,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mN-OR-wOM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3493" y="-172"/>
+            <point key="canvasLocation" x="4402.898550724638" y="-172.09821428571428"/>
         </scene>
         <!--news webview-->
         <scene sceneID="98G-LG-qq2">
             <objects>
-                <viewController storyboardIdentifier="NewsViewController" id="M7D-0P-SRw" userLabel="news webview" customClass="NewsViewController" customModule="뉴스스크랩_dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsViewController" id="M7D-0P-SRw" userLabel="news webview" customClass="NewsViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NBr-Bb-gyT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,12 +214,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McI-QC-Ijz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4328" y="-172"/>
+            <point key="canvasLocation" x="5237.68115942029" y="-172.09821428571428"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="uJf-Ix-YJU">
             <objects>
-                <tabBarController id="67s-io-dDD" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainViewController" id="67s-io-dDD" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="OlR-Zq-fgU"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eJ3-Yc-Mek">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -223,7 +233,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gI-Lf-mSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="139"/>
+            <point key="canvasLocation" x="1868.1159420289857" y="138.61607142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RXl-q0-Qw1">
@@ -242,7 +252,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LD1-XA-hpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="-172"/>
+            <point key="canvasLocation" x="2795.6521739130435" y="-172.09821428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kol-UL-ceY">
@@ -261,11 +271,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMS-oA-Smb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="502"/>
+            <point key="canvasLocation" x="2795.6521739130435" y="501.5625"/>
         </scene>
     </scenes>
     <resources>
-        <image name="bookmark.fill" catalog="system" width="56" height="64"/>
-        <image name="folder.fill" catalog="system" width="64" height="46"/>
+        <image name="bookmark.fill" catalog="system" width="112" height="128"/>
+        <image name="folder.fill" catalog="system" width="128" height="95"/>
     </resources>
 </document>
