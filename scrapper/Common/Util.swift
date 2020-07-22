@@ -43,13 +43,14 @@ class Util {
     
     func naverTimeFormatToNormal(date: String) -> String {
         let naverDateFormatter = DateFormatter()
-        let dateFormatter = DateFormatter()
         
         // 시간 포멧 변경 세팅
-        naverDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z" // 네이버 api에서 넘어오는 시간 포멧
-        let beforeDate = naverDateFormatter.date(from: date)!
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a" // 내가 뿌리고 싶은 시간 포멧
-        return dateFormatter.string(from: beforeDate)
+        naverDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z" // 네이버 api에서 넘어오는 시간 포멧
+        naverDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        guard let startTime = naverDateFormatter.date(from: date) else {return "?"}
+        naverDateFormatter.dateFormat = "yyyy-MM-dd hh:mm a" // 내가 뿌리고 싶은 시간 포멧
+        return naverDateFormatter.string(from: startTime)
     }
     
     func showToast(controller: UIViewController, message: String) {
