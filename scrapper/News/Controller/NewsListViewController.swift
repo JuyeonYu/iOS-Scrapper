@@ -56,6 +56,21 @@ class NewsListViewController: UIViewController {
 
         requestNaverNewsList(keyword: keyword, sort: searchSort, start: 1)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        let date:Date = dateFormatter.date(from: self.newsList[0].publishTime)!
+        
+        let keywordRealm = realm.objects(KeywordRealm.self).filter("keyword = '\(searchKeyword!)'").first
+        
+        try! realm.write {
+            keywordRealm?.latestArticleTime = date
+        }
+    }
         
     func requestNaverNewsList(keyword: String, sort: String, start: Int) {
         NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: sort, start: start) { (result) in

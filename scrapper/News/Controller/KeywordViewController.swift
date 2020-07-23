@@ -74,6 +74,7 @@ class KeywordViewController: UIViewController {
 
             let keywordRealm = KeywordRealm()
             keywordRealm.keyword = text!
+            keywordRealm.userID = UserDefaultsManager.getUserID()
             try! self.realm.write {
                 self.realm.add(keywordRealm)
             }
@@ -116,6 +117,11 @@ extension KeywordViewController: UITableViewDelegate {
             let date = pickerView.date
             let strTime = date.dateStringWith(strFormat: "HH:mm")
             print(keyword, strTime)
+            
+            let keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").first
+            try! self.realm.write {
+                keywordRealm?.alarmTime = date
+            }
         }))
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(editRadiusAlert, animated: true)
