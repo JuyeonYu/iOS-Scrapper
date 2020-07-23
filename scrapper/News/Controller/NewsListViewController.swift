@@ -61,14 +61,17 @@ class NewsListViewController: UIViewController {
         super.viewDidAppear(animated)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-        let date:Date = dateFormatter.date(from: self.newsList[0].publishTime)!
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        let keywordRealm = realm.objects(KeywordRealm.self).filter("keyword = '\(searchKeyword!)'").first
+        let dateString = self.newsList[0].publishTime
         
-        try! realm.write {
-            keywordRealm?.latestArticleTime = date
+        if let date = dateFormatter.date(from: dateString) {
+            let keywordRealm = realm.objects(KeywordRealm.self).filter("keyword = '\(searchKeyword!)'").first
+            
+            try! realm.write {
+                keywordRealm?.latestArticleTime = date
+            }
         }
     }
         
