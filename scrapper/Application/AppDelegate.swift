@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     fileprivate func requestAPNSAlarm(_ application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
             (granted, error) in
             guard granted else { return }
@@ -74,5 +75,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print("deviceToken: \(tokenString)")
     }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("fail to regist APNS: %@", error.localizedDescription)
+    }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // push notification when foreground
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                                        willPresent notification: UNNotification,
+                                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("User Info = ", notification.request.content.userInfo)
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    // push notification when background
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                                        didReceive response: UNNotificationResponse,
+                                                        withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("User Info = ",response.notification.request.content.userInfo)
+        completionHandler()
+    }
+}
