@@ -67,9 +67,19 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             // Create an account in your system.
-            let userIdentifier = appleIDCredential.user
-            UserDefaultsManager.setUserID(userID: userIdentifier)
-            goMainController()
+            UserDefaultsManager.setUserID(userID: appleIDCredential.user)
+            
+            guard let pushToken = UserDefaultsManager.getPushToken() else {
+                return
+            }
+            
+            NetworkManager.sharedInstance.signUp(id: appleIDCredential.user, pushToken: pushToken) { (response) in
+                if (response.isSuccess) {
+                    self.goMainController()
+                } else {
+                    
+                }
+            }
             
         } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
             // Sign in using an existing iCloud Keychain credential.

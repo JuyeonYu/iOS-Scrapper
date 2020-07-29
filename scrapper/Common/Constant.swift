@@ -21,6 +21,19 @@ struct Constants {
     struct UserDefault {
         static let login = "UserDefaultLogin"
         static let userID = "UserDefaultUserID"
+        static let pushToken = "UserDefaultPushToke n"
+    }
+    
+    struct RestAPI {
+        static let baseURL = "http://182.213.68.34:3000"
+        static let kUser = "user"
+        static let kID = "id"
+        static let kPushToken = "pushToken"
+        static let kKeyword = "keyword"
+        static let kLatestNewsTime = "latestNewsTime"
+        static let kAalarmOn = "alarmOn"
+        static let kAlarmTime = "alarmTime"
+        static let kUnreadCount = "unreadCount"
     }
 }
 

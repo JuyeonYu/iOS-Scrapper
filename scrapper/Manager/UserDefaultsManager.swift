@@ -24,4 +24,12 @@ class UserDefaultsManager {
     static func getUserID() -> String? {
         return UserDefaults.standard.string(forKey: Constants.UserDefault.userID) ?? nil
     }
+    
+    static func setPushToken(pushToken: String) {
+        UserDefaults.standard.set(pushToken, forKey: Constants.UserDefault.pushToken)
+    }
+    
+    static func getPushToken() -> String? {
+        return UserDefaults.standard.string(forKey: Constants.UserDefault.pushToken) ?? nil
+    }
 }

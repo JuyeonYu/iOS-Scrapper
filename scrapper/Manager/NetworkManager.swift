@@ -39,4 +39,20 @@ class NetworkManager {
             }
         }
     }
+    
+    func signUp(id: String, pushToken: String, completion: @escaping (RestAPIResponse) -> Void) {
+        let url = Constants.RestAPI.baseURL + "/"
+            + Constants.RestAPI.kUser + "/"
+        let param = ["userID":id, "pushToken":pushToken]
+        
+        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                completion(RestAPIResponse.init(isSuccess: true, message: nil, code: 200))
+            case .failure(let e):
+                completion(RestAPIResponse.init(isSuccess: false, message: nil, code: 200))
+                print(e.localizedDescription)
+            }
+        }
+    }
 }
