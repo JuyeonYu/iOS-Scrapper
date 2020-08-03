@@ -43,9 +43,76 @@ class NetworkManager {
     func signUp(id: String, pushToken: String, completion: @escaping (RestAPIResponse) -> Void) {
         let url = Constants.RestAPI.baseURL + "/"
             + Constants.RestAPI.kUser + "/"
+        
+        let encodedURLString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
         let param = ["userID":id, "pushToken":pushToken]
         
-        AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
+        AF.request(encodedURLString, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                completion(RestAPIResponse.init(isSuccess: true, message: nil, code: 200))
+            case .failure(let e):
+                completion(RestAPIResponse.init(isSuccess: false, message: nil, code: 200))
+                print(e.localizedDescription)
+            }
+        }
+    }
+    
+    func addKeyword(keywordRealm:KeywordRealm, completion: @escaping (RestAPIResponse) -> Void) {
+        let url = Constants.RestAPI.baseURL + "/"
+            + Constants.RestAPI.kKeyword + "/"
+            + keywordRealm.keyword
+        
+        let encodedURLString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let param = [Constants.RestAPI.kUserID:keywordRealm.userID!]
+        
+        AF.request(encodedURLString, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                completion(RestAPIResponse.init(isSuccess: true, message: nil, code: 200))
+            case .failure(let e):
+                completion(RestAPIResponse.init(isSuccess: false, message: nil, code: 200))
+                print(e.localizedDescription)
+            }
+        }
+    }
+    
+    func deleteKeyword(keywordRealm:KeywordRealm, completion: @escaping (RestAPIResponse) -> Void) {
+        let url = Constants.RestAPI.baseURL + "/"
+            + Constants.RestAPI.kKeyword + "/"
+            + keywordRealm.keyword
+        
+        let encodedURLString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let param = [Constants.RestAPI.kUser:keywordRealm.userID!]
+        
+        AF.request(encodedURLString, method: .delete, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                completion(RestAPIResponse.init(isSuccess: true, message: nil, code: 200))
+            case .failure(let e):
+                completion(RestAPIResponse.init(isSuccess: false, message: nil, code: 200))
+                print(e.localizedDescription)
+            }
+        }
+    }
+    
+    func updateKeyword(keywordRealm:KeywordRealm, completion: @escaping (RestAPIResponse) -> Void) {
+        let url = Constants.RestAPI.baseURL + "/"
+            + Constants.RestAPI.kKeyword + "/"
+            + keywordRealm.keyword
+        
+        let encodedURLString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let param = [
+            Constants.RestAPI.kUserID : keywordRealm.userID!,
+            Constants.RestAPI.kLatestNewsTime : keywordRealm.latestNewsTime ?? "",
+            Constants.RestAPI.kAlarmTime : keywordRealm.alarmTime ?? ""
+            ] as [String : Any]
+        
+        AF.request(encodedURLString, method: .put, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
             case .success(_):
                 completion(RestAPIResponse.init(isSuccess: true, message: nil, code: 200))

@@ -37,6 +37,9 @@ class KeywordViewController: UIViewController {
         let nibName = UINib(nibName: keywordCellID, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: keywordCellID)
         
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableView.automaticDimension
+        
         // get data for tableview
         
         if realm.objects(KeywordRealm.self).count == 0 {
@@ -71,12 +74,15 @@ class KeywordViewController: UIViewController {
                 self.present(alert, animated: true)
                 return
             }
-
             let keywordRealm = KeywordRealm()
             keywordRealm.keyword = text!
             keywordRealm.userID = UserDefaultsManager.getUserID()
             try! self.realm.write {
                 self.realm.add(keywordRealm)
+                
+                NetworkManager.sharedInstance.addKeyword(keywordRealm: keywordRealm) { (result) in
+                    if (result.isSuccess) {print("ok")}
+                }
             }
             self.tableView.reloadData()
         }
@@ -104,6 +110,7 @@ extension KeywordViewController: UITableViewDelegate {
         vc.preferredContentSize = CGSize(width: 250,height: 250)
         let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
         pickerView.datePickerMode = .time
+        
         vc.view.addSubview(pickerView)
         
         let editRadiusAlert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.alert)
@@ -120,7 +127,12 @@ extension KeywordViewController: UITableViewDelegate {
             
             let keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").first
             try! self.realm.write {
-                keywordRealm?.alarmTime = date
+                keywordRealm?.alarmTime = strTime
+                
+                NetworkManager.sharedInstance.updateKeyword(keywordRealm: keywordRealm!) { (result) in
+                    if (result.isSuccess) {print("ok")}
+                }
+                self.tableView.reloadData()
             }
         }))
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -133,7 +145,13 @@ extension KeywordViewController: UITableViewDelegate {
 
             // realm에서 먼저 삭제 한다.
             try! self.realm.write {
+                NetworkManager.sharedInstance.deleteKeyword(keywordRealm: keyword) { (result) in
+                    if (result.isSuccess) {print("ok")}
+                }
+                
                 self.realm.delete(keyword)
+                
+                
             }
             tableView.reloadData()
             success(true)
@@ -145,12 +163,44 @@ extension KeywordViewController: UITableViewDelegate {
         let alarmAction = UIContextualAction(style: .normal,
                                              title: "",
                                              handler: {(ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            self.setTimePicker(keyword: Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)
+            if (Array(self.realm.objects(KeywordRealm.self))[indexPath.row].alarmTime != nil
+                && Array(self.realm.objects(KeywordRealm.self))[indexPath.row].alarmTime != "") {
+                let alert = UIAlertController(title: nil,
+                                              message: nil,
+                                              preferredStyle: .actionSheet)
+                let edit = UIAlertAction(title: NSLocalizedString("edit", comment: ""),
+                                         style: .default) { (_) in
+                    self.setTimePicker(keyword: Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)
+                }
+                let delete = UIAlertAction(title: NSLocalizedString("delete", comment: ""),
+                                           style: .default) { (_) in
+                    let keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)'").first
+                    try! self.realm.write {
+                        keywordRealm?.alarmTime = ""
+                        NetworkManager.sharedInstance.updateKeyword(keywordRealm: keywordRealm!) { (result) in
+                            if (result.isSuccess) {print("ok")}
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+                let cancel = UIAlertAction(title: NSLocalizedString("cancel", comment: ""),
+                                         style: .cancel)
+                alert.addAction(edit)
+                alert.addAction(delete)
+                alert.addAction(cancel)
+                self.present(alert, animated: true)
+            } else {
+                self.setTimePicker(keyword: Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)
+            }
             success(true)
         })
         
         alarmAction.image = UIImage(systemName: "alarm")
         return UISwipeActionsConfiguration(actions:[deleteAction, alarmAction])
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 
@@ -170,6 +220,14 @@ extension KeywordViewController: UITableViewDataSource {
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
         cell.titleLabel.text = keyword
+        
+        if (keywordList[row].alarmTime != nil
+            && keywordList[row].alarmTime != "") {
+            cell.alarmViewConstraintHeight.constant = 20
+            cell.alarmTime.text = keywordList[row].alarmTime
+        } else {
+            cell.alarmViewConstraintHeight.constant = 0
+        }
         return cell
     }
 }

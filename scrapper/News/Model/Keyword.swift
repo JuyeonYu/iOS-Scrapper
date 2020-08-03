@@ -17,8 +17,8 @@ struct Keyword: Codable {
 
 class KeywordRealm: Object {
     @objc dynamic var keyword: String = ""
-    @objc dynamic var latestArticleTime: Date?
-    @objc dynamic var alarmTime: Date?
+    @objc dynamic var latestNewsTime: String?
+    @objc dynamic var alarmTime: String?
     @objc dynamic var userID: String?
 }
 

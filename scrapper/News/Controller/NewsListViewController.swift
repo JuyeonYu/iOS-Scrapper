@@ -65,12 +65,13 @@ class NewsListViewController: UIViewController {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         let dateString = self.newsList[0].publishTime
+        let keywordRealm = realm.objects(KeywordRealm.self).filter("keyword = '\(searchKeyword!)'").first
         
-        if let date = dateFormatter.date(from: dateString) {
-            let keywordRealm = realm.objects(KeywordRealm.self).filter("keyword = '\(searchKeyword!)'").first
+        try! realm.write {
+            keywordRealm?.latestNewsTime = dateString
             
-            try! realm.write {
-                keywordRealm?.latestArticleTime = date
+            NetworkManager.sharedInstance.updateKeyword(keywordRealm: keywordRealm!) { (result) in
+                if (result.isSuccess) {print("ok")}
             }
         }
     }

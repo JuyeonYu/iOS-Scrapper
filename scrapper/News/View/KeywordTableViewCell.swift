@@ -10,6 +10,9 @@ import UIKit
 
 class KeywordTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var alarmViewConstraintHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var alarmTime: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

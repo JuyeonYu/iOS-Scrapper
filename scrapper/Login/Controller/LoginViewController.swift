@@ -26,10 +26,6 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
         
         useAsNoMember.titleLabel?.text = NSLocalizedString("Use as non-member(no alarm feature)", comment: "")
-        
-        if UserDefaultsManager.getLogin() {
-            goMainController()
-        }
     }
     
     func setupProviderLoginView() {
@@ -77,20 +73,17 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 if (response.isSuccess) {
                     self.goMainController()
                 } else {
-                    
                 }
             }
-            
         } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
             // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
-            goMainController()
+//            goMainController()
         }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        
     }
 }
 

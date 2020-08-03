@@ -27,6 +27,7 @@ struct Constants {
     struct RestAPI {
         static let baseURL = "http://182.213.68.34:3000"
         static let kUser = "user"
+        static let kUserID = "userID"
         static let kID = "id"
         static let kPushToken = "pushToken"
         static let kKeyword = "keyword"
