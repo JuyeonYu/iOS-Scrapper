@@ -168,11 +168,11 @@ extension KeywordViewController: UITableViewDelegate {
                 let alert = UIAlertController(title: nil,
                                               message: nil,
                                               preferredStyle: .actionSheet)
-                let edit = UIAlertAction(title: NSLocalizedString("edit", comment: ""),
+                let edit = UIAlertAction(title: NSLocalizedString("Edit", comment: ""),
                                          style: .default) { (_) in
                     self.setTimePicker(keyword: Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)
                 }
-                let delete = UIAlertAction(title: NSLocalizedString("delete", comment: ""),
+                let delete = UIAlertAction(title: NSLocalizedString("Delete", comment: ""),
                                            style: .default) { (_) in
                     let keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(Array(self.realm.objects(KeywordRealm.self))[indexPath.row].keyword)'").first
                     try! self.realm.write {
@@ -220,14 +220,6 @@ extension KeywordViewController: UITableViewDataSource {
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
         cell.titleLabel.text = keyword
-        
-        if (keywordList[row].alarmTime != nil
-            && keywordList[row].alarmTime != "") {
-            cell.alarmViewConstraintHeight.constant = 20
-            cell.alarmTime.text = keywordList[row].alarmTime
-        } else {
-            cell.alarmViewConstraintHeight.constant = 0
-        }
         return cell
     }
 }

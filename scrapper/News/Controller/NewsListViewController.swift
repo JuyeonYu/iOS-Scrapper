@@ -24,7 +24,7 @@ class NewsListViewController: UIViewController {
     
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
-    var searchSort = "sim" // 기본값은 관련도 검색
+    var searchSort = "date" // 기본값은 관련도 검색
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {

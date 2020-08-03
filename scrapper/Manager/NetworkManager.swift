@@ -86,7 +86,7 @@ class NetworkManager {
         
         let encodedURLString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let param = [Constants.RestAPI.kUser:keywordRealm.userID!]
+        let param = [Constants.RestAPI.kUserID:keywordRealm.userID!]
         
         AF.request(encodedURLString, method: .delete, parameters: param, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
