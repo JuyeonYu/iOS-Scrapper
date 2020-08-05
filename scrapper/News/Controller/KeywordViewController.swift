@@ -20,8 +20,6 @@ class KeywordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(getNews), name: NSNotification.Name(rawValue: "ggggg"), object: nil)
-        
         
         // Navigation setting
         self.navigationItem.title = NSLocalizedString("Keyword", comment: "")
@@ -46,6 +44,18 @@ class KeywordViewController: UIViewController {
         if realm.objects(KeywordRealm.self).count == 0 {
             didTapAddKeywordButton()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(getNews), name: NSNotification.Name(rawValue: "ggggg"), object: nil)
+        
+        Notification.Name.NSBundleResourceRequestLowDiskSpace
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func getNews(_ notification: Notification) {
