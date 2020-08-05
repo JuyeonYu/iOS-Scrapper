@@ -20,5 +20,6 @@ class KeywordRealm: Object {
     @objc dynamic var latestNewsTime: String?
     @objc dynamic var alarmTime: String?
     @objc dynamic var userID: String?
+    @objc dynamic var hasNews: Bool = true
 }
 

@@ -11,8 +11,9 @@ import UIKit
 class KeywordTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var alarmViewConstraintHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var alarmTime: UILabel!
+    @IBOutlet weak var newIconImageView: UIImageView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var alarmTimeLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

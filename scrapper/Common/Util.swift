@@ -64,6 +64,20 @@ class Util {
             alert.dismiss(animated: true, completion: nil)
         }
     }
+    
+    func plus1Badge() {
+        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        + 1
+    }
+    
+    func minus1Badge() {
+        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        - 1
+    }
+    
+    func initBadge() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
 }
 
 public extension String {

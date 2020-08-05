@@ -15,12 +15,13 @@ class KeywordViewController: UIViewController {
     lazy var realm:Realm = {
         return try! Realm()
     }()
-    
     let keywordCellID = "KeywordTableViewCell"
     let newsListViewControllerID = "NewsListViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(getNews), name: NSNotification.Name(rawValue: "ggggg"), object: nil)
+        
         
         // Navigation setting
         self.navigationItem.title = NSLocalizedString("Keyword", comment: "")
@@ -45,6 +46,21 @@ class KeywordViewController: UIViewController {
         if realm.objects(KeywordRealm.self).count == 0 {
             didTapAddKeywordButton()
         }
+    }
+    
+    @objc func getNews(_ notification: Notification) {
+        let keyword = notification.object as! String
+        print("keyword: \(keyword)")
+        
+        let keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").first
+        try! self.realm.write {
+            keywordRealm?.hasNews = true
+            self.tableView.reloadData()
+        }
+    }
+    
+    @objc func newsFromAPNS(keyword: String) {
+        print("newsFromAPNS")
     }
         
     @objc func didTapAddKeywordButton() {
@@ -84,6 +100,8 @@ class KeywordViewController: UIViewController {
                     if (result.isSuccess) {print("ok")}
                 }
             }
+            Util.sharedInstance.plus1Badge()
+            
             self.tableView.reloadData()
         }
         alert.addAction(cancel)
@@ -97,10 +115,20 @@ extension KeywordViewController: UITableViewDelegate {
         let row = indexPath.row
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
+                
+        let keywordRealm = keywordList[row]
+        
+        if (keywordRealm.hasNews) {
+            Util.sharedInstance.minus1Badge()
+            try! self.realm.write {
+                keywordRealm.hasNews = false
+            }
+        }
         
         let vc = self.storyboard?.instantiateViewController(identifier: newsListViewControllerID) as! NewsListViewController
         vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
         vc.searchKeyword = keyword
+        self.tableView.reloadData();
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -142,17 +170,19 @@ extension KeywordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row]
+            
+            if (keyword.hasNews) {
+                Util.sharedInstance.minus1Badge()
+            }
 
-            // realm에서 먼저 삭제 한다.
             try! self.realm.write {
                 NetworkManager.sharedInstance.deleteKeyword(keywordRealm: keyword) { (result) in
                     if (result.isSuccess) {print("ok")}
                 }
                 
                 self.realm.delete(keyword)
-                
-                
             }
+            
             tableView.reloadData()
             success(true)
         })
@@ -179,8 +209,8 @@ extension KeywordViewController: UITableViewDelegate {
                         keywordRealm?.alarmTime = ""
                         NetworkManager.sharedInstance.updateKeyword(keywordRealm: keywordRealm!) { (result) in
                             if (result.isSuccess) {print("ok")}
-                            self.tableView.reloadData()
                         }
+                        self.tableView.reloadData()
                     }
                 }
                 let cancel = UIAlertAction(title: NSLocalizedString("cancel", comment: ""),
@@ -220,6 +250,23 @@ extension KeywordViewController: UITableViewDataSource {
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
         cell.titleLabel.text = keyword
+        
+        let alarmTime = keywordList[row].alarmTime
+        if (alarmTime != nil && alarmTime != "") {
+            cell.alarmTimeLabel.text = alarmTime
+            cell.alarmViewConstraintHeight.constant = 30;
+            cell.stackView.isHidden = false
+        } else {
+            cell.stackView.isHidden = true
+            cell.alarmViewConstraintHeight.constant = 0;
+        }
+        
+        let hasNews = keywordList[row].hasNews
+        if (hasNews) {
+            cell.newIconImageView.isHidden = false
+        } else {
+            cell.newIconImageView.isHidden = true
+        }
         return cell
     }
 }

@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 6,
+            schemaVersion: 7,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
+        
+        Util.sharedInstance.initBadge()
     }
     
     fileprivate func requestAPNSAlarm(_ application: UIApplication) {
@@ -89,6 +91,20 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                                         willPresent notification: UNNotification,
                                                         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("User Info = ", notification.request.content.userInfo)
+        let userInfo: Dictionary = notification.request.content.userInfo;
+        
+        if let aps = userInfo["aps"] as? NSDictionary {
+            if let alert = aps["alert"] as? NSDictionary {
+                if let message = alert["message"] as? NSString {
+                    print("message: \( message)")
+                }
+            } else if let alert = aps["alert"] as? NSString {
+                print("alert: \( alert)")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ggggg"), object: alert)
+            }
+        }
+        
+        Util.sharedInstance.plus1Badge()
         completionHandler([.alert, .badge, .sound])
     }
     
@@ -98,6 +114,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                                         didReceive response: UNNotificationResponse,
                                                         withCompletionHandler completionHandler: @escaping () -> Void) {
         print("User Info = ",response.notification.request.content.userInfo)
+        Util.sharedInstance.plus1Badge()
         completionHandler()
     }
 }
