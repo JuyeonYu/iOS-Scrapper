@@ -9,11 +9,6 @@
 import Foundation
 
 struct Constants {
-    
-    struct UserDefault {
-        static let newsOrder = "UserDefaultNewsOrder"
-    }
-    
     static let baseURL = "http://15.164.97.144:5000/"
     static let mainKeyword = "mainKeyword"
     static let userid = "userid"
@@ -26,6 +21,7 @@ struct Constants {
     struct UserDefault {
         static let login = "UserDefaultLogin"
         static let userID = "UserDefaultUserID"
+        static let newsOrder = "UserDefaultNewsOrder"
     }
 }
 

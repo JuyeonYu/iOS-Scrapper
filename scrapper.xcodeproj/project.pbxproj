@@ -65,6 +65,7 @@
 		B5486D9623F23463008A5ABD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5486D9823F23463008A5ABD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5619A87250780A600D89694 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		B5619A892507857800D89694 /* 뉴스스크랩Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "뉴스스크랩Release.entitlements"; sourceTree = "<group>"; };
 		B565A5BC23F58726001055CF /* NaverNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverNews.swift; sourceTree = "<group>"; };
 		B565A5BE23F64243001055CF /* BookMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewController.swift; sourceTree = "<group>"; };
 		B565A5C023F669FA001055CF /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -230,6 +231,7 @@
 		B5486D8923F23461008A5ABD /* scrapper */ = {
 			isa = PBXGroup;
 			children = (
+				B5619A892507857800D89694 /* 뉴스스크랩Release.entitlements */,
 				B5A2D93624C2E1A900AC0BBE /* 뉴스스크랩.entitlements */,
 				B520381423F3CDEC0025B571 /* Application */,
 				B520381923F3CF180025B571 /* Login */,
@@ -580,7 +582,7 @@
 			baseConfigurationReference = 9F87F1596BC1A78054548C59 /* Pods-scrapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "scrapper/뉴스스크랩.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "scrapper/뉴스스크랩Release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
