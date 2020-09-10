@@ -11,13 +11,13 @@ import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    var initialViewController :UIViewController?
 
-    //
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+    fileprivate func initRealm() {
         let configCheck = Realm.Configuration();
         do {
-             let fileUrlIs = try schemaVersionAtURL(configCheck.fileURL!)
+            let fileUrlIs = try schemaVersionAtURL(configCheck.fileURL!)
             print("schema version \(fileUrlIs)")
         } catch  {
             print(error)
@@ -27,19 +27,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
             schemaVersion: 3,
-
+            
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion < 3) {
                 }
-            })
-
+        })
+        
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        initRealm()
+        
         return true
     }
+    
+    
 
     // MARK: UISceneSession Lifecycle
 
