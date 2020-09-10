@@ -52,11 +52,16 @@ class KeywordViewController: UIViewController {
             tf.placeholder = NSLocalizedString("Please enter keyword which make you interting", comment: "")
         }
         
+        alert.addTextField { (tf) in
+            tf.placeholder = NSLocalizedString("add exception keyword", comment: "")
+        }
+        
         let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         let ok = UIAlertAction(title: NSLocalizedString("Add", comment: ""), style: .default) { (_) in
-            let text = alert.textFields?[0].text
+            let saveKeyword = alert.textFields?[0].text
+            let exceptionKeyword = alert.textFields?[1].text
 
-            guard let keyword = text else {
+            guard let keyword = saveKeyword else {
                 return
             }
             
@@ -72,7 +77,8 @@ class KeywordViewController: UIViewController {
             }
 
             let keywordRealm = KeywordRealm()
-            keywordRealm.keyword = text!
+            keywordRealm.keyword = saveKeyword!
+            keywordRealm.exceptionKeyword = exceptionKeyword!
             try! self.realm.write {
                 self.realm.add(keywordRealm)
             }
