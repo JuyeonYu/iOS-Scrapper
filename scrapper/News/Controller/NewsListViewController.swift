@@ -25,12 +25,20 @@ class NewsListViewController: UIViewController {
     let naverDateFormatter = DateFormatter()
     let dateFormatter = DateFormatter()
     var searchSort = "sim" // 기본값은 관련도 검색
+    var searchSortBarTitle = "Related order" // 기본값은 관련도 검색
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rightButtonItem = UIBarButtonItem.init(title: NSLocalizedString("Related order", comment: ""),
+        if UserDefaultManager.getNewsOrder() == "date" {
+            searchSortBarTitle = "Latest order"
+            searchSort = "date"
+        } else {
+            searchSortBarTitle = "Related order"
+            searchSort = "sim"
+        }
+        let rightButtonItem = UIBarButtonItem.init(title: NSLocalizedString(searchSortBarTitle, comment: ""),
                                                    style: .plain,
                                                    target: self,
                                                    action: #selector(rightBarButtonDidClick))
@@ -75,11 +83,12 @@ class NewsListViewController: UIViewController {
     }
     
     @objc func rightBarButtonDidClick() {
-        
         let actionSheet = UIAlertController(title: NSLocalizedString("You can choose the order", comment: ""), message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Latest order", comment: ""), style: .default, handler: { result in
             self.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Latest order", comment: "")
             self.searchSort = "date"
+            
+            UserDefaultManager.setNewsOrder(order: "date")
             
 //            키워드 페이지에서 검색할 키워드를 줌
             guard let keyword = self.searchKeyword else {
@@ -93,6 +102,8 @@ class NewsListViewController: UIViewController {
             self.navigationItem.rightBarButtonItem?.title = NSLocalizedString("Related order", comment: "")
             self.searchSort = "sim"
             
+            UserDefaultManager.setNewsOrder(order: "sim")
+
 //            키워드 페이지에서 검색할 키워드를 줌
             guard let keyword = self.searchKeyword else {
                 return
