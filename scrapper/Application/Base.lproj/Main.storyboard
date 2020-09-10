@@ -7,45 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="loginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xuH-a9-yww">
-                                <rect key="frame" x="10" y="822" width="394" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lh-JF-2EE">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
-                                        <state key="normal" title="Use without login (no alarm feature)"/>
-                                        <connections>
-                                            <action selector="didTapUseAsNoMember:" destination="BYZ-38-t0r" eventType="touchUpInside" id="whc-G5-oK3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xuH-a9-yww" secondAttribute="bottom" constant="10" id="7cp-yU-vsE"/>
-                            <constraint firstItem="xuH-a9-yww" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="9Wh-xS-SLf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xuH-a9-yww" secondAttribute="trailing" constant="10" id="N4n-Up-9mJ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="LQt-PX-zNd"/>
-                    <connections>
-                        <outlet property="loginStackView" destination="xuH-a9-yww" id="22C-WW-Inj"/>
-                        <outlet property="useAsNoMember" destination="6lh-JF-2EE" id="nM4-r7-alN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1868" y="-538"/>
-        </scene>
         <!--keyword-->
         <scene sceneID="Hfc-Qn-3wV">
             <objects>
@@ -276,20 +237,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMS-oA-Smb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2795.6521739130435" y="501.5625"/>
-        </scene>
-        <!--Root View Controller-->
-        <scene sceneID="TrV-c7-P4r">
-            <objects>
-                <viewController id="Qss-xF-bOF" customClass="RootViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dy2-g0-OO8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Jp2-gf-AYI"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t7P-J0-LKU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1007" y="-172"/>
         </scene>
     </scenes>
     <resources>
