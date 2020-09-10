@@ -52,11 +52,16 @@ class KeywordViewController: UIViewController {
             tf.placeholder = NSLocalizedString("Please enter keyword which make you interting", comment: "")
         }
         
+        alert.addTextField { (tf) in
+            tf.placeholder = NSLocalizedString("add exception keyword", comment: "")
+        }
+        
         let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         let ok = UIAlertAction(title: NSLocalizedString("Add", comment: ""), style: .default) { (_) in
-            let text = alert.textFields?[0].text
+            let saveKeyword = alert.textFields?[0].text
+            let exceptionKeyword = alert.textFields?[1].text
 
-            guard let keyword = text else {
+            guard let keyword = saveKeyword else {
                 return
             }
             
@@ -72,9 +77,37 @@ class KeywordViewController: UIViewController {
             }
 
             let keywordRealm = KeywordRealm()
-            keywordRealm.keyword = text!
+            keywordRealm.keyword = saveKeyword!
+            keywordRealm.exceptionKeyword = exceptionKeyword!
             try! self.realm.write {
                 self.realm.add(keywordRealm)
+            }
+            self.tableView.reloadData()
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true)
+    }
+    
+    func editExceptionKeyword(keyword: String, exceptionKeyword: String) {
+        let alert = UIAlertController(title: NSLocalizedString("exception keyword", comment: ""),
+                                      message: nil,
+                                      preferredStyle: .alert)
+        alert.addTextField { (tf) in
+            if exceptionKeyword == "" {
+                tf.placeholder = NSLocalizedString("add exception keyword", comment: "")
+            } else {
+                tf.text = exceptionKeyword
+            }
+        }
+        
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
+        let ok = UIAlertAction(title: NSLocalizedString("Edit", comment: ""), style: .default) { (_) in
+            let exceptionKeyword = alert.textFields?[0].text
+            
+            let keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").first
+            try! self.realm.write {
+                keywordRealm?.exceptionKeyword = exceptionKeyword ?? ""
             }
             self.tableView.reloadData()
         }
@@ -111,7 +144,13 @@ extension KeywordViewController: UITableViewDelegate {
             tableView.reloadData()
             success(true)
         })
-        return UISwipeActionsConfiguration(actions:[deleteAction])
+        
+        let editAction = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row].keyword
+            let exceptionKeyword = self.realm.objects(KeywordRealm.self)[indexPath.row].exceptionKeyword
+            self.editExceptionKeyword(keyword: keyword, exceptionKeyword: exceptionKeyword)
+        })
+        return UISwipeActionsConfiguration(actions:[deleteAction, editAction])
     }
 }
 
@@ -130,7 +169,18 @@ extension KeywordViewController: UITableViewDataSource {
         let row = indexPath.row
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
+        let exceptionKeyword = keywordList[row].exceptionKeyword
         cell.titleLabel.text = keyword
+        
+        if (exceptionKeyword != "") {
+            cell.exceptionLabel.text = "- " + exceptionKeyword
+            cell.exceptionHeight.constant = 15
+            cell.exceptionBottom.constant = 10
+        } else {
+            cell.exceptionHeight.constant = 0
+            cell.exceptionBottom.constant = 0
+        }
+        
         return cell
     }
 }
