@@ -136,7 +136,18 @@ extension KeywordViewController: UITableViewDataSource {
         let row = indexPath.row
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
+        let exceptionKeyword = keywordList[row].exceptionKeyword
         cell.titleLabel.text = keyword
+        
+        if (exceptionKeyword != "") {
+            cell.exceptionLabel.text = NSLocalizedString("exception keyword", comment: "") + " " + exceptionKeyword
+            cell.exceptionHeight.constant = 15
+            cell.exceptionBottom.constant = 10
+        } else {
+            cell.exceptionHeight.constant = 0
+            cell.exceptionBottom.constant = 0
+        }
+        
         return cell
     }
 }

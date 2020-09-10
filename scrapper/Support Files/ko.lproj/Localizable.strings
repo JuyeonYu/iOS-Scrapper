@@ -30,3 +30,4 @@
 "It is added in bookmark." = "즐겨찾기에 추가되었어요";
 "You already added this news." = "이미 추가된 기사에요";
 "add exception keyword" = "(선택)제외할 키워드를 등록해주세요";
+"exception keyword" = "-";

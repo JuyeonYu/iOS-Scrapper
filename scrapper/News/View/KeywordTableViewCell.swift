@@ -10,6 +10,9 @@ import UIKit
 
 class KeywordTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var exceptionLabel: UILabel!
+    @IBOutlet weak var exceptionBottom: NSLayoutConstraint!
+    @IBOutlet weak var exceptionHeight: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
