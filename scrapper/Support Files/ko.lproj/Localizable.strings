@@ -14,6 +14,7 @@
 "Reduplication" = "중복키워드";
 "Ok" = "확인";
 "Delete" = "삭제";
+"Edit" = "편집";
 "Category" = "카테고리";
 "Related order" = "관련도순";
 "Latest order" = "최신순";
@@ -30,4 +31,4 @@
 "It is added in bookmark." = "즐겨찾기에 추가되었어요";
 "You already added this news." = "이미 추가된 기사에요";
 "add exception keyword" = "(선택)제외할 키워드를 등록해주세요";
-"exception keyword" = "-";
+"exception keyword" = "제외 키워드";
