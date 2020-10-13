@@ -9,5 +9,6 @@ target 'scrapper' do
 
 pod 'Alamofire', '~> 5.0.0-rc.3'
 pod 'RealmSwift'
+pod 'Google-Mobile-Ads-SDK'
 
 end

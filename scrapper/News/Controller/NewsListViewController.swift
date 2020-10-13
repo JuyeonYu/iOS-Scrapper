@@ -73,13 +73,40 @@ class NewsListViewController: UIViewController {
             guard let naverNews = result as? NaverNews else {
                 return
             }
-                    
+            
             for news in naverNews.items {
                 let news: News = News(title: news.title, urlString: news.link, publishTime: news.pubDate)
-                self.newsList.append(news)
+                if (!news.title.contains(self.getExceptionKeyword(keyword: keyword))) {
+                    self.newsList.append(news)
+                }
             }
             self.tableView.reloadData()
         }
+    }
+    
+    func getExceptionKeyword(keyword: String) -> String {
+        var result: String = ""
+        let keywordList = Array(realm.objects(KeywordRealm.self))
+        for keywordRealm in keywordList {
+            if keywordRealm.keyword == keyword {
+                result = keywordRealm.exceptionKeyword
+                break
+            }
+        }
+        return result
+    }
+    
+    func removeExceptionKeywordNews(exceptionKeyword: String, newsList: [News]) -> [News] {
+        var resultNews: [News] = newsList
+        
+        for news in resultNews {
+            var index = 0
+            if news.title.contains(exceptionKeyword) {
+                resultNews.remove(at: index)
+                index = index + 1
+            }
+        }
+        return resultNews
     }
     
     @objc func rightBarButtonDidClick() {

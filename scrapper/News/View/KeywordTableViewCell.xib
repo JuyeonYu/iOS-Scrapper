@@ -1,40 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeywordTableViewCell" id="KGk-i7-Jjw" customClass="KeywordTableViewCell" customModule="scrapper" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeywordTableViewCell" rowHeight="80" id="KGk-i7-Jjw" customClass="KeywordTableViewCell" customModule="뉴스스크랩" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIn-qB-xvv" userLabel="title">
-                        <rect key="frame" x="16" y="12" width="42" height="21"/>
+                        <rect key="frame" x="16" y="10" width="288" height="35"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZ8-2b-9co">
+                        <rect key="frame" x="16" y="55" width="288" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Jxo-ie-nAX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="zIn-qB-xvv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="6bW-gf-bq5"/>
-                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="zIn-qB-xvv" secondAttribute="trailing" constant="262" id="V3E-fL-xD0"/>
-                    <constraint firstAttribute="bottom" secondItem="zIn-qB-xvv" secondAttribute="bottom" constant="11" id="d0r-82-8AE"/>
-                    <constraint firstItem="zIn-qB-xvv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="nyg-dg-k3h"/>
+                    <constraint firstAttribute="trailing" secondItem="zIn-qB-xvv" secondAttribute="trailing" constant="16" id="4Bt-7y-CBK"/>
+                    <constraint firstAttribute="bottom" secondItem="oZ8-2b-9co" secondAttribute="bottom" constant="10" id="Bhj-D4-u3c"/>
+                    <constraint firstItem="zIn-qB-xvv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Dvh-fX-c2H"/>
+                    <constraint firstItem="zIn-qB-xvv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="GXI-dw-gL0"/>
+                    <constraint firstItem="oZ8-2b-9co" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="QoB-is-34f"/>
+                    <constraint firstItem="oZ8-2b-9co" firstAttribute="top" secondItem="zIn-qB-xvv" secondAttribute="bottom" constant="10" id="dkQ-Tz-2eI"/>
+                    <constraint firstAttribute="trailing" secondItem="oZ8-2b-9co" secondAttribute="trailing" constant="16" id="sWw-Ls-2td"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="exceptionBottom" destination="Bhj-D4-u3c" id="3Rv-6h-LNG"/>
+                <outlet property="exceptionHeight" destination="Jxo-ie-nAX" id="rUO-mw-WS6"/>
+                <outlet property="exceptionLabel" destination="oZ8-2b-9co" id="DFL-1a-aPl"/>
                 <outlet property="titleLabel" destination="zIn-qB-xvv" id="KJq-bz-4dQ"/>
             </connections>
-            <point key="canvasLocation" x="141" y="154"/>
+            <point key="canvasLocation" x="140.57971014492756" y="164.73214285714286"/>
         </tableViewCell>
     </objects>
 </document>

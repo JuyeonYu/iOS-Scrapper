@@ -1,5 +1,38 @@
 PODS:
   - Alamofire (5.0.2)
+  - Google-Mobile-Ads-SDK (7.66.0):
+    - GoogleAppMeasurement (~> 6.0)
+    - GoogleUserMessagingPlatform (~> 1.1)
+  - GoogleAppMeasurement (6.9.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/MethodSwizzler (~> 6.7)
+    - GoogleUtilities/Network (~> 6.7)
+    - "GoogleUtilities/NSData+zlib (~> 6.7)"
+    - nanopb (~> 1.30906.0)
+  - GoogleUserMessagingPlatform (1.2.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.7.2):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.2):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.7.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.7.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
+    - GoogleUtilities/Logger
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
+  - PromisesObjC (1.2.11)
   - Realm (4.3.2):
     - Realm/Headers (= 4.3.2)
   - Realm/Headers (4.3.2)
@@ -8,19 +41,32 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-rc.3)
+  - Google-Mobile-Ads-SDK
   - RealmSwift
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+    - nanopb
+    - PromisesObjC
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  Google-Mobile-Ads-SDK: 7d7074359c040f5add4e0963bf860e14690060d0
+  GoogleAppMeasurement: a6a3a066369828db64eda428cb2856dc1cdc7c4e
+  GoogleUserMessagingPlatform: c85530d930ba509583aa5a6d50a10aca22cf8502
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
   RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
 
-PODFILE CHECKSUM: eb0c1f1c0fb35d0749b4335ee50935c0520b0474
+PODFILE CHECKSUM: a18f3250d18d9a08518ed35f7b68e9ddd0fbec21
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
