@@ -248,11 +248,14 @@ extension NewsListViewController: UITableViewDataSource {
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
         // 이미 읽은 기사를 체크하기 위해
-        if !realm.objects(ReadNewsRealm.self).filter("title = '\(dataList[row].title)'").isEmpty {
-            print("이미 읽은 뉴스 기사 제목 \(dataList[row].title)")
-            cell.titleLabel.textColor = UIColor.lightGray
-            cell.publishTimeLabel.textColor = UIColor.lightGray
-        }
+            if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {
+                print("이미 읽은 뉴스 기사 제목 \(self.dataList[row].title)")
+                cell.titleLabel.textColor = UIColor.lightGray
+                cell.publishTimeLabel.textColor = UIColor.lightGray
+            } else {
+                cell.titleLabel.textColor = UIColor.label
+                cell.publishTimeLabel.textColor = UIColor.label
+            }
         return cell
     }
 }

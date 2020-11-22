@@ -123,10 +123,16 @@ extension BookMarkViewController: UITableViewDataSource {
         cell.titleLabel.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
         cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
-        if !realm.objects(ReadNewsRealm.self).filter("title = '\(dataList[row].title)'").isEmpty {
-            print("이미 읽은 뉴스 기사 제목 \(dataList[row].title)")
-            cell.titleLabel.textColor = UIColor.lightGray
-            cell.publishTimeLabel.textColor = UIColor.lightGray
+        
+        DispatchQueue.main.async {
+            if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {
+                print("이미 읽은 뉴스 기사 제목 \(self.dataList[row].title)")
+                cell.titleLabel.textColor = UIColor.lightGray
+                cell.publishTimeLabel.textColor = UIColor.lightGray
+            } else {
+                cell.titleLabel.textColor = UIColor.red
+                cell.publishTimeLabel.textColor = UIColor.red
+            }
         }
         return cell
     }
