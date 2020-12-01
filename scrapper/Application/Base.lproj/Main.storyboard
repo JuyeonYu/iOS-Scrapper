@@ -60,7 +60,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="90o-n0-YvT">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="kuM-qW-NHb">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -68,18 +68,29 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0K-2H-34J" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="763" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0ms-ox-kSZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jvS-xV-0Ng"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="90o-n0-YvT" firstAttribute="bottom" secondItem="jvS-xV-0Ng" secondAttribute="bottom" id="99G-xb-RGG"/>
+                            <constraint firstItem="90o-n0-YvT" firstAttribute="bottom" secondItem="w0K-2H-34J" secondAttribute="top" id="99G-xb-RGG"/>
                             <constraint firstItem="90o-n0-YvT" firstAttribute="centerX" secondItem="jPq-Ws-j71" secondAttribute="centerX" id="HAI-pv-Zxw"/>
+                            <constraint firstItem="jvS-xV-0Ng" firstAttribute="trailing" secondItem="w0K-2H-34J" secondAttribute="trailing" id="Qpg-ka-gyP"/>
+                            <constraint firstItem="jvS-xV-0Ng" firstAttribute="bottom" secondItem="w0K-2H-34J" secondAttribute="bottom" id="RA3-Om-UtW"/>
+                            <constraint firstItem="w0K-2H-34J" firstAttribute="leading" secondItem="jvS-xV-0Ng" secondAttribute="leading" id="avJ-Vq-2V5"/>
                             <constraint firstItem="90o-n0-YvT" firstAttribute="leading" secondItem="jvS-xV-0Ng" secondAttribute="leading" id="ewx-aj-4p2"/>
                             <constraint firstItem="90o-n0-YvT" firstAttribute="top" secondItem="jvS-xV-0Ng" secondAttribute="top" id="xc9-m5-sA2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sgY-hT-bpi"/>
                     <connections>
+                        <outlet property="bannerView" destination="w0K-2H-34J" id="Pfw-RY-HJX"/>
                         <outlet property="searchBar" destination="kuM-qW-NHb" id="JUX-9j-jgp"/>
                         <outlet property="tableView" destination="90o-n0-YvT" id="CSL-PM-sfd"/>
                     </connections>
@@ -128,7 +139,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dgu-8s-VA3">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="z7i-mw-r4M">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -140,17 +151,28 @@
                                     </scopeButtonTitles>
                                 </searchBar>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sj-v6-URI" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="c6f-zK-Zur"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JeZ-5q-RWv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dgu-8s-VA3" firstAttribute="trailing" secondItem="JeZ-5q-RWv" secondAttribute="trailing" id="CBa-sD-v6R"/>
-                            <constraint firstItem="dgu-8s-VA3" firstAttribute="bottom" secondItem="JeZ-5q-RWv" secondAttribute="bottom" id="Nhp-YV-yTE"/>
                             <constraint firstItem="dgu-8s-VA3" firstAttribute="leading" secondItem="JeZ-5q-RWv" secondAttribute="leading" id="X5b-Om-Zft"/>
+                            <constraint firstItem="3sj-v6-URI" firstAttribute="top" secondItem="dgu-8s-VA3" secondAttribute="bottom" id="Z1x-Kk-8dv"/>
                             <constraint firstItem="dgu-8s-VA3" firstAttribute="top" secondItem="JeZ-5q-RWv" secondAttribute="top" id="dXB-n2-NtE"/>
+                            <constraint firstItem="3sj-v6-URI" firstAttribute="leading" secondItem="JeZ-5q-RWv" secondAttribute="leading" id="hy1-Ga-rMq"/>
+                            <constraint firstItem="JeZ-5q-RWv" firstAttribute="trailing" secondItem="3sj-v6-URI" secondAttribute="trailing" id="nsL-dc-1Aq"/>
+                            <constraint firstItem="JeZ-5q-RWv" firstAttribute="bottom" secondItem="3sj-v6-URI" secondAttribute="bottom" id="rEX-oa-fZp"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bannerView" destination="3sj-v6-URI" id="Ln0-i0-fJ4"/>
                         <outlet property="searchBar" destination="z7i-mw-r4M" id="gbG-nG-P9n"/>
                         <outlet property="tableView" destination="dgu-8s-VA3" id="VkA-OT-S9o"/>
                     </connections>

@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SafariServices
+import GoogleMobileAds
 
 class BookMarkViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -17,6 +18,8 @@ class BookMarkViewController: UIViewController {
     lazy var realm:Realm = {
         return try! Realm()
     }()
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var filteredNews: [BookMarkNewsRealm] = []
     var dataList: [BookMarkNewsRealm] = []
@@ -45,6 +48,11 @@ class BookMarkViewController: UIViewController {
         
         let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
+        
+        
+        bannerView.adUnitID = Constants.googleADModID
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
     }
 }
 

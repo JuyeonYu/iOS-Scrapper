@@ -19,7 +19,7 @@ class KeywordViewController: UIViewController {
     }()
     
     let keywordCellID = "KeywordTableViewCell"
-    let googleADModID = "ca-app-pub-7604048409167711/3101460469"
+//    let googleADModID = "ca-app-pub-7604048409167711/3101460469"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class KeywordViewController: UIViewController {
             didTapAddKeywordButton()
         }
         
-        bannerView.adUnitID = googleADModID
+        bannerView.adUnitID = Constants.googleADModID
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
