@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,27 +18,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VJl-N4-RX1">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yml-dB-Skm" customClass="GADBannerView">
                                 <rect key="frame" x="47" y="763" width="320" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="eXm-Xd-f6k"/>
-                                    <constraint firstAttribute="height" constant="50" id="ruD-XU-Y5w"/>
+                                    <constraint firstAttribute="height" constant="50" id="5ET-YX-WVM"/>
+                                    <constraint firstAttribute="width" constant="320" id="rwx-KQ-3Tl"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DIB-vK-X4O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Yml-dB-Skm" firstAttribute="centerX" secondItem="dPj-TA-Y5F" secondAttribute="centerX" id="9o7-Fg-jTV"/>
-                            <constraint firstItem="VJl-N4-RX1" firstAttribute="trailing" secondItem="DIB-vK-X4O" secondAttribute="trailing" id="Xt2-oL-0BI"/>
-                            <constraint firstItem="VJl-N4-RX1" firstAttribute="top" secondItem="DIB-vK-X4O" secondAttribute="top" id="ffy-g1-m3b"/>
-                            <constraint firstItem="VJl-N4-RX1" firstAttribute="centerX" secondItem="Yml-dB-Skm" secondAttribute="centerX" id="hsM-8S-JZJ"/>
-                            <constraint firstItem="VJl-N4-RX1" firstAttribute="bottom" secondItem="DIB-vK-X4O" secondAttribute="bottom" id="qtG-BQ-YJi"/>
-                            <constraint firstItem="Yml-dB-Skm" firstAttribute="bottom" secondItem="VJl-N4-RX1" secondAttribute="bottom" id="sOT-Fy-bkr"/>
+                            <constraint firstItem="Yml-dB-Skm" firstAttribute="top" secondItem="VJl-N4-RX1" secondAttribute="bottom" id="1LT-9X-GWs"/>
+                            <constraint firstItem="VJl-N4-RX1" firstAttribute="leading" secondItem="DIB-vK-X4O" secondAttribute="leading" id="DF2-CD-SdJ"/>
+                            <constraint firstItem="Yml-dB-Skm" firstAttribute="centerX" secondItem="DIB-vK-X4O" secondAttribute="centerX" id="JgV-8u-SAN"/>
+                            <constraint firstItem="Yml-dB-Skm" firstAttribute="bottom" secondItem="DIB-vK-X4O" secondAttribute="bottom" id="NZr-dC-lkO"/>
+                            <constraint firstItem="VJl-N4-RX1" firstAttribute="trailing" secondItem="DIB-vK-X4O" secondAttribute="trailing" id="PGv-8C-OxO"/>
+                            <constraint firstItem="VJl-N4-RX1" firstAttribute="top" secondItem="DIB-vK-X4O" secondAttribute="top" id="b0s-EJ-YvQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5qp-XE-ZZf"/>

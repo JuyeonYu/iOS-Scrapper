@@ -19,7 +19,7 @@ class KeywordViewController: UIViewController {
     }()
     
     let keywordCellID = "KeywordTableViewCell"
-    let googleADModID = "ca-app-pub-7604048409167711~4493722744"
+    let googleADModID = "ca-app-pub-7604048409167711/3101460469"
     
     override func viewDidLoad() {
         super.viewDidLoad()
