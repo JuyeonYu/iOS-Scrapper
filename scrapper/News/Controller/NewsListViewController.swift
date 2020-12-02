@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SafariServices
+import GoogleMobileAds
 
 
 class NewsListViewController: UIViewController {
@@ -28,6 +29,7 @@ class NewsListViewController: UIViewController {
     var searchSortBarTitle = "Related order" // 기본값은 관련도 검색
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var bannerView: GADBannerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,6 +68,10 @@ class NewsListViewController: UIViewController {
         }
 
         requestNaverNewsList(keyword: keyword, sort: searchSort, start: 1)
+        
+        bannerView.adUnitID = Constants.googleADModID
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
     }
         
     func requestNaverNewsList(keyword: String, sort: String, start: Int) {
