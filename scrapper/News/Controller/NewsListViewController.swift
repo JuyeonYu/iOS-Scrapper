@@ -54,8 +54,9 @@ class NewsListViewController: UIViewController {
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Please search news", comment: "")
         
-        let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
+//        let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
+//        tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
+        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "NewsTableViewCell")
         
         // 시간 포멧 변경 세팅
         naverDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z" // 네이버 api에서 넘어오는 시간 포멧
@@ -250,17 +251,17 @@ extension NewsListViewController: UITableViewDataSource {
         }
         
         // realm에 데이터를 넣을 때 '가 들어가면 데이터를 넣고 뺄 때 오류가 생김. 그래서 realm에 '를 &squot;으로 저장함
-        cell.titleLabel.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
-        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
+        cell.title.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
+        cell.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
         // 이미 읽은 기사를 체크하기 위해
             if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {
                 print("이미 읽은 뉴스 기사 제목 \(self.dataList[row].title)")
-                cell.titleLabel.textColor = UIColor.lightGray
-                cell.publishTimeLabel.textColor = UIColor.lightGray
+                cell.title.textColor = UIColor.lightGray
+                cell.publishTime.textColor = UIColor.lightGray
             } else {
-                cell.titleLabel.textColor = UIColor.label
-                cell.publishTimeLabel.textColor = UIColor.label
+                cell.title.textColor = UIColor.label
+                cell.publishTime.textColor = UIColor.label
             }
         return cell
     }

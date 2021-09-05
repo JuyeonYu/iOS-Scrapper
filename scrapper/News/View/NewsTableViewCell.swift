@@ -7,23 +7,44 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class NewsTableViewCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var publishTimeLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        titleLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
-        titleLabel.numberOfLines = 0
+    let title = UILabel().then {
+        $0.lineBreakMode = .byWordWrapping
+        $0.numberOfLines = 0
+        $0.textColor = .black
+        $0.font = UIFont.systemFont(ofSize: 17)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    let publishTime = UILabel().then {
+        $0.textColor = .black
+        $0.font = UIFont.systemFont(ofSize: 11)
+    }
+    fileprivate func addSubViews() {
+        [title, publishTime].forEach {
+            contentView.addSubview($0)
+        }
+    }
+    fileprivate func makeConstrants() {
+        title.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(12)
+            $0.left.trailing.equalToSuperview().inset(16)
+        }
+        publishTime.snp.makeConstraints {
+            $0.top.equalTo(title.snp.bottom).offset(8)
+            $0.left.trailing.equalTo(title)
+            $0.bottom.equalToSuperview().offset(-10)
+        }
     }
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubViews()
+        makeConstrants()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

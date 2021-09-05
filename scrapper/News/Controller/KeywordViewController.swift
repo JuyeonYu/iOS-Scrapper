@@ -36,8 +36,7 @@ class KeywordViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
         
-        let nibName = UINib(nibName: keywordCellID, bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: keywordCellID)
+        tableView.register(KeywordTableViewCell.self, forCellReuseIdentifier: "KeywordTableViewCell")
         
         // get data for tableview
         
@@ -178,17 +177,9 @@ extension KeywordViewController: UITableViewDataSource {
         let keywordList = Array(realm.objects(KeywordRealm.self))
         let keyword = keywordList[row].keyword
         let exceptionKeyword = keywordList[row].exceptionKeyword
-        cell.titleLabel.text = keyword
-        
-        if (exceptionKeyword != "") {
-            cell.exceptionLabel.text = "- " + exceptionKeyword
-            cell.exceptionHeight.constant = 15
-            cell.exceptionBottom.constant = 10
-        } else {
-            cell.exceptionHeight.constant = 0
-            cell.exceptionBottom.constant = 0
-        }
-        
+        cell.title.text = keyword
+        cell.exceptionKeyword.text = "- " + exceptionKeyword
+        cell.exceptionKeyword.isHidden = exceptionKeyword.isEmpty
         return cell
     }
 }

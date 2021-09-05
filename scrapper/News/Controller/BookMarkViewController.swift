@@ -45,10 +45,7 @@ class BookMarkViewController: UIViewController {
         
         // MARK: - Navigation setting
         self.navigationItem.title = NSLocalizedString("Bookmark", comment: "")
-        
-        let nibName = UINib(nibName: "NewsTableViewCell", bundle: nil)
-        tableView.register(nibName, forCellReuseIdentifier: "NewsTableViewCell")
-        
+        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: "NewsTableViewCell")
         
         bannerView.adUnitID = Constants.googleADModID
         bannerView.rootViewController = self
@@ -128,18 +125,18 @@ extension BookMarkViewController: UITableViewDataSource {
             let bookmarkNewsList = Array(realm.objects(BookMarkNewsRealm.self))
             dataList = bookmarkNewsList
         }
-        cell.titleLabel.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
-        cell.publishTimeLabel.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
+        cell.title.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
+        cell.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
         
         
         DispatchQueue.main.async {
             if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {
                 print("이미 읽은 뉴스 기사 제목 \(self.dataList[row].title)")
-                cell.titleLabel.textColor = UIColor.lightGray
-                cell.publishTimeLabel.textColor = UIColor.lightGray
+                cell.title.textColor = UIColor.lightGray
+                cell.publishTime.textColor = UIColor.lightGray
             } else {
-                cell.titleLabel.textColor = UIColor.red
-                cell.publishTimeLabel.textColor = UIColor.red
+                cell.title.textColor = UIColor.red
+                cell.publishTime.textColor = UIColor.red
             }
         }
         return cell
