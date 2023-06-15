@@ -46,9 +46,8 @@ class KeywordViewController: UIViewController {
     bannerView.adUnitID = Constants.googleADModID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
-    //        bannerView.delegate = self
     
-    let keywordsRealm = self.realm.objects(KeywordRealm.self).filter("timestamp = 0.0")
+    let keywordsRealm = Array(realm.objects(KeywordRealm.self)).filter { $0.timestamp == 0.0 }
     try! self.realm.write {
       keywordsRealm.forEach { $0.timestamp = Date().timeIntervalSince1970
       }
@@ -181,6 +180,7 @@ extension KeywordViewController: UITableViewDataSource {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
     let row = indexPath.row
     let keywordList = Array(realm.objects(KeywordRealm.self))
+      .sorted { $0.timestamp < $1.timestamp }
     let keyword = keywordList[row].keyword
     let exceptionKeyword = keywordList[row].exceptionKeyword
     cell.titleLabel.text = keyword
