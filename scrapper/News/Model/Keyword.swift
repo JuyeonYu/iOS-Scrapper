@@ -18,5 +18,6 @@ struct Keyword: Codable {
 class KeywordRealm: Object {
   @objc dynamic var keyword: String = ""
   @objc dynamic var exceptionKeyword: String = ""
+  @objc dynamic var timestamp: TimeInterval = 0.0
 }
 

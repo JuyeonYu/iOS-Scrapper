@@ -47,6 +47,12 @@ class KeywordViewController: UIViewController {
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
     //        bannerView.delegate = self
+    
+    let keywordsRealm = self.realm.objects(KeywordRealm.self).filter("timestamp = 0.0")
+    try! self.realm.write {
+      keywordsRealm.forEach { $0.timestamp = Date().timeIntervalSince1970
+      }
+    }
   }
   
   @objc func didTapAddKeywordButton() {
@@ -85,6 +91,7 @@ class KeywordViewController: UIViewController {
       let keywordRealm = KeywordRealm()
       keywordRealm.keyword = saveKeyword!
       keywordRealm.exceptionKeyword = exceptionKeyword!
+      keywordRealm.timestamp = Date().timeIntervalSince1970
       try! self.realm.write {
         self.realm.add(keywordRealm)
       }
