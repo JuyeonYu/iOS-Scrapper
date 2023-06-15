@@ -7,21 +7,21 @@ import Foundation
 
 // MARK: - NaverNews
 struct NaverNews: Codable {
-    let lastBuildDate: String
-    let total, start, display: Int
-    let items: [Item]
+  let lastBuildDate: String
+  let total, start, display: Int
+  let items: [Item]
 }
 
 // MARK: - Item
 struct Item: Codable {
-    let title: String
-    let originallink: String
-    let link: String
-    let itemDescription, pubDate: String
-
-    enum CodingKeys: String, CodingKey {
-        case title, originallink, link
-        case itemDescription = "description"
-        case pubDate
-    }
+  let title: String
+  let originallink: String
+  let link: String
+  let itemDescription, pubDate: String
+  
+  enum CodingKeys: String, CodingKey {
+    case title, originallink, link
+    case itemDescription = "description"
+    case pubDate
+  }
 }

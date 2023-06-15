@@ -9,13 +9,13 @@
 import Foundation
 
 class RestAPIResponse {
-    let isSuccess: Bool
-    let message: String?
-    let keywordList: [Keyword]?
-    
-    init(isSucces: Bool, message: String?, keywordList: [Keyword]?) {
-        self.isSuccess = isSucces
-        self.message = message
-        self.keywordList = keywordList
-    }
+  let isSuccess: Bool
+  let message: String?
+  let keywordList: [Keyword]?
+  
+  init(isSucces: Bool, message: String?, keywordList: [Keyword]?) {
+    self.isSuccess = isSucces
+    self.message = message
+    self.keywordList = keywordList
+  }
 }

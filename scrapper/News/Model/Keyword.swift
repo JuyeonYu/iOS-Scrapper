@@ -11,12 +11,12 @@ import Foundation
 import RealmSwift
 
 struct Keyword: Codable {
-    let keyword: String?
-    let idx_keyword: Int?
+  let keyword: String?
+  let idx_keyword: Int?
 }
 
 class KeywordRealm: Object {
-    @objc dynamic var keyword: String = ""
-    @objc dynamic var exceptionKeyword: String = ""
+  @objc dynamic var keyword: String = ""
+  @objc dynamic var exceptionKeyword: String = ""
 }
 

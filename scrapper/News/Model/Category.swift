@@ -9,9 +9,9 @@
 import UIKit
 
 class Category: NSObject {
-    let category: String
-    
-    init(category: String) {
-        self.category = category
-    }
+  let category: String
+  
+  init(category: String) {
+    self.category = category
+  }
 }

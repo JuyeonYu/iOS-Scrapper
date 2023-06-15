@@ -9,12 +9,12 @@
 import Foundation
 
 struct UserDefaultManager {
-    static func setNewsOrder(order: String) {
-        UserDefaults.standard.set(order, forKey: Constants.UserDefault.newsOrder)
-    }
-    
-    static func getNewsOrder() -> String? {
-        return UserDefaults.standard.string(forKey: Constants.UserDefault.newsOrder) ?? nil
-    }
-
+  static func setNewsOrder(order: String) {
+    UserDefaults.standard.set(order, forKey: Constants.UserDefault.newsOrder)
+  }
+  
+  static func getNewsOrder() -> String? {
+    return UserDefaults.standard.string(forKey: Constants.UserDefault.newsOrder) ?? nil
+  }
+  
 }
