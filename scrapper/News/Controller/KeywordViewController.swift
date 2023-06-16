@@ -13,52 +13,7 @@ import GoogleMobileAds
 class KeywordViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
-  @IBAction func onEdit(_ sender: Any) {
-    tableView.isEditing = !tableView.isEditing
-  }
-  @IBOutlet weak var edit: UIBarButtonItem!
-  @IBOutlet weak var bannerView: GADBannerView!
-  lazy var realm:Realm = {
-    return try! Realm()
-  }()
-  
-  let keywordCellID = "KeywordTableViewCell"
-  //    let googleADModID = "ca-app-pub-7604048409167711/3101460469"
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // Navigation setting
-    self.navigationItem.title = NSLocalizedString("Keyword", comment: "")
-    let rightButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add,
-                                               target: self,
-                                               action: #selector(didTapAddKeywordButton))
-    self.navigationItem.rightBarButtonItem = rightButtonItem
-    
-    // Tableview setting
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
-    
-    tableView.register(UINib(nibName: "KeywordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeywordTableViewCell")
-    // get data for tableview
-    
-    if realm.objects(KeywordRealm.self).count == 0 {
-      didTapAddKeywordButton()
-    }
-    
-    bannerView.adUnitID = Constants.googleADModID
-    bannerView.rootViewController = self
-    bannerView.load(GADRequest())
-    
-    let keywordsRealm = Array(realm.objects(KeywordRealm.self)).filter { $0.timestamp == 0.0 }
-    try! self.realm.write {
-      keywordsRealm.forEach { $0.timestamp = Date().timeIntervalSince1970
-      }
-    }
-  }
-  
-  @objc func didTapAddKeywordButton() {
+  @IBAction func onPlus(_ sender: Any) {
     let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
                                   message: NSLocalizedString("Please enter keyword which make you interting", comment: ""),
                                   preferredStyle: .alert)
@@ -103,6 +58,45 @@ class KeywordViewController: UIViewController {
     alert.addAction(cancel)
     alert.addAction(ok)
     self.present(alert, animated: true)
+  }
+  @IBAction func onMinus(_ sender: Any) {
+  }
+  @IBAction func onEdit(_ sender: Any) {
+    tableView.isEditing = !tableView.isEditing
+  }
+  @IBOutlet weak var edit: UIBarButtonItem!
+  @IBOutlet weak var bannerView: GADBannerView!
+  lazy var realm:Realm = {
+    return try! Realm()
+  }()
+  
+  let keywordCellID = "KeywordTableViewCell"
+  //    let googleADModID = "ca-app-pub-7604048409167711/3101460469"
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Tableview setting
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
+    
+    tableView.register(UINib(nibName: "KeywordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeywordTableViewCell")
+    // get data for tableview
+    
+    if realm.objects(KeywordRealm.self).count == 0 {
+      didTapAddKeywordButton()
+    }
+    
+    bannerView.adUnitID = Constants.googleADModID
+    bannerView.rootViewController = self
+    bannerView.load(GADRequest())
+    
+    let keywordsRealm = Array(realm.objects(KeywordRealm.self)).filter { $0.timestamp == 0.0 }
+    try! self.realm.write {
+      keywordsRealm.forEach { $0.timestamp = Date().timeIntervalSince1970
+      }
+    }
   }
   
   func editExceptionKeyword(keyword: String, exceptionKeyword: String) {
