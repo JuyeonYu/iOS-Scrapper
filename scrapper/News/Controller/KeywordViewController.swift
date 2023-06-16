@@ -13,6 +13,10 @@ import GoogleMobileAds
 class KeywordViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
+  @IBAction func onEdit(_ sender: Any) {
+    tableView.isEditing = !tableView.isEditing
+  }
+  @IBOutlet weak var edit: UIBarButtonItem!
   @IBOutlet weak var bannerView: GADBannerView!
   lazy var realm:Realm = {
     return try! Realm()
@@ -164,9 +168,31 @@ extension KeywordViewController: UITableViewDelegate {
     })
     return UISwipeActionsConfiguration(actions:[deleteAction, editAction])
   }
+  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    true
+  }
 }
 
 extension KeywordViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    let keywordList = Array(realm.objects(KeywordRealm.self))
+      .sorted { $0.timestamp < $1.timestamp }
+    let temp = keywordList[sourceIndexPath.row].timestamp
+    
+    let newTimestamp: TimeInterval
+    
+    if destinationIndexPath.row == 0 {
+      newTimestamp = keywordList.first!.timestamp - 1
+    } else if destinationIndexPath.row == keywordList.count - 1 {
+      newTimestamp = keywordList.last!.timestamp + 1
+    } else {
+      newTimestamp = (keywordList[destinationIndexPath.row].timestamp + keywordList[destinationIndexPath.row + 1].timestamp) / 2
+    }
+    
+    try! self.realm.write {
+      keywordList[sourceIndexPath.row].timestamp = newTimestamp
+    }
+  }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if realm.objects(KeywordRealm.self).count == 0 {
       self.tableView.setEmptyMessage(NSLocalizedString("Why don't you add some new keyword?", comment: ""))
