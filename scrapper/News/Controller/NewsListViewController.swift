@@ -165,8 +165,9 @@ extension NewsListViewController: UITableViewDelegate {
         realm.add(readNewsRealm)
       })
     }
-    
-    let safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!)
+    let config = SFSafariViewController.Configuration()
+    config.entersReaderIfAvailable = true
+    let safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!, configuration: config)
     safariVC.delegate = self
     present(safariVC, animated: true, completion: nil)
   }
