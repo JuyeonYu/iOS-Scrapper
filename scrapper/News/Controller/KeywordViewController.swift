@@ -13,6 +13,11 @@ import GoogleMobileAds
 class KeywordViewController: UIViewController {
   var noneGroupId: UUID?
   @IBOutlet weak var tableView: UITableView!
+  func getGroupRealm(section: Int) -> GroupRealm? {
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    guard section < groupList.count else { return nil }
+    return groupList[section]
+  }
   func getKeywordList(section: Int) -> [KeywordRealm] {
     let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
     let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
@@ -27,6 +32,7 @@ class KeywordViewController: UIViewController {
   }
   
   @IBAction func onPlus(_ sender: Any) {
+    tableView.isEditing = false
     let alert = UIAlertController(title: "", message: "무엇을 추가할까요?", preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "그룹", style: .default) { _ in
       self.popupAddGroup()
@@ -97,6 +103,10 @@ class KeywordViewController: UIViewController {
       keywordsRealm.filter { $0.timestamp == 0.0 }.forEach { $0.timestamp = Date().timeIntervalSince1970 }
       keywordsRealm.filter { $0.gourpId == nil }.forEach { $0.gourpId = noneGroupId }
     }
+  }
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    tableView.isEditing = false
   }
   func popupAddGroup() {
     let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
@@ -348,8 +358,35 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
       source.timestamp = groupList[section + 1].timestamp
       groupList[section + 1].timestamp = temp
     }
-    (tableView.headerView(forSection: section) as? KeywordGroupHeader)?.section = section + 1
+    let sourceHeader = (tableView.headerView(forSection: section) as? KeywordGroupHeader)
+    let destinationHeader = (tableView.headerView(forSection: section + 1) as? KeywordGroupHeader)
+    sourceHeader!.section! += 1
+    destinationHeader!.section! -= 1
     tableView.moveSection(section, toSection: section + 1)
+  }
+  func onDelete(section: Int) {
+    guard let groupRealm = getGroupRealm(section: section) else { return }
+    let keywordList = getKeywordList(section: section)
+    if keywordList.isEmpty {
+      try! realm.write({
+        realm.delete(groupRealm)
+      })
+      tableView.deleteSections([section], with: .left)
+    } else {
+      let alert  = UIAlertController(title: "삭제", message: "등록된 키워드들도 함께 삭제됩니다.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+      alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { _ in
+        try! self.realm.write({
+          self.realm.delete(groupRealm)
+          keywordList.forEach {
+            self.realm.delete($0)
+          }
+        })
+        self.tableView.deleteSections([section], with: .left)
+      })
+      self.present(alert, animated: true)
+    }
+    
   }
 }
 

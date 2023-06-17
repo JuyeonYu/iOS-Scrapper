@@ -11,6 +11,7 @@ import UIKit
 protocol KeywordGroupHeaderDelegate: AnyObject {
   func onUp(section: Int)
   func onDown(section: Int)
+  func onDelete(section: Int)
 }
 
 class KeywordGroupHeader: UITableViewHeaderFooterView {
@@ -18,7 +19,12 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
     showEdit(false)
     showContent(true)
   }
-  @IBOutlet weak var onDelete: UIButton!
+  @IBAction func onDelete(_ sender: Any) {
+    guard let section else { return }
+    showEdit(false)
+    showContent(true)
+    delegate?.onDelete(section: section)
+  }
   @IBOutlet weak var onEdit: UIButton!
   @IBOutlet weak var delete: UIButton!
   var section: Int?
@@ -43,12 +49,21 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
   @IBOutlet weak var count: UILabel!
   @IBOutlet weak var down: UIButton!
   @IBOutlet weak var up: UIButton!
-  override func awakeFromNib() {
-    super.awakeFromNib()
+  fileprivate func commonSetting() {
     up.setTitle("", for: .normal)
     down.setTitle("", for: .normal)
     showEdit(false)
     showReorder(false)
+  }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    commonSetting()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    commonSetting()
   }
   
   func showContent(_ show: Bool) {
@@ -62,8 +77,9 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
       self.delete.isHidden = !show
     }
   }
-  func showReorder(_ show: Bool) {
-    [minus, up, down].forEach {
+  func showReorder(_ show: Bool, isDefault: Bool = false) {
+    let contentButtons = isDefault ? [up, down] : [minus, up, down]
+    contentButtons.forEach {
       $0?.isHidden = !show
     }
   }
@@ -71,6 +87,6 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
   func configure(group: GroupRealm, keywordCount: Int, isEditing: Bool) {
     self.group.text = (group.name.isEmpty ? "기본" : group.name)
     count.text = "(\(String(keywordCount)))"
-    showReorder(isEditing)
+    showReorder(isEditing, isDefault: group.name.isEmpty)
   }
 }

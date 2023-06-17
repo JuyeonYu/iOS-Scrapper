@@ -62,7 +62,6 @@
                             <rect key="frame" x="261.66666666666669" y="12" width="45.666666666666686" height="34.333333333333336"/>
                             <buttonConfiguration key="configuration" style="plain" image="arrow.down" catalog="system"/>
                             <connections>
-                                <action selector="onDown:" destination="-1" eventType="touchUpInside" id="B6u-zi-10s"/>
                                 <action selector="onDown:" destination="iN0-l3-epB" eventType="touchUpInside" id="d6f-tH-FCg"/>
                             </connections>
                         </button>
@@ -73,6 +72,9 @@
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="삭제"/>
                             <buttonConfiguration key="configuration" style="plain" title="삭제"/>
+                            <connections>
+                                <action selector="onDelete:" destination="iN0-l3-epB" eventType="touchUpInside" id="YO1-my-Gcg"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
@@ -91,7 +93,6 @@
                 <outlet property="down" destination="Kie-H7-7PY" id="dlT-4O-JoF"/>
                 <outlet property="group" destination="CGJ-Jq-Fim" id="OKS-YM-bGi"/>
                 <outlet property="minus" destination="HV9-QA-Nel" id="PYa-09-ear"/>
-                <outlet property="onDelete" destination="byJ-i0-cGr" id="jRA-R8-enS"/>
                 <outlet property="up" destination="67W-kK-3dW" id="VVm-6J-ng1"/>
             </connections>
             <point key="canvasLocation" x="-57.251908396946561" y="246.47887323943664"/>
