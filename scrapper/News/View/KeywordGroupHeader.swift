@@ -52,7 +52,7 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
   }
   
   func showContent(_ show: Bool) {
-    [self.minus, self.group, self.count].forEach {
+    [self.minus, self.group, self.count, self.up, self.down].forEach {
       $0?.isHidden = !show
     }
   }

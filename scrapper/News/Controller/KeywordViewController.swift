@@ -13,6 +13,18 @@ import GoogleMobileAds
 class KeywordViewController: UIViewController {
   var noneGroupId: UUID?
   @IBOutlet weak var tableView: UITableView!
+  func getKeywordList(section: Int) -> [KeywordRealm] {
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    return keywordList.filter { $0.gourpId == groupList[section].id}
+  }
+  func getKeywordRealm(indexPath: IndexPath) -> KeywordRealm? {
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    
+    let groupId = groupList[indexPath.section].id
+    return keywordList.filter { $0.gourpId == groupId }[indexPath.row]
+  }
   
   @IBAction func onPlus(_ sender: Any) {
     let alert = UIAlertController(title: "", message: "무엇을 추가할까요?", preferredStyle: .actionSheet)
@@ -217,13 +229,9 @@ extension KeywordViewController: UITableViewDelegate {
     return header
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let row = indexPath.row
-    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
-    let keyword = keywordList[row].keyword
-    
-    
+    let keyword = getKeywordRealm(indexPath: indexPath)?.keyword
     let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
-    vc.navigationItem.title = keyword // 뉴스 페이지 제목 설정
+    vc.navigationItem.title = keyword
     vc.searchKeyword = keyword
     
     self.navigationController?.pushViewController(vc, animated: true)
@@ -231,21 +239,20 @@ extension KeywordViewController: UITableViewDelegate {
   
   // 오른쪽으로 밀어서 메뉴 보는 함수
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return nil }
     let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-      let keyword = self.realm.objects(KeywordRealm.self).sorted { $0.timestamp < $1.timestamp }[indexPath.row]
+      
       
       // realm에서 먼저 삭제 한다.
       try! self.realm.write {
-        self.realm.delete(keyword)
+        self.realm.delete(keywordRealm)
       }
       tableView.reloadData()
       success(true)
     })
     
     let editAction = UIContextualAction(style: .normal, title: NSLocalizedString("Edit", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-      let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row].keyword
-      let exceptionKeyword = self.realm.objects(KeywordRealm.self)[indexPath.row].exceptionKeyword
-      self.editExceptionKeyword(keyword: keyword, exceptionKeyword: exceptionKeyword)
+      self.editExceptionKeyword(keyword: keywordRealm.keyword, exceptionKeyword: keywordRealm.exceptionKeyword)
     })
     return UISwipeActionsConfiguration(actions:[deleteAction, editAction])
   }
@@ -259,20 +266,24 @@ extension KeywordViewController: UITableViewDelegate {
 extension KeywordViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    let keywordList = Array(realm.objects(KeywordRealm.self))
-      .sorted { $0.timestamp < $1.timestamp }
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    guard let sourceKeyword = getKeywordRealm(indexPath: sourceIndexPath) else { return }
+    let destinationKeywordList = getKeywordList(section: destinationIndexPath.section)
     let newTimestamp: TimeInterval
     
     if destinationIndexPath.row == 0 {
-      newTimestamp = keywordList.first!.timestamp - 1
-    } else if destinationIndexPath.row == keywordList.count - 1 {
-      newTimestamp = keywordList.last!.timestamp + 1
+      newTimestamp = (destinationKeywordList.first?.timestamp ?? 1) - 1
+    } else if destinationIndexPath.row == destinationKeywordList.count - 1 {
+      newTimestamp = (destinationKeywordList.last?.timestamp ?? 1) + 1
     } else {
-      newTimestamp = (keywordList[destinationIndexPath.row].timestamp + keywordList[destinationIndexPath.row + 1].timestamp) / 2
+      newTimestamp = (destinationKeywordList[destinationIndexPath.row].timestamp + destinationKeywordList[destinationIndexPath.row + 1].timestamp) / 2
     }
     
     try! self.realm.write {
-      keywordList[sourceIndexPath.row].timestamp = newTimestamp
+      sourceKeyword.timestamp = newTimestamp
+      if sourceIndexPath.section != destinationIndexPath.section {
+        sourceKeyword.gourpId = groupList[destinationIndexPath.section].id
+      }
     }
   }
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -296,26 +307,13 @@ extension KeywordViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
-    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
-    let groupId = groupList[indexPath.section].id
-    
+    guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return UITableViewCell() }
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
-    let row = indexPath.row
-    var sectionKeywordList: [KeywordRealm]
-    
-    if keywordList.filter({ $0.gourpId == groupId }).isEmpty {
-      sectionKeywordList = keywordList.filter { $0.gourpId == nil }
-    } else {
-      sectionKeywordList = keywordList.filter { $0.gourpId == groupId }
-    }
-    let keyword = sectionKeywordList[row].keyword
-    let exceptionKeyword = sectionKeywordList[row].exceptionKeyword
-    cell.titleLabel.text = keyword
+
+    let exceptionKeyword = keywordRealm.exceptionKeyword
+    cell.titleLabel.text = keywordRealm.keyword
     cell.exceptionLabel.text = "- " + exceptionKeyword
     cell.exceptionLabel.isHidden = exceptionKeyword.isEmpty
-    setupGestureRecognizer(for: cell.contentView)
-
     return cell
   }
 }
@@ -347,32 +345,6 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
     }
     (tableView.headerView(forSection: section) as? KeywordGroupHeader)?.section = section + 1
     tableView.moveSection(section, toSection: section + 1)
-  }
-  
-  func setupGestureRecognizer(for view: UIView) {
-      let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-      view.addGestureRecognizer(panGesture)
-  }
-  @objc func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
-      switch recognizer.state {
-      case .began:
-          // Start the reordering process
-          guard let sectionView = recognizer.view else { return }
-        let section = sectionView.tag
-          tableView.beginUpdates()
-          tableView.moveSection(section, toSection: tableView.numberOfSections - 1)
-          tableView.endUpdates()
-      case .changed: break
-          // Update the visual position of the dragged section if needed
-          // You can animate the change here to provide a smooth visual effect
-      case .ended: break
-          // End the reorde ring process
-          // Update your data source to reflect the new section order
-          tableView.reloadData()
-      default: break
-          // Cancel reordering if the gesture is not recognized or cancelled
-          tableView.reloadData()
-      }
   }
 }
 
