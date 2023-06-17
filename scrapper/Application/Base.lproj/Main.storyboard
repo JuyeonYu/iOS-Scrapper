@@ -55,6 +55,7 @@
                             <barButtonItem title="Item" image="minus" catalog="system" id="rvq-nD-7fD">
                                 <connections>
                                     <action selector="onMinus:" destination="1T2-33-RiP" id="M3j-wy-Fh7"/>
+                                    <segue destination="iOp-yl-EpV" kind="show" id="lW4-t2-Skg"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -147,6 +148,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roj-oI-KOU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3493" y="-1017"/>
+        </scene>
+        <!--제외 언론사-->
+        <scene sceneID="6n0-gi-Sl1">
+            <objects>
+                <viewController storyboardIdentifier="ExceptPublisherViewController" id="iOp-yl-EpV" customClass="ExceptPublisherViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5TP-Tf-SUc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7Wt-JW-9Jy">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4PO-vE-B0x"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Wt-JW-9Jy" firstAttribute="leading" secondItem="4PO-vE-B0x" secondAttribute="leading" id="1VX-Sm-KRJ"/>
+                            <constraint firstItem="7Wt-JW-9Jy" firstAttribute="top" secondItem="4PO-vE-B0x" secondAttribute="top" id="VFW-IQ-h7g"/>
+                            <constraint firstItem="4PO-vE-B0x" firstAttribute="trailing" secondItem="7Wt-JW-9Jy" secondAttribute="trailing" id="fGI-Q6-lwi"/>
+                            <constraint firstItem="4PO-vE-B0x" firstAttribute="bottom" secondItem="7Wt-JW-9Jy" secondAttribute="bottom" id="koz-8l-IBj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="제외 언론사" id="hk4-5J-ALv">
+                        <centerItemGroups>
+                            <barButtonItemGroup customizationDisposition="fixed" id="Lao-sP-5su"/>
+                        </centerItemGroups>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="7Wt-JW-9Jy" id="R17-hD-iWj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INB-0O-EJH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4316" y="-806"/>
         </scene>
         <!--news list-->
         <scene sceneID="PrQ-oH-MK5">
