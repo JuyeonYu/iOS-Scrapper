@@ -41,6 +41,11 @@ class KeywordViewController: UIViewController {
   }
   @IBAction func onEdit(_ sender: Any) {
     tableView.isEditing = !tableView.isEditing
+    if tableView.isEditing {
+      edit.title = "완료"
+    } else {
+      edit.title = "편집"
+    }
     tableView.reloadData()
   }
   @IBOutlet weak var edit: UIBarButtonItem!
@@ -273,10 +278,10 @@ extension KeywordViewController: UITableViewDataSource {
     
     if destinationIndexPath.row == 0 {
       newTimestamp = (destinationKeywordList.first?.timestamp ?? 1) - 1
-    } else if destinationIndexPath.row == destinationKeywordList.count - 1 {
+    } else if destinationIndexPath.row + 1 == destinationKeywordList.count || destinationIndexPath.row == destinationKeywordList.count {
       newTimestamp = (destinationKeywordList.last?.timestamp ?? 1) + 1
     } else {
-      newTimestamp = (destinationKeywordList[destinationIndexPath.row].timestamp + destinationKeywordList[destinationIndexPath.row + 1].timestamp) / 2
+      newTimestamp = (destinationKeywordList[destinationIndexPath.row].timestamp + destinationKeywordList[destinationIndexPath.row - 1].timestamp) / 2
     }
     
     try! self.realm.write {
