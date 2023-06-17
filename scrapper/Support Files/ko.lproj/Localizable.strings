@@ -32,3 +32,5 @@
 "You already added this news." = "이미 추가된 기사에요";
 "add exception keyword" = "(선택)제외할 키워드를 등록해주세요";
 "exception keyword" = "제외 키워드";
+"Please enter group what you want" = "그룹을 추가해보세요.";
+"Group" = "그룹";

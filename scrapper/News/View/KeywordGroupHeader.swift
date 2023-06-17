@@ -69,7 +69,7 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
   }
   
   func configure(group: GroupRealm, keywordCount: Int, isEditing: Bool) {
-    self.group.text = (group.name.isEmpty ? "그룹없음" : group.name)
+    self.group.text = (group.name.isEmpty ? "기본" : group.name)
     count.text = "(\(String(keywordCount)))"
     showReorder(isEditing)
   }
