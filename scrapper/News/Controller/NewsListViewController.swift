@@ -15,7 +15,7 @@ import GoogleMobileAds
 class NewsListViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   var newsList: [News] = []
-  var filteredNews: [News] = []
+  var searchedNews: [News] = []
   var dataList: [News] = []
   var searchKeyword: String?
   
@@ -89,6 +89,10 @@ class NewsListViewController: UIViewController {
         .map { News(title: $0.title, urlString: $0.link, originalLink: $0.originallink, publishTime: $0.pubDate) }
         .filter { news in !exceptKeywords.contains(where: { news.title.contains($0) })}
         .filter { news in !exceptDomains.contains(where: { news.originalLink.contains($0) })}
+      
+      if UserDefaultManager.getExclusivePress() {
+        
+      }
       self.newsList.append(contentsOf: filteredNews)
       self.tableView.reloadData()
     }
@@ -220,7 +224,7 @@ extension NewsListViewController: UITableViewDelegate {
 extension NewsListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if searchBar.text != "" && searchBar.text != nil && searchBar.isFirstResponder {
-      return filteredNews.count
+      return searchedNews.count
     } else {
       return newsList.count
     }
@@ -237,7 +241,7 @@ extension NewsListViewController: UITableViewDataSource {
     
     // 검색한 데이터를 가져올지 아닐지 처리
     if searchBar.text != "" && searchBar.isFirstResponder {
-      dataList = filteredNews
+      dataList = searchedNews
     } else {
       dataList = newsList
     }
@@ -261,12 +265,12 @@ extension NewsListViewController: UITableViewDataSource {
 
 extension NewsListViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    filteredNews.removeAll()
+    searchedNews.removeAll()
     
     for news in newsList {
       if news.title.contains(searchText) {
         print(news.title)
-        filteredNews.append(news)
+        searchedNews.append(news)
       }
     }
     tableView.reloadData()

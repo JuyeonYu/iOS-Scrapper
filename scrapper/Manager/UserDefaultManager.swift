@@ -17,4 +17,12 @@ struct UserDefaultManager {
     return UserDefaults.standard.string(forKey: Constants.UserDefault.newsOrder) ?? nil
   }
   
+  static func setExclusivePress(_ isExclusive: Bool) {
+    UserDefaults.standard.set(isExclusive, forKey: Constants.UserDefault.exclusivePress)
+  }
+  
+  static func getExclusivePress() -> Bool {
+    return UserDefaults.standard.bool(forKey: Constants.UserDefault.exclusivePress)
+  }
+  
 }
