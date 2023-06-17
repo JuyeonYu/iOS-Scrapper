@@ -11,6 +11,7 @@ import RealmSwift
 import GoogleMobileAds
 
 class KeywordViewController: UIViewController {
+  var noneGroupId: UUID?
   @IBOutlet weak var tableView: UITableView!
   
   @IBAction func onPlus(_ sender: Any) {
@@ -37,7 +38,6 @@ class KeywordViewController: UIViewController {
   }()
   
   let keywordCellID = "KeywordTableViewCell"
-  //    let googleADModID = "ca-app-pub-7604048409167711/3101460469"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,24 +59,27 @@ class KeywordViewController: UIViewController {
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
     
-    if realm.objects(GroupRealm.self).filter({ $0.name == ""}).isEmpty {
+    if let noneGroup = realm.objects(GroupRealm.self).filter({ $0.name == ""}).first {
+      noneGroupId = noneGroup.id
+    } else {
+      let id = UUID()
       try! self.realm.write {
         let groupRealm = GroupRealm()
         groupRealm.name = ""
-        groupRealm.id = UUID()
+        groupRealm.id = id
         groupRealm.timestamp = Date().timeIntervalSince1970
         self.realm.add(groupRealm)
       }
+      noneGroupId = id
     }
     
+    // DB 마이그레이션 용도. 기존에 만든 키워드 중 groupId나 timestamp가 없는 키워드를 기본 그룹에 넣음
     try! self.realm.write {
       let keywordsRealm = Array(realm.objects(KeywordRealm.self))
       let noneGroupId = realm.objects(GroupRealm.self).filter{ $0.name.isEmpty }.first?.id
       keywordsRealm.filter { $0.timestamp == 0.0 }.forEach { $0.timestamp = Date().timeIntervalSince1970 }
       keywordsRealm.filter { $0.gourpId == nil }.forEach { $0.gourpId = noneGroupId }
     }
-    
-    
   }
   func popupAddGroup() {
     let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
@@ -156,6 +159,7 @@ class KeywordViewController: UIViewController {
       keywordRealm.keyword = saveKeyword!
       keywordRealm.exceptionKeyword = exceptionKeyword!
       keywordRealm.timestamp = Date().timeIntervalSince1970
+      keywordRealm.gourpId = self.noneGroupId
       try! self.realm.write {
         self.realm.add(keywordRealm)
       }
@@ -204,8 +208,12 @@ extension KeywordViewController: UITableViewDelegate {
     header.section = section
     header.delegate = self
     let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let keywordList = Array(realm.objects(KeywordRealm.self))
+    
     let group = groupList[section]
-    header.configure(group: group, isEditing: tableView.isEditing)
+    let keywordCount = keywordList.filter { $0.gourpId == group.id }.count
+    
+    header.configure(group: group, keywordCount: keywordCount, isEditing: tableView.isEditing)
     return header
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -294,8 +302,13 @@ extension KeywordViewController: UITableViewDataSource {
     
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
     let row = indexPath.row
+    var sectionKeywordList: [KeywordRealm]
     
-    let sectionKeywordList = keywordList.filter { $0.gourpId == groupId }
+    if keywordList.filter({ $0.gourpId == groupId }).isEmpty {
+      sectionKeywordList = keywordList.filter { $0.gourpId == nil }
+    } else {
+      sectionKeywordList = keywordList.filter { $0.gourpId == groupId }
+    }
     let keyword = sectionKeywordList[row].keyword
     let exceptionKeyword = sectionKeywordList[row].exceptionKeyword
     cell.titleLabel.text = keyword
