@@ -21,7 +21,6 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
   @IBOutlet weak var onDelete: UIButton!
   @IBOutlet weak var onEdit: UIButton!
   @IBOutlet weak var delete: UIButton!
-  @IBOutlet weak var eidt: UIButton!
   var section: Int?
   @IBAction func onMinus(_ sender: Any) {
     showEdit(true)
@@ -60,9 +59,7 @@ class KeywordGroupHeader: UITableViewHeaderFooterView {
   
   func showEdit(_ show: Bool) {
     UIView.animate(withDuration: 0.25) {
-      [self.eidt, self.delete].forEach {
-        $0?.isHidden = !show
-      }
+      self.delete.isHidden = !show
     }
   }
   func showReorder(_ show: Bool) {

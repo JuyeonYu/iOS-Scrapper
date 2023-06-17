@@ -218,7 +218,7 @@ extension KeywordViewController: UITableViewDelegate {
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let row = indexPath.row
-    let keywordList = Array(realm.objects(KeywordRealm.self))
+    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
     let keyword = keywordList[row].keyword
     
     
@@ -232,7 +232,7 @@ extension KeywordViewController: UITableViewDelegate {
   // 오른쪽으로 밀어서 메뉴 보는 함수
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-      let keyword = self.realm.objects(KeywordRealm.self)[indexPath.row]
+      let keyword = self.realm.objects(KeywordRealm.self).sorted { $0.timestamp < $1.timestamp }[indexPath.row]
       
       // realm에서 먼저 삭제 한다.
       try! self.realm.write {
