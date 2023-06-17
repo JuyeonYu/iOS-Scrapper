@@ -30,4 +30,5 @@ class GroupRealm: Object {
 
 class exceptNews: Object {
   @objc dynamic var press: String = ""
+  @objc dynamic var domain: String = ""
 }

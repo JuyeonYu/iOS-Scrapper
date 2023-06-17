@@ -14,8 +14,9 @@ class News: Codable {
   var title: String
   let urlString: String
   let publishTime: String
+  let originalLink: String
   
-  init(title: String, urlString: String, publishTime: String) {
+  init(title: String, urlString: String, originalLink: String, publishTime: String) {
     // realm에 저장할때 '가 들어가면 filter로 값을 찾을 때 오류가 생김. '를 &squot; 바꿔 저장
     if title.contains("\'") {
       let temp1 = title.replacingOccurrences(of: "\'", with: "&squot;")
@@ -23,7 +24,7 @@ class News: Codable {
     } else {
       self.title = title
     }
-    
+    self.originalLink = originalLink
     self.urlString = urlString
     self.publishTime = publishTime   
   }

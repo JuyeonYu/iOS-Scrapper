@@ -55,6 +55,7 @@ extension ExceptPublisherViewController: UITableViewDelegate {
         try! realm.write({
           let news = exceptNews()
           news.press = press
+          news.domain = domain[press] ?? ""
           realm.add(news)
         })
       }

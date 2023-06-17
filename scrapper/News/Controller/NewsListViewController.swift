@@ -78,26 +78,20 @@ class NewsListViewController: UIViewController {
         return
       }
       
-      for news in naverNews.items {
-        let news: News = News(title: news.title, urlString: news.link, publishTime: news.pubDate)
-        if (!news.title.contains(self.getExceptionKeyword(keyword: keyword))) {
-          self.newsList.append(news)
-        }
-      }
+      let exceptKeywords = Array(self.realm.objects(KeywordRealm.self))
+        .filter { $0.keyword == keyword }
+        .map { $0.exceptionKeyword }
+      let exceptDomains = Array(self.realm.objects(exceptNews.self))
+        .map { $0.domain }
+      
+      let filteredNews =
+      naverNews.items
+        .map { News(title: $0.title, urlString: $0.link, originalLink: $0.originallink, publishTime: $0.pubDate) }
+        .filter { news in !exceptKeywords.contains(where: { news.title.contains($0) })}
+        .filter { news in !exceptDomains.contains(where: { news.originalLink.contains($0) })}
+      self.newsList.append(contentsOf: filteredNews)
       self.tableView.reloadData()
     }
-  }
-  
-  func getExceptionKeyword(keyword: String) -> String {
-    var result: String = ""
-    let keywordList = Array(realm.objects(KeywordRealm.self))
-    for keywordRealm in keywordList {
-      if keywordRealm.keyword == keyword {
-        result = keywordRealm.exceptionKeyword
-        break
-      }
-    }
-    return result
   }
   
   func removeExceptionKeywordNews(exceptionKeyword: String, newsList: [News]) -> [News] {
