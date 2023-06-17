@@ -14,12 +14,21 @@ class KeywordViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
   @IBAction func onPlus(_ sender: Any) {
-    popupAddKeyword
+    let alert = UIAlertController(title: "", message: "무엇을 추가할까요?", preferredStyle: .actionSheet)
+    alert.addAction(UIAlertAction(title: "그룹", style: .default) { _ in
+      self.popupAddGroup()
+    })
+    alert.addAction(UIAlertAction(title: "키워드", style: .default) { _ in
+      self.popupAddKeyword()
+    })
+    alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+    present(alert, animated: true)
   }
   @IBAction func onMinus(_ sender: Any) {
   }
   @IBAction func onEdit(_ sender: Any) {
     tableView.isEditing = !tableView.isEditing
+    tableView.reloadData()
   }
   @IBOutlet weak var edit: UIBarButtonItem!
   @IBOutlet weak var bannerView: GADBannerView!
@@ -39,6 +48,7 @@ class KeywordViewController: UIViewController {
     tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
     
     tableView.register(UINib(nibName: "KeywordTableViewCell", bundle: nil), forCellReuseIdentifier: "KeywordTableViewCell")
+    tableView.register(UINib(nibName: "KeywordGroupHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "KeywordGroupHeader")
     // get data for tableview
     
     if realm.objects(KeywordRealm.self).count == 0 {
@@ -49,13 +59,66 @@ class KeywordViewController: UIViewController {
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
     
-    let keywordsRealm = Array(realm.objects(KeywordRealm.self)).filter { $0.timestamp == 0.0 }
-    try! self.realm.write {
-      keywordsRealm.forEach { $0.timestamp = Date().timeIntervalSince1970
+    if realm.objects(GroupRealm.self).filter({ $0.name == ""}).isEmpty {
+      try! self.realm.write {
+        let groupRealm = GroupRealm()
+        groupRealm.name = ""
+        groupRealm.id = UUID()
+        groupRealm.timestamp = Date().timeIntervalSince1970
+        self.realm.add(groupRealm)
       }
     }
+    
+    try! self.realm.write {
+      let keywordsRealm = Array(realm.objects(KeywordRealm.self))
+      let noneGroupId = realm.objects(GroupRealm.self).filter{ $0.name.isEmpty }.first?.id
+      keywordsRealm.filter { $0.timestamp == 0.0 }.forEach { $0.timestamp = Date().timeIntervalSince1970 }
+      keywordsRealm.filter { $0.gourpId == nil }.forEach { $0.gourpId = noneGroupId }
+    }
+    
+    
   }
-  
+  func popupAddGroup() {
+    let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
+                                  message: NSLocalizedString("Please enter group what you want", comment: ""),
+                                  preferredStyle: .alert)
+    
+    alert.addTextField { (tf) in
+      tf.placeholder = NSLocalizedString("Please enter group what you want", comment: "")
+    }
+    
+    let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
+    let ok = UIAlertAction(title: NSLocalizedString("Add", comment: ""), style: .default) { (_) in
+      let saveKeyword = alert.textFields?[0].text
+      
+      guard let keyword = saveKeyword else {
+        return
+      }
+      
+      // [1.1-NS003] @juyeon / 중복 키워드 방지
+      guard (self.realm.objects(GroupRealm.self).filter("name = '\(keyword)'").isEmpty) else {
+        let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
+                                      message: NSLocalizedString("Let's search another one!", comment: ""),
+                                      preferredStyle: .alert)
+        let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
+        alert.addAction(ok)
+        self.present(alert, animated: true)
+        return
+      }
+      
+      let groupRealm = GroupRealm()
+      groupRealm.name = saveKeyword!
+      groupRealm.id = UUID()
+      groupRealm.timestamp = Date().timeIntervalSince1970
+      try! self.realm.write {
+        self.realm.add(groupRealm)
+      }
+      self.tableView.reloadData()
+    }
+    alert.addAction(cancel)
+    alert.addAction(ok)
+    self.present(alert, animated: true)
+  }
   func popupAddKeyword() {
     let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
                                   message: NSLocalizedString("Please enter keyword which make you interting", comment: ""),
@@ -133,6 +196,18 @@ class KeywordViewController: UIViewController {
 
 
 extension KeywordViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    50
+  }
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "KeywordGroupHeader") as! KeywordGroupHeader
+    header.section = section
+    header.delegate = self
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let group = groupList[section]
+    header.configure(group: group, isEditing: tableView.isEditing)
+    return header
+  }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let row = indexPath.row
     let keywordList = Array(realm.objects(KeywordRealm.self))
@@ -169,14 +244,15 @@ extension KeywordViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
     true
   }
+  
+  
 }
 
 extension KeywordViewController: UITableViewDataSource {
+  
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     let keywordList = Array(realm.objects(KeywordRealm.self))
       .sorted { $0.timestamp < $1.timestamp }
-    let temp = keywordList[sourceIndexPath.row].timestamp
-    
     let newTimestamp: TimeInterval
     
     if destinationIndexPath.row == 0 {
@@ -191,25 +267,100 @@ extension KeywordViewController: UITableViewDataSource {
       keywordList[sourceIndexPath.row].timestamp = newTimestamp
     }
   }
+  func numberOfSections(in tableView: UITableView) -> Int {
+    realm.objects(GroupRealm.self).count
+  }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if realm.objects(KeywordRealm.self).count == 0 {
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    
+    if keywordList.isEmpty {
       self.tableView.setEmptyMessage(NSLocalizedString("Why don't you add some new keyword?", comment: ""))
     } else {
       self.tableView.restore()
     }
-    return realm.objects(KeywordRealm.self).count
+    let groupId = groupList[section].id
+    if keywordList.contains(where: { $0.gourpId == nil}) {
+      return keywordList.filter { $0.gourpId == nil }.count
+    } else {
+      return keywordList.filter { $0.gourpId == groupId }.count
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let keywordList = Array(realm.objects(KeywordRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    let groupId = groupList[indexPath.section].id
+    
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
     let row = indexPath.row
-    let keywordList = Array(realm.objects(KeywordRealm.self))
-      .sorted { $0.timestamp < $1.timestamp }
-    let keyword = keywordList[row].keyword
-    let exceptionKeyword = keywordList[row].exceptionKeyword
+    
+    let sectionKeywordList = keywordList.filter { $0.gourpId == groupId }
+    let keyword = sectionKeywordList[row].keyword
+    let exceptionKeyword = sectionKeywordList[row].exceptionKeyword
     cell.titleLabel.text = keyword
     cell.exceptionLabel.text = "- " + exceptionKeyword
     cell.exceptionLabel.isHidden = exceptionKeyword.isEmpty
+    setupGestureRecognizer(for: cell.contentView)
+
     return cell
   }
 }
+
+extension KeywordViewController: KeywordGroupHeaderDelegate {
+  func onUp(section: Int) {
+    guard section > 0 else { return }
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    try! realm.write {
+      let source = groupList[section]
+      let temp = source.timestamp
+      source.timestamp = groupList[section - 1].timestamp
+      groupList[section - 1].timestamp = temp
+    }
+    let sourceHeader = (tableView.headerView(forSection: section) as? KeywordGroupHeader)
+    let destinationHeader = (tableView.headerView(forSection: section - 1) as? KeywordGroupHeader)
+    sourceHeader!.section! -= 1
+    destinationHeader!.section! += 1
+    tableView.moveSection(section, toSection: section - 1)
+  }
+  func onDown(section: Int) {
+    guard section < realm.objects(GroupRealm.self).count - 1 else { return }
+    let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    try! realm.write {
+      let source = groupList[section]
+      let temp = source.timestamp
+      source.timestamp = groupList[section + 1].timestamp
+      groupList[section + 1].timestamp = temp
+    }
+    (tableView.headerView(forSection: section) as? KeywordGroupHeader)?.section = section + 1
+    tableView.moveSection(section, toSection: section + 1)
+  }
+  
+  func setupGestureRecognizer(for view: UIView) {
+      let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+      view.addGestureRecognizer(panGesture)
+  }
+  @objc func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
+      switch recognizer.state {
+      case .began:
+          // Start the reordering process
+          guard let sectionView = recognizer.view else { return }
+        let section = sectionView.tag
+          tableView.beginUpdates()
+          tableView.moveSection(section, toSection: tableView.numberOfSections - 1)
+          tableView.endUpdates()
+      case .changed: break
+          // Update the visual position of the dragged section if needed
+          // You can animate the change here to provide a smooth visual effect
+      case .ended: break
+          // End the reorde ring process
+          // Update your data source to reflect the new section order
+          tableView.reloadData()
+      default: break
+          // Cancel reordering if the gesture is not recognized or cancelled
+          tableView.reloadData()
+      }
+  }
+}
+
+

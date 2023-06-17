@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var initialViewController :UIViewController?
   
   fileprivate func initRealm() {
+    let version: UInt64 = 6
     let configCheck = Realm.Configuration();
     do {
       let fileUrlIs = try schemaVersionAtURL(configCheck.fileURL!)
@@ -27,13 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let config = Realm.Configuration(
       // Set the new schema version. This must be greater than the previously used
       // version (if you've never set a schema version before, the version is 0).
-      schemaVersion: 5,
+      schemaVersion: version,
       
       // Set the block which will be called automatically when opening a Realm with
       // a schema version lower than the one set above
       migrationBlock: { migration, oldSchemaVersion in
         // We haven’t migrated anything yet, so oldSchemaVersion == 0
-        if (oldSchemaVersion < 5) {
+        if (oldSchemaVersion < version) {
         }
       })
     
