@@ -18,7 +18,9 @@ struct Constants {
   static let naverNewsAPIStartPageParameter = "&start="
   static let naverNewsAPIStartSortParameter = "&sort="
   
-  static let googleADModID = "ca-app-pub-7604048409167711/3101460469"
+  static let googleADModBannerID = "ca-app-pub-7604048409167711/3101460469"
+  static let googleADModContentsID = "ca-app-pub-7604048409167711/5528388498"
+  static let googleADModFullPageID = "ca-app-pub-7604048409167711/6207045348"
   
   struct UserDefault {
     static let login = "UserDefaultLogin"

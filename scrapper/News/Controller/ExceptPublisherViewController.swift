@@ -8,8 +8,11 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 class ExceptPublisherViewController: UIViewController {
+  private var interstitial: GADInterstitialAd?
+
   lazy var realm:Realm = {
     return try! Realm()
   }()
@@ -17,9 +20,24 @@ class ExceptPublisherViewController: UIViewController {
   var selectedPress: Set<String> = []
   
   @IBOutlet weak var tableView: UITableView!
+  fileprivate func loadAd() {
+    let request = GADRequest()
+    
+    GADInterstitialAd.load(withAdUnitID: Constants.googleADModFullPageID,
+                           request: request,
+                           completionHandler: { [self] ad, error in
+      if let error = error {
+        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+        return
+      }
+      interstitial = ad
+      interstitial?.fullScreenContentDelegate = self
+    })
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    loadAd()
     tableView.delegate = self
     tableView.dataSource = self
     
@@ -32,6 +50,9 @@ class ExceptPublisherViewController: UIViewController {
 extension ExceptPublisherViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) else { return }
+    if interstitial != nil {
+      interstitial!.present(fromRootViewController: self)
+    }
     let press = Constants.press[indexPath.row]
     var content = cell.defaultContentConfiguration()
     content.text = press
@@ -84,4 +105,10 @@ extension ExceptPublisherViewController: UITableViewDataSource {
   //  func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
   //    "기타 선택 시 선택되지 않는 언론사의 뉴스만 볼 수 있습니다."
   //  }
+}
+
+extension ExceptPublisherViewController: GADFullScreenContentDelegate {
+  func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    loadAd()
+  }
 }

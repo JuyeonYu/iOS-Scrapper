@@ -78,7 +78,7 @@ class KeywordViewController: UIViewController {
       popupAddKeyword()
     }
     
-    bannerView.adUnitID = Constants.googleADModID
+    bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
     

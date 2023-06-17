@@ -46,7 +46,7 @@ class BookMarkViewController: UIViewController {
     // MARK: - Navigation setting
     self.navigationItem.title = NSLocalizedString("Bookmark", comment: "")
     tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTableViewCell")
-    bannerView.adUnitID = Constants.googleADModID
+    bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
   }

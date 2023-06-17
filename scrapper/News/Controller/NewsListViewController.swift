@@ -67,7 +67,7 @@ class NewsListViewController: UIViewController {
     
     requestNaverNewsList(keyword: keyword, sort: searchSort, start: 1)
     
-    bannerView.adUnitID = Constants.googleADModID
+    bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
   }
