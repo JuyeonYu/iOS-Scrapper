@@ -38,7 +38,6 @@ class KeywordViewController: UIViewController {
     present(alert, animated: true)
   }
   @IBAction func onMinus(_ sender: Any) {
-    let alert = UIAlertController(title: nil, message: "제외할 언론사를 선택해주세요", preferredStyle: .actionSheet)
   }
   @IBAction func onEdit(_ sender: Any) {
     tableView.isEditing = !tableView.isEditing

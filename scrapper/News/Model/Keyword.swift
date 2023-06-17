@@ -28,6 +28,6 @@ class GroupRealm: Object {
   @objc dynamic var timestamp: TimeInterval = 0.0
 }
 
-class exceptPress: Object {
-  @objc dynamic var name: String = ""
+class exceptNews: Object {
+  @objc dynamic var press: String = ""
 }
