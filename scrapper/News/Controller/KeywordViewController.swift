@@ -41,7 +41,8 @@ class KeywordViewController: UIViewController {
       self.popupAddKeyword()
     })
     alert.addAction(UIAlertAction(title: "취소", style: .cancel))
-    present(alert, animated: true)
+    present(alert: alert)
+    
   }
   @IBAction func onMinus(_ sender: Any) {
   }
@@ -132,7 +133,7 @@ class KeywordViewController: UIViewController {
                                       preferredStyle: .alert)
         let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
         alert.addAction(ok)
-        self.present(alert, animated: true)
+        self.present(alert: alert)
         return
       }
       
@@ -147,7 +148,7 @@ class KeywordViewController: UIViewController {
     }
     alert.addAction(cancel)
     alert.addAction(ok)
-    self.present(alert, animated: true)
+    self.present(alert: alert)
   }
   func popupAddKeyword() {
     let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
@@ -178,7 +179,7 @@ class KeywordViewController: UIViewController {
                                       preferredStyle: .alert)
         let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
         alert.addAction(ok)
-        self.present(alert, animated: true)
+        self.present(alert: alert)
         return
       }
       
@@ -194,7 +195,7 @@ class KeywordViewController: UIViewController {
     }
     alert.addAction(cancel)
     alert.addAction(ok)
-    self.present(alert, animated: true)
+    self.present(alert: alert)
   }
   
   func editExceptionKeyword(keyword: String, exceptionKeyword: String) {
@@ -221,7 +222,7 @@ class KeywordViewController: UIViewController {
     }
     alert.addAction(cancel)
     alert.addAction(ok)
-    self.present(alert, animated: true)
+    self.present(alert: alert)
   }
 }
 
@@ -384,7 +385,7 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
         })
         self.tableView.deleteSections([section], with: .left)
       })
-      self.present(alert, animated: true)
+      self.present(alert: alert)
     }
     
   }

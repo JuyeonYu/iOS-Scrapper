@@ -58,7 +58,7 @@ class CategortyViewController: UIViewController {
     }
     alert.addAction(cancel)
     alert.addAction(ok)
-    self.present(alert, animated: true)
+    self.present(alert: alert)
   }
 }
 
