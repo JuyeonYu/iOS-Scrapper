@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD" initialMenu="S2v-Ab-mnZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--keyword-->
         <scene sceneID="Hfc-Qn-3wV">
             <objects>
-                <viewController id="1T2-33-RiP" userLabel="keyword" customClass="KeywordViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1T2-33-RiP" userLabel="keyword" customClass="KeywordViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dPj-TA-Y5F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +74,7 @@
         <!--BookMarkViewController-->
         <scene sceneID="bdW-Ma-pqm">
             <objects>
-                <viewController storyboardIdentifier="BookMarkViewController" id="g34-2a-8eI" userLabel="BookMarkViewController" customClass="BookMarkViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookMarkViewController" id="g34-2a-8eI" userLabel="BookMarkViewController" customClass="BookMarkViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jPq-Ws-j71">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,7 +108,20 @@
                             <constraint firstItem="90o-n0-YvT" firstAttribute="top" secondItem="jvS-xV-0Ng" secondAttribute="top" id="xc9-m5-sA2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sgY-hT-bpi"/>
+                    <navigationItem key="navigationItem" id="sgY-hT-bpi">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="trash" id="bHf-Nb-WPK">
+                                <connections>
+                                    <action selector="onDelete:" destination="g34-2a-8eI" id="sQL-P3-KcL"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="Z8C-uw-qHS">
+                                <connections>
+                                    <action selector="onShare:" destination="g34-2a-8eI" id="Bgz-xs-8xQ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="bannerView" destination="w0K-2H-34J" id="Pfw-RY-HJX"/>
                         <outlet property="searchBar" destination="kuM-qW-NHb" id="JUX-9j-jgp"/>
@@ -118,10 +132,18 @@
             </objects>
             <point key="canvasLocation" x="3563.7681159420295" y="501.5625"/>
         </scene>
+        <!--Root-->
+        <scene sceneID="ubD-bW-X99">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j5d-gD-WP2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <menu isSystemItem="YES" title="Root" identifier="com.apple.menu.root" id="S2v-Ab-mnZ" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="4137" y="269"/>
+        </scene>
         <!--category-->
         <scene sceneID="jkH-1I-EF6">
             <objects>
-                <viewController storyboardIdentifier="CategortyViewController" id="Z0P-JE-GtP" userLabel="category" customClass="CategortyViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategortyViewController" id="Z0P-JE-GtP" userLabel="category" customClass="CategortyViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCt-9N-CJ8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,7 +174,7 @@
         <!--제외 언론사-->
         <scene sceneID="6n0-gi-Sl1">
             <objects>
-                <viewController storyboardIdentifier="ExceptPublisherViewController" id="iOp-yl-EpV" customClass="ExceptPublisherViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExceptPublisherViewController" id="iOp-yl-EpV" customClass="ExceptPublisherViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5TP-Tf-SUc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,7 +209,7 @@
         <!--news list-->
         <scene sceneID="PrQ-oH-MK5">
             <objects>
-                <viewController storyboardIdentifier="NewsListViewController" id="Wpy-5F-Dus" userLabel="news list" customClass="NewsListViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsListViewController" id="Wpy-5F-Dus" userLabel="news list" customClass="NewsListViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LPs-DP-0sH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,7 +260,7 @@
         <!--news webview-->
         <scene sceneID="98G-LG-qq2">
             <objects>
-                <viewController storyboardIdentifier="NewsViewController" id="M7D-0P-SRw" userLabel="news webview" customClass="NewsViewController" customModule="뉴스스크랩" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsViewController" id="M7D-0P-SRw" userLabel="news webview" customClass="NewsViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NBr-Bb-gyT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

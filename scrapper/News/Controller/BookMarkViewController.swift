@@ -24,6 +24,21 @@ class BookMarkViewController: UIViewController {
   var filteredNews: [BookMarkNewsRealm] = []
   var dataList: [BookMarkNewsRealm] = []
   
+  @IBAction func onShare(_ sender: Any) {
+  }
+  @IBAction func onDelete(_ sender: Any) {
+    let alert = UIAlertController(title: "모두 삭제", message: "모든 북마크한 기사가 삭제됩니다.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+    alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { _ in
+      try! self.realm.write {
+        self.realm.objects(BookMarkNewsRealm.self).forEach {
+          self.realm.delete($0)
+        }
+      }
+      self.tableView.reloadData()
+    })
+    present(alert: alert)
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
     

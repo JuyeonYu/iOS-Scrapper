@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B5486D8623F23461008A5ABD"
-               BuildableName = "&#x1102;&#x1172;&#x1109;&#x1173;&#x1109;&#x1173;&#x110f;&#x1173;&#x1105;&#x1162;&#x11b8;.app"
+               BuildableName = "NewsScrap.app"
                BlueprintName = "scrapper"
                ReferencedContainer = "container:scrapper.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5486D8623F23461008A5ABD"
-            BuildableName = "&#x1102;&#x1172;&#x1109;&#x1173;&#x1109;&#x1173;&#x110f;&#x1173;&#x1105;&#x1162;&#x11b8;.app"
+            BuildableName = "NewsScrap.app"
             BlueprintName = "scrapper"
             ReferencedContainer = "container:scrapper.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5486D8623F23461008A5ABD"
-            BuildableName = "&#x1102;&#x1172;&#x1109;&#x1173;&#x1109;&#x1173;&#x110f;&#x1173;&#x1105;&#x1162;&#x11b8;.app"
+            BuildableName = "NewsScrap.app"
             BlueprintName = "scrapper"
             ReferencedContainer = "container:scrapper.xcodeproj">
          </BuildableReference>
