@@ -209,7 +209,8 @@ extension NewsListViewController: UITableViewDelegate {
       let row = indexPath.row
       let newsTitle = self.newsList[row].title
       let newsURL = self.newsList[row].urlString
-      Util.sharedInstance.showShareActivity(viewController: self, msg: newsTitle, image: nil, url: newsURL, sourceRect: nil)
+      
+      Util.sharedInstance.showShareActivity(viewController: self, msg: newsTitle, image: nil, url: [newsURL], sourceRect: nil)
       success(true)
     })
     // 4

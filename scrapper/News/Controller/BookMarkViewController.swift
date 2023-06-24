@@ -25,6 +25,7 @@ class BookMarkViewController: UIViewController {
   var dataList: [BookMarkNewsRealm] = []
   
   @IBAction func onShare(_ sender: Any) {
+    Util.sharedInstance.showShareActivity(news: Array(realm.objects(BookMarkNewsRealm.self)))
   }
   @IBAction func onDelete(_ sender: Any) {
     let alert = UIAlertController(title: "모두 삭제", message: "모든 북마크한 기사가 삭제됩니다.", preferredStyle: .alert)

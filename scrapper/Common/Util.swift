@@ -16,12 +16,21 @@ class Util {
   
   
   // 뉴스 공유할 때 사용
-  func showShareActivity(viewController: UIViewController, msg:String?, image:UIImage?, url:String?, sourceRect:CGRect?){
+  func showShareActivity(news: [BookMarkNewsRealm]) {
+    guard let topViewController = UIViewController.topViewController() else { return }
+    var newsSuite = (news.map { $0.title.htmlStripped + "\n" + $0.urlString  + "\n"})
+    newsSuite.append(Constants.appDownloadURL)
+    let objectsToShare = newsSuite as AnyObject
+      
+    let activityVC = UIActivityViewController(activityItems: objectsToShare as! [Any], applicationActivities: nil)
+    activityVC.modalPresentationStyle = .popover
+    activityVC.popoverPresentationController?.sourceView = topViewController.view
+    topViewController.present(activityVC, animated: true, completion: nil)
+  }
+  func showShareActivity(viewController: UIViewController, msg:String?, image:UIImage?, url: [String], sourceRect:CGRect?){
     var objectsToShare = [AnyObject]()
     
-    if let url = url {
-      objectsToShare = [url as AnyObject]
-    }
+    objectsToShare = [url as AnyObject]
     
     if let image = image {
       objectsToShare = [image as AnyObject]
@@ -119,4 +128,27 @@ extension UIViewController {
       self.present(alert, animated: true, completion: nil)
     }
   }
+  
+  class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    if let nav = base as? UINavigationController {
+      return topViewController(base: nav.visibleViewController)
+    }
+    if let tab = base as? UITabBarController {
+      if let selected = tab.selectedViewController {
+        return topViewController(base: selected)
+      }
+    }
+    if let presented = base?.presentedViewController {
+      return topViewController(base: presented)
+    }
+    return base
+  }
 }
+
+extension String {
+    var htmlStripped : String{
+      replacingOccurrences(of: "&quot;", with: "")
+        .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    }
+}
+
