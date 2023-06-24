@@ -20,14 +20,13 @@ class BookMarkViewController: UIViewController {
   var isSelectMode: Bool = false {
     didSet {
       tableView.reloadData()
-      if !isSelectMode {
-        [share, delete].forEach { $0?.isEnabled = false }
-      }
       if isSelectMode {
         edit.title = "취소"
         
       } else {
         edit.title = "선택"
+        [share, delete].forEach { $0?.isEnabled = false }
+        selectedNewsRows.removeAll()
       }
     }
   }
@@ -51,7 +50,9 @@ class BookMarkViewController: UIViewController {
     
   }
   @IBAction func onShare(_ sender: Any) {
-    Util.sharedInstance.showShareActivity(news: Array(realm.objects(BookMarkNewsRealm.self)))
+    let selectedRows = Array(self.selectedNewsRows).sorted(by: <)
+    let selectedNews = selectedRows.map { Array(realm.objects(BookMarkNewsRealm.self))[$0] }
+    Util.sharedInstance.showShareActivity(news:selectedNews)
   }
   @IBAction func onDelete(_ sender: Any) {
     let alert = UIAlertController(title: "삭제", message: "선택한 기사가 삭제됩니다.", preferredStyle: .alert)
