@@ -23,6 +23,12 @@ class BookMarkViewController: UIViewController {
       if !isSelectMode {
         [share, delete].forEach { $0?.isEnabled = false }
       }
+      if isSelectMode {
+        edit.title = "취소"
+        
+      } else {
+        edit.title = "선택"
+      }
     }
   }
   @IBOutlet weak var tableView: UITableView!
@@ -42,25 +48,22 @@ class BookMarkViewController: UIViewController {
   @IBOutlet weak var edit: UIBarButtonItem!
   @IBAction func onEdit(_ sender: Any) {
     self.isSelectMode.toggle()
-    if isSelectMode {
-      edit.title = "취소"
-      
-    } else {
-      edit.title = "선택"
-    }
+    
   }
   @IBAction func onShare(_ sender: Any) {
     Util.sharedInstance.showShareActivity(news: Array(realm.objects(BookMarkNewsRealm.self)))
   }
   @IBAction func onDelete(_ sender: Any) {
-    let alert = UIAlertController(title: "모두 삭제", message: "모든 북마크한 기사가 삭제됩니다.", preferredStyle: .alert)
+    let alert = UIAlertController(title: "삭제", message: "선택한 기사가 삭제됩니다.", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "취소", style: .cancel))
     alert.addAction(UIAlertAction(title: "삭제", style: .destructive) { _ in
       try! self.realm.write {
-        self.realm.objects(BookMarkNewsRealm.self).forEach {
-          self.realm.delete($0)
+        let selectedRows = Array(self.selectedNewsRows).sorted(by: >)
+        selectedRows.forEach {
+          self.realm.delete(Array(self.realm.objects(BookMarkNewsRealm.self))[$0])
         }
       }
+      self.isSelectMode = false
       self.tableView.reloadData()
     })
     present(alert: alert)
