@@ -52,7 +52,7 @@ class BookMarkViewController: UIViewController {
   @IBAction func onShare(_ sender: Any) {
     let selectedRows = Array(self.selectedNewsRows).sorted(by: <)
     let selectedNews = selectedRows.map { Array(realm.objects(BookMarkNewsRealm.self))[$0] }
-    Util.sharedInstance.showShareActivity(news:selectedNews)
+    Util.sharedInstance.shareBookmarks(selectedNews)
   }
   @IBAction func onDelete(_ sender: Any) {
     let alert = UIAlertController(title: "삭제", message: "선택한 기사가 삭제됩니다.", preferredStyle: .alert)
@@ -182,7 +182,7 @@ extension BookMarkViewController: UITableViewDataSource {
       let bookmarkNewsList = Array(realm.objects(BookMarkNewsRealm.self))
       dataList = bookmarkNewsList
     }
-    cell.title.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
+    cell.title.text = dataList[row].title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
     cell.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
     cell.selectImage.isHidden = !isSelectMode
     

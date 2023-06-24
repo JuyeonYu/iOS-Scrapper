@@ -16,18 +16,24 @@ class Util {
   
   
   // 뉴스 공유할 때 사용
-  func showShareActivity(news: [BookMarkNewsRealm]) {
-    guard let topViewController = UIViewController.topViewController() else { return }
+  func shareBookmarks(_ news: [BookMarkNewsRealm]) {
     var newsSuite = (news.map { $0.title.htmlStripped + "\n" + $0.urlString  + "\n"})
     newsSuite.append(Constants.appDownloadURL)
     let objectsToShare = newsSuite as AnyObject
-      
+    showShareActivity(objectsToShare: objectsToShare)
+  }
+  func shareNews(_ news: News) {
+    let newsSuite = [news.title.htmlStripped + "\n" + news.originalLink + "\n" + Constants.appDownloadURL] as AnyObject
+    showShareActivity(objectsToShare: newsSuite)
+  }
+  private func showShareActivity(objectsToShare: AnyObject) {
+    guard let topViewController = UIViewController.topViewController() else { return }
     let activityVC = UIActivityViewController(activityItems: objectsToShare as! [Any], applicationActivities: nil)
     activityVC.modalPresentationStyle = .popover
     activityVC.popoverPresentationController?.sourceView = topViewController.view
     topViewController.present(activityVC, animated: true, completion: nil)
   }
-  func showShareActivity(viewController: UIViewController, msg:String?, image:UIImage?, url: [String], sourceRect:CGRect?){
+  private func showShareActivity(viewController: UIViewController, msg:String?, image:UIImage?, url: [String], sourceRect:CGRect?){
     var objectsToShare = [AnyObject]()
     
     objectsToShare = [url as AnyObject]
@@ -76,15 +82,15 @@ class Util {
 }
 
 public extension String {
-  func stripOutHtml() -> String? {
+  var htmlStripped: String {
     do {
       guard let data = self.data(using: .unicode) else {
-        return nil
+        return ""
       }
       let attributed = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
       return attributed.string
     } catch {
-      return nil
+      return ""
     }
   }
 }
@@ -144,12 +150,3 @@ extension UIViewController {
     return base
   }
 }
-
-extension String {
-    var htmlStripped : String{
-      replacingOccurrences(of: "&apos;", with: "")
-        .replacingOccurrences(of: "&quot;", with: "")
-        .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-    }
-}
-

@@ -209,8 +209,7 @@ extension NewsListViewController: UITableViewDelegate {
       let row = indexPath.row
       let newsTitle = self.newsList[row].title
       let newsURL = self.newsList[row].urlString
-      
-      Util.sharedInstance.showShareActivity(viewController: self, msg: newsTitle, image: nil, url: [newsURL], sourceRect: nil)
+      Util.sharedInstance.shareNews(self.newsList[row])
       success(true)
     })
     // 4
@@ -248,7 +247,7 @@ extension NewsListViewController: UITableViewDataSource {
     }
     
     // realm에 데이터를 넣을 때 '가 들어가면 데이터를 넣고 뺄 때 오류가 생김. 그래서 realm에 '를 &squot;으로 저장함
-    cell.title.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
+    cell.title.text = dataList[row].title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
     cell.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
     
     // 이미 읽은 기사를 체크하기 위해
