@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hpy-RG-oqB">
-                        <rect key="frame" x="8" y="8" width="304" height="90"/>
+                        <rect key="frame" x="16" y="8" width="288" height="90"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.inset.filled" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bxq-ro-bxf">
                                 <rect key="frame" x="0.0" y="34" width="24" height="22.666666666666671"/>
@@ -28,16 +28,16 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-fm-E4u">
-                                <rect key="frame" x="32" y="24.333333333333339" width="272" height="41.666666666666657"/>
+                                <rect key="frame" x="32" y="24.333333333333339" width="256" height="41.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRx-VO-Lok">
-                                        <rect key="frame" x="0.0" y="0.0" width="272" height="20.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="256" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isz-dD-qS3">
-                                        <rect key="frame" x="0.0" y="28.333333333333325" width="272" height="13.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333325" width="256" height="13.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -49,9 +49,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Hpy-RG-oqB" secondAttribute="bottom" constant="8" id="Seu-Xx-yui"/>
-                    <constraint firstItem="Hpy-RG-oqB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Xc6-38-dF6"/>
+                    <constraint firstItem="Hpy-RG-oqB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Xc6-38-dF6"/>
                     <constraint firstItem="Hpy-RG-oqB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="vRn-FH-4xU"/>
-                    <constraint firstAttribute="trailing" secondItem="Hpy-RG-oqB" secondAttribute="trailing" constant="8" id="wzo-fP-ddQ"/>
+                    <constraint firstAttribute="trailing" secondItem="Hpy-RG-oqB" secondAttribute="trailing" constant="16" id="wzo-fP-ddQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

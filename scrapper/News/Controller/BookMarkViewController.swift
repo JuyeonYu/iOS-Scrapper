@@ -192,8 +192,8 @@ extension BookMarkViewController: UITableViewDataSource {
         cell.title.textColor = UIColor.lightGray
         cell.publishTime.textColor = UIColor.lightGray
       } else {
-        cell.title.textColor = UIColor.red
-        cell.publishTime.textColor = UIColor.red
+        cell.title.textColor = UIColor.label
+        cell.publishTime.textColor = UIColor.label
       }
     }
     return cell

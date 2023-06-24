@@ -147,7 +147,8 @@ extension UIViewController {
 
 extension String {
     var htmlStripped : String{
-      replacingOccurrences(of: "&quot;", with: "")
+      replacingOccurrences(of: "&apos;", with: "")
+        .replacingOccurrences(of: "&quot;", with: "")
         .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
 }
