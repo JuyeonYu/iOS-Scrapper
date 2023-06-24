@@ -109,6 +109,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sgY-hT-bpi">
+                        <barButtonItem key="leftBarButtonItem" title="선택" id="31c-In-EQA">
+                            <connections>
+                                <action selector="onEdit:" destination="g34-2a-8eI" id="epK-JF-UA3"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="trash" id="bHf-Nb-WPK">
                                 <connections>
@@ -124,7 +129,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bannerView" destination="w0K-2H-34J" id="Pfw-RY-HJX"/>
+                        <outlet property="delete" destination="bHf-Nb-WPK" id="ERS-Oz-bxG"/>
+                        <outlet property="edit" destination="31c-In-EQA" id="7LC-af-aTe"/>
                         <outlet property="searchBar" destination="kuM-qW-NHb" id="JUX-9j-jgp"/>
+                        <outlet property="share" destination="Z8C-uw-qHS" id="lo4-JK-hRn"/>
                         <outlet property="tableView" destination="90o-n0-YvT" id="CSL-PM-sfd"/>
                     </connections>
                 </viewController>
@@ -135,8 +143,8 @@
         <!--Root-->
         <scene sceneID="ubD-bW-X99">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j5d-gD-WP2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <menu isSystemItem="YES" title="Root" identifier="com.apple.menu.root" id="S2v-Ab-mnZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j5d-gD-WP2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4137" y="269"/>
         </scene>

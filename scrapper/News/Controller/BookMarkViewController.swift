@@ -12,6 +12,19 @@ import SafariServices
 import GoogleMobileAds
 
 class BookMarkViewController: UIViewController {
+  var selectedNewsRows: Set<Int> = [] {
+    didSet {
+      [share, delete].forEach { $0?.isEnabled = !(selectedNewsRows.isEmpty) }
+    }
+  }
+  var isSelectMode: Bool = false {
+    didSet {
+      tableView.reloadData()
+      if !isSelectMode {
+        [share, delete].forEach { $0?.isEnabled = false }
+      }
+    }
+  }
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
   
@@ -24,6 +37,18 @@ class BookMarkViewController: UIViewController {
   var filteredNews: [BookMarkNewsRealm] = []
   var dataList: [BookMarkNewsRealm] = []
   
+  @IBOutlet weak var delete: UIBarButtonItem!
+  @IBOutlet weak var share: UIBarButtonItem!
+  @IBOutlet weak var edit: UIBarButtonItem!
+  @IBAction func onEdit(_ sender: Any) {
+    self.isSelectMode.toggle()
+    if isSelectMode {
+      edit.title = "취소"
+      
+    } else {
+      edit.title = "선택"
+    }
+  }
   @IBAction func onShare(_ sender: Any) {
     Util.sharedInstance.showShareActivity(news: Array(realm.objects(BookMarkNewsRealm.self)))
   }
@@ -42,13 +67,14 @@ class BookMarkViewController: UIViewController {
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    [share, delete].forEach { $0?.isEnabled = !($0!.isEnabled) }
     /*
      1. realm에서 북마크된 뉴스 목록을 가져온다.
      2. tableview에 1에서 가져온 목록을 뿌린다.
      3. 북마크 삭제시 realm에서도 삭제해준다.
+     3. 북마크 삭제시 realm에서도 삭제해준다.
      */
-    
+    tableView.allowsMultipleSelection = true
     tableView.delegate = self
     tableView.dataSource = self
     tableView.tableFooterView = UIView() // 빈 셀에 하단 라인 없앰
@@ -70,6 +96,10 @@ class BookMarkViewController: UIViewController {
 
 extension BookMarkViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard !isSelectMode else {
+      selectedNewsRows.insert(indexPath.row)
+      return
+    }
     //        뉴스리스트 중 하나를 누르면 그 뉴스를 읽은 뉴스로 저장해야함
     let row = indexPath.row
     let news = Array(realm.objects(BookMarkNewsRealm.self))[row]
@@ -86,6 +116,14 @@ extension BookMarkViewController: UITableViewDelegate {
     let safariVC = SFSafariViewController(url: URL(string: realm.objects(BookMarkNewsRealm.self)[row].urlString)!)
     safariVC.delegate = self
     present(safariVC, animated: true, completion: nil)
+  }
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    guard !isSelectMode else {
+      if selectedNewsRows.contains(indexPath.row) {
+        selectedNewsRows.remove(indexPath.row)
+      }
+      return
+    }
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -133,7 +171,7 @@ extension BookMarkViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
     let row = indexPath.row
-    
+    cell.isSelectMode = isSelectMode
     if searchBar.text != "" && searchBar.isFirstResponder {
       dataList = filteredNews
     } else {
@@ -142,7 +180,7 @@ extension BookMarkViewController: UITableViewDataSource {
     }
     cell.title.text = dataList[row].title.stripOutHtml()?.replacingOccurrences(of: "&squot;", with: "\'")
     cell.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: dataList[row].publishTime)
-    
+    cell.selectImage.isHidden = !isSelectMode
     
     DispatchQueue.main.async {
       if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {

@@ -9,11 +9,25 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
-  
+  @IBOutlet weak var selectImage: UIImageView!
+  var isSelectMode: Bool = false
   @IBOutlet weak var publishTime: UILabel!
   @IBOutlet weak var title: UILabel!
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    guard isSelectMode else {
+      return
+    }
+    
+    if selected {
+      selectImage.image = UIImage(systemName: "circle.inset.filled")
+    } else {
+      selectImage.image = UIImage(systemName: "circle.dashed")
+    }
   }
   
   required init?(coder: NSCoder) {
@@ -21,6 +35,6 @@ class NewsTableViewCell: UITableViewCell {
   }
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
+    selectImage.isHidden = true
   }
 }
