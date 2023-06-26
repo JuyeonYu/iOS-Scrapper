@@ -245,11 +245,13 @@ extension KeywordViewController: UITableViewDelegate {
     return header
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let keyword = getKeywordRealm(indexPath: indexPath)?.keyword
-    let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") as! NewsListViewController
-    vc.navigationItem.title = keyword
-    vc.searchKeyword = keyword
+    guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return }
     
+    let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") { coder in
+        return NewsListViewController(coder: coder, keywordRealm: keywordRealm)
+    }
+    guard let vc else { return }
+    vc.navigationItem.title = keywordRealm.keyword
     self.navigationController?.pushViewController(vc, animated: true)
   }
   
@@ -325,11 +327,7 @@ extension KeywordViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return UITableViewCell() }
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
-
-    let exceptionKeyword = keywordRealm.exceptionKeyword
-    cell.titleLabel.text = keywordRealm.keyword
-    cell.exceptionLabel.text = "- " + exceptionKeyword
-    cell.exceptionLabel.isHidden = exceptionKeyword.isEmpty
+    cell.config(keyword: keywordRealm)
     return cell
   }
 }

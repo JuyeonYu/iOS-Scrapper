@@ -12,6 +12,7 @@ class KeywordTableViewCell: UITableViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var exceptionLabel: UILabel!
   
+  @IBOutlet weak var unreads: UILabel!
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
@@ -20,6 +21,13 @@ class KeywordTableViewCell: UITableViewCell {
   }
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
+    unreads.layer.masksToBounds = true
+    unreads.layer.cornerRadius = unreads.frame.width / 2
+  }
+  func config(keyword: KeywordRealm) {
+    titleLabel.text = keyword.keyword
+    exceptionLabel.text = "- " + keyword.exceptionKeyword
+    exceptionLabel.isHidden = keyword.exceptionKeyword.isEmpty
+    unreads.isHidden = !keyword.hasUnread
   }
 }

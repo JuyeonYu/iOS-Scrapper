@@ -20,6 +20,7 @@ class KeywordRealm: Object {
   @objc dynamic var exceptionKeyword: String = ""
   @objc dynamic var timestamp: TimeInterval = 0.0
   @objc dynamic var gourpId: UUID?
+  @objc dynamic var hasUnread: Bool = true
 }
 
 class GroupRealm: Object {

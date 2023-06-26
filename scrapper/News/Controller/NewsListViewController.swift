@@ -17,7 +17,16 @@ class NewsListViewController: UIViewController {
   var newsList: [News] = []
   var searchedNews: [News] = []
   var dataList: [News] = []
-  var searchKeyword: String?
+  
+  let keywordRealm: KeywordRealm
+  init?(coder: NSCoder, keywordRealm: KeywordRealm) {
+    self.keywordRealm = keywordRealm
+    super.init(coder: coder)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   lazy var realm:Realm = {
     return try! Realm()
@@ -60,12 +69,8 @@ class NewsListViewController: UIViewController {
     dateFormatter.dateFormat = "yyyy-MM-dd hh:mm" // 내가 뿌리고 싶은 시간 포멧
     dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // 네이버 포멧에서 gmt + 9 값으로 주기 때문에 로컬로 변경 필요
     
-    //        키워드 페이지에서 검색할 키워드를 줌
-    guard let keyword = searchKeyword else {
-      return
-    }
     
-    requestNaverNewsList(keyword: keyword, sort: searchSort, start: 1)
+    requestNaverNewsList(keyword: keywordRealm.keyword, sort: searchSort, start: 1)
     
     bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
@@ -119,12 +124,8 @@ class NewsListViewController: UIViewController {
       
       UserDefaultManager.setNewsOrder(order: "date")
       
-      //            키워드 페이지에서 검색할 키워드를 줌
-      guard let keyword = self.searchKeyword else {
-        return
-      }
       self.newsList.removeAll()
-      self.requestNaverNewsList(keyword: keyword, sort: self.searchSort, start: 1)
+      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, sort: self.searchSort, start: 1)
       self.tableView.reloadData()
     }))
     actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Related order", comment: ""), style: .default, handler: { result in
@@ -133,12 +134,8 @@ class NewsListViewController: UIViewController {
       
       UserDefaultManager.setNewsOrder(order: "sim")
       
-      //            키워드 페이지에서 검색할 키워드를 줌
-      guard let keyword = self.searchKeyword else {
-        return
-      }
       self.newsList.removeAll()
-      self.requestNaverNewsList(keyword: keyword, sort: self.searchSort, start: 1)
+      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, sort: self.searchSort, start: 1)
       self.tableView.reloadData()
     }))
     actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
@@ -236,7 +233,7 @@ extension NewsListViewController: UITableViewDataSource {
     
     // 뉴스 페이징 처리
     if row == newsList.count-1 {
-      requestNaverNewsList(keyword: self.searchKeyword!, sort: self.searchSort, start: row + 2)
+      requestNaverNewsList(keyword: keywordRealm.keyword, sort: self.searchSort, start: row + 2)
     }
     
     // 검색한 데이터를 가져올지 아닐지 처리
