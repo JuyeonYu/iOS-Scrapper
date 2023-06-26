@@ -24,4 +24,14 @@ struct Item: Codable {
     case itemDescription = "description"
     case pubDate
   }
+  
+  var pubDateTimestamp: TimeInterval? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd hh:mma"
+    if let date = dateFormatter.date(from: pubDate) {
+        return date.timeIntervalSince1970
+    } else {
+        return nil
+    }
+  }
 }

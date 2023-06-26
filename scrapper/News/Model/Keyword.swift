@@ -21,6 +21,7 @@ class KeywordRealm: Object {
   @objc dynamic var timestamp: TimeInterval = 0.0
   @objc dynamic var gourpId: UUID?
   @objc dynamic var hasUnread: Bool = true
+  @objc dynamic var lastReadNewsTimestamp: TimeInterval = 0.0
 }
 
 class GroupRealm: Object {
