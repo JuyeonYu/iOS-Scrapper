@@ -19,8 +19,8 @@ class NetworkManager {
     let param = ["query":keyword, "display":100, "start":start, "sort":sort] as [String : Any]
     let headers: HTTPHeaders = [
       "Content-Type": "application/json",
-      "X-Naver-Client-Id": "zmO4KBQdHToxqh6FfuDv",
-      "X-Naver-Client-Secret": "88YmMc4b62"
+      "X-Naver-Client-Id": Bundle.main.object(forInfoDictionaryKey: "NaverSearchAPIId") as! String,
+      "X-Naver-Client-Secret": Bundle.main.object(forInfoDictionaryKey: "NaverSearchAPISecret") as! String
     ]
     
     AF.request(url, parameters: param, headers: headers).responseJSON { response in
