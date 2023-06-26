@@ -75,9 +75,6 @@ class NewsListViewController: UIViewController {
     bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
-    try! realm.write({
-      keywordRealm.hasUnread = false
-    })
   }
   
   func requestNaverNewsList(keyword: String, sort: String, start: Int) {
@@ -89,6 +86,7 @@ class NewsListViewController: UIViewController {
       if start == 1 {
         try! self.realm.write({
           self.keywordRealm.lastReadNewsTimestamp = naverNews.items.first?.pubDateTimestamp ?? 0.0
+          self.keywordRealm.hasUnread = false
         })
       }
       

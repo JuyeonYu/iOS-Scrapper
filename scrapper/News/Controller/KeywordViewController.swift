@@ -105,6 +105,32 @@ class KeywordViewController: UIViewController {
       keywordsRealm.filter { $0.gourpId == nil }.forEach { $0.gourpId = noneGroupId }
     }
   }
+  func resetUnreadNews() {
+    Array(realm.objects(KeywordRealm.self)).forEach { keywordRealm in
+      
+      if !keywordRealm.hasUnread {
+        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keywordRealm.keyword, sort: UserDefaultManager.getNewsOrder() == "date" ? "date" : "sim", start: 1) { result in
+          guard let naverNews = result as? NaverNews else {
+            return
+          }
+          if let pubDateTimestamp = naverNews.items.first?.pubDateTimestamp,
+             pubDateTimestamp > keywordRealm.lastReadNewsTimestamp {
+            try! self.realm.write({
+              keywordRealm.lastReadNewsTimestamp = pubDateTimestamp
+              keywordRealm.hasUnread = true
+            })
+          }
+          self.tableView.reloadData()
+        }
+      }
+    }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    resetUnreadNews()
+    
+  }
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     tableView.isEditing = false
@@ -388,5 +414,4 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
     
   }
 }
-
 

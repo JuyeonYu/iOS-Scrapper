@@ -27,7 +27,8 @@ struct Item: Codable {
   
   var pubDateTimestamp: TimeInterval? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd hh:mma"
+    dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     if let date = dateFormatter.date(from: pubDate) {
         return date.timeIntervalSince1970
     } else {

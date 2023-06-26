@@ -28,8 +28,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {
-    // Called when the scene has moved from an inactive state to an active state.
-    // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+    guard let windowScene = scene as? UIWindowScene else { return }
+    guard let window = windowScene.windows.first else { return }
+    guard let tabBarController = window.rootViewController as? UITabBarController else {
+        return
+    }
+    guard let navigationController = tabBarController.children[tabBarController.selectedIndex] as? UINavigationController,
+          let keywordViewController = navigationController.children.first as? KeywordViewController else { return }
+    keywordViewController.resetUnreadNews()
+
   }
   
   func sceneWillResignActive(_ scene: UIScene) {
