@@ -16,6 +16,17 @@ class News: Codable {
   let publishTime: String
   let originalLink: String
   
+  var publishTimestamp: TimeInterval? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z" // 네이버 api에서 넘어오는 시간 포멧
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    if let date = dateFormatter.date(from: publishTime) {
+        return date.timeIntervalSince1970
+    } else {
+        return nil
+    }
+  }
+  
   init(title: String, urlString: String, originalLink: String, publishTime: String) {
     // realm에 저장할때 '가 들어가면 filter로 값을 찾을 때 오류가 생김. '를 &squot; 바꿔 저장
     if title.contains("\'") {

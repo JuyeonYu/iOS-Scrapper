@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,23 +29,37 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-fm-E4u">
-                                <rect key="frame" x="32" y="24.333333333333339" width="256" height="41.666666666666657"/>
+                                <rect key="frame" x="32" y="24.333333333333339" width="228" height="41.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRx-VO-Lok">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="20.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="228" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isz-dD-qS3">
-                                        <rect key="frame" x="0.0" y="28.333333333333325" width="256" height="13.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333325" width="228" height="13.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yP-se-Pfa">
+                                <rect key="frame" x="268" y="35" width="20" height="20"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="kIT-Xy-E7e"/>
+                                    <constraint firstAttribute="width" secondItem="6yP-se-Pfa" secondAttribute="height" id="vl7-Gj-lLr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="6yP-se-Pfa" firstAttribute="width" secondItem="6yP-se-Pfa" secondAttribute="height" id="ank-Jm-63X"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -59,11 +74,18 @@
                 <outlet property="publishTime" destination="Isz-dD-qS3" id="YVz-Zy-ecY"/>
                 <outlet property="selectImage" destination="Bxq-ro-bxf" id="bHu-gM-nfZ"/>
                 <outlet property="title" destination="dRx-VO-Lok" id="GIy-es-nAV"/>
+                <outlet property="unread" destination="6yP-se-Pfa" id="ftp-4g-LuD"/>
             </connections>
             <point key="canvasLocation" x="-35.114503816793892" y="42.253521126760567"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="circle.inset.filled" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

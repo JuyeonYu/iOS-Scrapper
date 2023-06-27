@@ -9,6 +9,7 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
+  @IBOutlet weak var unread: UILabel!
   @IBOutlet weak var selectImage: UIImageView!
   var isSelectMode: Bool = false
   @IBOutlet weak var publishTime: UILabel!
@@ -36,5 +37,12 @@ class NewsTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     selectImage.isHidden = true
+  }
+  
+  func configure(news: News, lastReadTimestamp: TimeInterval) {
+    title.text = news.title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
+    publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
+    unread.isHidden = news.publishTimestamp ?? 0 > lastReadTimestamp
+    unread.isHidden = true
   }
 }
