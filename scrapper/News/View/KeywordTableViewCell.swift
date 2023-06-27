@@ -28,11 +28,6 @@ class KeywordTableViewCell: UITableViewCell {
     titleLabel.text = keyword.keyword
     exceptionLabel.text = "- " + keyword.exceptionKeyword
     exceptionLabel.isHidden = keyword.exceptionKeyword.isEmpty
-    
-    if keyword.lastReadNewsTimestamp == 0 {
-      unreads.isHidden = false
-    } else {
-      unreads.isHidden = true
-    }
+    unreads.isHidden = !keyword.hasUnread
   }
 }

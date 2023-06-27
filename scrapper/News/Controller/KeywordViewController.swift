@@ -113,13 +113,17 @@ class KeywordViewController: UIViewController {
           guard let naverNews = result as? NaverNews else {
             return
           }
-          if let pubDateTimestamp = naverNews.items.first?.pubDateTimestamp,
-             pubDateTimestamp > keywordRealm.lastReadNewsTimestamp {
-            try! self.realm.write({
+          try! self.realm.write({
+            if let pubDateTimestamp = naverNews.items.first?.pubDateTimestamp,
+               pubDateTimestamp > keywordRealm.lastReadNewsTimestamp {
+              
               keywordRealm.lastReadNewsTimestamp = pubDateTimestamp
               keywordRealm.hasUnread = true
-            })
-          }
+              
+            } else {
+              keywordRealm.hasUnread = false
+            }
+          })
           self.tableView.reloadData()
         }
       }
