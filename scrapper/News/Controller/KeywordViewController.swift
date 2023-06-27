@@ -368,11 +368,11 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
       source.timestamp = groupList[section - 1].timestamp
       groupList[section - 1].timestamp = temp
     }
-    let sourceHeader = (tableView.headerView(forSection: section) as? KeywordGroupHeader)
-    let destinationHeader = (tableView.headerView(forSection: section - 1) as? KeywordGroupHeader)
-    sourceHeader!.section! -= 1
-    destinationHeader!.section! += 1
-    tableView.moveSection(section, toSection: section - 1)
+    UIView.transition(with: tableView,
+                      duration: 0.35,
+                      options: .transitionCrossDissolve,
+                      animations: { self.tableView.reloadData() })
+
   }
   func onDown(section: Int) {
     guard section < realm.objects(GroupRealm.self).count - 1 else { return }
@@ -383,11 +383,10 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
       source.timestamp = groupList[section + 1].timestamp
       groupList[section + 1].timestamp = temp
     }
-    let sourceHeader = (tableView.headerView(forSection: section) as? KeywordGroupHeader)
-    let destinationHeader = (tableView.headerView(forSection: section + 1) as? KeywordGroupHeader)
-    sourceHeader!.section! += 1
-    destinationHeader!.section! -= 1
-    tableView.moveSection(section, toSection: section + 1)
+    UIView.transition(with: tableView,
+                      duration: 0.35,
+                      options: .transitionCrossDissolve,
+                      animations: { self.tableView.reloadData() })
   }
   func onDelete(section: Int) {
     guard let groupRealm = getGroupRealm(section: section) else { return }
