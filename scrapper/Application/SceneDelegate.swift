@@ -35,8 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     guard let navigationController = tabBarController.children[tabBarController.selectedIndex] as? UINavigationController,
           let keywordViewController = navigationController.children.first as? KeywordViewController else { return }
-    keywordViewController.resetUnreadNews()
-
   }
   
   func sceneWillResignActive(_ scene: UIScene) {

@@ -39,10 +39,9 @@ class NewsTableViewCell: UITableViewCell {
     selectImage.isHidden = true
   }
   
-  func configure(news: News, lastReadTimestamp: TimeInterval) {
+  func configure(news: News) {
     title.text = news.title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
     publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
-    unread.isHidden = news.publishTimestamp ?? 0 > lastReadTimestamp
     unread.isHidden = true
   }
 }

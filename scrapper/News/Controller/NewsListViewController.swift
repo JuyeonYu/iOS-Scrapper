@@ -83,13 +83,6 @@ class NewsListViewController: UIViewController {
         return
       }
       
-      if start == 1 {
-        try! self.realm.write({
-          self.keywordRealm.lastReadNewsTimestamp = naverNews.items.first?.pubDateTimestamp ?? 0.0
-          self.keywordRealm.hasUnread = false
-        })
-      }
-      
       let exceptKeywords = Array(self.realm.objects(KeywordRealm.self))
         .filter { $0.keyword == keyword }
         .map { $0.exceptionKeyword }
@@ -249,7 +242,7 @@ extension NewsListViewController: UITableViewDataSource {
     } else {
       dataList = newsList
     }
-    cell.configure(news: dataList[row], lastReadTimestamp: keywordRealm.lastReadNewsTimestamp)
+    cell.configure(news: dataList[row])
         
     // 이미 읽은 기사를 체크하기 위해
     if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {

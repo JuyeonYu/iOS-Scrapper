@@ -28,6 +28,6 @@ class KeywordTableViewCell: UITableViewCell {
     titleLabel.text = keyword.keyword
     exceptionLabel.text = "- " + keyword.exceptionKeyword
     exceptionLabel.isHidden = keyword.exceptionKeyword.isEmpty
-    unreads.isHidden = !keyword.hasUnread
+    unreads.isHidden = true
   }
 }
