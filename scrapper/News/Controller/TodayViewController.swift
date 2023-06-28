@@ -16,22 +16,17 @@ class TodayViewController: UIViewController {
   let zumURL = URL(string: "https://zum.com")!
   var issueKeywords: [[RSSFeedItem]] = []
   @IBOutlet weak var tableView: UITableView!
+  let refreshControl = UIRefreshControl()
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    Task {
-      var rss = try await fetchRSS()
-      let sorted = rss.sorted { $0.pubDate ?? Date() > $1.pubDate ?? Date() }
-      issueKeywords = groupRSSByDay(rss: sorted)
-      tableView.reloadData()
-    }
-    
+        
     tableView.dataSource = self
     tableView.delegate = self
-    
+    tableView.refreshControl = refreshControl
+    refreshControl.addTarget(self, action: #selector(fetchRSS), for: .valueChanged)
   }
   
-  func groupRSSByDay(rss: [RSSFeedItem]) -> [[RSSFeedItem]] {
+  private func groupRSSByDay(rss: [RSSFeedItem]) -> [[RSSFeedItem]] {
     var result: [[RSSFeedItem]] = []
     var currentGroup: [RSSFeedItem] = []
     for i in 0 ..< rss.count {
@@ -58,10 +53,20 @@ class TodayViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-//    fetchIssueKeyword()
+    fetchRSS()
   }
   
-  func fetchRSS() async throws -> [RSSFeedItem] {
+  @objc func fetchRSS() {
+    Task {
+      let rss = try await fetchRSS()
+      let sorted = rss.sorted { $0.pubDate ?? Date() > $1.pubDate ?? Date() }
+      issueKeywords = groupRSSByDay(rss: sorted)
+      tableView.refreshControl?.endRefreshing()
+      tableView.reloadData()
+    }
+  }
+  
+  private func fetchRSS() async throws -> [RSSFeedItem] {
     let parser = FeedParser(URL: feedURL)
     
     let result = try await parser.parse()
