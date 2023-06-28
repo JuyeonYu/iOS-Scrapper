@@ -150,3 +150,9 @@ extension UIViewController {
     return base
   }
 }
+
+extension Date {
+  var day: Int? {
+    Calendar.current.dateComponents([.day], from: self).day
+  }
+}

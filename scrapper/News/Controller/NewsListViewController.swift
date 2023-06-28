@@ -19,9 +19,9 @@ class NewsListViewController: UIViewController {
   var searchedNews: [News] = []
   var dataList: [News] = []
   
-  let keywordRealm: KeywordRealm
-  init?(coder: NSCoder, keywordRealm: KeywordRealm) {
-    self.keywordRealm = keywordRealm
+  let keyword: String
+  init?(coder: NSCoder, keyword: String) {
+    self.keyword = keyword
     super.init(coder: coder)
   }
   
@@ -73,7 +73,7 @@ class NewsListViewController: UIViewController {
     dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // 네이버 포멧에서 gmt + 9 값으로 주기 때문에 로컬로 변경 필요
     
     
-    requestNaverNewsList(keyword: keywordRealm.keyword, start: 1)
+    requestNaverNewsList(keyword: keyword, start: 1)
     
     bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
@@ -123,7 +123,7 @@ class NewsListViewController: UIViewController {
     return resultNews
   }
   @objc func refresh() {
-    requestNaverNewsList(keyword: keywordRealm.keyword, start: 1)
+    requestNaverNewsList(keyword: keyword, start: 1)
   }
   
   @objc func rightBarButtonDidClick() {
@@ -135,7 +135,7 @@ class NewsListViewController: UIViewController {
       UserDefaultManager.setNewsOrder(order: "date")
       
       self.newsList.removeAll()
-      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, start: 1)
+      self.requestNaverNewsList(keyword: self.keyword, start: 1)
       self.tableView.reloadData()
     }))
     actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Related order", comment: ""), style: .default, handler: { result in
@@ -145,7 +145,7 @@ class NewsListViewController: UIViewController {
       UserDefaultManager.setNewsOrder(order: "sim")
       
       self.newsList.removeAll()
-      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, start: 1)
+      self.requestNaverNewsList(keyword: self.keyword, start: 1)
       self.tableView.reloadData()
     }))
     actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
@@ -243,7 +243,7 @@ extension NewsListViewController: UITableViewDataSource {
     
     // 뉴스 페이징 처리
     if row == newsList.count-1 {
-      requestNaverNewsList(keyword: keywordRealm.keyword, start: row + 2)
+      requestNaverNewsList(keyword: keyword, start: row + 2)
     }
     
     // 검색한 데이터를 가져올지 아닐지 처리

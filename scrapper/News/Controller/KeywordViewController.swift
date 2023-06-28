@@ -248,7 +248,7 @@ extension KeywordViewController: UITableViewDelegate {
     guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return }
     
     let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") { coder in
-        return NewsListViewController(coder: coder, keywordRealm: keywordRealm)
+      return NewsListViewController(coder: coder, keyword: keywordRealm.keyword)
     }
     guard let vc else { return }
     vc.navigationItem.title = keywordRealm.keyword

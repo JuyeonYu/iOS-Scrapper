@@ -35,6 +35,9 @@
 		D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */; };
 		D63BEA242A3DE7BB004DD22A /* ExceptPublisherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */; };
 		D661A9BD2A4C1D5F00E1EDBA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */; };
+		D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */; };
+		D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */; };
+		D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = D661A9C42A4C71AB00E1EDBA /* FeedKit */; };
 		D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */; };
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
@@ -79,6 +82,7 @@
 		D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordGroupHeader.xib; sourceTree = "<group>"; };
 		D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptPublisherViewController.swift; sourceTree = "<group>"; };
 		D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,7 +95,9 @@
 				D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */,
 				D6C6ACE92A3B524100438E61 /* Realm in Frameworks */,
 				D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */,
+				D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */,
 				D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */,
+				D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +142,7 @@
 				B5460C3223F2A648002A199E /* NewsListViewController.swift */,
 				B565A5BE23F64243001055CF /* BookMarkViewController.swift */,
 				D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */,
+				D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */,
 				D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */,
 			);
 			path = Controller;
@@ -239,6 +246,8 @@
 				D6C6ACE82A3B524100438E61 /* Realm */,
 				D6C6ACEA2A3B524100438E61 /* RealmSwift */,
 				D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */,
+				D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */,
+				D661A9C42A4C71AB00E1EDBA /* FeedKit */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -273,6 +282,8 @@
 				D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D6C6ACE72A3B524100438E61 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D6C6ACEC2A3B57A900438E61 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */,
 			);
 			productRefGroup = B5486D8823F23461008A5ABD /* Products */;
 			projectDirPath = "";
@@ -317,6 +328,7 @@
 				B5486D8B23F23461008A5ABD /* AppDelegate.swift in Sources */,
 				B520383B23F3F0DC0025B571 /* RestAPIResponse.swift in Sources */,
 				B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */,
+				D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */,
 				B565A5BF23F64243001055CF /* BookMarkViewController.swift in Sources */,
 				B57E879223F2EA2B002FC196 /* News.swift in Sources */,
 				B565A5C123F669FA001055CF /* Util.swift in Sources */,
@@ -567,6 +579,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nmdias/FeedKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -594,6 +622,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		D661A9C42A4C71AB00E1EDBA /* FeedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */;
+			productName = FeedKit;
+		};
 		D6A13FAD2A3B4F4C002A457B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */;
