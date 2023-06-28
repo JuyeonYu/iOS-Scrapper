@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SettingViewController: UIViewController {
+  let maxGroup = 3
+  let maxKeyword = 10
+  
+  lazy var realm:Realm = {
+    return try! Realm()
+  }()
   
   enum SettingSection: Int, CaseIterable {
     case app
@@ -33,6 +40,10 @@ class SettingViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
   }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
+  }
 }
 
 extension SettingViewController: UITableViewDelegate {
@@ -51,7 +62,7 @@ extension SettingViewController: UITableViewDataSource {
     let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
     var configuration = cell.defaultContentConfiguration()
     
-    let font = UIFont.systemFont(ofSize: 13) // Change the font size to your desired value
+    let font = UIFont.systemFont(ofSize: 13)
     configuration.textProperties.font = font
     configuration.secondaryTextProperties.font = font
 
@@ -61,16 +72,35 @@ extension SettingViewController: UITableViewDataSource {
       guard let appType = AppType(rawValue: indexPath.row) else { return UITableViewCell() }
       switch appType {
       case .group:
+        let groupCount = realm.objects(GroupRealm.self).count
         configuration.text = "그룹"
-        configuration.secondaryText = "Detail"
+        
+        configuration.secondaryText = "\(groupCount) / \(maxGroup)"
+        if groupCount < 2 {
+          configuration.secondaryTextProperties.color = .systemGreen
+        } else if groupCount < 3 {
+          configuration.secondaryTextProperties.color = .systemYellow
+        } else {
+          configuration.secondaryTextProperties.color = .systemRed
+        }
         configuration.image = UIImage(systemName: "rectangle.3.group")
       case .keyword:
+        let keywordCount = realm.objects(KeywordRealm.self).count
         configuration.text = "키워드"
-        configuration.secondaryText = "Detail"
+        
+        configuration.secondaryText = "\(keywordCount) / \(maxKeyword)"
+        if keywordCount < 5 {
+          configuration.secondaryTextProperties.color = .systemGreen
+        } else if keywordCount < 9 {
+          configuration.secondaryTextProperties.color = .systemYellow
+        } else {
+          configuration.secondaryTextProperties.color = .systemRed
+        }
         configuration.image = UIImage(systemName: "newspaper")
       case .exceptPress:
+        let exceptpressCount = self.realm.objects(exceptNews.self).count
         configuration.text = "제외언론사"
-        configuration.secondaryText = "Detail"
+        configuration.secondaryText = "\(exceptpressCount)"
         configuration.image = UIImage(systemName: "selection.pin.in.out")
       }
     case .other:
