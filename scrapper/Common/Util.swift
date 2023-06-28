@@ -26,7 +26,7 @@ class Util {
     let newsSuite = [news.title.htmlStripped + "\n" + news.originalLink + "\n" + Constants.appDownloadURL] as AnyObject
     showShareActivity(objectsToShare: newsSuite)
   }
-  private func showShareActivity(objectsToShare: AnyObject) {
+  func showShareActivity(objectsToShare: AnyObject) {
     guard let topViewController = UIViewController.topViewController() else { return }
     let activityVC = UIActivityViewController(activityItems: objectsToShare as! [Any], applicationActivities: nil)
     activityVC.modalPresentationStyle = .popover

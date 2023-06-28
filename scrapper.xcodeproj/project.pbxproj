@@ -38,6 +38,9 @@
 		D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */; };
 		D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */; };
 		D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = D661A9C42A4C71AB00E1EDBA /* FeedKit */; };
+		D661A9C72A4C910A00E1EDBA /* PayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9C62A4C910A00E1EDBA /* PayViewController.swift */; };
+		D661A9C92A4C915800E1EDBA /* PromotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9C82A4C915800E1EDBA /* PromotionViewController.swift */; };
+		D661A9CB2A4C933100E1EDBA /* BouncyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9CA2A4C933100E1EDBA /* BouncyButton.swift */; };
 		D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */; };
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
@@ -83,6 +86,9 @@
 		D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptPublisherViewController.swift; sourceTree = "<group>"; };
 		D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		D661A9C62A4C910A00E1EDBA /* PayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayViewController.swift; sourceTree = "<group>"; };
+		D661A9C82A4C915800E1EDBA /* PromotionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionViewController.swift; sourceTree = "<group>"; };
+		D661A9CA2A4C933100E1EDBA /* BouncyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButton.swift; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +150,8 @@
 				D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */,
 				D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */,
 				D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */,
+				D661A9C62A4C910A00E1EDBA /* PayViewController.swift */,
+				D661A9C82A4C915800E1EDBA /* PromotionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -163,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */,
+				D661A9CA2A4C933100E1EDBA /* BouncyButton.swift */,
 				D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */,
 				B5460C2C23F28EB9002A199E /* KeywordTableViewCell.swift */,
 				D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */,
@@ -318,6 +327,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D661A9CB2A4C933100E1EDBA /* BouncyButton.swift in Sources */,
+				D661A9C72A4C910A00E1EDBA /* PayViewController.swift in Sources */,
 				B5460C3123F2A45B002A199E /* CategortyViewController.swift in Sources */,
 				B565A5BD23F58726001055CF /* NaverNews.swift in Sources */,
 				B5460C3C23F2B0DA002A199E /* NewsTableViewCell.swift in Sources */,
@@ -339,6 +350,7 @@
 				B5486D8D23F23461008A5ABD /* SceneDelegate.swift in Sources */,
 				B5460C2E23F28EB9002A199E /* KeywordTableViewCell.swift in Sources */,
 				D63BEA202A3CC52B004DD22A /* KeywordGroupHeader.swift in Sources */,
+				D661A9C92A4C915800E1EDBA /* PromotionViewController.swift in Sources */,
 				B5460C3323F2A648002A199E /* NewsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

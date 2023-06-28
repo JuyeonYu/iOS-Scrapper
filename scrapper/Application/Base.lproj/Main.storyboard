@@ -140,6 +140,52 @@
             </objects>
             <point key="canvasLocation" x="4473.913043478261" y="501.5625"/>
         </scene>
+        <!--Pay View Controller-->
+        <scene sceneID="dBc-Cv-KhV">
+            <objects>
+                <viewController storyboardIdentifier="PayViewController" id="veS-JH-V2a" customClass="PayViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dYp-Tv-ujR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-HV-gZp" customClass="BouncyButton" customModule="NewsScrap" customModuleProvider="target">
+                                <rect key="frame" x="24" y="401.5" width="366" height="35"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Z4Q-LP-6dA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Z4Q-LP-6dA" firstAttribute="trailing" secondItem="zv5-HV-gZp" secondAttribute="trailing" constant="24" id="Ae9-oD-chN"/>
+                            <constraint firstItem="zv5-HV-gZp" firstAttribute="centerY" secondItem="dYp-Tv-ujR" secondAttribute="centerY" id="Hn9-rL-aex"/>
+                            <constraint firstItem="zv5-HV-gZp" firstAttribute="leading" secondItem="Z4Q-LP-6dA" secondAttribute="leading" constant="24" id="bG7-Jh-Hp9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pay" destination="zv5-HV-gZp" id="e7S-7a-juC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oAl-WO-2vU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6519" y="596"/>
+        </scene>
+        <!--Promotion View Controller-->
+        <scene sceneID="uHN-bF-Adb">
+            <objects>
+                <viewController storyboardIdentifier="PromotionViewController" id="1qT-Wi-fN8" customClass="PromotionViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vsm-Vb-5sP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="jnV-G8-9L6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Q7-jo-VX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6517" y="1372"/>
+        </scene>
         <!--category-->
         <scene sceneID="jkH-1I-EF6">
             <objects>
@@ -382,6 +428,9 @@
                                     <color systemColor="tertiaryLabelColor"/>
                                 </hierarchicalColors>
                             </imageReference>
+                            <connections>
+                                <segue destination="veS-JH-V2a" kind="presentation" id="LCc-MU-C8N"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -474,6 +523,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

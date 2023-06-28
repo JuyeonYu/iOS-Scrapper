@@ -35,6 +35,8 @@ struct Constants {
   ]
   
   static let appDownloadURL = "https://apps.apple.com/us/app/뉴스스크랩/id1499305186"
+  static let privacyURL = "https://juyeonyu.github.io/projects/2023/06/06/dodo.html"
+  static let infoURL = "https://juyeonyu.github.io/projects/2023/06/06/dodo.html"
 }
 
 

@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import MessageUI
+import SafariServices
 
 class SettingViewController: UIViewController {
   let maxGroup = 3
@@ -53,6 +55,56 @@ extension SettingViewController: UITableViewDelegate {
     case .app: return "APP"
     case .other: return "OTHER"
     }
+  }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let section = SettingSection(rawValue: indexPath.section) else { return }
+    switch section {
+      
+    case .app:
+      guard let appType = AppType(rawValue: indexPath.row) else { return }
+      switch appType {
+      case .group:
+        break
+      case .keyword:
+        break
+      case .exceptPress:
+        let vc = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(identifier: "ExceptPublisherViewController")
+        navigationController?.pushViewController(vc, animated: true)
+      }
+    case .other:
+      guard let otherType = OtherType(rawValue: indexPath.row) else { return }
+      switch otherType {
+      case .terms:
+        let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
+        present(safariVC, animated: true, completion: nil)
+      case .policy:
+        let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
+        present(safariVC, animated: true, completion: nil)
+      case .report:
+        if MFMailComposeViewController.canSendMail() {
+          let compseVC = MFMailComposeViewController()
+          compseVC.mailComposeDelegate = self
+          compseVC.setToRecipients(["2x2isfor.gmail.com"])
+          compseVC.setSubject("메시지제목")
+          compseVC.setMessageBody("메시지컨텐츠", isHTML: false)
+          self.present(compseVC, animated: true, completion: nil)
+        }
+        else {
+          self.showSendMailErrorAlert()
+        }
+      case .share:
+        Util.sharedInstance.showShareActivity(objectsToShare: [Constants.appDownloadURL] as AnyObject)
+      }
+    }
+  }
+  func showSendMailErrorAlert() {
+    let sendMailErrorAlert = UIAlertController(title: "메일을 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+    let confirmAction = UIAlertAction(title: "확인", style: .default) {
+      (action) in
+      print("확인")
+    }
+    sendMailErrorAlert.addAction(confirmAction)
+    self.present(sendMailErrorAlert, animated: true, completion: nil)
   }
 }
 
@@ -134,5 +186,11 @@ extension SettingViewController: UITableViewDataSource {
     case .app: return AppType.allCases.count
     case .other: return OtherType.allCases.count
     }
+  }
+}
+
+extension SettingViewController: MFMailComposeViewControllerDelegate {
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    controller.dismiss(animated: true)
   }
 }
