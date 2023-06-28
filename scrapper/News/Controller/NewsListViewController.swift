@@ -14,6 +14,7 @@ import GoogleMobileAds
 
 class NewsListViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
+  let refreshControl = UIRefreshControl()
   var newsList: [News] = []
   var searchedNews: [News] = []
   var dataList: [News] = []
@@ -41,7 +42,9 @@ class NewsListViewController: UIViewController {
   @IBOutlet weak var bannerView: GADBannerView!
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.refreshControl = refreshControl
     
+    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     if UserDefaultManager.getNewsOrder() == "date" {
       searchSortBarTitle = "Latest order"
       searchSort = "date"
@@ -70,15 +73,18 @@ class NewsListViewController: UIViewController {
     dateFormatter.timeZone = TimeZone(abbreviation: "UTC") // 네이버 포멧에서 gmt + 9 값으로 주기 때문에 로컬로 변경 필요
     
     
-    requestNaverNewsList(keyword: keywordRealm.keyword, sort: searchSort, start: 1)
+    requestNaverNewsList(keyword: keywordRealm.keyword, start: 1)
     
     bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
   }
   
-  func requestNaverNewsList(keyword: String, sort: String, start: Int) {
-    NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: sort, start: start) { (result) in
+  func requestNaverNewsList(keyword: String, start: Int) {
+    if start == 1 {
+      newsList.removeAll()
+    }
+    NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword, sort: searchSort, start: start) { (result) in
       guard let naverNews = result as? NaverNews else {
         return
       }
@@ -99,6 +105,7 @@ class NewsListViewController: UIViewController {
         
       }
       self.newsList.append(contentsOf: filteredNews)
+      self.tableView.refreshControl?.endRefreshing()
       self.tableView.reloadData()
     }
   }
@@ -115,6 +122,9 @@ class NewsListViewController: UIViewController {
     }
     return resultNews
   }
+  @objc func refresh() {
+    requestNaverNewsList(keyword: keywordRealm.keyword, start: 1)
+  }
   
   @objc func rightBarButtonDidClick() {
     let actionSheet = UIAlertController(title: NSLocalizedString("You can choose the order", comment: ""), message: nil, preferredStyle: .actionSheet)
@@ -125,7 +135,7 @@ class NewsListViewController: UIViewController {
       UserDefaultManager.setNewsOrder(order: "date")
       
       self.newsList.removeAll()
-      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, sort: self.searchSort, start: 1)
+      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, start: 1)
       self.tableView.reloadData()
     }))
     actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Related order", comment: ""), style: .default, handler: { result in
@@ -135,7 +145,7 @@ class NewsListViewController: UIViewController {
       UserDefaultManager.setNewsOrder(order: "sim")
       
       self.newsList.removeAll()
-      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, sort: self.searchSort, start: 1)
+      self.requestNaverNewsList(keyword: self.keywordRealm.keyword, start: 1)
       self.tableView.reloadData()
     }))
     actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
@@ -233,7 +243,7 @@ extension NewsListViewController: UITableViewDataSource {
     
     // 뉴스 페이징 처리
     if row == newsList.count-1 {
-      requestNaverNewsList(keyword: keywordRealm.keyword, sort: self.searchSort, start: row + 2)
+      requestNaverNewsList(keyword: keywordRealm.keyword, start: row + 2)
     }
     
     // 검색한 데이터를 가져올지 아닐지 처리
