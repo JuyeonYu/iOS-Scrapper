@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD" initialMenu="S2v-Ab-mnZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="67s-io-dDD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -139,14 +139,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KY5-CN-mgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3563.7681159420295" y="501.5625"/>
-        </scene>
-        <!--Root-->
-        <scene sceneID="ubD-bW-X99">
-            <objects>
-                <menu isSystemItem="YES" title="Root" identifier="com.apple.menu.root" id="S2v-Ab-mnZ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j5d-gD-WP2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4137" y="269"/>
         </scene>
         <!--category-->
         <scene sceneID="jkH-1I-EF6">
@@ -313,6 +305,7 @@
                     <connections>
                         <segue destination="RFI-TM-lZk" kind="relationship" relationship="viewControllers" id="ome-5o-u0U"/>
                         <segue destination="ZVn-kA-M2k" kind="relationship" relationship="viewControllers" id="2oo-m5-c2b"/>
+                        <segue destination="k7k-B3-uYh" kind="relationship" relationship="viewControllers" id="JcV-8L-jVT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gI-Lf-mSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -357,14 +350,85 @@
             </objects>
             <point key="canvasLocation" x="2795.6521739130435" y="501.5625"/>
         </scene>
+        <!--설정-->
+        <scene sceneID="Eff-CK-fk3">
+            <objects>
+                <viewController id="a9E-nj-dhI" customClass="SettingViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="10l-ZM-Ft7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9Ms-Fh-tFZ">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0BZ-Lu-YzP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0BZ-Lu-YzP" firstAttribute="trailing" secondItem="9Ms-Fh-tFZ" secondAttribute="trailing" id="6Ye-a8-enI"/>
+                            <constraint firstItem="9Ms-Fh-tFZ" firstAttribute="top" secondItem="0BZ-Lu-YzP" secondAttribute="top" id="Orp-A5-Xlm"/>
+                            <constraint firstItem="9Ms-Fh-tFZ" firstAttribute="leading" secondItem="0BZ-Lu-YzP" secondAttribute="leading" id="iJM-JW-Vhr"/>
+                            <constraint firstItem="0BZ-Lu-YzP" firstAttribute="bottom" secondItem="9Ms-Fh-tFZ" secondAttribute="bottom" id="kKq-Gp-2bT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="설정" largeTitleDisplayMode="always" id="bEC-Ho-dGc">
+                        <barButtonItem key="rightBarButtonItem" id="IGH-fN-5Z4">
+                            <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical-single">
+                                <hierarchicalColors>
+                                    <color systemColor="systemYellowColor"/>
+                                    <color systemColor="secondaryLabelColor"/>
+                                    <color systemColor="tertiaryLabelColor"/>
+                                </hierarchicalColors>
+                            </imageReference>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="9Ms-Fh-tFZ" id="BE7-lr-dDX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zD0-Lq-xUG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3727.5362318840585" y="1201.3392857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Y99-BG-FZD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k7k-B3-uYh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="gear" catalog="system" id="Utd-MV-W5a"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lgp-Hy-WAe">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="a9E-nj-dhI" kind="relationship" relationship="rootViewController" id="SFQ-F7-wUP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qv-gh-cFJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2817.3913043478265" y="1201.3392857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bookmark.fill" catalog="system" width="110" height="128"/>
+        <image name="crown.fill" catalog="system" width="128" height="92"/>
         <image name="folder.fill" catalog="system" width="128" height="96"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -221,7 +221,7 @@ extension NewsListViewController: UITableViewDelegate {
     })
     // 4
     if !isBookmarked {
-      bookMarkAction.backgroundColor = UIColor.blue
+      bookMarkAction.backgroundColor = UIColor.systemBlue
     }
     
     return UISwipeActionsConfiguration(actions:[bookMarkAction, shareAction])
