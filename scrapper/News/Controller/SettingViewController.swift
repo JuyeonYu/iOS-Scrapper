@@ -135,7 +135,7 @@ extension SettingViewController: UITableViewDataSource {
         } else {
           configuration.secondaryTextProperties.color = .systemRed
         }
-        configuration.image = UIImage(systemName: "rectangle.3.group")
+        configuration.image = UIImage(systemName: "rectangle.3.group")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .keyword:
         let keywordCount = realm.objects(KeywordRealm.self).count
         configuration.text = "키워드"
@@ -148,28 +148,28 @@ extension SettingViewController: UITableViewDataSource {
         } else {
           configuration.secondaryTextProperties.color = .systemRed
         }
-        configuration.image = UIImage(systemName: "newspaper")
+        configuration.image = UIImage(systemName: "newspaper")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .exceptPress:
         let exceptpressCount = self.realm.objects(exceptNews.self).count
         configuration.text = "제외언론사"
         configuration.secondaryText = "\(exceptpressCount)"
-        configuration.image = UIImage(systemName: "selection.pin.in.out")
+        configuration.image = UIImage(systemName: "selection.pin.in.out")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return UITableViewCell() }
       switch otherType {
       case .policy:
         configuration.text = "개인정보 처리방침"
-        configuration.image = UIImage(systemName: "doc.viewfinder")
+        configuration.image = UIImage(systemName: "doc.viewfinder")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .terms:
         configuration.text = "이용약관"
-        configuration.image = UIImage(systemName: "doc.append")
+        configuration.image = UIImage(systemName: "doc.append")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .report:
         configuration.text = "문의하기"
-        configuration.image = UIImage(systemName: "exclamationmark.bubble")
+        configuration.image = UIImage(systemName: "exclamationmark.bubble")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .share:
         configuration.text = "공유"
-        configuration.image = UIImage(systemName: "square.and.arrow.up")
+        configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       }
       cell.accessoryType = .disclosureIndicator
     }
