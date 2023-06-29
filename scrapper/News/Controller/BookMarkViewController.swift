@@ -196,6 +196,7 @@ extension BookMarkViewController: UITableViewDataSource {
         cell.publishTime.textColor = UIColor.label
       }
     }
+    cell.unread.isHidden = true
     return cell
   }
 }

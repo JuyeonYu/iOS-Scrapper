@@ -47,19 +47,11 @@
                                 <action selector="onEdit:" destination="1T2-33-RiP" id="DHk-P2-aVq"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" image="plus" catalog="system" id="W9u-PM-fyM">
-                                <connections>
-                                    <action selector="onPlus:" destination="1T2-33-RiP" id="SSz-IX-pPc"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="minus" catalog="system" id="rvq-nD-7fD">
-                                <connections>
-                                    <action selector="onMinus:" destination="1T2-33-RiP" id="M3j-wy-Fh7"/>
-                                    <segue destination="iOp-yl-EpV" kind="show" id="lW4-t2-Skg"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="W9u-PM-fyM">
+                            <connections>
+                                <action selector="onPlus:" destination="1T2-33-RiP" id="SSz-IX-pPc"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bannerView" destination="Yml-dB-Skm" id="3RR-lj-2ds"/>
@@ -499,7 +491,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7Wt-JW-9Jy">
-                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
@@ -636,7 +628,15 @@
         <scene sceneID="RXl-q0-Qw1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RFI-TM-lZk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="folder.fill" catalog="system" id="HO6-DD-C4h"/>
+                    <tabBarItem key="tabBarItem" title="" id="HO6-DD-C4h">
+                        <imageReference key="image" image="folder.fill" catalog="system" renderingMode="hierarchical">
+                            <hierarchicalColors>
+                                <color name="Theme"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nsq-Vt-89n">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
@@ -655,7 +655,15 @@
         <scene sceneID="Kol-UL-ceY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZVn-kA-M2k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="bookmark.fill" catalog="system" id="eEW-8h-D23"/>
+                    <tabBarItem key="tabBarItem" title="" id="eEW-8h-D23">
+                        <imageReference key="image" image="bookmark.fill" catalog="system" renderingMode="hierarchical">
+                            <hierarchicalColors>
+                                <color name="Theme"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s9w-kN-ZAd">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
@@ -748,7 +756,15 @@
         <scene sceneID="Y99-BG-FZD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k7k-B3-uYh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="gear.circle.fill" catalog="system" id="Utd-MV-W5a"/>
+                    <tabBarItem key="tabBarItem" title="" id="Utd-MV-W5a">
+                        <imageReference key="image" image="gear.circle.fill" catalog="system" renderingMode="hierarchical">
+                            <hierarchicalColors>
+                                <color name="Theme"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lgp-Hy-WAe">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
@@ -767,7 +783,15 @@
         <scene sceneID="DbK-MN-Dqp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JvO-Qr-cLM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="bolt.fill" catalog="system" id="zjm-LY-taz"/>
+                    <tabBarItem key="tabBarItem" title="" id="zjm-LY-taz">
+                        <imageReference key="image" image="bolt.fill" catalog="system" renderingMode="hierarchical">
+                            <hierarchicalColors>
+                                <color name="Theme"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="R3G-mg-k54">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
@@ -783,6 +807,7 @@
             <point key="canvasLocation" x="2788.4057971014495" y="1143.75"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="Theme"/>
     <resources>
         <image name="bolt.fill" catalog="system" width="100" height="128"/>
         <image name="bookmark.fill" catalog="system" width="110" height="128"/>
@@ -790,12 +815,14 @@
         <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="folder.fill" catalog="system" width="128" height="96"/>
         <image name="gear.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="minus" catalog="system" width="128" height="26"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="rectangle.3.group.fill" catalog="system" width="128" height="81"/>
         <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="video.slash.fill" catalog="system" width="128" height="103"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="Theme">
+            <color red="0.7177455425" green="0.27021461730000002" blue="0.24794003370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -115,7 +115,7 @@ extension TodayViewController: UITableViewDataSource {
     content.text = issue.title
     content.image = UIImage(systemName: "\(indexPath.row + 1).circle.fill")?
       .withRenderingMode(.alwaysOriginal)
-      .withTintColor(indexPath.row == 0 ? .systemRed : .systemGray)
+      .withTintColor(indexPath.row == 0 ? UIColor(named: "Theme")! : .systemGray)
     cell.contentConfiguration = content
     return cell
   }

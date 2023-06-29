@@ -11,26 +11,36 @@ import AVFoundation
 
 class PayViewController: UIViewController {
   @IBAction func onYearlyPay(_ sender: Any) {
-    if #available(iOS 15.0, *) {
-      yearlyPay.setTitle("30,000원 / 연간", for: .normal)
-      monthlyPay.setTitle("3,300원 / 월간", for: .normal)
-      yearlyPay.configuration = .tinted()
-      monthlyPay.configuration = .gray()
-//      monthlyPay.subtitleLabel?.text = "월간 구독"
-    } else {
-      // Fallback on earlier versions
-    }
+    yearlyPay.setTitle("30,000원 / 연", for: .normal)
+    monthlyPay.setTitle("3,300원 / 월", for: .normal)
+    
+    monthlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
+    yearlyPay.layer.borderColor = UIColor.gray.cgColor
+//    if #available(iOS 15.0, *) {
+//
+//      yearlyPay.configuration = .tinted()
+//      monthlyPay.configuration = .gray()
+//    } else {
+//      yearlyPay.backgroundColor = UIColor(named: "Theme")
+//      monthlyPay.backgroundColor = UIColor.gray
+//    }
     
   }
   @IBAction func onMonthlyPay(_ sender: Any) {
-    if #available(iOS 15.0, *) {
-      yearlyPay.setTitle("30,000원 / 연간", for: .normal)
-      monthlyPay.setTitle("3,300원 / 월간", for: .normal)
-      yearlyPay.configuration = .gray()
-      monthlyPay.configuration = .tinted()
-    } else {
-      // Fallback on earlier versions
-    }
+    
+    yearlyPay.setTitle("30,000원 / 연", for: .normal)
+    monthlyPay.setTitle("3,300원 / 월", for: .normal)
+    
+//    monthlyPay.layer.borderColor = UIColor.gray.cgColor
+//    yearlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
+//    if #available(iOS 15.0, *) {
+//
+//      yearlyPay.configuration = .gray()
+//      monthlyPay.configuration = .tinted()
+//    } else {
+//      yearlyPay.backgroundColor = UIColor.gray
+//      monthlyPay.backgroundColor = UIColor(named: "Theme")
+//    }
     
   }
   @IBOutlet weak var yearlyPay: UIButton!
@@ -46,6 +56,12 @@ class PayViewController: UIViewController {
     super.viewDidLoad()
     pay.layer.masksToBounds = true
     pay.layer.cornerRadius = 25
+    
+    [monthlyPay, yearlyPay].forEach {
+      $0?.layer.borderWidth = 1
+      $0?.layer.cornerRadius = 20
+      $0?.backgroundColor = .clear
+    }
     
     guard let path = Bundle.main.path(forResource: "paywall\(Int.random(in: 1...3))", ofType:"mp4") else {
       debugPrint("video.m4v not found")
