@@ -11,37 +11,18 @@ import AVFoundation
 
 class PayViewController: UIViewController {
   @IBAction func onYearlyPay(_ sender: Any) {
-    yearlyPay.setTitle("30,000원 / 연", for: .normal)
-    monthlyPay.setTitle("3,300원 / 월", for: .normal)
+    monthlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+    monthlyPay.layer.borderColor = UIColor.lightGray.cgColor
     
-    monthlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
-    yearlyPay.layer.borderColor = UIColor.gray.cgColor
-//    if #available(iOS 15.0, *) {
-//
-//      yearlyPay.configuration = .tinted()
-//      monthlyPay.configuration = .gray()
-//    } else {
-//      yearlyPay.backgroundColor = UIColor(named: "Theme")
-//      monthlyPay.backgroundColor = UIColor.gray
-//    }
-    
+    yearlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
+    yearlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
   }
   @IBAction func onMonthlyPay(_ sender: Any) {
+    monthlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
+    monthlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
     
-    yearlyPay.setTitle("30,000원 / 연", for: .normal)
-    monthlyPay.setTitle("3,300원 / 월", for: .normal)
-    
-//    monthlyPay.layer.borderColor = UIColor.gray.cgColor
-//    yearlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
-//    if #available(iOS 15.0, *) {
-//
-//      yearlyPay.configuration = .gray()
-//      monthlyPay.configuration = .tinted()
-//    } else {
-//      yearlyPay.backgroundColor = UIColor.gray
-//      monthlyPay.backgroundColor = UIColor(named: "Theme")
-//    }
-    
+    yearlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+    yearlyPay.layer.borderColor = UIColor.lightGray.cgColor
   }
   @IBOutlet weak var yearlyPay: UIButton!
   @IBOutlet weak var monthlyPay: UIButton!
@@ -60,24 +41,32 @@ class PayViewController: UIViewController {
     [monthlyPay, yearlyPay].forEach {
       $0?.layer.borderWidth = 1
       $0?.layer.cornerRadius = 20
-      $0?.backgroundColor = .clear
     }
+    monthlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
+    monthlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
+    
+    yearlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+    yearlyPay.layer.borderColor = UIColor.lightGray.cgColor
     
     guard let path = Bundle.main.path(forResource: "paywall\(Int.random(in: 1...3))", ofType:"mp4") else {
       debugPrint("video.m4v not found")
       return
     }
     playerAV = AVPlayer(url: URL(fileURLWithPath: path))
-    playerAV.play()
     
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     let playerLayerAV = AVPlayerLayer(player: playerAV)
-    playerLayerAV.frame = playerParent.bounds
+    
     playerParent.layer.addSublayer(playerLayerAV)
     playerLayerAV.videoGravity = .resizeAspectFill
     playerLayerAV.isOpaque = true
 
     playerLayerAV.opacity = 1
     loopVideo(videoPlayer: playerAV)
+    playerLayerAV.frame = view.bounds
   }
   
   func loopVideo(videoPlayer: AVPlayer) {
@@ -90,6 +79,7 @@ class PayViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    playerAV.play()
     let animationDuration = 1.5 // 애니메이션 지속 시간 (초)
     let scaleFactor: CGFloat = 1.05 // 크기 변화 비율
     let damping: CGFloat = 0.2 // 감쇠 계수

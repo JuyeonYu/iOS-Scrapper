@@ -26,6 +26,11 @@ class Util {
     let newsSuite = [news.title.htmlStripped + "\n" + news.originalLink + "\n" + Constants.appDownloadURL] as AnyObject
     showShareActivity(objectsToShare: newsSuite)
   }
+  func shareNewsList(_ news: [Item]) {    
+    var newsSuite = (news.map { $0.title.htmlStripped + "\n" + $0.originallink  + "\n"})
+    let objectsToShare = newsSuite as AnyObject
+    showShareActivity(objectsToShare: objectsToShare)
+  }
   func showShareActivity(objectsToShare: AnyObject) {
     guard let topViewController = UIViewController.topViewController() else { return }
     let activityVC = UIActivityViewController(activityItems: objectsToShare as! [Any], applicationActivities: nil)

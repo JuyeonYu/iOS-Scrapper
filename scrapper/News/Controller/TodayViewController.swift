@@ -26,6 +26,34 @@ class TodayViewController: UIViewController {
     refreshControl.addTarget(self, action: #selector(fetchRSS), for: .valueChanged)
   }
   
+  @IBAction func onShare(_ sender: Any) {
+    guard let todayKeywords = issueKeywords.first else {
+      Util.sharedInstance.showToast(controller: self, message: "오늘의 키워드가 없습니다.")
+      return
+    }
+    
+    var newsList: [Item] = []
+    let group = DispatchGroup()
+    for (index, keyword) in todayKeywords.enumerated() {
+      group.enter()
+      
+      NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword.title ?? "", sort: "sim", start: 1) { result in
+        defer {
+          group.leave()
+        }
+        
+        guard let naverNews = result as? NaverNews,
+              let news = naverNews.items.first else {
+          return
+        }
+        newsList.append(news)
+      }
+    }
+
+    group.notify(queue: .main) {
+      Util.sharedInstance.shareNewsList(newsList)
+    }
+  }
   private func groupRSSByDay(rss: [RSSFeedItem]) -> [[RSSFeedItem]] {
     var result: [[RSSFeedItem]] = []
     var currentGroup: [RSSFeedItem] = []
