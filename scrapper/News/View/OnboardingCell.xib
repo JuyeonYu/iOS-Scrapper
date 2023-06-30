@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OnboardingCell" id="gTV-IL-0wX" customClass="OnboardingCell" customModule="NewsScrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="413" height="413"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="413" height="413"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtA-J5-GTd">
+                        <rect key="frame" x="185.66666666666666" y="41" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ei0-lM-cBp">
+                        <rect key="frame" x="86.666666666666686" y="87.000000000000014" width="240" height="239.66666666666669"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Ei0-lM-cBp" secondAttribute="height" id="pam-AE-hDN"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67O-oe-HHV">
+                        <rect key="frame" x="185.66666666666666" y="351" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Ei0-lM-cBp" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="4eV-Fz-OtK"/>
+                <constraint firstItem="vtA-J5-GTd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="F3T-bj-Bkr"/>
+                <constraint firstItem="Ei0-lM-cBp" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="IBH-VW-8th"/>
+                <constraint firstItem="Ei0-lM-cBp" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.581114" id="N8x-CE-Esc"/>
+                <constraint firstItem="vtA-J5-GTd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gkG-vL-jKW"/>
+                <constraint firstItem="67O-oe-HHV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="rLs-g1-cdM"/>
+                <constraint firstItem="67O-oe-HHV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ra4-88-2VM"/>
+            </constraints>
+            <size key="customSize" width="413" height="413"/>
+            <point key="canvasLocation" x="219.08396946564883" y="148.2394366197183"/>
+        </collectionViewCell>
+    </objects>
+</document>
