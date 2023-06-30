@@ -131,7 +131,7 @@ extension BookMarkViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let deleteAction = UIContextualAction(style: .destructive,
+    let deleteAction = UIContextualAction(style: .normal,
                                           title:  "삭제",
                                           handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
       let news = self.realm.objects(BookMarkNewsRealm.self)[indexPath.row]
@@ -144,9 +144,10 @@ extension BookMarkViewController: UITableViewDelegate {
       tableView.reloadData()
       success(true)
     })
+    deleteAction.backgroundColor = UIColor(named: "Theme")
     
     let shareAction = UIContextualAction(style: .normal,
-                                         title:  NSLocalizedString("share", comment: ""),
+                                         title:  "공유",
                                          handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
       let row = indexPath.row
       let newsTitle = self.realm.objects(BookMarkNewsRealm.self)[row].title
