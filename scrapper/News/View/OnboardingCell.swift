@@ -12,7 +12,7 @@ class OnboardingCell: UICollectionViewCell {
   @IBOutlet weak var head: UILabel!
   
   @IBOutlet weak var foot: UILabel!
-//  @IBOutlet weak var thumbnail: UIImageView!
+  @IBOutlet weak var thumbnail: UIImageView!
   override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,7 +20,7 @@ class OnboardingCell: UICollectionViewCell {
   
   func configure(item: OnboardingItem) {
     head.text = item.head
-//    thumbnail.image = UIImage(systemName: item.imageName)
+    thumbnail.image = UIImage(systemName: item.imageName)
     foot.text = item.foot
   }
 

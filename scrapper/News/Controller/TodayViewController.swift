@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import SwiftSoup
 import FeedKit
+import GoogleMobileAds
 
 class TodayViewController: UIViewController {
   let googleTrendsURL = URL(string: "https://trends.google.com/trends/trendingsearches/daily/rss?geo=KR")!
   let feedURL = URL(string: "https://trends.google.co.kr/trends/trendingsearches/daily/rss?geo=KR")!
   let zumURL = URL(string: "https://zum.com")!
   var issueKeywords: [[RSSFeedItem]] = []
+  @IBOutlet weak var bannerView: GADBannerView!
   @IBOutlet weak var tableView: UITableView!
   let refreshControl = UIRefreshControl()
   override func viewDidLoad() {
@@ -24,6 +25,10 @@ class TodayViewController: UIViewController {
     tableView.delegate = self
     tableView.refreshControl = refreshControl
     refreshControl.addTarget(self, action: #selector(fetchRSS), for: .valueChanged)
+    
+    bannerView.adUnitID = Constants.googleADModBannerID
+    bannerView.rootViewController = self
+    bannerView.load(GADRequest())
   }
   
   @IBAction func onShare(_ sender: Any) {

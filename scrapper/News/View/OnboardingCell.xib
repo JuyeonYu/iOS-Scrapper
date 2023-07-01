@@ -12,52 +12,54 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OnboardingCell" id="gTV-IL-0wX" customClass="OnboardingCell" customModule="NewsScrap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="413" height="413"/>
+            <rect key="frame" x="0.0" y="0.0" width="413" height="847"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="413" height="413"/>
+                <rect key="frame" x="0.0" y="0.0" width="413" height="847"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtA-J5-GTd">
-                        <rect key="frame" x="185.66666666666666" y="41" width="42" height="21"/>
+                        <rect key="frame" x="185.66666666666666" y="95.333333333333329" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67O-oe-HHV">
-                        <rect key="frame" x="185.66666666666666" y="351" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="184.33333333333334" y="731" width="44.333333333333343" height="20.333333333333371"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-8r-avH">
-                        <rect key="frame" x="103.33333333333333" y="103.33333333333333" width="206.33333333333343" height="206.33333333333343"/>
-                        <color key="backgroundColor" name="Theme"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-8r-avH">
+                        <rect key="frame" x="131.66666666666666" y="349.66666666666669" width="149.99999999999997" height="148.66666666666663"/>
+                        <color key="tintColor" name="Theme"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="zw2-8r-avH" secondAttribute="height" id="0Gw-7g-2vD"/>
+                            <constraint firstAttribute="width" constant="150" id="hpe-jT-xoJ"/>
+                            <constraint firstAttribute="width" secondItem="zw2-8r-avH" secondAttribute="height" id="iuH-CF-lFx"/>
                         </constraints>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="zw2-8r-avH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AWV-aV-J4z"/>
+                <constraint firstItem="zw2-8r-avH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="AwJ-Ff-Fiz"/>
                 <constraint firstItem="vtA-J5-GTd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="F3T-bj-Bkr"/>
-                <constraint firstItem="zw2-8r-avH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Y6Z-nb-1Zo"/>
-                <constraint firstItem="zw2-8r-avH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="dPQ-w1-9Oh"/>
-                <constraint firstItem="zw2-8r-avH" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="dVU-jf-t5y"/>
                 <constraint firstItem="vtA-J5-GTd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gkG-vL-jKW"/>
                 <constraint firstItem="67O-oe-HHV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="rLs-g1-cdM"/>
                 <constraint firstItem="67O-oe-HHV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ra4-88-2VM"/>
             </constraints>
-            <size key="customSize" width="413" height="413"/>
+            <size key="customSize" width="413" height="847"/>
             <connections>
                 <outlet property="foot" destination="67O-oe-HHV" id="WIJ-63-R9E"/>
                 <outlet property="head" destination="vtA-J5-GTd" id="yxL-QE-QYQ"/>
+                <outlet property="thumbnail" destination="zw2-8r-avH" id="K54-2S-zOr"/>
             </connections>
-            <point key="canvasLocation" x="219.08396946564883" y="147.53521126760563"/>
+            <point key="canvasLocation" x="219.08396946564883" y="300.35211267605638"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="circle" catalog="system" width="128" height="123"/>
         <namedColor name="Theme">
             <color red="0.71799999475479126" green="0.27000001072883606" blue="0.24799999594688416" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

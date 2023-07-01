@@ -563,20 +563,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gr-xU-wHa">
                                 <rect key="frame" x="0.0" y="47" width="390" height="763"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ed2-nC-fqL">
-                                        <rect key="frame" x="23.666666666666657" y="698" width="342.66666666666674" height="35"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="다음"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ed2-nC-fqL">
+                                        <rect key="frame" x="23.666666666666657" y="690.33333333333337" width="342.66666666666674" height="50"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Gtf-8a-XES"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="다음"/>
                                         <connections>
                                             <action selector="onNext:" destination="uby-Zb-skq" eventType="touchUpInside" id="qrc-wQ-kOJ"/>
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="LYJ-GN-xQ4">
                                         <rect key="frame" x="137" y="32" width="116" height="26"/>
-                                        <color key="backgroundColor" name="Theme"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="pageIndicatorTintColor" systemColor="systemGrayColor"/>
+                                        <color key="currentPageIndicatorTintColor" name="Theme"/>
                                     </pageControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H4K-Yt-CbK">
-                                        <rect key="frame" x="0.0" y="58" width="390" height="640"/>
+                                        <rect key="frame" x="0.0" y="58" width="390" height="632.33333333333337"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CGD-su-EQZ">
                                             <size key="itemSize" width="0.0" height="0.0"/>
@@ -751,16 +757,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Afn-ne-njT">
-                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                                <rect key="frame" x="0.0" y="91" width="390" height="620"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJy-VL-rk1" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="711" width="390" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Shm-dw-30x"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cb6-Uw-o5e"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cb6-Uw-o5e" firstAttribute="bottom" secondItem="Afn-ne-njT" secondAttribute="bottom" id="KTC-Lt-sjd"/>
+                            <constraint firstItem="oJy-VL-rk1" firstAttribute="top" secondItem="Afn-ne-njT" secondAttribute="bottom" id="Jr0-UX-ga9"/>
+                            <constraint firstItem="cb6-Uw-o5e" firstAttribute="bottom" secondItem="oJy-VL-rk1" secondAttribute="bottom" id="Q0r-8u-T9V"/>
                             <constraint firstItem="cb6-Uw-o5e" firstAttribute="trailing" secondItem="Afn-ne-njT" secondAttribute="trailing" id="TBA-ur-oIh"/>
+                            <constraint firstItem="oJy-VL-rk1" firstAttribute="leading" secondItem="cb6-Uw-o5e" secondAttribute="leading" id="cgF-Zg-zkD"/>
                             <constraint firstItem="Afn-ne-njT" firstAttribute="top" secondItem="cb6-Uw-o5e" secondAttribute="top" id="czD-3s-Gf3"/>
                             <constraint firstItem="Afn-ne-njT" firstAttribute="leading" secondItem="cb6-Uw-o5e" secondAttribute="leading" id="jMs-Bn-8bE"/>
+                            <constraint firstItem="cb6-Uw-o5e" firstAttribute="trailing" secondItem="oJy-VL-rk1" secondAttribute="trailing" id="vBM-fh-86c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="오늘의 키워드" id="Yvr-Aa-lHW">
@@ -778,12 +794,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bannerView" destination="oJy-VL-rk1" id="Pk9-cA-A6G"/>
                         <outlet property="tableView" destination="Afn-ne-njT" id="HeQ-Ct-tyw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3U-30-mNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3698.5507246376815" y="1143.75"/>
+            <point key="canvasLocation" x="3698.4615384615381" y="1142.4170616113743"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Y99-BG-FZD">
@@ -864,6 +881,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
