@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,32 +24,42 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ei0-lM-cBp">
-                        <rect key="frame" x="86.666666666666686" y="87.000000000000014" width="240" height="239.66666666666669"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Ei0-lM-cBp" secondAttribute="height" id="pam-AE-hDN"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67O-oe-HHV">
                         <rect key="frame" x="185.66666666666666" y="351" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-8r-avH">
+                        <rect key="frame" x="103.33333333333333" y="103.33333333333333" width="206.33333333333343" height="206.33333333333343"/>
+                        <color key="backgroundColor" name="Theme"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="zw2-8r-avH" secondAttribute="height" id="0Gw-7g-2vD"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="Ei0-lM-cBp" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="4eV-Fz-OtK"/>
                 <constraint firstItem="vtA-J5-GTd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="F3T-bj-Bkr"/>
-                <constraint firstItem="Ei0-lM-cBp" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="IBH-VW-8th"/>
-                <constraint firstItem="Ei0-lM-cBp" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.581114" id="N8x-CE-Esc"/>
+                <constraint firstItem="zw2-8r-avH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Y6Z-nb-1Zo"/>
+                <constraint firstItem="zw2-8r-avH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="dPQ-w1-9Oh"/>
+                <constraint firstItem="zw2-8r-avH" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="dVU-jf-t5y"/>
                 <constraint firstItem="vtA-J5-GTd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gkG-vL-jKW"/>
                 <constraint firstItem="67O-oe-HHV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="rLs-g1-cdM"/>
                 <constraint firstItem="67O-oe-HHV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ra4-88-2VM"/>
             </constraints>
             <size key="customSize" width="413" height="413"/>
-            <point key="canvasLocation" x="219.08396946564883" y="148.2394366197183"/>
+            <connections>
+                <outlet property="foot" destination="67O-oe-HHV" id="WIJ-63-R9E"/>
+                <outlet property="head" destination="vtA-J5-GTd" id="yxL-QE-QYQ"/>
+            </connections>
+            <point key="canvasLocation" x="219.08396946564883" y="147.53521126760563"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <namedColor name="Theme">
+            <color red="0.71799999475479126" green="0.27000001072883606" blue="0.24799999594688416" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
 </document>

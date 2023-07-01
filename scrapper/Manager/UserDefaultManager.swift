@@ -25,4 +25,20 @@ struct UserDefaultManager {
     return UserDefaults.standard.bool(forKey: Constants.UserDefault.exclusivePress)
   }
   
+  static func setIsUser() {
+    UserDefaults.standard.set(true, forKey: Constants.UserDefault.isUser)
+  }
+  
+  static func getIsUser() -> Bool {
+    return UserDefaults.standard.bool(forKey: Constants.UserDefault.isUser)
+  }
+  
+  static func setSelectedBottomTabBarIndex(_ index: Int) {
+    UserDefaults.standard.set(index, forKey: Constants.UserDefault.tabBarIndex)
+  }
+  
+  static func getSelectedBottomTabBarIndex() -> Int {
+    return UserDefaults.standard.integer(forKey: Constants.UserDefault.tabBarIndex)
+  }
+  
 }

@@ -1,5 +1,5 @@
 //
-//  OnBoardingViewController.swift
+//  OnboardingViewController.swift
 //  scrapper
 //
 //  Created by  유 주연 on 2023/07/01.
@@ -8,7 +8,10 @@
 
 import UIKit
 
-class OnBoardingViewController: UIViewController {
+class OnboardingViewController: UIViewController {
+  let onboardItems: [OnboardingItem] = [.init(head: "첫번째 헤드", imageName: "doc.fill", foot: "첫번째 바텀"),
+                                        .init(head: "두번째 헤드", imageName: "favorite.fill", foot: "두번째 바텀"),
+                                        .init(head: "세번째 헤드", imageName: "volt.fill", foot: "세번째 바텀")]
   @IBOutlet weak var nextBtn: UIButton!
   
   
@@ -27,7 +30,10 @@ class OnBoardingViewController: UIViewController {
       }
   @IBAction func onNext(_ sender: Any) {
     if currentPage == 2 {
-        print("go to main")
+      let main = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainViewController")
+      main.modalTransitionStyle = .crossDissolve
+      main.modalPresentationStyle = .overFullScreen
+      self.present(main, animated: true)
     } else {
         currentPage += 1
         let indexPath = IndexPath(item: currentPage, section: 0)
@@ -45,48 +51,31 @@ class OnBoardingViewController: UIViewController {
     collectionView.delegate = self
     collectionView.isPagingEnabled = true
     collectionView.register(UINib(nibName: "OnboardingCell", bundle: nil), forCellWithReuseIdentifier: "OnboardingCell")
-    
-        // Do any additional setup after loading the view.
+    collectionView.showsHorizontalScrollIndicator = false
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
-extension OnBoardingViewController: UICollectionViewDelegate {
+extension OnboardingViewController: UICollectionViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let width = scrollView.frame.width
     currentPage = Int(scrollView.contentOffset.x / width)
   }
 }
 
-extension OnBoardingViewController: UICollectionViewDataSource {
+extension OnboardingViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    3
+    onboardItems.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OnboardingCell", for: indexPath)
-    if indexPath.row == 0 {
-      
-    } else if indexPath.row == 1 {
-      
-    } else {
-      
-    }
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OnboardingCell", for: indexPath) as! OnboardingCell
+    
+    cell.configure(item: onboardItems[indexPath.row])
+    
     return cell
   }
 }
 
-extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
+extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     .init(width: collectionView.frame.width, height: collectionView.frame.height)
   }

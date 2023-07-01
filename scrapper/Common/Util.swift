@@ -161,3 +161,26 @@ extension Date {
     Calendar.current.dateComponents([.day], from: self).day
   }
 }
+
+extension SceneDelegate {
+    func setRootViewController(_ scene: UIScene){
+        if UserDefaultManager.getIsUser() {
+          setRootViewController(scene, name: "Main",
+                                identifier: "MainViewController")
+        } else {
+          setRootViewController(scene, name: "Main",
+                                identifier: "OnboardingViewController")
+        }
+    }
+    
+    private func setRootViewController(_ scene: UIScene, name: String, identifier: String) {
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            let storyboard = UIStoryboard(name: name, bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+            window.rootViewController = viewController
+            self.window = window
+            window.makeKeyAndVisible()
+        }
+    }
+}

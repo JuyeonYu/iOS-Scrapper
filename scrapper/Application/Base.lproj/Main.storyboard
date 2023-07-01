@@ -8,7 +8,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -553,10 +552,10 @@
             </objects>
             <point key="canvasLocation" x="6166.1538461538457" y="-172.74881516587678"/>
         </scene>
-        <!--On Boarding View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="aza-h5-ieB">
             <objects>
-                <viewController storyboardIdentifier="OnBoardingViewController" id="uby-Zb-skq" customClass="OnBoardingViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="uby-Zb-skq" customClass="OnboardingViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o6Z-bL-DHr">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -579,74 +578,13 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H4K-Yt-CbK">
                                         <rect key="frame" x="0.0" y="58" width="390" height="640"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CGD-su-EQZ">
-                                            <size key="itemSize" width="128" height="128"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CGD-su-EQZ">
+                                            <size key="itemSize" width="0.0" height="0.0"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VYc-3z-Rdd">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="k77-Tj-Hxo">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Evm-F3-jBj">
-                                                            <rect key="frame" x="60.333333333333336" y="53.666666666666657" width="7.6666666666666643" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="Evm-F3-jBj" firstAttribute="centerX" secondItem="k77-Tj-Hxo" secondAttribute="centerX" id="PTT-dk-7nG"/>
-                                                        <constraint firstItem="Evm-F3-jBj" firstAttribute="centerY" secondItem="k77-Tj-Hxo" secondAttribute="centerY" id="yjj-3k-d5A"/>
-                                                    </constraints>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="U5V-VT-Keh">
-                                                <rect key="frame" x="0.0" y="138" width="128" height="127.99999999999997"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WFm-O8-q6b">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="127.99999999999997"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PY1-sd-UKy">
-                                                            <rect key="frame" x="59" y="53.666666666666657" width="10" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="PY1-sd-UKy" firstAttribute="centerY" secondItem="WFm-O8-q6b" secondAttribute="centerY" id="pOT-R9-ash"/>
-                                                        <constraint firstItem="PY1-sd-UKy" firstAttribute="centerX" secondItem="WFm-O8-q6b" secondAttribute="centerX" id="udE-Pn-LaG"/>
-                                                    </constraints>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="y1U-xL-oTG">
-                                                <rect key="frame" x="0.0" y="276" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="86L-mh-fBP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aA-ls-LJT">
-                                                            <rect key="frame" x="59" y="53.666666666666657" width="10" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="6aA-ls-LJT" firstAttribute="centerX" secondItem="86L-mh-fBP" secondAttribute="centerX" id="X6t-MH-Vt1"/>
-                                                        <constraint firstItem="6aA-ls-LJT" firstAttribute="centerY" secondItem="86L-mh-fBP" secondAttribute="centerY" id="iyJ-0Z-QnH"/>
-                                                    </constraints>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -685,10 +623,10 @@
             </objects>
             <point key="canvasLocation" x="790.76923076923072" y="-1209.2417061611375"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main View Controller-->
         <scene sceneID="uJf-Ix-YJU">
             <objects>
-                <tabBarController storyboardIdentifier="mainViewController" id="67s-io-dDD" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainViewController" id="67s-io-dDD" customClass="MainViewController" customModule="NewsScrap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="OlR-Zq-fgU"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eJ3-Yc-Mek">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

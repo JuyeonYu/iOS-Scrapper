@@ -44,9 +44,11 @@
 		D661A9D72A4DC52E00E1EDBA /* paywall2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D661A9D42A4DC52E00E1EDBA /* paywall2.mp4 */; };
 		D661A9D82A4DC52E00E1EDBA /* paywall3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D661A9D52A4DC52E00E1EDBA /* paywall3.mp4 */; };
 		D661A9D92A4DC52E00E1EDBA /* paywall1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D661A9D62A4DC52E00E1EDBA /* paywall1.mp4 */; };
-		D661A9DB2A4F2B6700E1EDBA /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9DA2A4F2B6700E1EDBA /* OnBoardingViewController.swift */; };
+		D661A9DB2A4F2B6700E1EDBA /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9DA2A4F2B6700E1EDBA /* OnboardingViewController.swift */; };
 		D661A9DE2A4F2CF400E1EDBA /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9DC2A4F2CF400E1EDBA /* OnboardingCell.swift */; };
 		D661A9DF2A4F2CF400E1EDBA /* OnboardingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D661A9DD2A4F2CF400E1EDBA /* OnboardingCell.xib */; };
+		D661A9E12A4F345900E1EDBA /* OnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9E02A4F345900E1EDBA /* OnboardingItem.swift */; };
+		D661A9E32A50442000E1EDBA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9E22A50442000E1EDBA /* MainViewController.swift */; };
 		D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */; };
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
@@ -99,9 +101,11 @@
 		D661A9D42A4DC52E00E1EDBA /* paywall2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = paywall2.mp4; sourceTree = "<group>"; };
 		D661A9D52A4DC52E00E1EDBA /* paywall3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = paywall3.mp4; sourceTree = "<group>"; };
 		D661A9D62A4DC52E00E1EDBA /* paywall1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = paywall1.mp4; sourceTree = "<group>"; };
-		D661A9DA2A4F2B6700E1EDBA /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		D661A9DA2A4F2B6700E1EDBA /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		D661A9DC2A4F2CF400E1EDBA /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		D661A9DD2A4F2CF400E1EDBA /* OnboardingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingCell.xib; sourceTree = "<group>"; };
+		D661A9E02A4F345900E1EDBA /* OnboardingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItem.swift; sourceTree = "<group>"; };
+		D661A9E22A50442000E1EDBA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				B5460C2123F28A20002A199E /* KeywordViewController.swift */,
-				D661A9DA2A4F2B6700E1EDBA /* OnBoardingViewController.swift */,
+				D661A9DA2A4F2B6700E1EDBA /* OnboardingViewController.swift */,
 				B5460C3023F2A45B002A199E /* CategortyViewController.swift */,
 				B5460C3223F2A648002A199E /* NewsListViewController.swift */,
 				B565A5BE23F64243001055CF /* BookMarkViewController.swift */,
@@ -166,6 +170,7 @@
 				D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */,
 				D661A9C62A4C910A00E1EDBA /* PayViewController.swift */,
 				D661A9C82A4C915800E1EDBA /* PromotionViewController.swift */,
+				D661A9E22A50442000E1EDBA /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				B565A5BC23F58726001055CF /* NaverNews.swift */,
 				B5460C3423F2A6EC002A199E /* Category.swift */,
 				B57E879123F2EA2B002FC196 /* News.swift */,
+				D661A9E02A4F345900E1EDBA /* OnboardingItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,18 +370,20 @@
 				B520383B23F3F0DC0025B571 /* RestAPIResponse.swift in Sources */,
 				B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */,
 				D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */,
+				D661A9E32A50442000E1EDBA /* MainViewController.swift in Sources */,
 				B565A5BF23F64243001055CF /* BookMarkViewController.swift in Sources */,
 				B57E879223F2EA2B002FC196 /* News.swift in Sources */,
 				B565A5C123F669FA001055CF /* Util.swift in Sources */,
 				D63BEA242A3DE7BB004DD22A /* ExceptPublisherViewController.swift in Sources */,
 				B5460C3823F2B0CA002A199E /* CategoryTableViewCell.swift in Sources */,
 				B5619A88250780A600D89694 /* UserDefaultManager.swift in Sources */,
-				D661A9DB2A4F2B6700E1EDBA /* OnBoardingViewController.swift in Sources */,
+				D661A9DB2A4F2B6700E1EDBA /* OnboardingViewController.swift in Sources */,
 				B5460C3523F2A6EC002A199E /* Category.swift in Sources */,
 				B5486D8D23F23461008A5ABD /* SceneDelegate.swift in Sources */,
 				B5460C2E23F28EB9002A199E /* KeywordTableViewCell.swift in Sources */,
 				D661A9DE2A4F2CF400E1EDBA /* OnboardingCell.swift in Sources */,
 				D63BEA202A3CC52B004DD22A /* KeywordGroupHeader.swift in Sources */,
+				D661A9E12A4F345900E1EDBA /* OnboardingItem.swift in Sources */,
 				D661A9C92A4C915800E1EDBA /* PromotionViewController.swift in Sources */,
 				B5460C3323F2A648002A199E /* NewsListViewController.swift in Sources */,
 			);
