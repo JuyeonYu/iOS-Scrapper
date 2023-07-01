@@ -32,14 +32,22 @@ class TodayViewController: UIViewController {
   }
   
   @IBAction func onShare(_ sender: Any) {
-    guard let todayKeywords = issueKeywords.first else {
-      Util.sharedInstance.showToast(controller: self, message: "오늘의 키워드가 없습니다.")
-      return
+    let alert = UIAlertController(title: "언제 뉴스를 공유할까요?", message: "각 키워드의 최신뉴스 하나씩을 공유합니다.", preferredStyle: .actionSheet)
+    for issueKeyword in issueKeywords {
+      guard let pubDate = issueKeyword.first?.pubDate else { return }
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy년 MM월 dd일"
+      alert.addAction(UIAlertAction(title: formatter.string(from: pubDate), style: .default) { _ in
+        self.showShare(todayKeywords: issueKeyword)
+      })
     }
-    
+    alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+    present(alert: alert)
+  }
+  private func showShare(todayKeywords: [RSSFeedItem]) {
     var newsList: [Item] = []
     let group = DispatchGroup()
-    for (index, keyword) in todayKeywords.enumerated() {
+    for keyword in todayKeywords {
       group.enter()
       
       NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword.title ?? "", sort: "sim", start: 1) { result in
