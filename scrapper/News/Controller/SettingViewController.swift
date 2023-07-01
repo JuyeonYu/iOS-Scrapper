@@ -30,6 +30,7 @@ class SettingViewController: UIViewController {
     case keyword
     case exceptPress
     case issueShare
+    case version
   }
   enum OtherType: Int, CaseIterable {
     case terms
@@ -113,6 +114,7 @@ extension SettingViewController: UITableViewDelegate {
         alert.modalTransitionStyle = .crossDissolve
         alert.modalPresentationStyle = .overCurrentContext
         present(alert, animated: true)
+      default: break
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return }
@@ -213,6 +215,10 @@ extension SettingViewController: UITableViewDataSource {
         configuration.text = "오늘의 이슈 공유"
         configuration.secondaryText = "0/1 (매일)"
         configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+      case .version:
+        configuration.text = "버전"
+        configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+        configuration.secondaryText = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return UITableViewCell() }
