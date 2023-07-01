@@ -29,6 +29,7 @@ class SettingViewController: UIViewController {
     case group
     case keyword
     case exceptPress
+    case issueShare
   }
   enum OtherType: Int, CaseIterable {
     case terms
@@ -86,18 +87,32 @@ extension SettingViewController: UITableViewDelegate {
       switch appType {
       case .group:
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "키워드 10개 지급", body: "광고를 시청하고 키워드 보상을 받으세요!")
+          CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!")
         }
         alert.delegate = self
         alert.modalTransitionStyle = .crossDissolve
         alert.modalPresentationStyle = .overCurrentContext
         present(alert, animated: true)
-        break
+        
       case .keyword:
-        break
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "키워드 +5", body: "광고를 시청하고 보상을 받으세요!")
+        }
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        present(alert, animated: true)
       case .exceptPress:
         let vc = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(identifier: "ExceptPublisherViewController")
         navigationController?.pushViewController(vc, animated: true)
+      case .issueShare:
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "오늘의 이슈 공유 +1", body: "광고를 시청하고 보상을 받으세요!")
+        }
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        present(alert, animated: true)
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return }
@@ -194,6 +209,10 @@ extension SettingViewController: UITableViewDataSource {
         configuration.text = "제외언론사"
         configuration.secondaryText = "\(exceptpressCount)"
         configuration.image = UIImage(systemName: "selection.pin.in.out")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+      case.issueShare:
+        configuration.text = "오늘의 이슈 공유"
+        configuration.secondaryText = "0/1 (매일)"
+        configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return UITableViewCell() }
