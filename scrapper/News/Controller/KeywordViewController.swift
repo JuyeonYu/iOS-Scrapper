@@ -32,13 +32,26 @@ class KeywordViewController: UIViewController {
   }
   
   @IBAction func onPlus(_ sender: Any) {
+    
     tableView.isEditing = false
     let alert = UIAlertController(title: "", message: "무엇을 추가할까요?", preferredStyle: .actionSheet)
     alert.addAction(UIAlertAction(title: "그룹", style: .default) { _ in
-      self.popupAddGroup()
+      let maxGroup = UserDefaultManager.getMaxGroupCount()
+      let currentGroupCount = Array(self.realm.objects(GroupRealm.self)).count
+      if currentGroupCount >= maxGroup {
+        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+      } else {
+        self.popupAddGroup()
+      }
     })
     alert.addAction(UIAlertAction(title: "키워드", style: .default) { _ in
-      self.popupAddKeyword()
+      let maxKeyword = UserDefaultManager.getMaxKeywordCount()
+      let currentKeywordCount = Array(self.realm.objects(KeywordRealm.self)).count
+      if currentKeywordCount >= maxKeyword {
+        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+      } else {
+        self.popupAddKeyword()
+      }
     })
     alert.addAction(UIAlertAction(title: "취소", style: .cancel))
     present(alert: alert)

@@ -30,6 +30,9 @@ struct Constants {
     static let exclusivePress = "UserDefaultexclusivePress"
     static let isUser = "UserDefaultIsUser"
     static let tabBarIndex = "UserDefaultTabBarIndex"
+    static let maxKeyword = "UserDefaultmaxKeyword"
+    static let maxGroup = "UserDefaultmaxGroup"
+    static let maxShare = "UserDefaultmaxShare"
   }
   
   static let press: [String] = ["KBS", "MBC", "SBS", "경향신문", "뉴스1", "뉴시스", "동아일보", "매일경제", "머니투데이", "서울신문", "아시아경제", "엑스포츠뉴스", "연합뉴스", "이데일리", "조선일보", "중앙일보", "티빙", "파이낸셜뉴스", "한겨레", "한국경제"]
