@@ -21,6 +21,7 @@ struct Constants {
   static let googleADModBannerID = "ca-app-pub-7604048409167711/3101460469"
   static let googleADModContentsID = "ca-app-pub-7604048409167711/5528388498"
   static let googleADModFullPageID = "ca-app-pub-7604048409167711/6207045348"
+  static let googleADModRewardID = "ca-app-pub-7604048409167711/8056614374"
   
   struct UserDefault {
     static let login = "UserDefaultLogin"

@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import MessageUI
 import SafariServices
+import GoogleMobileAds
 
 class SettingViewController: UIViewController {
   let maxGroup = 3
@@ -36,11 +37,31 @@ class SettingViewController: UIViewController {
     case share
   }
   
+  private var rewardedAd: GADRewardedAd?
+  
+  func loadRewardedAd() {
+    let request = GADRequest()
+    GADRewardedAd.load(withAdUnitID: Constants.googleADModRewardID,
+                       request: request,
+                       completionHandler: { [self] ad, error in
+      if let error = error {
+        print("Failed to load rewarded ad with error: \(error.localizedDescription)")
+        return
+      }
+      rewardedAd = ad
+      rewardedAd?.fullScreenContentDelegate = self
+
+      print("Rewarded ad loaded.")
+    }
+    )
+  }
+  
   @IBOutlet weak var tableView: UITableView!
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
+    loadRewardedAd()
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -64,6 +85,13 @@ extension SettingViewController: UITableViewDelegate {
       guard let appType = AppType(rawValue: indexPath.row) else { return }
       switch appType {
       case .group:
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "키워드 10개 지급", body: "광고를 시청하고 키워드 보상을 받으세요!")
+        }
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        present(alert, animated: true)
         break
       case .keyword:
         break
@@ -106,6 +134,18 @@ extension SettingViewController: UITableViewDelegate {
     sendMailErrorAlert.addAction(confirmAction)
     self.present(sendMailErrorAlert, animated: true, completion: nil)
   }
+  
+  func showRewardAd() {
+    if let ad = rewardedAd {
+      ad.present(fromRootViewController: self) {
+        let reward = ad.adReward
+        print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
+        // TODO: Reward the user.
+      }
+    } else {
+      print("Ad wasn't ready")
+    }
+  }
 }
 
 extension SettingViewController: UITableViewDataSource {
@@ -117,8 +157,8 @@ extension SettingViewController: UITableViewDataSource {
     let font = UIFont.systemFont(ofSize: 13)
     configuration.textProperties.font = font
     configuration.secondaryTextProperties.font = font
-
-
+    
+    
     switch section {
     case .app:
       guard let appType = AppType(rawValue: indexPath.row) else { return UITableViewCell() }
@@ -193,4 +233,29 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
   func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
     controller.dismiss(animated: true)
   }
+}
+
+
+extension SettingViewController: CustomAlertDelegate {
+  func onOk() {
+    showRewardAd()
+  }
+}
+
+extension SettingViewController: GADFullScreenContentDelegate {
+  /// Tells the delegate that the ad failed to present full screen content.
+  func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    print("Ad did fail to present full screen content.")
+  }
+
+  /// Tells the delegate that the ad will present full screen content.
+  func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    print("Ad will present full screen content.")
+  }
+
+  /// Tells the delegate that the ad dismissed full screen content.
+  func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    print("Ad did dismiss full screen content.")
+  }
+
 }
