@@ -11,8 +11,11 @@ import RealmSwift
 import GoogleMobileAds
 
 class KeywordViewController: UIViewController {
+  var rewardType: RewardType?
   var noneGroupId: UUID?
   @IBOutlet weak var tableView: UITableView!
+  private var rewardedAd: GADRewardedAd?
+
   func getGroupRealm(section: Int) -> GroupRealm? {
     let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
     guard section < groupList.count else { return nil }
@@ -39,7 +42,16 @@ class KeywordViewController: UIViewController {
       let maxGroup = UserDefaultManager.getMaxGroupCount()
       let currentGroupCount = Array(self.realm.objects(GroupRealm.self)).count
       if currentGroupCount >= maxGroup {
-        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+//        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+        }
+        self.rewardType = .group
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        self.present(alert, animated: true)
+
       } else {
         self.popupAddGroup()
       }
@@ -48,7 +60,15 @@ class KeywordViewController: UIViewController {
       let maxKeyword = UserDefaultManager.getMaxKeywordCount()
       let currentKeywordCount = Array(self.realm.objects(KeywordRealm.self)).count
       if currentKeywordCount >= maxKeyword {
-        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+//        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+        }
+        self.rewardType = .keyword
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        self.present(alert, animated: true)
       } else {
         self.popupAddKeyword()
       }
@@ -117,11 +137,46 @@ class KeywordViewController: UIViewController {
       keywordsRealm.filter { $0.timestamp == 0.0 }.forEach { $0.timestamp = Date().timeIntervalSince1970 }
       keywordsRealm.filter { $0.gourpId == nil }.forEach { $0.gourpId = noneGroupId }
     }
+    
+    loadRewardedAd()
+
   }
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     tableView.isEditing = false
   }
+  func loadRewardedAd() {
+    let request = GADRequest()
+    GADRewardedAd.load(withAdUnitID: Constants.googleADModRewardID,
+                       request: request,
+                       completionHandler: { [self] ad, error in
+      if let error = error {
+        print("Failed to load rewarded ad with error: \(error.localizedDescription)")
+        return
+      }
+      rewardedAd = ad
+      rewardedAd?.fullScreenContentDelegate = self
+      
+      print("Rewarded ad loaded.")
+    }
+    )
+  }
+  func showRewardAd() {
+    if let ad = rewardedAd {
+      ad.present(fromRootViewController: self) {
+        let reward = ad.adReward
+        guard let rewardType = self.rewardType else { return }
+        switch rewardType {
+        case .group: UserDefaultManager.addMaxGroupCount(Int(truncating: reward.amount))
+        case .keyword: UserDefaultManager.addMaxKeywordCount(Int(truncating: reward.amount))
+        }
+      }
+    } else {
+      print("Ad wasn't ready")
+    }
+  }
+
+  
   func popupAddGroup() {
     let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
                                   message: NSLocalizedString("Please enter group what you want", comment: ""),
@@ -419,3 +474,29 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
   }
 }
 
+
+extension KeywordViewController: CustomAlertDelegate {
+  func onOk() {
+    self.showRewardAd()
+  }
+}
+
+extension KeywordViewController: GADFullScreenContentDelegate {
+  /// Tells the delegate that the ad failed to present full screen content.
+  func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+  }
+
+  /// Tells the delegate that the ad will present full screen content.
+  func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+  }
+
+  /// Tells the delegate that the ad dismissed full screen content.
+  func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    loadRewardedAd()
+    guard let rewardType else { return }
+    switch rewardType {
+    case .keyword: self.popupAddKeyword()
+    case .group: self.popupAddGroup()
+    }
+  }
+}
