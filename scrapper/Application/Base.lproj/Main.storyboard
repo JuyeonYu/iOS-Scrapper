@@ -383,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAl-WO-2vU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6518.840579710145" y="595.3125"/>
+            <point key="canvasLocation" x="4420" y="1843"/>
         </scene>
         <!--Promotion View Controller-->
         <scene sceneID="uHN-bF-Adb">
@@ -837,20 +837,7 @@
                             <constraint firstItem="0BZ-Lu-YzP" firstAttribute="bottom" secondItem="9Ms-Fh-tFZ" secondAttribute="bottom" id="kKq-Gp-2bT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="설정" largeTitleDisplayMode="always" id="bEC-Ho-dGc">
-                        <barButtonItem key="rightBarButtonItem" id="IGH-fN-5Z4">
-                            <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical-single">
-                                <hierarchicalColors>
-                                    <color name="Theme"/>
-                                    <color systemColor="secondaryLabelColor"/>
-                                    <color systemColor="tertiaryLabelColor"/>
-                                </hierarchicalColors>
-                            </imageReference>
-                            <connections>
-                                <segue destination="veS-JH-V2a" kind="presentation" id="LCc-MU-C8N"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="설정" largeTitleDisplayMode="always" id="bEC-Ho-dGc"/>
                     <connections>
                         <outlet property="tableView" destination="9Ms-Fh-tFZ" id="BE7-lr-dDX"/>
                     </connections>
@@ -972,7 +959,6 @@
     <resources>
         <image name="bolt.fill" catalog="system" width="100" height="128"/>
         <image name="bookmark.fill" catalog="system" width="110" height="128"/>
-        <image name="crown.fill" catalog="system" width="128" height="92"/>
         <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="folder.fill" catalog="system" width="128" height="96"/>
         <image name="gear.circle.fill" catalog="system" width="128" height="123"/>
