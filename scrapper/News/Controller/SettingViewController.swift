@@ -35,12 +35,12 @@ class SettingViewController: UIViewController {
     case group
     case keyword
     case exceptPress
-    case issueShare
+//    case issueShare
     case version
   }
   enum OtherType: Int, CaseIterable {
-    case terms
-    case policy
+//    case terms
+//    case policy
     case report
     case share
   }
@@ -58,7 +58,7 @@ class SettingViewController: UIViewController {
       }
       rewardedAd = ad
       rewardedAd?.fullScreenContentDelegate = self
-
+      
       print("Rewarded ad loaded.")
     }
     )
@@ -103,7 +103,7 @@ extension SettingViewController: UITableViewDelegate {
         
       case .keyword:
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "키워드 +5", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+          CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
         }
         rewardType = .keyword
         alert.delegate = self
@@ -113,25 +113,25 @@ extension SettingViewController: UITableViewDelegate {
       case .exceptPress:
         let vc = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(identifier: "ExceptPublisherViewController")
         navigationController?.pushViewController(vc, animated: true)
-      case .issueShare:
-        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "오늘의 이슈 공유 +1", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
-        }
-        alert.delegate = self
-        alert.modalTransitionStyle = .crossDissolve
-        alert.modalPresentationStyle = .overCurrentContext
-        present(alert, animated: true)
+//      case .issueShare:
+//        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+//          CustomAlertViewController(coder: coder, head: "오늘의 이슈 공유 +1", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+//        }
+//        alert.delegate = self
+//        alert.modalTransitionStyle = .crossDissolve
+//        alert.modalPresentationStyle = .overCurrentContext
+//        present(alert, animated: true)
       default: break
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return }
       switch otherType {
-      case .terms:
-        let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
-        present(safariVC, animated: true, completion: nil)
-      case .policy:
-        let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
-        present(safariVC, animated: true, completion: nil)
+//      case .terms:
+//        let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
+//        present(safariVC, animated: true, completion: nil)
+//      case .policy:
+//        let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
+//        present(safariVC, animated: true, completion: nil)
       case .report:
         if MFMailComposeViewController.canSendMail() {
           let compseVC = MFMailComposeViewController()
@@ -164,7 +164,12 @@ extension SettingViewController: UITableViewDelegate {
       ad.present(fromRootViewController: self) {
         let reward = ad.adReward
         print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
-        // TODO: Reward the user.
+        
+        guard let rewardType = self.rewardType else { return }
+        switch rewardType {
+        case .group: UserDefaultManager.addMaxGroupCount(Int(truncating: reward.amount))
+        case .keyword: UserDefaultManager.addMaxKeywordCount(Int(truncating: reward.amount))
+        }
       }
     } else {
       print("Ad wasn't ready")
@@ -221,10 +226,10 @@ extension SettingViewController: UITableViewDataSource {
         configuration.text = "제외언론사"
         configuration.secondaryText = "\(exceptpressCount)"
         configuration.image = UIImage(systemName: "selection.pin.in.out")?.withTintColor(.label, renderingMode: .alwaysOriginal)
-      case.issueShare:
-        configuration.text = "오늘의 이슈 공유"
-        configuration.secondaryText = "0/1 (매일)"
-        configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+//      case.issueShare:
+//        configuration.text = "오늘의 이슈 공유"
+//        configuration.secondaryText = "0/1 (매일)"
+//        configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .version:
         configuration.text = "버전"
         configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
@@ -233,12 +238,12 @@ extension SettingViewController: UITableViewDataSource {
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return UITableViewCell() }
       switch otherType {
-      case .policy:
-        configuration.text = "개인정보 처리방침"
-        configuration.image = UIImage(systemName: "doc.viewfinder")?.withTintColor(.label, renderingMode: .alwaysOriginal)
-      case .terms:
-        configuration.text = "이용약관"
-        configuration.image = UIImage(systemName: "doc.append")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+//      case .policy:
+//        configuration.text = "개인정보 처리방침"
+//        configuration.image = UIImage(systemName: "doc.viewfinder")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+//      case .terms:
+//        configuration.text = "이용약관"
+//        configuration.image = UIImage(systemName: "doc.append")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .report:
         configuration.text = "문의하기"
         configuration.image = UIImage(systemName: "exclamationmark.bubble")?.withTintColor(.label, renderingMode: .alwaysOriginal)
@@ -274,7 +279,6 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
 extension SettingViewController: CustomAlertDelegate {
   func onOk() {
     self.showRewardAd()
-//    showRewardAd()
   }
 }
 
@@ -292,11 +296,7 @@ extension SettingViewController: GADFullScreenContentDelegate {
   /// Tells the delegate that the ad dismissed full screen content.
   func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
     loadRewardedAd()
-    guard let rewardType else { return }
-    switch rewardType {
-    case .group: UserDefaultManager.addMaxGroupCount()
-    case .keyword: UserDefaultManager.addMaxKeywordCount()
-    }
+    
     tableView.reloadData()
     let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
       CustomAlertViewController(coder: coder, head: "보상 지급 완료", body: "보상이 지급되었습니다.", lottieImageName: "9733-coin", okTitle: "확인", useOkDelegate: false)
@@ -307,5 +307,4 @@ extension SettingViewController: GADFullScreenContentDelegate {
     present(alert, animated: true)
     
   }
-
 }

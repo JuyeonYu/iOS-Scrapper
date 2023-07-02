@@ -15,9 +15,12 @@ class TodayViewController: UIViewController {
   let feedURL = URL(string: "https://trends.google.co.kr/trends/trendingsearches/daily/rss?geo=KR")!
   let zumURL = URL(string: "https://zum.com")!
   var issueKeywords: [[RSSFeedItem]] = []
+  var shareIssueKeywords: [RSSFeedItem] = []
   @IBOutlet weak var bannerView: GADBannerView!
   @IBOutlet weak var tableView: UITableView!
   let refreshControl = UIRefreshControl()
+  private var rewardedAd: GADRewardedAd?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
         
@@ -29,6 +32,7 @@ class TodayViewController: UIViewController {
     bannerView.adUnitID = Constants.googleADModBannerID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
+    loadRewardedAd()
   }
   
   @IBAction func onShare(_ sender: Any) {
@@ -36,7 +40,14 @@ class TodayViewController: UIViewController {
     for issueKeyword in issueKeywords {
       guard let pubDate = issueKeyword.first?.pubDate else { return }
       alert.addAction(UIAlertAction(title: pubDate.korean, style: .default) { _ in
-        self.showShare(todayKeywords: issueKeyword)
+        self.shareIssueKeywords = issueKeyword
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "이슈 공유하기", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+        }
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        self.present(alert, animated: true)
       })
     }
     alert.addAction(UIAlertAction(title: "취소", style: .cancel))
@@ -126,6 +137,32 @@ class TodayViewController: UIViewController {
       throw failure
     }
   }
+  
+  func loadRewardedAd() {
+    let request = GADRequest()
+    GADRewardedAd.load(withAdUnitID: Constants.googleADModRewardID,
+                       request: request,
+                       completionHandler: { [self] ad, error in
+      if let error = error {
+        print("Failed to load rewarded ad with error: \(error.localizedDescription)")
+        return
+      }
+      rewardedAd = ad
+      rewardedAd?.fullScreenContentDelegate = self
+      
+      print("Rewarded ad loaded.")
+    }
+    )
+  }
+  func showRewardAd() {
+    if let ad = rewardedAd {
+      ad.present(fromRootViewController: self) {
+
+      }
+    } else {
+      print("Ad wasn't ready")
+    }
+  }
 }
 
 
@@ -133,15 +170,6 @@ extension TodayViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     guard let pubDate = issueKeywords[section].first?.pubDate else { return nil }
     return pubDate.korean
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy년 MM월 dd일"
-    return formatter.string(from: pubDate)
-  }
-  func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-    guard section == issueKeywords.count - 1  else {
-      return nil
-    } 
-    return "키워드는 1시간에 한번씩 갱신됩니다."
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let keyword = issueKeywords[indexPath.section][indexPath.row].title else { return }
@@ -173,5 +201,28 @@ extension TodayViewController: UITableViewDataSource {
       .withTintColor(indexPath.row == 0 ? UIColor(named: "Theme")! : .systemGray)
     cell.contentConfiguration = content
     return cell
+  }
+}
+
+extension TodayViewController: CustomAlertDelegate {
+  func onOk() {
+    self.showRewardAd()
+  }
+}
+
+extension TodayViewController: GADFullScreenContentDelegate {
+  /// Tells the delegate that the ad failed to present full screen content.
+  func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    shareIssueKeywords = []
+  }
+
+  /// Tells the delegate that the ad will present full screen content.
+  func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+  }
+
+  /// Tells the delegate that the ad dismissed full screen content.
+  func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    loadRewardedAd()
+    self.showShare(todayKeywords: self.shareIssueKeywords)
   }
 }
