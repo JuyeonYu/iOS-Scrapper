@@ -145,7 +145,7 @@ extension SettingViewController: UITableViewDelegate {
           self.showSendMailErrorAlert()
         }
       case .share:
-        Util.sharedInstance.showShareActivity(objectsToShare: [Constants.appDownloadURL] as AnyObject)
+        Util.sharedInstance.showShareActivity(objectsToShare: [Constants.appDownloadURL])
       }
     }
   }

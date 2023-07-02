@@ -19,21 +19,24 @@ class Util {
   func shareBookmarks(_ news: [BookMarkNewsRealm]) {
     var newsSuite = (news.map { $0.title.htmlStripped + "\n" + $0.urlString  + "\n"})
     newsSuite.append(Constants.appDownloadURL)
-    let objectsToShare = newsSuite as AnyObject
-    showShareActivity(objectsToShare: objectsToShare)
-  }
-  func shareNews(_ news: News) {
-    let newsSuite = [news.title.htmlStripped + "\n" + news.originalLink + "\n" + Constants.appDownloadURL] as AnyObject
     showShareActivity(objectsToShare: newsSuite)
   }
-  func shareNewsList(_ news: [Item]) {    
-    var newsSuite = (news.map { $0.title.htmlStripped + "\n" + $0.originallink  + "\n"})
-    let objectsToShare = newsSuite as AnyObject
-    showShareActivity(objectsToShare: objectsToShare)
+  func shareNews(_ news: News) {
+    let newsSuite = [news.title.htmlStripped + "\n" + news.originalLink + "\n" + Constants.appDownloadURL]
+    showShareActivity(objectsToShare: newsSuite)
   }
-  func showShareActivity(objectsToShare: AnyObject) {
+  func shareNewsList(_ news: [Item]) {
+    guard let pubDate = news.first?.pubDate else { return }
+    var newsSuite = news.map { $0.title.htmlStripped + "\n" + $0.originallink  + "\n" }
+    newsSuite.insert("간추린 뉴스 \(naverTimeFormatToNormal(format: "yyyy-MM-dd", date: pubDate))", at: 0)
+    showShareActivity(objectsToShare: newsSuite)
+  }
+  
+  func showShareActivity(objectsToShare: [String]) {
     guard let topViewController = UIViewController.topViewController() else { return }
-    let activityVC = UIActivityViewController(activityItems: objectsToShare as! [Any], applicationActivities: nil)
+    let combinedString = objectsToShare.joined(separator: "\n")
+    
+    let activityVC = UIActivityViewController(activityItems: [combinedString], applicationActivities: nil)
     activityVC.modalPresentationStyle = .popover
     activityVC.popoverPresentationController?.sourceView = topViewController.view
     topViewController.present(activityVC, animated: true, completion: nil)
@@ -61,7 +64,7 @@ class Util {
     viewController.present(activityVC, animated: true, completion: nil)
   }
   
-  func naverTimeFormatToNormal(date: String) -> String {
+  func naverTimeFormatToNormal(format: String = "yyyy-MM-dd hh:mm a", date: String) -> String {
     let naverDateFormatter = DateFormatter()
     
     // 시간 포멧 변경 세팅
@@ -69,7 +72,7 @@ class Util {
     naverDateFormatter.locale = Locale(identifier: "en_US_POSIX")
     
     guard let startTime = naverDateFormatter.date(from: date) else {return "?"}
-    naverDateFormatter.dateFormat = "yyyy-MM-dd hh:mm a" // 내가 뿌리고 싶은 시간 포멧
+    naverDateFormatter.dateFormat = format
     return naverDateFormatter.string(from: startTime)
   }
   
@@ -163,24 +166,24 @@ extension Date {
 }
 
 extension SceneDelegate {
-    func setRootViewController(_ scene: UIScene){
-        if UserDefaultManager.getIsUser() {
-          setRootViewController(scene, name: "Main",
-                                identifier: "MainViewController")
-        } else {
-          setRootViewController(scene, name: "Main",
-                                identifier: "OnboardingViewController")
-        }
+  func setRootViewController(_ scene: UIScene){
+    if UserDefaultManager.getIsUser() {
+      setRootViewController(scene, name: "Main",
+                            identifier: "MainViewController")
+    } else {
+      setRootViewController(scene, name: "Main",
+                            identifier: "OnboardingViewController")
     }
-    
-    private func setRootViewController(_ scene: UIScene, name: String, identifier: String) {
-        if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            let storyboard = UIStoryboard(name: name, bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
-            window.rootViewController = viewController
-            self.window = window
-            window.makeKeyAndVisible()
-        }
+  }
+  
+  private func setRootViewController(_ scene: UIScene, name: String, identifier: String) {
+    if let windowScene = scene as? UIWindowScene {
+      let window = UIWindow(windowScene: windowScene)
+      let storyboard = UIStoryboard(name: name, bundle: nil)
+      let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+      window.rootViewController = viewController
+      self.window = window
+      window.makeKeyAndVisible()
     }
+  }
 }

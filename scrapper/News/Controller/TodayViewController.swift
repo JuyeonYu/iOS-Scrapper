@@ -45,28 +45,37 @@ class TodayViewController: UIViewController {
     present(alert: alert)
   }
   private func showShare(todayKeywords: [RSSFeedItem]) {
-    var newsList: [Item] = []
+    var newsList: [(index: Int, news: Item)] = []
+    let serialQueue = DispatchQueue(label: "com.example.newsQueue")
     let group = DispatchGroup()
-    for keyword in todayKeywords {
+    
+    for (index, keyword) in todayKeywords.enumerated() {
       group.enter()
       
-      NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword.title ?? "", sort: "sim", start: 1) { result in
-        defer {
-          group.leave()
+      serialQueue.async {
+        NetworkManager.sharedInstance.requestNaverNewsList(keyword: keyword.title ?? "", sort: "sim", start: 1) { result in
+          defer {
+            group.leave()
+          }
+          
+          guard let naverNews = result as? NaverNews,
+                let news = naverNews.items.first else {
+            return
+          }
+          
+          let newsTuple = (index, news)
+          newsList.append(newsTuple)
         }
-        
-        guard let naverNews = result as? NaverNews,
-              let news = naverNews.items.first else {
-          return
-        }
-        newsList.append(news)
       }
     }
-
+    
     group.notify(queue: .main) {
-      Util.sharedInstance.shareNewsList(newsList)
+      newsList.sort { $0.index < $1.index }
+      let sortedNewsList = newsList.map { $0.news }
+      Util.sharedInstance.shareNewsList(sortedNewsList)
     }
   }
+
   private func groupRSSByDay(rss: [RSSFeedItem]) -> [[RSSFeedItem]] {
     var result: [[RSSFeedItem]] = []
     var currentGroup: [RSSFeedItem] = []
@@ -128,6 +137,12 @@ extension TodayViewController: UITableViewDelegate {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy년 MM월 dd일"
     return formatter.string(from: pubDate)
+  }
+  func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    guard section == issueKeywords.count - 1  else {
+      return nil
+    } 
+    return "키워드는 1시간에 한번씩 갱신됩니다."
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let keyword = issueKeywords[indexPath.section][indexPath.row].title else { return }
