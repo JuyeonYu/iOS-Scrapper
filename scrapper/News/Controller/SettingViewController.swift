@@ -12,7 +12,13 @@ import MessageUI
 import SafariServices
 import GoogleMobileAds
 
+enum RewardType {
+  case group
+  case keyword
+}
+
 class SettingViewController: UIViewController {
+  var rewardType: RewardType?
   let maxGroup = 3
   let maxKeyword = 10
   
@@ -82,14 +88,14 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let section = SettingSection(rawValue: indexPath.section) else { return }
     switch section {
-      
     case .app:
       guard let appType = AppType(rawValue: indexPath.row) else { return }
       switch appType {
       case .group:
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!")
+          CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
         }
+        rewardType = .group
         alert.delegate = self
         alert.modalTransitionStyle = .crossDissolve
         alert.modalPresentationStyle = .overCurrentContext
@@ -97,8 +103,9 @@ extension SettingViewController: UITableViewDelegate {
         
       case .keyword:
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "키워드 +5", body: "광고를 시청하고 보상을 받으세요!")
+          CustomAlertViewController(coder: coder, head: "키워드 +5", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
         }
+        rewardType = .keyword
         alert.delegate = self
         alert.modalTransitionStyle = .crossDissolve
         alert.modalPresentationStyle = .overCurrentContext
@@ -108,7 +115,7 @@ extension SettingViewController: UITableViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
       case .issueShare:
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "오늘의 이슈 공유 +1", body: "광고를 시청하고 보상을 받으세요!")
+          CustomAlertViewController(coder: coder, head: "오늘의 이슈 공유 +1", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
         }
         alert.delegate = self
         alert.modalTransitionStyle = .crossDissolve
@@ -182,12 +189,14 @@ extension SettingViewController: UITableViewDataSource {
       switch appType {
       case .group:
         let groupCount = realm.objects(GroupRealm.self).count
+        let maxCount = UserDefaultManager.getMaxGroupCount()
         configuration.text = "그룹"
         
-        configuration.secondaryText = "\(groupCount) / \(maxGroup)"
-        if groupCount < 2 {
+        configuration.secondaryText = "\(groupCount) / \(UserDefaultManager.getMaxGroupCount())"
+        
+        if maxCount / 2 > groupCount {
           configuration.secondaryTextProperties.color = .systemGreen
-        } else if groupCount < 3 {
+        } else if maxCount > groupCount {
           configuration.secondaryTextProperties.color = .systemYellow
         } else {
           configuration.secondaryTextProperties.color = .systemRed
@@ -195,12 +204,13 @@ extension SettingViewController: UITableViewDataSource {
         configuration.image = UIImage(systemName: "rectangle.3.group")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .keyword:
         let keywordCount = realm.objects(KeywordRealm.self).count
+        let maxCount = UserDefaultManager.getMaxKeywordCount()
         configuration.text = "키워드"
         
-        configuration.secondaryText = "\(keywordCount) / \(maxKeyword)"
-        if keywordCount < 5 {
+        configuration.secondaryText = "\(keywordCount) / \(UserDefaultManager.getMaxKeywordCount())"
+        if maxCount / 2 > keywordCount {
           configuration.secondaryTextProperties.color = .systemGreen
-        } else if keywordCount < 9 {
+        } else if maxCount > keywordCount {
           configuration.secondaryTextProperties.color = .systemYellow
         } else {
           configuration.secondaryTextProperties.color = .systemRed
@@ -263,24 +273,39 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
 
 extension SettingViewController: CustomAlertDelegate {
   func onOk() {
-    showRewardAd()
+    self.showRewardAd()
+//    showRewardAd()
   }
 }
 
 extension SettingViewController: GADFullScreenContentDelegate {
   /// Tells the delegate that the ad failed to present full screen content.
   func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-    print("Ad did fail to present full screen content.")
+    rewardType = nil
   }
 
   /// Tells the delegate that the ad will present full screen content.
   func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-    print("Ad will present full screen content.")
+    
   }
 
   /// Tells the delegate that the ad dismissed full screen content.
   func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-    print("Ad did dismiss full screen content.")
+    loadRewardedAd()
+    guard let rewardType else { return }
+    switch rewardType {
+    case .group: UserDefaultManager.addMaxGroupCount()
+    case .keyword: UserDefaultManager.addMaxKeywordCount()
+    }
+    tableView.reloadData()
+    let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+      CustomAlertViewController(coder: coder, head: "보상 지급 완료", body: "보상이 지급되었습니다.", lottieImageName: "9733-coin", okTitle: "확인", useOkDelegate: false)
+    }
+    alert.delegate = self
+    alert.modalTransitionStyle = .crossDissolve
+    alert.modalPresentationStyle = .overCurrentContext
+    present(alert, animated: true)
+    
   }
 
 }

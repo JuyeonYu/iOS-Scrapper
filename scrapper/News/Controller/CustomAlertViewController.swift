@@ -15,9 +15,19 @@ protocol CustomAlertDelegate: AnyObject {
 
 class CustomAlertViewController: UIViewController {
   @IBOutlet weak var base: UIView!
-  init?(coder: NSCoder, head: String, body: String) {
+  init?(
+    coder: NSCoder,
+    head: String?,
+    body: String?,
+    lottieImageName: String?,
+    okTitle: String?,
+    useOkDelegate: Bool
+  ) {
     self.headValue = head
     self.bodyValue = body
+    self.lottieImageName = lottieImageName
+    self.okTitle = okTitle
+    self.useOkDelegate = useOkDelegate
     super.init(coder: coder)
   }
   
@@ -25,11 +35,17 @@ class CustomAlertViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   weak var delegate: CustomAlertDelegate?
-  let headValue: String
-  let bodyValue: String
+  let headValue: String?
+  let bodyValue: String?
+  let lottieImageName: String?
+  let okTitle: String?
+  let useOkDelegate: Bool
   @IBOutlet weak var imageParent: UIView!
   @IBAction func onOk(_ sender: Any) {
-    delegate?.onOk()
+    dismiss(animated: true) {
+      guard self.useOkDelegate else { return }
+      self.delegate?.onOk()
+    }
   }
   @IBOutlet weak var ok: UIButton!
   @IBOutlet weak var body: UILabel!
@@ -38,29 +54,39 @@ class CustomAlertViewController: UIViewController {
     dismiss(animated: true)
   }
   @IBOutlet weak var close: UIButton!
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    base.layer.cornerRadius = 32
-    head.text = headValue
-    body.text = bodyValue
-    ok.layer.cornerRadius = 16
-    let animationView: LottieAnimationView = .init(name: "18089-gold-coin")
+  fileprivate func addLottieView() {
+    if let lottieImageName {
+      let animationView: LottieAnimationView = .init(name: lottieImageName)
+      animationView.frame = imageParent.bounds
+      imageParent.addSubview(animationView)
+      animationView.loopMode = .loop
+      animationView.play()
+    }
     
-    animationView.frame = imageParent.bounds
-    imageParent.addSubview(animationView)
-    animationView.loopMode = .loop
-    animationView.play()
   }
   
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    base.layer.cornerRadius = 16
+    ok.layer.cornerRadius = 16
+    addLottieView()
+    
+    if let headValue {
+      head.text = headValue
+    } else {
+      head.removeFromSuperview()
+    }
+    
+    if let bodyValue {
+      body.text = bodyValue
+    } else {
+      body.removeFromSuperview()
+    }
+    
+    if let okTitle {
+      ok.setTitle(okTitle, for: .normal)
+    } else {
+      ok.removeFromSuperview()
+    }
+  }
 }

@@ -651,7 +651,7 @@
                                         </vibrancyEffect>
                                     </visualEffectView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="7ac-hu-rHY" secondAttribute="trailing" id="3EY-z3-nyZ"/>
                                     <constraint firstAttribute="bottom" secondItem="7ac-hu-rHY" secondAttribute="bottom" id="ErI-LM-y8W"/>

@@ -52,6 +52,7 @@
 		D661A9E92A50851800E1EDBA /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D661A9E82A50851800E1EDBA /* Lottie */; };
 		D661A9EB2A50852B00E1EDBA /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */; };
 		D661A9ED2A50868F00E1EDBA /* 18089-gold-coin.json in Resources */ = {isa = PBXBuildFile; fileRef = D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */; };
+		D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */ = {isa = PBXBuildFile; fileRef = D661A9F12A519BEE00E1EDBA /* 9733-coin.json */; };
 		D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */; };
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
@@ -111,6 +112,7 @@
 		D661A9E22A50442000E1EDBA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "18089-gold-coin.json"; sourceTree = "<group>"; };
+		D661A9F12A519BEE00E1EDBA /* 9733-coin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "9733-coin.json"; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */,
+				D661A9F12A519BEE00E1EDBA /* 9733-coin.json */,
 				B5486D9823F23463008A5ABD /* Info.plist */,
 				D63158612A49C5A9000E4972 /* Config.xcconfig */,
 				B5872F06247D11F300F12A8F /* Localizable.strings */,
@@ -354,6 +357,7 @@
 				D661A9D72A4DC52E00E1EDBA /* paywall2.mp4 in Resources */,
 				D661A9D82A4DC52E00E1EDBA /* paywall3.mp4 in Resources */,
 				D661A9D92A4DC52E00E1EDBA /* paywall1.mp4 in Resources */,
+				D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */,
 				B5872F04247D11F300F12A8F /* Localizable.strings in Resources */,
 				B5486D9423F23463008A5ABD /* Assets.xcassets in Resources */,
 				B5486D9223F23461008A5ABD /* Main.storyboard in Resources */,

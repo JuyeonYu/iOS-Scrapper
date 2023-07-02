@@ -41,16 +41,16 @@ struct UserDefaultManager {
     return UserDefaults.standard.integer(forKey: Constants.UserDefault.tabBarIndex)
   }
   
-  static func setMaxKeywordCount(_ count: Int) {
-    UserDefaults.standard.set(count, forKey: Constants.UserDefault.maxKeyword)
+  static func addMaxKeywordCount() {
+    UserDefaults.standard.set(getMaxKeywordCount() + 5, forKey: Constants.UserDefault.maxKeyword)
   }
   
   static func getMaxKeywordCount() -> Int {
     return UserDefaults.standard.integer(forKey: Constants.UserDefault.maxKeyword)
   }
   
-  static func setMaxGroupCount(_ count: Int) {
-    UserDefaults.standard.set(count, forKey: Constants.UserDefault.maxGroup)
+  static func addMaxGroupCount() {
+    UserDefaults.standard.set(getMaxGroupCount() + 3, forKey: Constants.UserDefault.maxGroup)
   }
   
   static func getMaxGroupCount() -> Int {
