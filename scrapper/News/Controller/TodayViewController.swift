@@ -35,9 +35,7 @@ class TodayViewController: UIViewController {
     let alert = UIAlertController(title: "언제 뉴스를 공유할까요?", message: "각 키워드의 최신뉴스 하나씩을 공유합니다.", preferredStyle: .actionSheet)
     for issueKeyword in issueKeywords {
       guard let pubDate = issueKeyword.first?.pubDate else { return }
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy년 MM월 dd일"
-      alert.addAction(UIAlertAction(title: formatter.string(from: pubDate), style: .default) { _ in
+      alert.addAction(UIAlertAction(title: pubDate.korean, style: .default) { _ in
         self.showShare(todayKeywords: issueKeyword)
       })
     }
@@ -134,6 +132,7 @@ class TodayViewController: UIViewController {
 extension TodayViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     guard let pubDate = issueKeywords[section].first?.pubDate else { return nil }
+    return pubDate.korean
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy년 MM월 dd일"
     return formatter.string(from: pubDate)

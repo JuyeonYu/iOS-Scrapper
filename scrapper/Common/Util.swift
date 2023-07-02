@@ -163,8 +163,27 @@ extension Date {
   var day: Int? {
     Calendar.current.dateComponents([.day], from: self).day
   }
+  
+  var korean: String? {
+    let calendar = Calendar.current
+    let start = calendar.startOfDay(for: self)
+    let end = calendar.startOfDay(for: Date())
+    
+    if calendar.isDate(start, equalTo: end, toGranularity: .day) {
+      return "오늘"
+    } else if let yesterday = calendar.date(byAdding: .day, value: -1, to: end),
+              calendar.isDate(start, equalTo: yesterday, toGranularity: .day) {
+      return "어제"
+    } else {
+      let components = calendar.dateComponents([.day], from: start, to: end)
+      if let dayDifference = components.day {
+        return "\(abs(dayDifference))일전"
+      } else {
+        return ""
+      }
+    }
+  }
 }
-
 extension SceneDelegate {
   func setRootViewController(_ scene: UIScene){
     if UserDefaultManager.getIsUser() {
