@@ -46,7 +46,8 @@ struct UserDefaultManager {
   }
   
   static func getMaxKeywordCount() -> Int {
-    return UserDefaults.standard.integer(forKey: Constants.UserDefault.maxKeyword)
+    let max = UserDefaults.standard.integer(forKey: Constants.UserDefault.maxKeyword)
+    return max == 0 ? 5 : max
   }
   
   static func addMaxGroupCount(_ count: Int) {
@@ -54,7 +55,8 @@ struct UserDefaultManager {
   }
   
   static func getMaxGroupCount() -> Int {
-    return UserDefaults.standard.integer(forKey: Constants.UserDefault.maxGroup)
+    let max = UserDefaults.standard.integer(forKey: Constants.UserDefault.maxGroup)
+    return max == 0 ? 3 : max
   }
   
   static func setMaxIssueShareCount(_ count: Int) {
