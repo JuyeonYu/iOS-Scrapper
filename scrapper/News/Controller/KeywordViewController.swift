@@ -251,19 +251,43 @@ class KeywordViewController: UIViewController {
         return
       }
       
-      let keywordRealm = KeywordRealm()
-      keywordRealm.keyword = saveKeyword!
-      keywordRealm.exceptionKeyword = exceptionKeyword!
-      keywordRealm.timestamp = Date().timeIntervalSince1970
-      keywordRealm.gourpId = self.noneGroupId
-      try! self.realm.write {
-        self.realm.add(keywordRealm)
+      if self.realm.objects(GroupRealm.self).count == 1 {
+        let keywordRealm = KeywordRealm()
+        keywordRealm.keyword = saveKeyword!
+        keywordRealm.exceptionKeyword = exceptionKeyword!
+        keywordRealm.timestamp = Date().timeIntervalSince1970
+        keywordRealm.gourpId = self.noneGroupId
+        try! self.realm.write {
+          self.realm.add(keywordRealm)
+        }
+        self.tableView.reloadData()
+      } else {
+        self.popupSelectGroupForSave(keyword: saveKeyword!, exceptionKeyword: exceptionKeyword)
       }
-      self.tableView.reloadData()
     }
     alert.addAction(cancel)
     alert.addAction(ok)
     self.present(alert: alert)
+  }
+  
+  func popupSelectGroupForSave(keyword: String, exceptionKeyword: String?) {
+    let alert = UIAlertController(title: keyword, message: "어떤 그룹에 추가할까요?", preferredStyle: .actionSheet)
+    let groups = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
+    groups.forEach { group in
+      alert.addAction(UIAlertAction(title: group.name.isEmpty ? "기본" : group.name, style: .default) { _ in
+        let keywordRealm = KeywordRealm()
+        keywordRealm.keyword = keyword
+        keywordRealm.exceptionKeyword = exceptionKeyword ?? ""
+        keywordRealm.timestamp = Date().timeIntervalSince1970
+        keywordRealm.gourpId = group.id
+        try! self.realm.write {
+          self.realm.add(keywordRealm)
+        }
+        self.tableView.reloadData()
+      })
+    }
+    alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+    present(alert: alert)
   }
   
   func editExceptionKeyword(keyword: String, exceptionKeyword: String) {
