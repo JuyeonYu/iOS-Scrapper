@@ -582,7 +582,7 @@
                                         <color key="currentPageIndicatorTintColor" name="Theme"/>
                                     </pageControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H4K-Yt-CbK">
-                                        <rect key="frame" x="0.0" y="58" width="390" height="632.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="58" width="390" height="632.33333333333348"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CGD-su-EQZ">
                                             <size key="itemSize" width="0.0" height="0.0"/>
@@ -837,7 +837,20 @@
                             <constraint firstItem="0BZ-Lu-YzP" firstAttribute="bottom" secondItem="9Ms-Fh-tFZ" secondAttribute="bottom" id="kKq-Gp-2bT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="설정" largeTitleDisplayMode="always" id="bEC-Ho-dGc"/>
+                    <navigationItem key="navigationItem" title="설정" largeTitleDisplayMode="always" id="bEC-Ho-dGc">
+                        <barButtonItem key="rightBarButtonItem" id="VtP-X2-F3N">
+                            <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical">
+                                <hierarchicalColors>
+                                    <color name="Theme"/>
+                                    <color systemColor="secondaryLabelColor"/>
+                                    <color systemColor="tertiaryLabelColor"/>
+                                </hierarchicalColors>
+                            </imageReference>
+                            <connections>
+                                <segue destination="veS-JH-V2a" kind="presentation" id="Aa4-g2-1uk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="9Ms-Fh-tFZ" id="BE7-lr-dDX"/>
                     </connections>
@@ -959,6 +972,7 @@
     <resources>
         <image name="bolt.fill" catalog="system" width="100" height="128"/>
         <image name="bookmark.fill" catalog="system" width="110" height="128"/>
+        <image name="crown.fill" catalog="system" width="128" height="92"/>
         <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="folder.fill" catalog="system" width="128" height="96"/>
         <image name="gear.circle.fill" catalog="system" width="128" height="123"/>

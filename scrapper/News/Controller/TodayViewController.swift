@@ -36,22 +36,27 @@ class TodayViewController: UIViewController {
   }
   
   @IBAction func onShare(_ sender: Any) {
-    let alert = UIAlertController(title: "언제 뉴스를 공유할까요?", message: "각 키워드의 최신뉴스 하나씩을 공유합니다.", preferredStyle: .actionSheet)
-    for issueKeyword in issueKeywords {
-      guard let pubDate = issueKeyword.first?.pubDate else { return }
-      alert.addAction(UIAlertAction(title: pubDate.korean, style: .default) { _ in
-        self.shareIssueKeywords = issueKeyword
-        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "이슈 공유하기", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
-        }
-        alert.delegate = self
-        alert.modalTransitionStyle = .crossDissolve
-        alert.modalPresentationStyle = .overCurrentContext
-        self.present(alert, animated: true)
-      })
+    if rewardedAd != nil {
+      let alert = UIAlertController(title: "언제 뉴스를 공유할까요?", message: "각 키워드의 최신뉴스 하나씩을 공유합니다.", preferredStyle: .actionSheet)
+      for issueKeyword in issueKeywords {
+        guard let pubDate = issueKeyword.first?.pubDate else { return }
+        alert.addAction(UIAlertAction(title: pubDate.korean, style: .default) { _ in
+          self.shareIssueKeywords = issueKeyword
+          let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+            CustomAlertViewController(coder: coder, head: "이슈 공유하기", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+          }
+          alert.delegate = self
+          alert.modalTransitionStyle = .crossDissolve
+          alert.modalPresentationStyle = .overCurrentContext
+          self.present(alert, animated: true)
+        })
+      }
+      alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+      present(alert: alert)
+    } else {
+      self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
     }
-    alert.addAction(UIAlertAction(title: "취소", style: .cancel))
-    present(alert: alert)
+    
   }
   private func showShare(todayKeywords: [RSSFeedItem]) {
     var newsList: [(index: Int, news: Item)] = []

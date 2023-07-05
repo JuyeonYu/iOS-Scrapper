@@ -41,7 +41,7 @@ class KeywordViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "그룹", style: .default) { _ in
       let maxGroup = UserDefaultManager.getMaxGroupCount()
       let currentGroupCount = Array(self.realm.objects(GroupRealm.self)).count
-      if currentGroupCount >= maxGroup {
+      if currentGroupCount >= maxGroup && self.rewardedAd != nil {
 //        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
           CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
@@ -59,7 +59,7 @@ class KeywordViewController: UIViewController {
     alert.addAction(UIAlertAction(title: "키워드", style: .default) { _ in
       let maxKeyword = UserDefaultManager.getMaxKeywordCount()
       let currentKeywordCount = Array(self.realm.objects(KeywordRealm.self)).count
-      if currentKeywordCount >= maxKeyword {
+      if currentKeywordCount >= maxKeyword && self.rewardedAd != nil {
 //        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
           CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
