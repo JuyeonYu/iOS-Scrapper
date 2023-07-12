@@ -75,9 +75,16 @@ class NewsListViewController: UIViewController {
     
     requestNaverNewsList(keyword: keyword, start: 1)
     
-    bannerView.adUnitID = Constants.googleADModBannerID
-    bannerView.rootViewController = self
-    bannerView.load(GADRequest())
+    Task {
+      if await IAPManager.isPro() {
+        bannerView.isHidden = true
+      } else {
+        bannerView.isHidden = false
+        bannerView.adUnitID = Constants.googleADModBannerID
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+      }
+    }
   }
   
   func requestNaverNewsList(keyword: String, start: Int) {

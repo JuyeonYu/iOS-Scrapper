@@ -37,7 +37,12 @@ class ExceptPublisherViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    loadAd()
+    Task {
+      if await !IAPManager.isPro() {
+        loadAd()
+      }
+    }
+    
     tableView.delegate = self
     tableView.dataSource = self
     

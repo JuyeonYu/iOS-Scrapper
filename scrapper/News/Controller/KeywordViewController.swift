@@ -112,9 +112,17 @@ class KeywordViewController: UIViewController {
       popupAddKeyword()
     }
     
-    bannerView.adUnitID = Constants.googleADModBannerID
-    bannerView.rootViewController = self
-    bannerView.load(GADRequest())
+    Task {
+      if await IAPManager.isPro() {
+        bannerView.isHidden = true
+      } else {
+        bannerView.isHidden = false
+        bannerView.adUnitID = Constants.googleADModBannerID
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+      }
+    }
+    
     
     if let noneGroup = realm.objects(GroupRealm.self).filter({ $0.name == ""}).first {
       noneGroupId = noneGroup.id
