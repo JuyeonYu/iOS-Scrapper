@@ -92,24 +92,29 @@ extension SettingViewController: UITableViewDelegate {
       guard let appType = AppType(rawValue: indexPath.row) else { return }
       switch appType {
       case .group:
-        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+        Task {
+          guard await !IAPManager.isPro() else { return }
+          let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+            CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+          }
+          rewardType = .group
+          alert.delegate = self
+          alert.modalTransitionStyle = .crossDissolve
+          alert.modalPresentationStyle = .overCurrentContext
+          present(alert, animated: true)
         }
-        rewardType = .group
-        alert.delegate = self
-        alert.modalTransitionStyle = .crossDissolve
-        alert.modalPresentationStyle = .overCurrentContext
-        present(alert, animated: true)
-        
       case .keyword:
-        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+        Task {
+          guard await !IAPManager.isPro() else { return }
+          let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+            CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+          }
+          rewardType = .keyword
+          alert.delegate = self
+          alert.modalTransitionStyle = .crossDissolve
+          alert.modalPresentationStyle = .overCurrentContext
+          present(alert, animated: true)
         }
-        rewardType = .keyword
-        alert.delegate = self
-        alert.modalTransitionStyle = .crossDissolve
-        alert.modalPresentationStyle = .overCurrentContext
-        present(alert, animated: true)
       case .exceptPress:
         let vc = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(identifier: "ExceptPublisherViewController")
         navigationController?.pushViewController(vc, animated: true)
