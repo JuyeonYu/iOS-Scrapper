@@ -8,14 +8,31 @@
 
 import UIKit
 import AVFoundation
+import StoreKit
 
 class PayViewController: UIViewController {
+  @IBAction func onRestore(_ sender: Any) {
+    do {
+      if #available(iOS 15.0, *) {
+        Task {
+          try await AppStore.sync()
+        }
+        
+      } else {
+        // Fallback on earlier versions
+      }
+    } catch {
+      print(error)
+    }
+    
+  }
   @IBAction func onYearlyPay(_ sender: Any) {
     monthlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
     monthlyPay.layer.borderColor = UIColor.lightGray.cgColor
     
     yearlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
     yearlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
+    payProductId = productIds[0]
   }
   @IBAction func onMonthlyPay(_ sender: Any) {
     monthlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
@@ -23,11 +40,56 @@ class PayViewController: UIViewController {
     
     yearlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
     yearlyPay.layer.borderColor = UIColor.lightGray.cgColor
+    payProductId = productIds[1]
+  }
+  let productIds = ["year", "com.haar.scrap.month"]
+  var payProductId = "year"
+  @IBAction func onPay(_ sender: Any) {
+    let productIds = ["year", "com.haar.scrap.month"]
+    Task {
+      if #available(iOS 15.0, *) {
+        let products = try await Product.products(for: [payProductId])
+        
+        let result = try await products[0].purchase()
+        switch result {
+        case let .success(.verified(transaction)):
+          await transaction.finish()
+          self.dismiss(animated: true)
+        case let .success(.unverified(_, error)):
+          break
+        case .pending, .userCancelled: break
+        }
+        print(123)
+      } else {
+        // Fallback on earlier versions
+      }
+    }
+    
+
   }
   @IBOutlet weak var yearlyPay: UIButton!
   @IBOutlet weak var monthlyPay: UIButton!
   var playerAV: AVPlayer!
   @IBAction func onClose(_ sender: Any) {
+    Task {
+      if #available(iOS 15.0, *) {
+        for await result in Transaction.currentEntitlements {
+          guard case .verified(let transaction) = result else {
+            continue
+          }
+          
+          if transaction.revocationDate == nil {
+            //          self.purchasedProductIDs.insert(transaction.productID)
+          } else {
+            //          self.purchasedProductIDs.remove(transaction.productID)
+          }
+        }
+      } else {
+        // Fallback on earlier versions
+      }
+    }
+    
+    
     dismiss(animated: true)
   }
   

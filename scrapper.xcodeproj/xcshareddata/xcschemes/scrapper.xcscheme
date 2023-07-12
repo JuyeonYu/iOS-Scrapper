@@ -50,6 +50,9 @@
             ReferencedContainer = "container:scrapper.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../scrapper/Support Files/&#x1102;&#x1172;&#x1109;&#x1173;&#x1109;&#x1173;&#x110f;&#x1173;&#x1105;&#x1162;&#x11b8;.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

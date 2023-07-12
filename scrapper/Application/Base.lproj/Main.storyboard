@@ -317,17 +317,41 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-HV-gZp" customClass="BouncyButton" customModule="NewsScrap" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-pA-0s1">
                                         <rect key="frame" x="0.0" y="657" width="340" height="50"/>
-                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zv5-HV-gZp" customClass="BouncyButton" customModule="NewsScrap" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="340" height="50"/>
+                                                <color key="backgroundColor" systemColor="linkColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="GNE-1w-t3f"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="7일 무료 체험하기">
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVV-Dj-Tpv">
+                                                <rect key="frame" x="0.0" y="0.0" width="340" height="50"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="onPay:" destination="veS-JH-V2a" eventType="touchUpInside" id="wZI-uS-uO5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="GNE-1w-t3f"/>
+                                            <constraint firstAttribute="height" constant="50" id="4Qm-Ha-tRP"/>
+                                            <constraint firstAttribute="bottom" secondItem="RVV-Dj-Tpv" secondAttribute="bottom" id="Hzp-0n-6rU"/>
+                                            <constraint firstItem="RVV-Dj-Tpv" firstAttribute="top" secondItem="7QI-pA-0s1" secondAttribute="top" id="LHj-YP-1K9"/>
+                                            <constraint firstAttribute="trailing" secondItem="RVV-Dj-Tpv" secondAttribute="trailing" id="MFj-4e-qC4"/>
+                                            <constraint firstAttribute="trailing" secondItem="zv5-HV-gZp" secondAttribute="trailing" id="k1O-aU-t3c"/>
+                                            <constraint firstItem="RVV-Dj-Tpv" firstAttribute="leading" secondItem="7QI-pA-0s1" secondAttribute="leading" id="mYc-b3-Rwt"/>
+                                            <constraint firstItem="zv5-HV-gZp" firstAttribute="top" secondItem="7QI-pA-0s1" secondAttribute="top" id="qiD-Se-4nx"/>
+                                            <constraint firstAttribute="bottom" secondItem="zv5-HV-gZp" secondAttribute="bottom" id="sUr-kY-7eY"/>
+                                            <constraint firstItem="zv5-HV-gZp" firstAttribute="leading" secondItem="7QI-pA-0s1" secondAttribute="leading" id="vcM-vJ-bVr"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="7일 무료 체험하기">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
-                                        </buttonConfiguration>
-                                    </button>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hp2-i8-yt4">
                                         <rect key="frame" x="0.0" y="727" width="340" height="20"/>
                                         <subviews>
@@ -341,6 +365,9 @@
                                                 <state key="normal" title="구매복원">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onRestore:" destination="veS-JH-V2a" eventType="touchUpInside" id="0xv-N7-Frf"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmb-ez-Ex3">
                                                 <rect key="frame" x="226.66666666666666" y="0.0" width="113.33333333333334" height="20"/>
@@ -582,7 +609,7 @@
                                         <color key="currentPageIndicatorTintColor" name="Theme"/>
                                     </pageControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H4K-Yt-CbK">
-                                        <rect key="frame" x="0.0" y="58" width="390" height="632.33333333333348"/>
+                                        <rect key="frame" x="0.0" y="58" width="390" height="632.33333333333337"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CGD-su-EQZ">
                                             <size key="itemSize" width="0.0" height="0.0"/>

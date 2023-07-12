@@ -1,0 +1,79 @@
+{
+  "identifier" : "867B8A47",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1499305186",
+    "_developerTeamID" : "DUV8UP2WXU",
+    "_lastSynchronizedDate" : 710824809.25487399
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21361888",
+      "localizations" : [
+
+      ],
+      "name" : "subs",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6451178704",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "구독하고 무제한으로 이용하세요",
+              "displayName" : "뉴스스크랩 구독",
+              "locale" : "ko"
+            }
+          ],
+          "productID" : "year",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "com.haar.scrap.year",
+          "subscriptionGroupID" : "21361888",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "1.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6451178840",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "구독하고 무제한으로 기능을 이용하세요",
+              "displayName" : "뉴스스크랩 구독",
+              "locale" : "ko"
+            }
+          ],
+          "productID" : "com.haar.scrap.month",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "month",
+          "subscriptionGroupID" : "21361888",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

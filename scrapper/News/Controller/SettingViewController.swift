@@ -197,30 +197,44 @@ extension SettingViewController: UITableViewDataSource {
         let maxCount = UserDefaultManager.getMaxGroupCount()
         configuration.text = "그룹"
         
-        configuration.secondaryText = "\(groupCount) / \(UserDefaultManager.getMaxGroupCount())"
-        
-        if maxCount / 2 > groupCount {
-          configuration.secondaryTextProperties.color = .systemGreen
-        } else if maxCount > groupCount {
-          configuration.secondaryTextProperties.color = .systemYellow
-        } else {
-          configuration.secondaryTextProperties.color = .systemRed
+        Task {
+          if await IAPManager.isPro() {
+            configuration.secondaryText = "\(groupCount)"
+          } else {
+            configuration.secondaryText = "\(groupCount) / \(UserDefaultManager.getMaxGroupCount())"
+            if maxCount / 2 > groupCount {
+              configuration.secondaryTextProperties.color = .systemGreen
+            } else if maxCount > groupCount {
+              configuration.secondaryTextProperties.color = .systemYellow
+            } else {
+              configuration.secondaryTextProperties.color = .systemRed
+            }
+          }
+          
+          configuration.image = UIImage(systemName: "rectangle.3.group")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+          cell.contentConfiguration = configuration
         }
-        configuration.image = UIImage(systemName: "rectangle.3.group")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .keyword:
         let keywordCount = realm.objects(KeywordRealm.self).count
         let maxCount = UserDefaultManager.getMaxKeywordCount()
         configuration.text = "키워드"
-        
-        configuration.secondaryText = "\(keywordCount) / \(UserDefaultManager.getMaxKeywordCount())"
-        if maxCount / 2 > keywordCount {
-          configuration.secondaryTextProperties.color = .systemGreen
-        } else if maxCount > keywordCount {
-          configuration.secondaryTextProperties.color = .systemYellow
-        } else {
-          configuration.secondaryTextProperties.color = .systemRed
+        Task {
+          if await IAPManager.isPro() {
+            configuration.secondaryText = "\(keywordCount)"
+          } else {
+            configuration.secondaryText = "\(keywordCount) / \(UserDefaultManager.getMaxKeywordCount())"
+            if maxCount / 2 > keywordCount {
+              configuration.secondaryTextProperties.color = .systemGreen
+            } else if maxCount > keywordCount {
+              configuration.secondaryTextProperties.color = .systemYellow
+            } else {
+              configuration.secondaryTextProperties.color = .systemRed
+            }
+          }
+          
+          configuration.image = UIImage(systemName: "newspaper")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+          cell.contentConfiguration = configuration
         }
-        configuration.image = UIImage(systemName: "newspaper")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .exceptPress:
         let exceptpressCount = self.realm.objects(exceptNews.self).count
         configuration.text = "제외언론사"
