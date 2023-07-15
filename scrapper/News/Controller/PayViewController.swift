@@ -59,7 +59,6 @@ class PayViewController: UIViewController {
           break
         case .pending, .userCancelled: break
         }
-        print(123)
       } else {
         // Fallback on earlier versions
       }
@@ -104,11 +103,11 @@ class PayViewController: UIViewController {
       $0?.layer.borderWidth = 1
       $0?.layer.cornerRadius = 20
     }
-    monthlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
-    monthlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
+    yearlyPay.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.3)
+    yearlyPay.layer.borderColor = UIColor(named: "Theme")?.cgColor
     
-    yearlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
-    yearlyPay.layer.borderColor = UIColor.lightGray.cgColor
+    monthlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+    monthlyPay.layer.borderColor = UIColor.lightGray.cgColor
     
     guard let path = Bundle.main.path(forResource: "paywall\(Int.random(in: 1...3))", ofType:"mp4") else {
       debugPrint("video.m4v not found")
