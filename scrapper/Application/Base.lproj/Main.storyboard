@@ -330,7 +330,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="GNE-1w-t3f"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="7일 무료 체험하기">
+                                                <buttonConfiguration key="configuration" style="filled" title="시작하기">
                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
                                                 </buttonConfiguration>
                                                 <connections>
