@@ -30,6 +30,8 @@
 		B565A5C123F669FA001055CF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B565A5C023F669FA001055CF /* Util.swift */; };
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 		B5872F04247D11F300F12A8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5872F06247D11F300F12A8F /* Localizable.strings */; };
+		D618C07D2A8367AE00EA7998 /* PaySpac.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C07C2A8367AE00EA7998 /* PaySpac.swift */; };
+		D618C0802A83682B00EA7998 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = D618C07F2A83682B00EA7998 /* Quick */; };
 		D63158622A49C5A9000E4972 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D63158612A49C5A9000E4972 /* Config.xcconfig */; };
 		D63BEA202A3CC52B004DD22A /* KeywordGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */; };
 		D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */; };
@@ -62,7 +64,18 @@
 		D6C6ACE92A3B524100438E61 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACE82A3B524100438E61 /* Realm */; };
 		D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACEA2A3B524100438E61 /* RealmSwift */; };
 		D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */; };
+		D6D910652A8366C8009A852D /* NewsScrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D910642A8366C8009A852D /* NewsScrapTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D6D910662A8366C8009A852D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5486D7F23F23461008A5ABD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5486D8623F23461008A5ABD;
+			remoteInfo = scrapper;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B520381023F30A280025B571 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -95,6 +108,7 @@
 		B5872F09247D120000F12A8F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D617DAFD2A3F37AA000329EF /* scrapperRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scrapperRelease.entitlements; sourceTree = "<group>"; };
 		D617DAFE2A3F37AB000329EF /* scrapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scrapper.entitlements; sourceTree = "<group>"; };
+		D618C07C2A8367AE00EA7998 /* PaySpac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaySpac.swift; sourceTree = "<group>"; };
 		D63158612A49C5A9000E4972 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordGroupHeader.swift; sourceTree = "<group>"; };
 		D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordGroupHeader.xib; sourceTree = "<group>"; };
@@ -121,6 +135,8 @@
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
+		D6D910622A8366C8009A852D /* NewsScrapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsScrapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D910642A8366C8009A852D /* NewsScrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScrapTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +152,14 @@
 				D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */,
 				D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */,
 				D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D9105F2A8366C8009A852D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D618C0802A83682B00EA7998 /* Quick in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +278,7 @@
 				D661A9D52A4DC52E00E1EDBA /* paywall3.mp4 */,
 				D661A9D22A4DAAB100E1EDBA /* tunnel.mp4 */,
 				B5486D8923F23461008A5ABD /* scrapper */,
+				D6D910632A8366C8009A852D /* NewsScrapTests */,
 				B5486D8823F23461008A5ABD /* Products */,
 				D687676E2A5E4D890024574B /* Frameworks */,
 			);
@@ -263,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				B5486D8723F23461008A5ABD /* NewsScrap.app */,
+				D6D910622A8366C8009A852D /* NewsScrapTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,6 +313,15 @@
 				D687676F2A5E4D890024574B /* StoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D6D910632A8366C8009A852D /* NewsScrapTests */ = {
+			isa = PBXGroup;
+			children = (
+				D6D910642A8366C8009A852D /* NewsScrapTests.swift */,
+				D618C07C2A8367AE00EA7998 /* PaySpac.swift */,
+			);
+			path = NewsScrapTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,18 +353,43 @@
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D6D910612A8366C8009A852D /* NewsScrapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6D9106A2A8366C8009A852D /* Build configuration list for PBXNativeTarget "NewsScrapTests" */;
+			buildPhases = (
+				D6D9105E2A8366C8009A852D /* Sources */,
+				D6D9105F2A8366C8009A852D /* Frameworks */,
+				D6D910602A8366C8009A852D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6D910672A8366C8009A852D /* PBXTargetDependency */,
+			);
+			name = NewsScrapTests;
+			packageProductDependencies = (
+				D618C07F2A83682B00EA7998 /* Quick */,
+			);
+			productName = NewsScrapTests;
+			productReference = D6D910622A8366C8009A852D /* NewsScrapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		B5486D7F23F23461008A5ABD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = johnny;
 				TargetAttributes = {
 					B5486D8623F23461008A5ABD = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					D6D910612A8366C8009A852D = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = B5486D8623F23461008A5ABD;
 					};
 				};
 			};
@@ -350,12 +410,14 @@
 				D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */,
 				D661A9E72A50851800E1EDBA /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */,
 			);
 			productRefGroup = B5486D8823F23461008A5ABD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				B5486D8623F23461008A5ABD /* scrapper */,
+				D6D910612A8366C8009A852D /* NewsScrapTests */,
 			);
 		};
 /* End PBXProject section */
@@ -381,6 +443,13 @@
 				B5486D9423F23463008A5ABD /* Assets.xcassets in Resources */,
 				B5486D9223F23461008A5ABD /* Main.storyboard in Resources */,
 				D661A9ED2A50868F00E1EDBA /* 18089-gold-coin.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D910602A8366C8009A852D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +494,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6D9105E2A8366C8009A852D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6D910652A8366C8009A852D /* NewsScrapTests.swift in Sources */,
+				D618C07D2A8367AE00EA7998 /* PaySpac.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D6D910672A8366C8009A852D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5486D8623F23461008A5ABD /* scrapper */;
+			targetProxy = D6D910662A8366C8009A852D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B5486D9023F23461008A5ABD /* Main.storyboard */ = {
@@ -639,6 +725,46 @@
 			};
 			name = Release;
 		};
+		D6D910682A8366C8009A852D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DUV8UP2WXU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haar.NewsScrapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsScrap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NewsScrap";
+			};
+			name = Debug;
+		};
+		D6D910692A8366C8009A852D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DUV8UP2WXU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haar.NewsScrapTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsScrap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NewsScrap";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -660,9 +786,26 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D6D9106A2A8366C8009A852D /* Build configuration list for PBXNativeTarget "NewsScrapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D910682A8366C8009A852D /* Debug */,
+				D6D910692A8366C8009A852D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
@@ -714,6 +857,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D618C07F2A83682B00EA7998 /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
 		D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */;

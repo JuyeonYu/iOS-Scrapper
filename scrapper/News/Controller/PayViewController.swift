@@ -11,6 +11,7 @@ import AVFoundation
 import StoreKit
 
 class PayViewController: UIViewController {
+  @IBOutlet weak var indicator: UIActivityIndicatorView!
   @IBAction func onRestore(_ sender: Any) {
     do {
       if #available(iOS 15.0, *) {
@@ -45,6 +46,8 @@ class PayViewController: UIViewController {
   let productIds = ["year", "com.haar.scrap.month"]
   var payProductId = "year"
   @IBAction func onPay(_ sender: Any) {
+    indicator.isHidden = false
+    indicator.startAnimating()
     let productIds = ["year", "com.haar.scrap.month"]
     Task {
       if #available(iOS 15.0, *) {
@@ -59,6 +62,8 @@ class PayViewController: UIViewController {
           break
         case .pending, .userCancelled: break
         }
+        
+        indicator.isHidden = true
       } else {
         // Fallback on earlier versions
       }
@@ -114,7 +119,7 @@ class PayViewController: UIViewController {
       return
     }
     playerAV = AVPlayer(url: URL(fileURLWithPath: path))
-    
+    indicator.isHidden = true
   }
   
   override func viewWillAppear(_ animated: Bool) {

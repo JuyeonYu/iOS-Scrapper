@@ -389,12 +389,16 @@
                                     <constraint firstItem="AtS-g1-8MY" firstAttribute="top" secondItem="Hqt-fJ-7Dg" secondAttribute="top" constant="199" id="P3B-kP-GYb"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="EVS-LQ-ZoS">
+                                <rect key="frame" x="176.66666666666666" y="403.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Z4Q-LP-6dA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Am8-Dh-1v9" firstAttribute="leading" secondItem="dYp-Tv-ujR" secondAttribute="leading" id="5PN-7Z-5Uw"/>
                             <constraint firstItem="Hqt-fJ-7Dg" firstAttribute="top" secondItem="Z4Q-LP-6dA" secondAttribute="top" id="868-7d-KNt"/>
+                            <constraint firstItem="EVS-LQ-ZoS" firstAttribute="centerX" secondItem="dYp-Tv-ujR" secondAttribute="centerX" id="AtQ-TG-zcc"/>
                             <constraint firstItem="Z4Q-LP-6dA" firstAttribute="trailing" secondItem="Hqt-fJ-7Dg" secondAttribute="trailing" constant="25" id="BFc-Jr-hNe"/>
                             <constraint firstItem="RF2-8q-9KF" firstAttribute="trailing" secondItem="Am8-Dh-1v9" secondAttribute="trailing" id="Cn6-if-zFv"/>
                             <constraint firstItem="RF2-8q-9KF" firstAttribute="top" secondItem="Am8-Dh-1v9" secondAttribute="top" id="NXn-ol-s4y"/>
@@ -404,10 +408,12 @@
                             <constraint firstItem="Z4Q-LP-6dA" firstAttribute="bottom" secondItem="Hqt-fJ-7Dg" secondAttribute="bottom" constant="16" id="RaO-Hn-mkl"/>
                             <constraint firstAttribute="trailing" secondItem="Am8-Dh-1v9" secondAttribute="trailing" id="Vmm-no-lhN"/>
                             <constraint firstItem="RF2-8q-9KF" firstAttribute="bottom" secondItem="Am8-Dh-1v9" secondAttribute="bottom" id="fY9-r4-NBx"/>
+                            <constraint firstItem="EVS-LQ-ZoS" firstAttribute="centerY" secondItem="dYp-Tv-ujR" secondAttribute="centerY" id="gPw-xc-UZp"/>
                             <constraint firstItem="RF2-8q-9KF" firstAttribute="leading" secondItem="Am8-Dh-1v9" secondAttribute="leading" id="vFr-7d-wSM"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="indicator" destination="EVS-LQ-ZoS" id="R07-Yz-oEU"/>
                         <outlet property="monthlyPay" destination="MhK-7a-QTZ" id="SgA-ch-aBG"/>
                         <outlet property="pay" destination="zv5-HV-gZp" id="e7S-7a-juC"/>
                         <outlet property="playerParent" destination="Am8-Dh-1v9" id="JHy-c0-n6i"/>
