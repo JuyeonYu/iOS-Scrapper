@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import GoogleMobileAds
+import SwiftRater
 
 class KeywordViewController: UIViewController {
   var rewardType: RewardType?
@@ -35,6 +36,7 @@ class KeywordViewController: UIViewController {
   }
   
   @IBAction func onPlus(_ sender: Any) {
+    SwiftRater.incrementSignificantUsageCount()
     
     tableView.isEditing = false
     let alert = UIAlertController(title: "", message: "무엇을 추가할까요?", preferredStyle: .actionSheet)

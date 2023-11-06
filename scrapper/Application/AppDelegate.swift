@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import GoogleMobileAds
+import SwiftRater
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     GADMobileAds.sharedInstance().start(completionHandler: nil)
     initRealm()
+    
+    SwiftRater.daysUntilPrompt = 7
+    SwiftRater.usesUntilPrompt = 10
+    SwiftRater.significantUsesUntilPrompt = 3
+    SwiftRater.daysBeforeReminding = 1
+    SwiftRater.showLaterButton = true
+//    SwiftRater.debugMode = true
+    SwiftRater.appLaunched()
+
     return true
   }
   

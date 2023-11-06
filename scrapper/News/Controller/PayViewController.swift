@@ -46,31 +46,38 @@ class PayViewController: UIViewController {
   let productIds = ["year", "com.haar.scrap.month"]
   var payProductId = "year"
   @IBAction func onPay(_ sender: Any) {
-    indicator.isHidden = false
-    indicator.startAnimating()
-    let productIds = ["year", "com.haar.scrap.month"]
-    Task {
-      if #available(iOS 15.0, *) {
-        let products = try await Product.products(for: [payProductId])
-        
-        let result = try await products[0].purchase()
-        switch result {
-        case let .success(.verified(transaction)):
-          await transaction.finish()
-          self.dismiss(animated: true)
-        case let .success(.unverified(_, error)):
-          break
-        case .pending, .userCancelled: break
-        }
-        
-        indicator.isHidden = true
-      } else {
-        // Fallback on earlier versions
+      indicator.isHidden = false
+      indicator.startAnimating()
+      let productIds = ["year", "com.haar.scrap.month"]
+      
+      Task {
+          do {
+              if #available(iOS 15.0, *) {
+                  let products = try await Product.products(for: [payProductId])
+                  let result = try await products[0].purchase()
+                  switch result {
+                  case let .success(.verified(transaction)):
+                      await transaction.finish()
+                      DispatchQueue.main.async {
+                          self.dismiss(animated: true)
+                      }
+                  case let .success(.unverified(_, error)):
+                      break
+                  case .pending, .userCancelled: break
+                  }
+              } else {
+                  // Fallback on earlier versions
+              }
+          } catch {
+              // Handle any errors here
+          }
+          
+          DispatchQueue.main.async {
+              self.indicator.isHidden = true
+          }
       }
-    }
-    
-
   }
+
   @IBOutlet weak var yearlyPay: UIButton!
   @IBOutlet weak var monthlyPay: UIButton!
   var playerAV: AVPlayer!
