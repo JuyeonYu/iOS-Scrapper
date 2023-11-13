@@ -7,8 +7,6 @@
 //
 
 import XCTest
-import Nimble
-import Quick
 
 final class PaySpac: XCTestCase {
 

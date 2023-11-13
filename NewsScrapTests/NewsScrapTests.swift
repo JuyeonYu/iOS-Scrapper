@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Quick
 
 final class NewsScrapTests: XCTestCase {
 
