@@ -31,7 +31,6 @@
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 		B5872F04247D11F300F12A8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5872F06247D11F300F12A8F /* Localizable.strings */; };
 		D618C07D2A8367AE00EA7998 /* PaySpac.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C07C2A8367AE00EA7998 /* PaySpac.swift */; };
-		D618C0802A83682B00EA7998 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = D618C07F2A83682B00EA7998 /* Quick */; };
 		D63158622A49C5A9000E4972 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D63158612A49C5A9000E4972 /* Config.xcconfig */; };
 		D63BEA202A3CC52B004DD22A /* KeywordGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */; };
 		D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */; };
@@ -161,7 +160,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D618C0802A83682B00EA7998 /* Quick in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +369,6 @@
 			);
 			name = NewsScrapTests;
 			packageProductDependencies = (
-				D618C07F2A83682B00EA7998 /* Quick */,
 			);
 			productName = NewsScrapTests;
 			productReference = D6D910622A8366C8009A852D /* NewsScrapTests.xctest */;
@@ -413,7 +410,6 @@
 				D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */,
 				D661A9E72A50851800E1EDBA /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */,
 				D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 			);
 			productRefGroup = B5486D8823F23461008A5ABD /* Products */;
@@ -802,14 +798,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Quick/Quick";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
@@ -869,11 +857,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D618C07F2A83682B00EA7998 /* Quick */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */;
-			productName = Quick;
-		};
 		D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */;
