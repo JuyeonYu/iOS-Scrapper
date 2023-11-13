@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import StoreKit
+import SafariServices
 
 class PayViewController: UIViewController {
   @IBOutlet weak var indicator: UIActivityIndicatorView!
@@ -26,6 +27,14 @@ class PayViewController: UIViewController {
       print(error)
     }
     
+  }
+  @IBAction func onPrivacy(_ sender: Any) {
+    let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
+    present(safariVC, animated: true, completion: nil)
+  }
+  @IBAction func onTerms(_ sender: Any) {
+    let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
+    present(safariVC, animated: true, completion: nil)
   }
   @IBAction func onYearlyPay(_ sender: Any) {
     monthlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)

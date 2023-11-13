@@ -39,8 +39,8 @@ class SettingViewController: UIViewController {
     case version
   }
   enum OtherType: Int, CaseIterable {
-//    case terms
-//    case policy
+    case terms
+    case policy
     case report
     case share
   }
@@ -131,12 +131,12 @@ extension SettingViewController: UITableViewDelegate {
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return }
       switch otherType {
-//      case .terms:
-//        let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
-//        present(safariVC, animated: true, completion: nil)
-//      case .policy:
-//        let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
-//        present(safariVC, animated: true, completion: nil)
+      case .terms:
+        let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
+        present(safariVC, animated: true, completion: nil)
+      case .policy:
+        let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
+        present(safariVC, animated: true, completion: nil)
       case .report:
         if MFMailComposeViewController.canSendMail() {
           let compseVC = MFMailComposeViewController()
@@ -257,12 +257,12 @@ extension SettingViewController: UITableViewDataSource {
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return UITableViewCell() }
       switch otherType {
-//      case .policy:
-//        configuration.text = "개인정보 처리방침"
-//        configuration.image = UIImage(systemName: "doc.viewfinder")?.withTintColor(.label, renderingMode: .alwaysOriginal)
-//      case .terms:
-//        configuration.text = "이용약관"
-//        configuration.image = UIImage(systemName: "doc.append")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+      case .policy:
+        configuration.text = "개인정보 처리방침"
+        configuration.image = UIImage(systemName: "doc.viewfinder")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+      case .terms:
+        configuration.text = "이용약관"
+        configuration.image = UIImage(systemName: "doc.append")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .report:
         configuration.text = "문의하기"
         configuration.image = UIImage(systemName: "exclamationmark.bubble")?.withTintColor(.label, renderingMode: .alwaysOriginal)

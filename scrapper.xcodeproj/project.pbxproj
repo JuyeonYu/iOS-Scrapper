@@ -61,6 +61,7 @@
 		D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */; };
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
+		D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = D6B8CF392AF91F0F00F6AC63 /* SwiftRater */; };
 		D6C6ACE92A3B524100438E61 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACE82A3B524100438E61 /* Realm */; };
 		D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACEA2A3B524100438E61 /* RealmSwift */; };
 		D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */; };
@@ -144,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */,
 				D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */,
 				D661A9E92A50851800E1EDBA /* Lottie in Frameworks */,
 				D6C6ACE92A3B524100438E61 /* Realm in Frameworks */,
@@ -348,6 +350,7 @@
 				D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */,
 				D661A9C42A4C71AB00E1EDBA /* FeedKit */,
 				D661A9E82A50851800E1EDBA /* Lottie */,
+				D6B8CF392AF91F0F00F6AC63 /* SwiftRater */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -411,6 +414,7 @@
 				D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */,
 				D661A9E72A50851800E1EDBA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D618C07E2A83682B00EA7998 /* XCRemoteSwiftPackageReference "Quick" */,
+				D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 			);
 			productRefGroup = B5486D8823F23461008A5ABD /* Products */;
 			projectDirPath = "";
@@ -685,7 +689,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper.dev;
 				PRODUCT_NAME = NewsScrap;
@@ -714,7 +718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
@@ -838,6 +842,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/takecian/SwiftRater";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		D6C6ACE72A3B524100438E61 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -881,6 +893,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		D6B8CF392AF91F0F00F6AC63 /* SwiftRater */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */;
+			productName = SwiftRater;
 		};
 		D6C6ACE82A3B524100438E61 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

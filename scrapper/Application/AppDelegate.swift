@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let configCheck = Realm.Configuration();
     do {
       let fileUrlIs = try schemaVersionAtURL(configCheck.fileURL!)
-      print("schema version \(fileUrlIs)")
+      print("schema version \(fileUrlIs)") 
     } catch  {
       print(error)
     }
@@ -46,9 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     GADMobileAds.sharedInstance().start(completionHandler: nil)
     initRealm()
-    
+    SwiftRater.conditionsMetMode = .any
     SwiftRater.daysUntilPrompt = 7
-    SwiftRater.usesUntilPrompt = 10
+    SwiftRater.usesUntilPrompt = 0
     SwiftRater.significantUsesUntilPrompt = 3
     SwiftRater.daysBeforeReminding = 1
     SwiftRater.showLaterButton = true

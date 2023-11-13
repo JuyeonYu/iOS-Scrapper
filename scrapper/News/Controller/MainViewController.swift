@@ -19,7 +19,8 @@ class MainViewController: UITabBarController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     selectedIndex = UserDefaultManager.getSelectedBottomTabBarIndex()
-      SwiftRater.check()
+    
+    SwiftRater.check()
   }
   
   
