@@ -20,7 +20,7 @@ class OnboardingCell: UICollectionViewCell {
   
   func configure(item: OnboardingItem) {
     head.text = item.head
-    thumbnail.image = UIImage(systemName: item.imageName)
+    thumbnail.image = UIImage(named: item.imageName)
     foot.text = item.foot
   }
 

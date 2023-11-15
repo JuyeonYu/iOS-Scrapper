@@ -12,6 +12,7 @@ import StoreKit
 import SafariServices
 
 class PayViewController: UIViewController {
+  var onClose: (() -> ())?
   @IBOutlet weak var indicator: UIActivityIndicatorView!
   @IBAction func onRestore(_ sender: Any) {
     do {
@@ -110,7 +111,9 @@ class PayViewController: UIViewController {
     }
     
     
-    dismiss(animated: true)
+    dismiss(animated: true) {
+      self.onClose?()
+    }
   }
   
   @IBOutlet weak var playerParent: UIView!
