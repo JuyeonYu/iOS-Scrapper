@@ -18,6 +18,7 @@ enum RewardType {
 }
 
 class SettingViewController: UIViewController {
+  var hackOnBoarding: Int = 0
   var rewardType: RewardType?
   let maxGroup = 3
   let maxKeyword = 10
@@ -126,7 +127,13 @@ extension SettingViewController: UITableViewDelegate {
 //        alert.modalTransitionStyle = .crossDissolve
 //        alert.modalPresentationStyle = .overCurrentContext
 //        present(alert, animated: true)
-      default: break
+      default:
+        hackOnBoarding += 1
+        if hackOnBoarding == 5 {
+          hackOnBoarding = 0
+          let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OnboardingViewController")
+          present(vc, animated:  true)
+        }
       }
     case .other:
       guard let otherType = OtherType(rawValue: indexPath.row) else { return }

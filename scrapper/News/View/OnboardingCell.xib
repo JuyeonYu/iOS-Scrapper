@@ -19,22 +19,22 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtA-J5-GTd">
-                        <rect key="frame" x="185.66666666666666" y="95.333333333333329" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="184.66666666666666" y="688" width="43.666666666666657" height="21.666666666666629"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67O-oe-HHV">
-                        <rect key="frame" x="184.33333333333334" y="731" width="44.333333333333343" height="20.333333333333371"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <rect key="frame" x="181" y="729" width="51.333333333333343" height="24"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zw2-8r-avH">
-                        <rect key="frame" x="56.666666666666657" y="274.66666666666663" width="300" height="298.66666666666663"/>
+                        <rect key="frame" x="31.666666666666657" y="164.66666666666666" width="350" height="348.66666666666674"/>
                         <color key="tintColor" name="Theme"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="300" id="hpe-jT-xoJ"/>
+                            <constraint firstAttribute="width" constant="350" id="hpe-jT-xoJ"/>
                             <constraint firstAttribute="width" secondItem="zw2-8r-avH" secondAttribute="height" id="iuH-CF-lFx"/>
                         </constraints>
                     </imageView>
@@ -43,8 +43,8 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="zw2-8r-avH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AWV-aV-J4z"/>
-                <constraint firstItem="zw2-8r-avH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="AwJ-Ff-Fiz"/>
-                <constraint firstItem="vtA-J5-GTd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.25" id="F3T-bj-Bkr"/>
+                <constraint firstItem="zw2-8r-avH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="0.8" id="AwJ-Ff-Fiz"/>
+                <constraint firstItem="vtA-J5-GTd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.65" id="F3T-bj-Bkr"/>
                 <constraint firstItem="vtA-J5-GTd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="gkG-vL-jKW"/>
                 <constraint firstItem="67O-oe-HHV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.75" id="rLs-g1-cdM"/>
                 <constraint firstItem="67O-oe-HHV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ra4-88-2VM"/>

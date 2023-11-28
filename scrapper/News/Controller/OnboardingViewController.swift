@@ -9,9 +9,9 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-  let onboardItems: [OnboardingItem] = [.init(head: "모든 뉴스를 다 볼 수는 없으니까", imageName: "onboarding1", foot: "관심있는 키워드를 등록해보세요!"),
-                                        .init(head: "그룹으로 묶고, 즐겨찾고", imageName: "onboarding2", foot: "나만의 뉴스를 만들어보세요!"),
-                                        .init(head: "요즘 뭐가 이슈인지", imageName: "onboarding3", foot: "뒤쳐지지 않게 만들어 드릴게요!")]
+  let onboardItems: [OnboardingItem] = [.init(head: "모든 뉴스를 다 볼 수는 없으니까", imageName: "onboarding1-1", foot: "관심있는 키워드를 등록해보세요!"),
+                                        .init(head: "그룹으로 묶고, 즐겨찾고", imageName: "onboarding1-2", foot: "나만의 뉴스를 만들어보세요!"),
+                                        .init(head: "요즘 뭐가 이슈인지", imageName: "onboarding1-3", foot: "뒤쳐지지 않게 만들어 드릴게요!")]
   @IBOutlet weak var nextBtn: UIButton!
   
   

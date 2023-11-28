@@ -64,6 +64,10 @@
 		D6C6ACE92A3B524100438E61 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACE82A3B524100438E61 /* Realm */; };
 		D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACEA2A3B524100438E61 /* RealmSwift */; };
 		D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */; };
+		D6D207A52B162B130093D59C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6D207A42B162B130093D59C /* GoogleService-Info.plist */; };
+		D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */; };
+		D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A92B162C310093D59C /* FirebaseCrashlytics */; };
+		D6D207AC2B162C310093D59C /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207AB2B162C310093D59C /* FirebaseRemoteConfigSwift */; };
 		D6D910652A8366C8009A852D /* NewsScrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D910642A8366C8009A852D /* NewsScrapTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +139,7 @@
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
+		D6D207A42B162B130093D59C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D6D910622A8366C8009A852D /* NewsScrapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsScrapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D910642A8366C8009A852D /* NewsScrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScrapTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,9 +153,12 @@
 				D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */,
 				D661A9E92A50851800E1EDBA /* Lottie in Frameworks */,
 				D6C6ACE92A3B524100438E61 /* Realm in Frameworks */,
+				D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */,
+				D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */,
 				D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */,
 				D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */,
 				D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */,
+				D6D207AC2B162C310093D59C /* FirebaseRemoteConfigSwift in Frameworks */,
 				D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */,
 				D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */,
 			);
@@ -249,6 +257,7 @@
 		B520382D23F3D0930025B571 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				D6D207A42B162B130093D59C /* GoogleService-Info.plist */,
 				D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */,
 				D68767732A5E52B90024574B /* 뉴스스크랩.storekit */,
 				D661A9F12A519BEE00E1EDBA /* 9733-coin.json */,
@@ -349,6 +358,9 @@
 				D661A9C42A4C71AB00E1EDBA /* FeedKit */,
 				D661A9E82A50851800E1EDBA /* Lottie */,
 				D6B8CF392AF91F0F00F6AC63 /* SwiftRater */,
+				D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */,
+				D6D207A92B162C310093D59C /* FirebaseCrashlytics */,
+				D6D207AB2B162C310093D59C /* FirebaseRemoteConfigSwift */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -411,6 +423,7 @@
 				D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */,
 				D661A9E72A50851800E1EDBA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */,
+				D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = B5486D8823F23461008A5ABD /* Products */;
 			projectDirPath = "";
@@ -439,6 +452,7 @@
 				D661A9D82A4DC52E00E1EDBA /* paywall3.mp4 in Resources */,
 				D661A9D92A4DC52E00E1EDBA /* paywall1.mp4 in Resources */,
 				D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */,
+				D6D207A52B162B130093D59C /* GoogleService-Info.plist in Resources */,
 				B5872F04247D11F300F12A8F /* Localizable.strings in Resources */,
 				B5486D9423F23463008A5ABD /* Assets.xcassets in Resources */,
 				B5486D9223F23461008A5ABD /* Main.storyboard in Resources */,
@@ -854,6 +868,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.18.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -896,6 +918,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6C6ACEC2A3B57A900438E61 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		D6D207A92B162C310093D59C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		D6D207AB2B162C310093D59C /* FirebaseRemoteConfigSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfigSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

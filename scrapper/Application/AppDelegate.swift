@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import GoogleMobileAds
 import SwiftRater
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     SwiftRater.showLaterButton = true
 //    SwiftRater.debugMode = true
     SwiftRater.appLaunched()
+    
+    FirebaseApp.configure()
 
     return true
   }
