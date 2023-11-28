@@ -20,11 +20,12 @@ class OnboardingViewController: UIViewController {
       pageControl.currentPage = currentPage
       if currentPage == 2 {
         nextBtn.setTitle("지금부터 시작", for: .normal)
+        
         nextBtn.backgroundColor = UIColor(named: "Theme")
         
       } else {
         nextBtn.setTitle("다음", for: .normal)
-        nextBtn.backgroundColor = .lightGray
+        nextBtn.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.5)
       }
     }
   }
@@ -60,7 +61,7 @@ class OnboardingViewController: UIViewController {
     collectionView.showsHorizontalScrollIndicator = false
     nextBtn.backgroundColor = .lightGray
     nextBtn.layer.cornerRadius = 20
-    
+    nextBtn.backgroundColor = UIColor(named: "Theme")?.withAlphaComponent(0.5)
   }
 }
 

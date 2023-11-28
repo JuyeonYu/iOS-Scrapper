@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NaverSearchAPISecret</key>
-	<string>${NaverSearchAPISecret}</string>
-	<key>NaverSearchAPIId</key>
-	<string>${NaverSearchAPIId}</string>
-	<key>CFBundleDisplayName</key>
-	<string>뉴스스크랩</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>뉴스스크랩</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -37,6 +33,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NaverSearchAPIId</key>
+	<string>${NaverSearchAPIId}</string>
+	<key>NaverSearchAPISecret</key>
+	<string>${NaverSearchAPISecret}</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

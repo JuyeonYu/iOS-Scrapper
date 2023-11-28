@@ -148,9 +148,8 @@ extension SettingViewController: UITableViewDelegate {
         if MFMailComposeViewController.canSendMail() {
           let compseVC = MFMailComposeViewController()
           compseVC.mailComposeDelegate = self
-          compseVC.setToRecipients(["2x2isfor.gmail.com"])
-          compseVC.setSubject("메시지제목")
-          compseVC.setMessageBody("메시지컨텐츠", isHTML: false)
+          compseVC.setToRecipients(["2x2isfor@gmail.com"])
+          compseVC.setSubject("iOS 뉴스스크랩 문의")
           self.present(compseVC, animated: true, completion: nil)
         }
         else {
@@ -208,7 +207,7 @@ extension SettingViewController: UITableViewDataSource {
         let groupCount = realm.objects(GroupRealm.self).count
         let maxCount = UserDefaultManager.getMaxGroupCount()
         configuration.text = "그룹"
-        
+        configuration.image = UIImage(systemName: "rectangle.3.group")?.withTintColor(.label, renderingMode: .alwaysOriginal)
         Task {
           if await IAPManager.isPro() {
             configuration.secondaryText = "\(groupCount)"
@@ -223,13 +222,14 @@ extension SettingViewController: UITableViewDataSource {
             }
           }
           
-          configuration.image = UIImage(systemName: "rectangle.3.group")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+          
           cell.contentConfiguration = configuration
         }
       case .keyword:
         let keywordCount = realm.objects(KeywordRealm.self).count
         let maxCount = UserDefaultManager.getMaxKeywordCount()
         configuration.text = "키워드"
+        configuration.image = UIImage(systemName: "newspaper")?.withTintColor(.label, renderingMode: .alwaysOriginal)
         Task {
           if await IAPManager.isPro() {
             configuration.secondaryText = "\(keywordCount)"
@@ -244,7 +244,7 @@ extension SettingViewController: UITableViewDataSource {
             }
           }
           
-          configuration.image = UIImage(systemName: "newspaper")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+          
           cell.contentConfiguration = configuration
         }
       case .exceptPress:
