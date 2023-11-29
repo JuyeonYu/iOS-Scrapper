@@ -11,6 +11,7 @@ import RealmSwift
 import GoogleMobileAds
 import SwiftRater
 import FirebaseCore
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -46,11 +47,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     SwiftRater.significantUsesUntilPrompt = 3
     SwiftRater.daysBeforeReminding = 1
     SwiftRater.showLaterButton = true
-//    SwiftRater.debugMode = true
+    //    SwiftRater.debugMode = true
     SwiftRater.appLaunched()
     
     FirebaseApp.configure()
-
+    Messaging.messaging().delegate = self
+    
+    UNUserNotificationCenter.current().delegate = self
+    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+    UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
+      if granted {
+        print("알림 등록이 완료되었습니다.")
+      }
+    }
+    application.registerForRemoteNotifications()
+    
+    
     return true
   }
   
@@ -71,3 +83,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    Messaging.messaging().apnsToken = deviceToken
+  }
+  
+  // foreground 상에서 알림이 보이게끔 해준다.
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    completionHandler([.banner, .sound, .badge])
+  }
+  
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    
+    let userInfo = response.notification.request.content.userInfo
+    if userInfo[AnyHashable("page")] as? String == "pay" {
+      let pay = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PayViewController")
+      DispatchQueue.main.async {
+        UIApplication.shared.windows.first?.rootViewController?.present(pay, animated: true)
+      }
+    }
+  }
+}
+
+extension AppDelegate: MessagingDelegate {
+  
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+    // 여기서 이제 서버로 다시 fcm 토큰을 보내줘야 한다!
+    // 그러나 서버가 없기 때문에 이렇게 token을 출력하게 한다.
+    // 이 토큰은 뒤에서 Test할때 필요하다!
+    print("FCM Token: \(fcmToken)")
+  }
+}

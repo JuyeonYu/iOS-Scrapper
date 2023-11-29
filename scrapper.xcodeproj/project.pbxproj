@@ -35,6 +35,7 @@
 		D63BEA202A3CC52B004DD22A /* KeywordGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */; };
 		D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */; };
 		D63BEA242A3DE7BB004DD22A /* ExceptPublisherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */; };
+		D654E5E02B16FC9500BF5EF7 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D654E5DF2B16FC9500BF5EF7 /* FirebaseMessaging */; };
 		D661A9BD2A4C1D5F00E1EDBA /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9BC2A4C1D5F00E1EDBA /* SettingViewController.swift */; };
 		D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */; };
 		D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9C12A4C5D3D00E1EDBA /* TodayViewController.swift */; };
@@ -157,6 +158,7 @@
 				D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */,
 				D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */,
 				D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */,
+				D654E5E02B16FC9500BF5EF7 /* FirebaseMessaging in Frameworks */,
 				D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */,
 				D6D207AC2B162C310093D59C /* FirebaseRemoteConfigSwift in Frameworks */,
 				D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */,
@@ -361,6 +363,7 @@
 				D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */,
 				D6D207A92B162C310093D59C /* FirebaseCrashlytics */,
 				D6D207AB2B162C310093D59C /* FirebaseRemoteConfigSwift */,
+				D654E5DF2B16FC9500BF5EF7 /* FirebaseMessaging */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -879,6 +882,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D654E5DF2B16FC9500BF5EF7 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseMessaging;
+		};
 		D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */;
