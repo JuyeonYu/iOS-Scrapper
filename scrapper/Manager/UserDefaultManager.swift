@@ -66,4 +66,11 @@ struct UserDefaultManager {
   static func getMaxIssueShareCount() -> Int {
     return UserDefaults.standard.integer(forKey: Constants.UserDefault.maxShare)
   }
+  
+  static func setLastOpen() {
+    UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: Constants.UserDefault.lastOpen)
+  }
+  static func getLastOpen() -> Double {
+    return UserDefaults.standard.double(forKey: Constants.UserDefault.lastOpen)
+  }
 }
