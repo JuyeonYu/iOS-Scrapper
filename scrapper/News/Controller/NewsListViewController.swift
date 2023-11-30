@@ -18,6 +18,8 @@ class NewsListViewController: UIViewController {
   var newsList: [News] = []
   var searchedNews: [News] = []
   var dataList: [News] = []
+  var newsViewCount: Int = 0
+  let popupAdNewsViewCount: Int = 5
   
   let keyword: String
   init?(coder: NSCoder, keyword: String) {
@@ -39,7 +41,11 @@ class NewsListViewController: UIViewController {
   var searchSortBarTitle = "Related order" // 기본값은 관련도 검색
   @IBOutlet weak var searchBar: UISearchBar!
   
+  private var interstitial: GADInterstitialAd?
   @IBOutlet weak var bannerView: GADBannerView!
+  
+  var safariVC: SFSafariViewController?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.refreshControl = refreshControl
@@ -85,6 +91,11 @@ class NewsListViewController: UIViewController {
         bannerView.load(GADRequest())
       }
     }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    loadAd()
   }
   
   func requestNaverNewsList(keyword: String, start: Int) {
@@ -168,6 +179,20 @@ class NewsListViewController: UIViewController {
       self.present(actionSheet, animated: true, completion: nil)
     }
   }
+  fileprivate func loadAd() {
+    let request = GADRequest()
+    
+    GADInterstitialAd.load(withAdUnitID: Constants.googleADModFullPageID,
+                           request: request,
+                           completionHandler: { [self] ad, error in
+      if let error = error {
+        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+        return
+      }
+      interstitial = ad
+      interstitial?.fullScreenContentDelegate = self
+    })
+  }
 }
 
 extension NewsListViewController: UITableViewDelegate {
@@ -183,11 +208,20 @@ extension NewsListViewController: UITableViewDelegate {
         realm.add(readNewsRealm)
       })
     }
+    
     let config = SFSafariViewController.Configuration()
     config.entersReaderIfAvailable = true
-    let safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!, configuration: config)
-    safariVC.delegate = self
-    present(safariVC, animated: true, completion: nil)
+    safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!, configuration: config)
+    safariVC?.delegate = self
+    
+    if (interstitial != nil && newsViewCount == popupAdNewsViewCount) && !bannerView.isHidden {
+      newsViewCount = 0
+      interstitial!.present(fromRootViewController: self)
+    } else {
+      present(safariVC!, animated: true, completion: nil)
+      newsViewCount += 1
+    }
+    
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -295,5 +329,11 @@ extension NewsListViewController: UISearchBarDelegate {
 extension NewsListViewController: SFSafariViewControllerDelegate {
   func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
     self.tableView.reloadData()
+  }
+}
+
+extension NewsListViewController: GADFullScreenContentDelegate {
+  func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    present(safariVC!, animated: true, completion: nil)
   }
 }
