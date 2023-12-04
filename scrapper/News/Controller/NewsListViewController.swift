@@ -19,7 +19,7 @@ class NewsListViewController: UIViewController {
   var searchedNews: [News] = []
   var dataList: [News] = []
   var newsViewCount: Int = 0
-  let popupAdNewsViewCount: Int = 5
+  let popupAdNewsViewCount: Int = 10
   let lastReadNewsOriginalLink: String?
   
   let keyword: String
