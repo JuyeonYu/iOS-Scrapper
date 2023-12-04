@@ -73,4 +73,11 @@ struct UserDefaultManager {
   static func getLastOpen() -> Double {
     return UserDefaults.standard.double(forKey: Constants.UserDefault.lastOpen)
   }
+  
+  static func setLastReadNewsOriginalLink(keyword: String, link: String) {
+    UserDefaults.standard.set(link, forKey: keyword)
+  }
+  static func getLastReadNewsOriginalLink(keyword: String) -> String? {
+    return UserDefaults.standard.string(forKey: keyword)
+  }
 }

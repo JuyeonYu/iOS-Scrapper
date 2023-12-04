@@ -20,10 +20,12 @@ class NewsListViewController: UIViewController {
   var dataList: [News] = []
   var newsViewCount: Int = 0
   let popupAdNewsViewCount: Int = 5
+  let lastReadNewsOriginalLink: String?
   
   let keyword: String
   init?(coder: NSCoder, keyword: String) {
     self.keyword = keyword
+    self.lastReadNewsOriginalLink = UserDefaultManager.getLastReadNewsOriginalLink(keyword: keyword)
     super.init(coder: coder)
   }
   
@@ -45,6 +47,7 @@ class NewsListViewController: UIViewController {
   @IBOutlet weak var bannerView: GADBannerView!
   
   var safariVC: SFSafariViewController?
+  var matchLastRead: Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -96,6 +99,14 @@ class NewsListViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     loadAd()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    if let link = newsList.first?.originalLink {
+      UserDefaultManager.setLastReadNewsOriginalLink(keyword: keyword, link: link)
+    }
   }
   
   func requestNaverNewsList(keyword: String, start: Int) {
@@ -293,7 +304,12 @@ extension NewsListViewController: UITableViewDataSource {
     } else {
       dataList = newsList
     }
-    cell.configure(news: dataList[row])
+    
+    if lastReadNewsOriginalLink == dataList[row].originalLink {
+      matchLastRead = true
+    }
+    
+    cell.configure(news: dataList[row], isNew: !matchLastRead)
         
     // 이미 읽은 기사를 체크하기 위해
     if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {

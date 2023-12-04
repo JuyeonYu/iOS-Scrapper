@@ -30,21 +30,26 @@ class NewsTableViewCell: UITableViewCell {
       selectImage.image = UIImage(systemName: "circle.dashed")
     }
   }
-  
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
   override func awakeFromNib() {
     super.awakeFromNib()
     selectImage.isHidden = true
+    unread.layer.masksToBounds = true
+  }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    unread.layer.cornerRadius = unread.frame.width / 2
   }
   
-  func configure(news: News) {
-    DispatchQueue.main.async {
-      self.title.text = news.title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
-    }
-    
-    publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
-    unread.isHidden = true
+  func configure(news: News, isNew: Bool) {
+    self.title.text = news.title
+      .replacingOccurrences(of: "&squot;", with: "\'")
+      .replacingOccurrences(of: "<b>", with: "")
+      .replacingOccurrences(of: "</b>", with: "")
+      .replacingOccurrences(of: "&quot;", with: "\"")
+    self.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
+    self.unread.isHidden = !isNew
   }
 }
