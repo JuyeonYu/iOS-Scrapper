@@ -49,6 +49,8 @@ class NewsTableViewCell: UITableViewCell {
       .replacingOccurrences(of: "<b>", with: "")
       .replacingOccurrences(of: "</b>", with: "")
       .replacingOccurrences(of: "&quot;", with: "\"")
+      .replacingOccurrences(of: "&lt;", with: "<")
+      .replacingOccurrences(of: "&gt;", with: ">")
     self.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
     self.unread.isHidden = !isNew
   }

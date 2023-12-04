@@ -305,7 +305,7 @@ extension NewsListViewController: UITableViewDataSource {
       dataList = newsList
     }
     
-    if lastReadNewsOriginalLink == dataList[row].originalLink {
+    if lastReadNewsOriginalLink == dataList[safe: row]?.originalLink {
       matchLastRead = true
     }
     
