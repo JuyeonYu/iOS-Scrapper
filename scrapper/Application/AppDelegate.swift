@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var initialViewController :UIViewController?
   
   fileprivate func initRealm() {
-    let version: UInt64 = 15
+    let version: UInt64 = 16
     let configCheck = Realm.Configuration();
     do {
       let fileUrlIs = try schemaVersionAtURL(configCheck.fileURL!)

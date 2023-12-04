@@ -40,7 +40,10 @@ class NewsTableViewCell: UITableViewCell {
   }
   
   func configure(news: News) {
-    title.text = news.title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
+    DispatchQueue.main.async {
+      self.title.text = news.title.htmlStripped.replacingOccurrences(of: "&squot;", with: "\'")
+    }
+    
     publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
     unread.isHidden = true
   }
