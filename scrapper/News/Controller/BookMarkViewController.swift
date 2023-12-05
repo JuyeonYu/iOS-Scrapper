@@ -39,6 +39,7 @@ class BookMarkViewController: UIViewController {
   
   @IBOutlet weak var bannerView: GADBannerView!
   
+  @IBOutlet weak var pay: UIBarButtonItem!
   var filteredNews: [BookMarkNewsRealm] = []
   var dataList: [BookMarkNewsRealm] = []
   
@@ -68,6 +69,9 @@ class BookMarkViewController: UIViewController {
       self.tableView.reloadData()
     })
     present(alert: alert)
+  }
+  @IBAction func onPay(_ sender: Any) {
+    self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
   }
   override func viewDidLoad() {
     super.viewDidLoad()

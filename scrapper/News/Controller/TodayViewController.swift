@@ -17,6 +17,7 @@ class TodayViewController: UIViewController {
   var issueKeywords: [[RSSFeedItem]] = []
   var shareIssueKeywords: [RSSFeedItem] = []
   @IBOutlet weak var bannerView: GADBannerView!
+  @IBOutlet weak var pay: UIBarButtonItem!
   @IBOutlet weak var tableView: UITableView!
   let refreshControl = UIRefreshControl()
   private var rewardedAd: GADRewardedAd?
@@ -80,6 +81,9 @@ class TodayViewController: UIViewController {
       
       
     }
+  }
+  @IBAction func onPay(_ sender: Any) {
+    self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
   }
   private func showShare(todayKeywords: [RSSFeedItem]) {
     var newsList: [(index: Int, news: Item)] = []

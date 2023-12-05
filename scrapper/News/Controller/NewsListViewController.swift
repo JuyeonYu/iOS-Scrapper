@@ -293,6 +293,7 @@ extension NewsListViewController: UITableViewDataSource {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
     let row = indexPath.row
     
+    
     // 뉴스 페이징 처리
     if row == newsList.count-1 {
       requestNaverNewsList(keyword: keyword, start: row + 2)
@@ -305,15 +306,16 @@ extension NewsListViewController: UITableViewDataSource {
       dataList = newsList
     }
     
-    if lastReadNewsOriginalLink == dataList[safe: row]?.originalLink {
+    guard let news = dataList[safe: row] else { return UITableViewCell() }
+    
+    if lastReadNewsOriginalLink == news.originalLink {
       matchLastRead = true
     }
     
-    cell.configure(news: dataList[row], isNew: !matchLastRead)
+    cell.configure(news: news, isNew: !matchLastRead)
         
     // 이미 읽은 기사를 체크하기 위해
-    if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(self.dataList[row].title)'").isEmpty {
-      print("이미 읽은 뉴스 기사 제목 \(self.dataList[row].title)")
+    if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(news.title)'").isEmpty {
       cell.title.textColor = UIColor.lightGray
       cell.publishTime.textColor = UIColor.lightGray
     } else {

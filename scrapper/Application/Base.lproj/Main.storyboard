@@ -50,15 +50,30 @@
                                 <action selector="onEdit:" destination="1T2-33-RiP" id="DHk-P2-aVq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="W9u-PM-fyM">
-                            <connections>
-                                <action selector="onPlus:" destination="1T2-33-RiP" id="SSz-IX-pPc"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem id="z5M-ab-M7t">
+                                <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical">
+                                    <hierarchicalColors>
+                                        <color systemColor="systemYellowColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                                <connections>
+                                    <action selector="onPay:" destination="1T2-33-RiP" id="JnW-Yl-Fl5"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="plus" catalog="system" id="W9u-PM-fyM">
+                                <connections>
+                                    <action selector="onPlus:" destination="1T2-33-RiP" id="SSz-IX-pPc"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="bannerView" destination="Yml-dB-Skm" id="3RR-lj-2ds"/>
                         <outlet property="edit" destination="4Oz-ED-Pwz" id="tdu-yS-Fk6"/>
+                        <outlet property="pay" destination="z5M-ab-M7t" id="Td1-hY-4DL"/>
                         <outlet property="tableView" destination="VJl-N4-RX1" id="d3S-Jl-bPF"/>
                     </connections>
                 </viewController>
@@ -112,6 +127,18 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
+                            <barButtonItem id="ni8-Lw-Io0">
+                                <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical">
+                                    <hierarchicalColors>
+                                        <color systemColor="systemYellowColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                                <connections>
+                                    <action selector="onPay:" destination="g34-2a-8eI" id="n0M-9O-EIV"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="trash" id="bHf-Nb-WPK">
                                 <connections>
                                     <action selector="onDelete:" destination="g34-2a-8eI" id="sQL-P3-KcL"/>
@@ -128,6 +155,7 @@
                         <outlet property="bannerView" destination="w0K-2H-34J" id="Pfw-RY-HJX"/>
                         <outlet property="delete" destination="bHf-Nb-WPK" id="ERS-Oz-bxG"/>
                         <outlet property="edit" destination="31c-In-EQA" id="7LC-af-aTe"/>
+                        <outlet property="pay" destination="ni8-Lw-Io0" id="I8u-XQ-oqf"/>
                         <outlet property="searchBar" destination="kuM-qW-NHb" id="JUX-9j-jgp"/>
                         <outlet property="share" destination="Z8C-uw-qHS" id="lo4-JK-hRn"/>
                         <outlet property="tableView" destination="90o-n0-YvT" id="CSL-PM-sfd"/>
@@ -901,7 +929,7 @@
                         <barButtonItem key="rightBarButtonItem" id="VtP-X2-F3N">
                             <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical">
                                 <hierarchicalColors>
-                                    <color name="Theme"/>
+                                    <color systemColor="systemYellowColor"/>
                                     <color systemColor="secondaryLabelColor"/>
                                     <color systemColor="tertiaryLabelColor"/>
                                 </hierarchicalColors>
@@ -953,21 +981,36 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="오늘의 키워드" id="Yvr-Aa-lHW">
-                        <barButtonItem key="rightBarButtonItem" id="FwQ-2o-BJp">
-                            <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" renderingMode="hierarchical">
-                                <hierarchicalColors>
-                                    <color name="Theme"/>
-                                    <color systemColor="secondaryLabelColor"/>
-                                    <color systemColor="tertiaryLabelColor"/>
-                                </hierarchicalColors>
-                            </imageReference>
-                            <connections>
-                                <action selector="onShare:" destination="jlC-yi-lhh" id="jKW-KH-v3N"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem id="wPS-1y-YFK">
+                                <imageReference key="image" image="crown.fill" catalog="system" renderingMode="hierarchical">
+                                    <hierarchicalColors>
+                                        <color systemColor="systemYellowColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                                <connections>
+                                    <action selector="onPay:" destination="jlC-yi-lhh" id="xLa-2m-njp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem id="FwQ-2o-BJp">
+                                <imageReference key="image" image="square.and.arrow.up.fill" catalog="system" renderingMode="hierarchical">
+                                    <hierarchicalColors>
+                                        <color name="Theme"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
+                                <connections>
+                                    <action selector="onShare:" destination="jlC-yi-lhh" id="jKW-KH-v3N"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="bannerView" destination="oJy-VL-rk1" id="Pk9-cA-A6G"/>
+                        <outlet property="pay" destination="wPS-1y-YFK" id="bmm-8R-ssM"/>
                         <outlet property="tableView" destination="Afn-ne-njT" id="HeQ-Ct-tyw"/>
                     </connections>
                 </viewController>
@@ -1352,6 +1395,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>

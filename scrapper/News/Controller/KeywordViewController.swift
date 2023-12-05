@@ -100,6 +100,10 @@ class KeywordViewController: UIViewController {
     return try! Realm()
   }()
   
+  @IBAction func onPay(_ sender: Any) {
+    self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+  }
+  @IBOutlet weak var pay: UIBarButtonItem!
   let keywordCellID = "KeywordTableViewCell"
   
   override func viewDidLoad() {
