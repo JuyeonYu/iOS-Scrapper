@@ -258,6 +258,7 @@ extension SettingViewController: UITableViewDataSource {
 //        configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .version:
         configuration.text = "버전"
+        cell.accessoryType = .none
         configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
         configuration.secondaryText = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
       }
@@ -277,6 +278,11 @@ extension SettingViewController: UITableViewDataSource {
         configuration.text = "공유"
         configuration.image = UIImage(systemName: "square.and.arrow.up")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       }
+    }
+    
+    if section == .app && AppType(rawValue: indexPath.row) == .version {
+      cell.accessoryType = .none
+    } else {
       cell.accessoryType = .disclosureIndicator
     }
     cell.contentConfiguration = configuration

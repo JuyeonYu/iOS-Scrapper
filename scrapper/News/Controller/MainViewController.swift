@@ -15,14 +15,11 @@ class MainViewController: UITabBarController {
     super.viewDidLoad()
     UserDefaultManager.setIsUser()
     
-    guard  UserDefaultManager.getLastOpen() > 0 else { return }
-    if Date().timeIntervalSince1970 - 86400 > UserDefaultManager.getLastOpen() {
-      DispatchQueue.main.async {
+    Task {
+      if await !IAPManager.isPro() && UserDefaultManager.getLastOpenDay() != Date().day ?? 1 {
         self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
       }
-    }
-    do {
-      UserDefaultManager.setLastOpen()
+      UserDefaultManager.setLastOpenDay()
     }
   }
   

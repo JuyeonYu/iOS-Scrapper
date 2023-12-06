@@ -67,11 +67,12 @@ struct UserDefaultManager {
     return UserDefaults.standard.integer(forKey: Constants.UserDefault.maxShare)
   }
   
-  static func setLastOpen() {
-    UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: Constants.UserDefault.lastOpen)
+  static func getLastOpenDay() -> Int {
+    UserDefaults.standard.integer(forKey: Constants.UserDefault.lastOpen)
   }
-  static func getLastOpen() -> Double {
-    return UserDefaults.standard.double(forKey: Constants.UserDefault.lastOpen)
+  
+  static func setLastOpenDay()  {
+    UserDefaults.standard.set(Date().day ?? 1, forKey: Constants.UserDefault.lastOpen)
   }
   
   static func setLastReadNewsOriginalLink(keyword: String, link: String) {
