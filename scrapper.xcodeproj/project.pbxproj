@@ -31,7 +31,8 @@
 		B57E879223F2EA2B002FC196 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E879123F2EA2B002FC196 /* News.swift */; };
 		B5872F04247D11F300F12A8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5872F06247D11F300F12A8F /* Localizable.strings */; };
 		D618C07D2A8367AE00EA7998 /* PaySpac.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C07C2A8367AE00EA7998 /* PaySpac.swift */; };
-		D63158622A49C5A9000E4972 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D63158612A49C5A9000E4972 /* Config.xcconfig */; };
+		D62111102C2E7DEB00C5EA68 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D621110F2C2E7DEB00C5EA68 /* RealmSwift */; };
+		D62111112C2E886900C5EA68 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D621110F2C2E7DEB00C5EA68 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D63BEA202A3CC52B004DD22A /* KeywordGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */; };
 		D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */; };
 		D63BEA242A3DE7BB004DD22A /* ExceptPublisherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */; };
@@ -63,8 +64,6 @@
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
 		D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = D6B8CF392AF91F0F00F6AC63 /* SwiftRater */; };
-		D6C6ACE92A3B524100438E61 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACE82A3B524100438E61 /* Realm */; };
-		D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACEA2A3B524100438E61 /* RealmSwift */; };
 		D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */; };
 		D6D207A52B162B130093D59C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6D207A42B162B130093D59C /* GoogleService-Info.plist */; };
 		D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */; };
@@ -82,6 +81,20 @@
 			remoteInfo = scrapper;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D62111122C2E886900C5EA68 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D62111112C2E886900C5EA68 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B520381023F30A280025B571 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -115,7 +128,6 @@
 		D617DAFD2A3F37AA000329EF /* scrapperRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scrapperRelease.entitlements; sourceTree = "<group>"; };
 		D617DAFE2A3F37AB000329EF /* scrapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scrapper.entitlements; sourceTree = "<group>"; };
 		D618C07C2A8367AE00EA7998 /* PaySpac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaySpac.swift; sourceTree = "<group>"; };
-		D63158612A49C5A9000E4972 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordGroupHeader.swift; sourceTree = "<group>"; };
 		D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordGroupHeader.xib; sourceTree = "<group>"; };
 		D63BEA232A3DE7BB004DD22A /* ExceptPublisherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptPublisherViewController.swift; sourceTree = "<group>"; };
@@ -153,9 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */,
-				D6C6ACEB2A3B524100438E61 /* RealmSwift in Frameworks */,
 				D661A9E92A50851800E1EDBA /* Lottie in Frameworks */,
-				D6C6ACE92A3B524100438E61 /* Realm in Frameworks */,
+				D62111102C2E7DEB00C5EA68 /* RealmSwift in Frameworks */,
 				D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */,
 				D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */,
 				D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */,
@@ -267,7 +278,6 @@
 				D68767732A5E52B90024574B /* 뉴스스크랩.storekit */,
 				D661A9F12A519BEE00E1EDBA /* 9733-coin.json */,
 				B5486D9823F23463008A5ABD /* Info.plist */,
-				D63158612A49C5A9000E4972 /* Config.xcconfig */,
 				B5872F06247D11F300F12A8F /* Localizable.strings */,
 				B5486D9323F23463008A5ABD /* Assets.xcassets */,
 			);
@@ -348,6 +358,7 @@
 				B5486D8323F23461008A5ABD /* Sources */,
 				B5486D8423F23461008A5ABD /* Frameworks */,
 				B5486D8523F23461008A5ABD /* Resources */,
+				D62111122C2E886900C5EA68 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,8 +367,6 @@
 			name = scrapper;
 			packageProductDependencies = (
 				D6A13FAD2A3B4F4C002A457B /* Alamofire */,
-				D6C6ACE82A3B524100438E61 /* Realm */,
-				D6C6ACEA2A3B524100438E61 /* RealmSwift */,
 				D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */,
 				D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */,
 				D661A9C42A4C71AB00E1EDBA /* FeedKit */,
@@ -367,6 +376,7 @@
 				D6D207A92B162C310093D59C /* FirebaseCrashlytics */,
 				D6D207AB2B162C310093D59C /* FirebaseRemoteConfigSwift */,
 				D654E5DF2B16FC9500BF5EF7 /* FirebaseMessaging */,
+				D621110F2C2E7DEB00C5EA68 /* RealmSwift */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -452,7 +462,6 @@
 				D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */,
 				D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */,
 				D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */,
-				D63158622A49C5A9000E4972 /* Config.xcconfig in Resources */,
 				B5460C3923F2B0CA002A199E /* CategoryTableViewCell.xib in Resources */,
 				D661A9D72A4DC52E00E1EDBA /* paywall2.mp4 in Resources */,
 				D661A9D82A4DC52E00E1EDBA /* paywall3.mp4 in Resources */,
@@ -689,7 +698,6 @@
 		};
 		B5486D9C23F23463008A5ABD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D63158612A49C5A9000E4972 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = scrapper/scrapper.entitlements;
@@ -718,7 +726,6 @@
 		};
 		B5486D9D23F23463008A5ABD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D63158612A49C5A9000E4972 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = scrapper/scrapperRelease.entitlements;
@@ -886,6 +893,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D621110F2C2E7DEB00C5EA68 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6C6ACE72A3B524100438E61 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		D654E5DF2B16FC9500BF5EF7 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseMessaging;
@@ -914,16 +926,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */;
 			productName = SwiftRater;
-		};
-		D6C6ACE82A3B524100438E61 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D6C6ACE72A3B524100438E61 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		D6C6ACEA2A3B524100438E61 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D6C6ACE72A3B524100438E61 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
