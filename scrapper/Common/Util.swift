@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class Util {
   static let sharedInstance = Util()
@@ -185,18 +186,21 @@ extension Date {
   }
 }
 extension SceneDelegate {
-  func setRootViewController(_ scene: UIScene){
-    if UserDefaultManager.getIsUser() {
-      setRootViewController(scene, name: "Main",
+  func setRootViewController() {
+    if Auth.auth().currentUser == nil {
+      setRootViewController(name: "Main",
+                            identifier: "LoginViewController")
+    } else if UserDefaultManager.getIsUser() {
+      setRootViewController(name: "Main",
                             identifier: "MainViewController")
     } else {
-      setRootViewController(scene, name: "Main",
+      setRootViewController(name: "Main",
                             identifier: "OnboardingViewController")
     }
   }
   
-  private func setRootViewController(_ scene: UIScene, name: String, identifier: String) {
-    if let windowScene = scene as? UIWindowScene {
+  private func setRootViewController(name: String, identifier: String) {
+    if let windowScene = self.window?.windowScene {
       let window = UIWindow(windowScene: windowScene)
       let storyboard = UIStoryboard(name: name, bundle: nil)
       let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
