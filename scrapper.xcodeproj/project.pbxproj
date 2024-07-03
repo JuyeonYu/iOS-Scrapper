@@ -57,6 +57,7 @@
 		D661A9EB2A50852B00E1EDBA /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */; };
 		D661A9ED2A50868F00E1EDBA /* 18089-gold-coin.json in Resources */ = {isa = PBXBuildFile; fileRef = D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */; };
 		D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */ = {isa = PBXBuildFile; fileRef = D661A9F12A519BEE00E1EDBA /* 9733-coin.json */; };
+		D6701FEC2C3576EB003B1DE0 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FEB2C3576EB003B1DE0 /* GoogleMobileAds */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -64,7 +65,6 @@
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
 		D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = D6B8CF392AF91F0F00F6AC63 /* SwiftRater */; };
-		D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */; };
 		D6D207A52B162B130093D59C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6D207A42B162B130093D59C /* GoogleService-Info.plist */; };
 		D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */; };
 		D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A92B162C310093D59C /* FirebaseCrashlytics */; };
@@ -164,13 +164,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6701FEC2C3576EB003B1DE0 /* GoogleMobileAds in Frameworks */,
 				D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */,
 				D661A9E92A50851800E1EDBA /* Lottie in Frameworks */,
 				D62111102C2E7DEB00C5EA68 /* RealmSwift in Frameworks */,
 				D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */,
 				D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */,
 				D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */,
-				D6C6ACEE2A3B57A900438E61 /* GoogleMobileAds in Frameworks */,
 				D654E5E02B16FC9500BF5EF7 /* FirebaseMessaging in Frameworks */,
 				D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */,
 				D6D207AC2B162C310093D59C /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -367,7 +367,6 @@
 			name = scrapper;
 			packageProductDependencies = (
 				D6A13FAD2A3B4F4C002A457B /* Alamofire */,
-				D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */,
 				D661A9BF2A4C5CDE00E1EDBA /* SwiftSoup */,
 				D661A9C42A4C71AB00E1EDBA /* FeedKit */,
 				D661A9E82A50851800E1EDBA /* Lottie */,
@@ -377,6 +376,7 @@
 				D6D207AB2B162C310093D59C /* FirebaseRemoteConfigSwift */,
 				D654E5DF2B16FC9500BF5EF7 /* FirebaseMessaging */,
 				D621110F2C2E7DEB00C5EA68 /* RealmSwift */,
+				D6701FEB2C3576EB003B1DE0 /* GoogleMobileAds */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -434,12 +434,12 @@
 			packageReferences = (
 				D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D6C6ACE72A3B524100438E61 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				D6C6ACEC2A3B57A900438E61 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				D661A9BE2A4C5CDD00E1EDBA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				D661A9C32A4C71AB00E1EDBA /* XCRemoteSwiftPackageReference "FeedKit" */,
 				D661A9E72A50851800E1EDBA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 				D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D6701FEA2C3576EA003B1DE0 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = B5486D8823F23461008A5ABD /* Products */;
 			projectDirPath = "";
@@ -850,6 +850,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		D6701FEA2C3576EA003B1DE0 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.6.0;
+			};
+		};
 		D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -872,14 +880,6 @@
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		D6C6ACEC2A3B57A900438E61 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
 			};
 		};
 		D6D207A62B162C310093D59C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -917,6 +917,11 @@
 			package = D661A9E72A50851800E1EDBA /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
+		D6701FEB2C3576EB003B1DE0 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6701FEA2C3576EA003B1DE0 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
 		D6A13FAD2A3B4F4C002A457B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D6A13FAC2A3B4F4C002A457B /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -926,11 +931,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6B8CF382AF91F0F00F6AC63 /* XCRemoteSwiftPackageReference "SwiftRater" */;
 			productName = SwiftRater;
-		};
-		D6C6ACED2A3B57A900438E61 /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D6C6ACEC2A3B57A900438E61 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
 		};
 		D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
