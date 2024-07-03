@@ -25,8 +25,8 @@ struct UserDefaultManager {
     return UserDefaults.standard.bool(forKey: Constants.UserDefault.exclusivePress)
   }
   
-  static func setIsUser() {
-    UserDefaults.standard.set(true, forKey: Constants.UserDefault.isUser)
+  static func setIsUser(_ value: Bool) {
+    UserDefaults.standard.set(value, forKey: Constants.UserDefault.isUser)
   }
   
   static func getIsUser() -> Bool {

@@ -1058,11 +1058,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rnr-L7-1dN">
-                                <rect key="frame" x="8" y="696" width="374" height="64"/>
+                                <rect key="frame" x="8" y="666" width="374" height="64"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="appleid_button"/>
                                 <connections>
                                     <action selector="onLogin:" destination="oIY-Nz-66n" eventType="touchUpInside" id="lyd-N6-cJP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmt-7N-rhM">
+                                <rect key="frame" x="114.66666666666669" y="746" width="161" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="비회원으로 시작하기"/>
+                                <connections>
+                                    <action selector="goWithoutAuth:" destination="oIY-Nz-66n" eventType="touchUpInside" id="HVz-8v-ScE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1070,8 +1078,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rnr-L7-1dN" firstAttribute="leading" secondItem="kUQ-Ld-Em6" secondAttribute="leading" constant="8" id="4VO-54-ocj"/>
+                            <constraint firstItem="gmt-7N-rhM" firstAttribute="centerX" secondItem="kUQ-Ld-Em6" secondAttribute="centerX" id="J7t-w9-sIv"/>
+                            <constraint firstItem="gmt-7N-rhM" firstAttribute="top" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="16" id="VQC-bg-GNo"/>
                             <constraint firstAttribute="trailing" secondItem="Rnr-L7-1dN" secondAttribute="trailing" constant="8" id="igT-PU-WlO"/>
-                            <constraint firstItem="cpJ-2A-rkV" firstAttribute="bottom" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="50" id="qfK-G4-dqO"/>
+                            <constraint firstItem="cpJ-2A-rkV" firstAttribute="bottom" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="80" id="qfK-G4-dqO"/>
                         </constraints>
                     </view>
                 </viewController>

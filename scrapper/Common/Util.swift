@@ -187,10 +187,7 @@ extension Date {
 }
 extension SceneDelegate {
   func setRootViewController() {
-    if Auth.auth().currentUser == nil {
-      setRootViewController(name: "Main",
-                            identifier: "LoginViewController")
-    } else if UserDefaultManager.getIsUser() {
+    if UserDefaultManager.getIsUser() {
       setRootViewController(name: "Main",
                             identifier: "MainViewController")
     } else {

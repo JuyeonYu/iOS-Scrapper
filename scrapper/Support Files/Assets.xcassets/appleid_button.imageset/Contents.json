@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "appleid_button@2x-2.png",
+      "filename" : "appleid_button_black.png",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "appleid_button_white.png",
       "idiom" : "universal"
     }
   ],

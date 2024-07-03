@@ -13,7 +13,7 @@ class MainViewController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    UserDefaultManager.setIsUser()
+    UserDefaultManager.setIsUser(true)
     
     Task {
       if await !IAPManager.isPro() && UserDefaultManager.getLastOpenDay() != Date().day ?? 1 {

@@ -89,25 +89,34 @@ extension SettingViewController: UITableViewDelegate {
   }
   func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     guard SettingSection(rawValue: section) == .other else { return nil }
+    
+    let isLogin = Auth.auth().currentUser != nil
+    
     let view = UIView()
     let logout: UIButton = UIButton()
     logout.contentHorizontalAlignment = .leading
     logout.titleLabel?.font = .systemFont(ofSize: 12)
     logout.addAction(.init(handler: {_ in
-      let alert = UIAlertController(title: "알림", message: "로그아웃 하시면 등록한 키워드에서 새로운 뉴스가 왔을 때 알림을 전달할 수 없습니다. 그래도 로그아웃하시겠습니까?", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "취소", style: .cancel))
-      alert.addAction(UIAlertAction(title: "로그아웃", style: .destructive, handler: { _ in
-        do {
-          try Auth.auth().signOut()
-          (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
-        } catch {
-          print(error)
-        }
-      }))
-      self.present(alert: alert)
+      UserDefaultManager.setIsUser(false)
+      if isLogin {
+        let alert = UIAlertController(title: "알림", message: "로그아웃 하시면 등록한 키워드에서 새로운 뉴스가 왔을 때 알림을 전달할 수 없습니다. 그래도 로그아웃하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "로그아웃", style: .destructive, handler: { _ in
+          do {
+            try Auth.auth().signOut()
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+          } catch {
+            print(error)
+          }
+        }))
+        self.present(alert: alert)
+      } else {
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+      }
+      
     }), for: .touchUpInside)
     logout.translatesAutoresizingMaskIntoConstraints = false
-    logout.setTitle("로그아웃", for: .normal)
+    logout.setTitle(isLogin ? "로그아웃" : "로그인", for: .normal)
     view.addSubview(logout)
     [logout.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
      logout.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),

@@ -17,6 +17,10 @@ class LoginViewController: UIViewController {
   // Unhashed nonce.
   fileprivate var currentNonce: String?
 
+  @IBAction func goWithoutAuth(_ sender: Any) {
+    UserDefaultManager.setIsUser(true)
+    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+  }
   
   @IBAction func onLogin(_ sender: Any) {
     startSignInWithAppleFlow()
@@ -100,6 +104,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     return
                 }
                 // 로그인에 성공했을 시 실행할 메서드 추가
+              UserDefaultManager.setIsUser(true)
               (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
             }
         }

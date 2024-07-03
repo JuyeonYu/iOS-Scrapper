@@ -33,7 +33,7 @@ class OnboardingViewController: UIViewController {
     if currentPage == 2 {
       let payVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController") as! PayViewController
       payVC.onClose = {
-        let main = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainViewController")
+        let main = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "LoginViewController")
         main.modalTransitionStyle = .crossDissolve
         main.modalPresentationStyle = .overFullScreen
         self.present(main, animated: true)
