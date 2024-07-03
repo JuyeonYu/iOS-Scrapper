@@ -11,11 +11,14 @@ import UIKit
 import CryptoKit
 import AuthenticationServices
 import FirebaseAuth
-
+import FirebaseDatabase
+import FirebaseAppCheck
 
 class LoginViewController: UIViewController {
   // Unhashed nonce.
   fileprivate var currentNonce: String?
+  
+  var firebaseDB: DatabaseReference!
 
   @IBAction func goWithoutAuth(_ sender: Any) {
     UserDefaultManager.setIsUser(true)
@@ -28,10 +31,13 @@ class LoginViewController: UIViewController {
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+
+    self.firebaseDB = Database.database(url: "https://news-scrap-b64dd-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
+    
+    // TODO: app check
+//    AppCheck.appCheck().token(forcingRefresh: true) { token, error in
+//      print(token)
+//    }
   }
 }
 
@@ -103,6 +109,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print("Error Apple sign in: \(error.localizedDescription)")
                     return
                 }
+              if let uid = authResult?.user.uid {
+                if let fcmToken = KeychainHelper.shared.loadString(key: KeychainKey.fcmToken.rawValue) {
+                  self.firebaseDB.child(uid).child("fcm_token").setValue(fcmToken)
+                }
+              }
                 // 로그인에 성공했을 시 실행할 메서드 추가
               UserDefaultManager.setIsUser(true)
               (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
