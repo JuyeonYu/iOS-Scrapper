@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 import GoogleMobileAds
 import SwiftRater
+import FirebaseDatabase
+import FirebaseAuth
 
 class KeywordViewController: UIViewController {
   var rewardType: RewardType?
@@ -157,7 +159,10 @@ class KeywordViewController: UIViewController {
     }
     
     loadRewardedAd()
-
+    
+    if let uid = Auth.auth().currentUser?.uid {
+      Database.database(url: "https://news-scrap-b64dd-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child(uid).child("keywords").setValue(Array(realm.objects(KeywordRealm.self).map { $0.keyword }))
+    }
   }
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
