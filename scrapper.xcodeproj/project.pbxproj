@@ -66,6 +66,8 @@
 		D6701FF82C395F97003B1DE0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FF72C395F97003B1DE0 /* FirebaseFirestoreSwift */; };
 		D6701FFA2C3967C3003B1DE0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */; };
 		D6701FFC2C397C20003B1DE0 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */; };
+		D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */; };
+		D67020002C398EAE003B1DE0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFF2C398EAE003B1DE0 /* LottieView.swift */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -160,6 +162,8 @@
 		D6701FED2C357C41003B1DE0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiSetting.swift; sourceTree = "<group>"; };
+		D6701FFF2C398EAE003B1DE0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		D687676F2A5E4D890024574B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D68767712A5E4EBA0024574B /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				D661A9C82A4C915800E1EDBA /* PromotionViewController.swift */,
 				D661A9E22A50442000E1EDBA /* MainViewController.swift */,
 				D654E5E12B18E52000BF5EF7 /* DiscountViewController.swift */,
+				D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				D63BEA1F2A3CC52B004DD22A /* KeywordGroupHeader.swift */,
+				D6701FFF2C398EAE003B1DE0 /* LottieView.swift */,
 				D661A9CA2A4C933100E1EDBA /* BouncyButton.swift */,
 				D63BEA212A3CC533004DD22A /* KeywordGroupHeader.xib */,
 				B5460C2C23F28EB9002A199E /* KeywordTableViewCell.swift */,
@@ -513,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D67020002C398EAE003B1DE0 /* LottieView.swift in Sources */,
 				D661A9CB2A4C933100E1EDBA /* BouncyButton.swift in Sources */,
 				D6701FFA2C3967C3003B1DE0 /* FirestoreManager.swift in Sources */,
 				D661A9C72A4C910A00E1EDBA /* PayViewController.swift in Sources */,
@@ -525,6 +532,7 @@
 				B5460C2923F28BE2002A199E /* Keyword.swift in Sources */,
 				B5486D8B23F23461008A5ABD /* AppDelegate.swift in Sources */,
 				B520383B23F3F0DC0025B571 /* RestAPIResponse.swift in Sources */,
+				D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */,
 				B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */,
 				D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */,
 				D661A9E32A50442000E1EDBA /* MainViewController.swift in Sources */,
