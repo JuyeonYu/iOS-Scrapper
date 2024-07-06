@@ -12,6 +12,7 @@ import GoogleMobileAds
 import SwiftRater
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseFirestore
 
 class KeywordViewController: UIViewController {
   var rewardType: RewardType?
@@ -283,6 +284,7 @@ class KeywordViewController: UIViewController {
         try! self.realm.write {
           self.realm.add(keywordRealm)
         }
+        FirestoreManager().upsert(keyword: KeywordFirestore(keywordRealm: keywordRealm))
         self.tableView.reloadData()
       } else {
         self.popupSelectGroupForSave(keyword: saveKeyword!, exceptionKeyword: exceptionKeyword)
@@ -303,6 +305,7 @@ class KeywordViewController: UIViewController {
         keywordRealm.exceptionKeyword = exceptionKeyword ?? ""
         keywordRealm.timestamp = Date().timeIntervalSince1970
         keywordRealm.gourpId = group.id
+        FirestoreManager().upsert(keyword: KeywordFirestore(keywordRealm: keywordRealm))
         try! self.realm.write {
           self.realm.add(keywordRealm)
         }
@@ -375,7 +378,8 @@ extension KeywordViewController: UITableViewDelegate {
     guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return nil }
     let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
       
-      
+      FirestoreManager().delete(keyword: KeywordFirestore.init(keywordRealm: keywordRealm))
+
       // realm에서 먼저 삭제 한다.
       try! self.realm.write {
         self.realm.delete(keywordRealm)
@@ -510,6 +514,7 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
         try! self.realm.write({
           self.realm.delete(groupRealm)
           keywordList.forEach {
+            FirestoreManager().delete(keyword: KeywordFirestore.init(keywordRealm: $0))
             self.realm.delete($0)
           }
         })

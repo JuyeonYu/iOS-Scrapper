@@ -63,6 +63,9 @@
 		D6701FF22C358E1A003B1DE0 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FF12C358E1A003B1DE0 /* FirebaseDatabaseSwift */; };
 		D6701FF42C35925F003B1DE0 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FF32C35925F003B1DE0 /* FirebaseAppCheck */; };
 		D6701FF62C3597F6003B1DE0 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */; };
+		D6701FF82C395F97003B1DE0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FF72C395F97003B1DE0 /* FirebaseFirestoreSwift */; };
+		D6701FFA2C3967C3003B1DE0 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */; };
+		D6701FFC2C397C20003B1DE0 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -156,6 +159,7 @@
 		D661A9F12A519BEE00E1EDBA /* 9733-coin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "9733-coin.json"; sourceTree = "<group>"; };
 		D6701FED2C357C41003B1DE0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D687676F2A5E4D890024574B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D68767712A5E4EBA0024574B /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
@@ -172,12 +176,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6701FF22C358E1A003B1DE0 /* FirebaseDatabaseSwift in Frameworks */,
+				D6701FFC2C397C20003B1DE0 /* FirebaseAppCheck in Frameworks */,
 				D6701FEC2C3576EB003B1DE0 /* GoogleMobileAds in Frameworks */,
 				D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */,
 				D661A9E92A50851800E1EDBA /* Lottie in Frameworks */,
 				D62111102C2E7DEB00C5EA68 /* RealmSwift in Frameworks */,
 				D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */,
 				D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */,
+				D6701FF82C395F97003B1DE0 /* FirebaseFirestoreSwift in Frameworks */,
 				D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */,
 				D654E5E02B16FC9500BF5EF7 /* FirebaseMessaging in Frameworks */,
 				D661A9C52A4C71AB00E1EDBA /* FeedKit in Frameworks */,
@@ -206,6 +212,7 @@
 				B5619A87250780A600D89694 /* UserDefaultManager.swift */,
 				D68767712A5E4EBA0024574B /* IAPHelper.swift */,
 				D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */,
+				D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -392,6 +399,8 @@
 				D6701FEF2C357EA9003B1DE0 /* FirebaseAuth */,
 				D6701FF12C358E1A003B1DE0 /* FirebaseDatabaseSwift */,
 				D6701FF32C35925F003B1DE0 /* FirebaseAppCheck */,
+				D6701FF72C395F97003B1DE0 /* FirebaseFirestoreSwift */,
+				D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -505,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D661A9CB2A4C933100E1EDBA /* BouncyButton.swift in Sources */,
+				D6701FFA2C3967C3003B1DE0 /* FirestoreManager.swift in Sources */,
 				D661A9C72A4C910A00E1EDBA /* PayViewController.swift in Sources */,
 				B5460C3123F2A45B002A199E /* CategortyViewController.swift in Sources */,
 				B565A5BD23F58726001055CF /* NaverNews.swift in Sources */,
@@ -948,6 +958,14 @@
 			productName = FirebaseDatabaseSwift;
 		};
 		D6701FF32C35925F003B1DE0 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAppCheck;
+		};
+		D6701FF72C395F97003B1DE0 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestoreSwift;
+		};
+		D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAppCheck;
 		};

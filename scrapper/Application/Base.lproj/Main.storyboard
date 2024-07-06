@@ -1058,7 +1058,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rnr-L7-1dN">
-                                <rect key="frame" x="8" y="666" width="374" height="64"/>
+                                <rect key="frame" x="16" y="666" width="358" height="64"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="appleid_button"/>
                                 <connections>
@@ -1077,10 +1077,10 @@
                         <viewLayoutGuide key="safeArea" id="cpJ-2A-rkV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Rnr-L7-1dN" firstAttribute="leading" secondItem="kUQ-Ld-Em6" secondAttribute="leading" constant="8" id="4VO-54-ocj"/>
+                            <constraint firstItem="Rnr-L7-1dN" firstAttribute="leading" secondItem="kUQ-Ld-Em6" secondAttribute="leading" constant="16" id="4VO-54-ocj"/>
                             <constraint firstItem="gmt-7N-rhM" firstAttribute="centerX" secondItem="kUQ-Ld-Em6" secondAttribute="centerX" id="J7t-w9-sIv"/>
                             <constraint firstItem="gmt-7N-rhM" firstAttribute="top" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="16" id="VQC-bg-GNo"/>
-                            <constraint firstAttribute="trailing" secondItem="Rnr-L7-1dN" secondAttribute="trailing" constant="8" id="igT-PU-WlO"/>
+                            <constraint firstAttribute="trailing" secondItem="Rnr-L7-1dN" secondAttribute="trailing" constant="16" id="igT-PU-WlO"/>
                             <constraint firstItem="cpJ-2A-rkV" firstAttribute="bottom" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="80" id="qfK-G4-dqO"/>
                         </constraints>
                     </view>

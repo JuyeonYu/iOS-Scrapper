@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import RealmSwift
+import FirebaseAuth
 
 struct Keyword: Codable {
   let keyword: String?
@@ -31,4 +32,28 @@ class GroupRealm: Object {
 class exceptNews: Object {
   @objc dynamic var press: String = ""
   @objc dynamic var domain: String = ""
+}
+
+
+struct KeywordFirestore {
+  init(keywordRealm: KeywordRealm) {
+    self.keyword = keywordRealm.keyword
+  }
+  let keyword: String
+  let notiEnable: Bool = true
+  var userId: String? {
+    Auth.auth().currentUser?.uid
+  }
+  let lastPushTime: Double = 0
+  
+  
+  var dict: [String: Any]? {
+    guard let userId else { return nil }
+    return [
+      "user_id": userId,
+      "keyword": keyword,
+      "noti_enable": notiEnable,
+      "last_push_time": lastPushTime
+    ]
+  }
 }

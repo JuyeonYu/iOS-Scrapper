@@ -96,6 +96,7 @@ extension SettingViewController: UITableViewDelegate {
     let logout: UIButton = UIButton()
     logout.contentHorizontalAlignment = .leading
     logout.titleLabel?.font = .systemFont(ofSize: 12)
+    logout.setTitleColor(UIColor.secondaryLabel, for: .normal)
     logout.addAction(.init(handler: {_ in
       UserDefaultManager.setIsUser(false)
       if isLogin {

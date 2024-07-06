@@ -115,5 +115,6 @@ extension AppDelegate: MessagingDelegate {
     print("FCM Token: \(fcmToken)")
     guard let fcmToken else { return }
     KeychainHelper.shared.saveString(key: KeychainKey.fcmToken.rawValue, value: fcmToken)
+    FirestoreManager().sync()
   }
 }
