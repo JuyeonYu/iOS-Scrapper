@@ -21,8 +21,15 @@ class LoginViewController: UIViewController {
   var firebaseDB: DatabaseReference!
 
   @IBAction func goWithoutAuth(_ sender: Any) {
-    UserDefaultManager.setIsUser(true)
-    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+    let alert  = UIAlertController(title: "알림", message: "비회원은 새로운 뉴스의 알림을 받아보실 수 없습니다.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "게스트로 이용하기", style: .default, handler: { _ in
+      UserDefaultManager.setIsUser(true)
+      (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+    }))
+    alert.addAction(UIAlertAction(title: "로그인하기", style: .destructive, handler: { _ in
+      self.onLogin(())
+    }))
+    present(alert: alert)
   }
   
   @IBAction func onLogin(_ sender: Any) {
