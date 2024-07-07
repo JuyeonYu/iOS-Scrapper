@@ -140,7 +140,7 @@ extension SettingViewController: UITableViewDelegate {
         Task {
           guard await !IAPManager.isPro() else { return }
           let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-            CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+            CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true, okType: .ad)
           }
           rewardType = .group
           alert.delegate = self
@@ -152,7 +152,7 @@ extension SettingViewController: UITableViewDelegate {
         Task {
           guard await !IAPManager.isPro() else { return }
           let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-            CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+            CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true, okType: .ad)
           }
           rewardType = .keyword
           alert.delegate = self
@@ -357,7 +357,7 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
 
 
 extension SettingViewController: CustomAlertDelegate {
-  func onOk() {
+  func onOk(type: CustomAlertOkType) {
     self.showRewardAd()
   }
 }
@@ -379,7 +379,7 @@ extension SettingViewController: GADFullScreenContentDelegate {
     
     tableView.reloadData()
     let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-      CustomAlertViewController(coder: coder, head: "보상 지급 완료", body: "보상이 지급되었습니다.", lottieImageName: "9733-coin", okTitle: "확인", useOkDelegate: false)
+      CustomAlertViewController(coder: coder, head: "보상 지급 완료", body: "보상이 지급되었습니다.", lottieImageName: "9733-coin", okTitle: "확인", useOkDelegate: false, okType: .ad)
     }
     alert.delegate = self
     alert.modalTransitionStyle = .crossDissolve
