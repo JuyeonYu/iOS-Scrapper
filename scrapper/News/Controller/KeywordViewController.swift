@@ -446,7 +446,9 @@ extension KeywordViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return UITableViewCell() }
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
+    cell.indexPath = indexPath
     cell.config(keyword: keywordRealm)
+    cell.delegate = self
     return cell
   }
 }
@@ -550,5 +552,16 @@ extension KeywordViewController: GADFullScreenContentDelegate {
     case .keyword: self.popupAddKeyword()
     case .group: self.popupAddGroup()
     }
+  }
+}
+
+extension KeywordViewController: KeywordTableViewCellDelegate {
+  func onNoti(indexPath: IndexPath) {
+    guard let keyword = getKeywordRealm(indexPath: indexPath) else { return }
+    try! realm.write({
+      keyword.notiEnabled.toggle()
+    })
+    FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
+    tableView.reloadRows(at: [indexPath], with: .none)
   }
 }

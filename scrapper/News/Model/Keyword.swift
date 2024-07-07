@@ -21,6 +21,16 @@ class KeywordRealm: Object {
   @objc dynamic var exceptionKeyword: String = ""
   @objc dynamic var timestamp: TimeInterval = 0.0
   @objc dynamic var gourpId: UUID?
+  @objc dynamic var notiEnabled: Bool = false
+  
+  var dict: [String: Any]? {
+    guard let userId = Auth.auth().currentUser?.uid else { return nil }
+    return [
+      "user_id": userId,
+      "keyword": keyword,
+      "noti_enable": notiEnabled
+    ]
+  }
 }
 
 class GroupRealm: Object {

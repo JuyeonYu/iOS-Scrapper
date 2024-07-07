@@ -49,6 +49,10 @@ struct FirestoreManager {
     guard let dict = keyword.dict else { return }
     upsert(collection: .keyword, documentId: userId + keyword.keyword, dict: dict)
   }
+  func updateKeywordNoti(keyword: String, enable: Bool) {
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    upsert(collection: .keyword, documentId: userId + keyword, dict: ["noti_enable": enable])
+  }
   func delete(keyword: KeywordFirestore) {
     guard let userId = Auth.auth().currentUser?.uid else { return }
     let collectionRef = firestore.collection(FirestoreCollectionType.keyword.rawValue)
