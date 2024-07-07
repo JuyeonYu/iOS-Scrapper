@@ -41,5 +41,6 @@ class KeywordTableViewCell: UITableViewCell {
     exceptionLabel.isHidden = keyword.exceptionKeyword.isEmpty
     unreads.isHidden = false
     noti.setImage(.init(systemName: keyword.notiEnabled ? "bell.fill" : "bell.slash.fill"), for: .normal)
+    noti.tintColor = keyword.notiEnabled ? UIColor(named: "Theme") : UIColor.lightGray
   }
 }

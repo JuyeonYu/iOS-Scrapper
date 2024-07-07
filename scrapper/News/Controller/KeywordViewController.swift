@@ -50,7 +50,7 @@ class KeywordViewController: UIViewController {
         if await !IAPManager.isPro() && currentGroupCount >= maxGroup && self.rewardedAd != nil {
           //        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
           let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-            CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+            CustomAlertViewController(coder: coder, head: "그룹 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true, okType: .ad)
           }
           self.rewardType = .group
           alert.delegate = self
@@ -70,7 +70,7 @@ class KeywordViewController: UIViewController {
         if await !IAPManager.isPro() && currentKeywordCount >= maxKeyword && self.rewardedAd != nil {
           //        self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
           let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-            CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+            CustomAlertViewController(coder: coder, head: "키워드 +3", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true, okType: .ad)
           }
           self.rewardType = .keyword
           alert.delegate = self
@@ -530,8 +530,13 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
 
 
 extension KeywordViewController: CustomAlertDelegate {
-  func onOk() {
-    self.showRewardAd()
+  func onOk(type: CustomAlertOkType) {
+    switch type {
+    case .ad:
+      self.showRewardAd()
+    case .paywall:
+      self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
+    }
   }
 }
 
@@ -558,10 +563,25 @@ extension KeywordViewController: GADFullScreenContentDelegate {
 extension KeywordViewController: KeywordTableViewCellDelegate {
   func onNoti(indexPath: IndexPath) {
     guard let keyword = getKeywordRealm(indexPath: indexPath) else { return }
-    try! realm.write({
-      keyword.notiEnabled.toggle()
-    })
-    FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
-    tableView.reloadRows(at: [indexPath], with: .none)
+    
+    Task {
+      if await !IAPManager.isPro() && realm.objects(KeywordRealm.self).map({ $0.notiEnabled }).filter({ $0 }).count > 0 && !keyword.notiEnabled {
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "알림", body: "프리미엄 회원되고 무제한 키워드 알림을 받아보세요.", lottieImageName: "18089-gold-coin", okTitle: "확인", useOkDelegate: true, okType: .paywall)
+        }
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        self.present(alert, animated: true)
+
+        return
+      }
+      
+      try! realm.write({
+        keyword.notiEnabled.toggle()
+      })
+      FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
+      tableView.reloadRows(at: [indexPath], with: .none)
+    }
   }
 }

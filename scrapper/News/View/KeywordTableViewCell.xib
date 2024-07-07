@@ -11,27 +11,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeywordTableViewCell" rowHeight="95" id="KGk-i7-Jjw" customClass="KeywordTableViewCell" customModule="NewsScrap" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeywordTableViewCell" rowHeight="61" id="KGk-i7-Jjw" customClass="KeywordTableViewCell" customModule="NewsScrap" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4b-6d-R3f">
                         <rect key="frame" x="16" y="10" width="288" height="50"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oCM-QH-7AN">
-                                <rect key="frame" x="0.0" y="0.0" width="188" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekR-7l-b4p">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="20.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="238" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RO-3h-Ym1">
-                                        <rect key="frame" x="0.0" y="28.333333333333336" width="188" height="21.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333336" width="238" height="21.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wJ-BM-uwB">
-                                <rect key="frame" x="188" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="238" y="0.0" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="h3o-5a-VIo"/>
                                 </constraints>
@@ -49,15 +49,15 @@
                                     <action selector="onNoti:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eKz-WT-FBt"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HSj-xP-be6">
-                                <rect key="frame" x="238" y="0.0" width="50" height="50"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HSj-xP-be6">
+                                <rect key="frame" x="288" y="0.0" width="50" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="N" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfK-ZE-hwV">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bfK-ZE-hwV" secondAttribute="height" id="N4Y-JT-Jzt"/>
-                                            <constraint firstAttribute="width" constant="50" id="uob-Tn-LyN"/>
+                                            <constraint firstAttribute="width" constant="44" id="uob-Tn-LyN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" systemColor="systemBackgroundColor"/>
@@ -90,7 +90,7 @@
                 <outlet property="titleLabel" destination="ekR-7l-b4p" id="LcN-3W-M7I"/>
                 <outlet property="unreads" destination="bfK-ZE-hwV" id="CbR-0w-Nde"/>
             </connections>
-            <point key="canvasLocation" x="-224" y="5"/>
+            <point key="canvasLocation" x="-224.42748091603053" y="-7.394366197183099"/>
         </tableViewCell>
     </objects>
     <resources>

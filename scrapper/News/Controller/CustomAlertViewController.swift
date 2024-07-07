@@ -10,7 +10,12 @@ import UIKit
 import Lottie
 
 protocol CustomAlertDelegate: AnyObject {
-  func onOk()
+  func onOk(type: CustomAlertOkType)
+}
+
+enum CustomAlertOkType {
+  case ad
+  case paywall
 }
 
 class CustomAlertViewController: UIViewController {
@@ -21,13 +26,15 @@ class CustomAlertViewController: UIViewController {
     body: String?,
     lottieImageName: String?,
     okTitle: String?,
-    useOkDelegate: Bool
+    useOkDelegate: Bool,
+    okType: CustomAlertOkType
   ) {
     self.headValue = head
     self.bodyValue = body
     self.lottieImageName = lottieImageName
     self.okTitle = okTitle
     self.useOkDelegate = useOkDelegate
+    self.okType = okType
     super.init(coder: coder)
   }
   
@@ -35,6 +42,7 @@ class CustomAlertViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   weak var delegate: CustomAlertDelegate?
+  let okType: CustomAlertOkType
   let headValue: String?
   let bodyValue: String?
   let lottieImageName: String?
@@ -44,7 +52,7 @@ class CustomAlertViewController: UIViewController {
   @IBAction func onOk(_ sender: Any) {
     dismiss(animated: true) {
       guard self.useOkDelegate else { return }
-      self.delegate?.onOk()
+      self.delegate?.onOk(type: self.okType)
     }
   }
   @IBOutlet weak var ok: UIButton!

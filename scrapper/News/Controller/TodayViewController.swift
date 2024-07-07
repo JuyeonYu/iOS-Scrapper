@@ -65,7 +65,7 @@ class TodayViewController: UIViewController {
           alert.addAction(UIAlertAction(title: pubDate.korean, style: .default) { _ in
             self.shareIssueKeywords = issueKeyword
             let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-              CustomAlertViewController(coder: coder, head: "이슈 공유하기", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true)
+              CustomAlertViewController(coder: coder, head: "이슈 공유하기", body: "광고를 시청하고 보상을 받으세요!", lottieImageName: "18089-gold-coin", okTitle: "받기", useOkDelegate: true, okType: .ad)
             }
             alert.delegate = self
             alert.modalTransitionStyle = .crossDissolve
@@ -237,7 +237,7 @@ extension TodayViewController: UITableViewDataSource {
 }
 
 extension TodayViewController: CustomAlertDelegate {
-  func onOk() {
+  func onOk(type: CustomAlertOkType) {
     self.showRewardAd()
   }
 }
