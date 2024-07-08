@@ -22,6 +22,8 @@ class KeywordRealm: Object {
   @objc dynamic var timestamp: TimeInterval = 0.0
   @objc dynamic var gourpId: UUID?
   @objc dynamic var notiEnabled: Bool = false
+  @objc dynamic var hasNews: Bool = false
+
   
   var dict: [String: Any]? {
     guard let userId = Auth.auth().currentUser?.uid else { return nil }

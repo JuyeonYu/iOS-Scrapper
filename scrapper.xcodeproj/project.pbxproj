@@ -68,6 +68,7 @@
 		D6701FFC2C397C20003B1DE0 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */; };
 		D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */; };
 		D67020002C398EAE003B1DE0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFF2C398EAE003B1DE0 /* LottieView.swift */; };
+		D67020022C3C2B4F003B1DE0 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D67020012C3C2B4F003B1DE0 /* FirebaseFunctions */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -182,6 +183,7 @@
 				D6701FF22C358E1A003B1DE0 /* FirebaseDatabaseSwift in Frameworks */,
 				D6701FFC2C397C20003B1DE0 /* FirebaseAppCheck in Frameworks */,
 				D6701FEC2C3576EB003B1DE0 /* GoogleMobileAds in Frameworks */,
+				D67020022C3C2B4F003B1DE0 /* FirebaseFunctions in Frameworks */,
 				D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */,
 				D661A9E92A50851800E1EDBA /* Lottie in Frameworks */,
 				D62111102C2E7DEB00C5EA68 /* RealmSwift in Frameworks */,
@@ -407,6 +409,7 @@
 				D6701FF32C35925F003B1DE0 /* FirebaseAppCheck */,
 				D6701FF72C395F97003B1DE0 /* FirebaseFirestoreSwift */,
 				D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */,
+				D67020012C3C2B4F003B1DE0 /* FirebaseFunctions */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -976,6 +979,10 @@
 		D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseAppCheck;
+		};
+		D67020012C3C2B4F003B1DE0 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFunctions;
 		};
 		D6A13FAD2A3B4F4C002A457B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

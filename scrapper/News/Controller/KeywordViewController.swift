@@ -13,12 +13,14 @@ import SwiftRater
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFunctions
 
 class KeywordViewController: UIViewController {
   var rewardType: RewardType?
   var noneGroupId: UUID?
   @IBOutlet weak var tableView: UITableView!
   private var rewardedAd: GADRewardedAd?
+  let functions = Functions.functions()
 
   func getGroupRealm(section: Int) -> GroupRealm? {
     let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
@@ -163,6 +165,26 @@ class KeywordViewController: UIViewController {
     
     if let uid = Auth.auth().currentUser?.uid {
       Database.database(url: "https://news-scrap-b64dd-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child(uid).child("keywords").setValue(Array(realm.objects(KeywordRealm.self).map { $0.keyword }))
+    }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    functions.httpsCallable("test").call() { result, error in
+      guard let data = result?.data as? [[String: Any]] else { return }
+      
+      let localKeywords = self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)")
+      let hasNewKeywords = data.filter { $0["hasNew"] as? Bool ?? false }
+        .compactMap { $0["keyword"] as? String }.sorted()
+      
+      localKeywords.forEach { localKeyword in
+        if hasNewKeywords.contains(localKeyword.keyword) {
+          localKeyword.hasNews = true
+          try! self.realm.write {
+            self.realm.add(localKeyword)
+          }
+        }
+      }
     }
   }
   override func viewWillDisappear(_ animated: Bool) {
@@ -348,6 +370,9 @@ class KeywordViewController: UIViewController {
 extension KeywordViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     50
+  }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    60
   }
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "KeywordGroupHeader") as! KeywordGroupHeader

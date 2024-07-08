@@ -13,6 +13,7 @@ protocol KeywordTableViewCellDelegate: AnyObject {
 }
 
 class KeywordTableViewCell: UITableViewCell {
+  @IBOutlet weak var hasNewBadge: UIView!
   @IBOutlet weak var noti: UIButton!
   @IBAction func onNoti(_ sender: Any) {
     guard let indexPath else { return }
@@ -23,7 +24,6 @@ class KeywordTableViewCell: UITableViewCell {
   @IBOutlet weak var exceptionLabel: UILabel!
   var indexPath: IndexPath?
   
-  @IBOutlet weak var unreads: UILabel!
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
@@ -32,15 +32,14 @@ class KeywordTableViewCell: UITableViewCell {
   }
   override func awakeFromNib() {
     super.awakeFromNib()
-    unreads.layer.masksToBounds = true
-    unreads.layer.cornerRadius = unreads.frame.width / 2
+    hasNewBadge.layer.cornerRadius = hasNewBadge.frame.width / 2
   }
   func config(keyword: KeywordRealm) {
     titleLabel.text = keyword.keyword
     exceptionLabel.text = "- " + keyword.exceptionKeyword
     exceptionLabel.isHidden = keyword.exceptionKeyword.isEmpty
-    unreads.isHidden = false
     noti.setImage(.init(systemName: keyword.notiEnabled ? "bell.fill" : "bell.slash.fill"), for: .normal)
     noti.tintColor = keyword.notiEnabled ? UIColor(named: "Theme") : UIColor.lightGray
+    hasNewBadge.isHidden = !keyword.hasNews
   }
 }
