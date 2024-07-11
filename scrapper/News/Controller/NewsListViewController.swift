@@ -21,12 +21,13 @@ class NewsListViewController: UIViewController {
   var newsViewCount: Int = 0
   let popupAdNewsViewCount: Int = 10
   let lastReadNewsOriginalLink: String?
-  
+  var keywordRealm: KeywordRealm?
   let keyword: String
   init?(coder: NSCoder, keyword: String) {
     self.keyword = keyword
     self.lastReadNewsOriginalLink = UserDefaultManager.getLastReadNewsOriginalLink(keyword: keyword)
     super.init(coder: coder)
+    self.keywordRealm = self.realm.objects(KeywordRealm.self).filter("keyword = '\(keyword)'").first
   }
   
   required init?(coder: NSCoder) {
@@ -107,6 +108,13 @@ class NewsListViewController: UIViewController {
     if let link = newsList.first?.originalLink {
       UserDefaultManager.setLastReadNewsOriginalLink(keyword: keyword, link: link)
     }
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    try! realm.write({
+      keywordRealm?.timestamp = Date().timeIntervalSince1970
+    })
   }
   
   func requestNaverNewsList(keyword: String, start: Int) {
@@ -307,11 +315,7 @@ extension NewsListViewController: UITableViewDataSource {
     }
     
     guard let news = dataList[safe: row] else { return UITableViewCell() }
-    
-    if lastReadNewsOriginalLink == news.originalLink {
-      matchLastRead = true
-    }
-    
+    matchLastRead = (news.publishTimestamp ?? 0) > keywordRealm?.timestamp ?? 0
     cell.configure(news: news, isNew: !matchLastRead)
         
     // 이미 읽은 기사를 체크하기 위해
