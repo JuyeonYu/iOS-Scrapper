@@ -12,6 +12,7 @@ import GoogleMobileAds
 import SwiftRater
 import FirebaseCore
 import FirebaseMessaging
+import SafariServices
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -61,8 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
     application.registerForRemoteNotifications()
-    
-    
     return true
   }
   
@@ -95,24 +94,27 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   }
   
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    
     let userInfo = response.notification.request.content.userInfo
     if userInfo[AnyHashable("page")] as? String == "pay" {
       let pay = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PayViewController")
       DispatchQueue.main.async {
         UIApplication.shared.windows.first?.rootViewController?.present(pay, animated: true)
       }
+    } else if let link = userInfo["link"] as? String, let newUrl = URL(string: link) {
+      DispatchQueue.main.async {
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        let safariVC = SFSafariViewController(url: newUrl, configuration: config)
+        UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
+      }
     }
+    completionHandler()
   }
 }
 
 extension AppDelegate: MessagingDelegate {
   
   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-    // 여기서 이제 서버로 다시 fcm 토큰을 보내줘야 한다!
-    // 그러나 서버가 없기 때문에 이렇게 token을 출력하게 한다.
-    // 이 토큰은 뒤에서 Test할때 필요하다!
-    print("FCM Token: \(fcmToken)")
     guard let fcmToken else { return }
     KeychainHelper.shared.saveString(key: KeychainKey.fcmToken.rawValue, value: fcmToken)
     FirestoreManager().sync()
