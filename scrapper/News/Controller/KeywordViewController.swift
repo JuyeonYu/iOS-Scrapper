@@ -113,7 +113,7 @@ class KeywordViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     // Tableview setting
     tableView.delegate = self
     tableView.dataSource = self
@@ -170,26 +170,31 @@ class KeywordViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    functions.httpsCallable("test").call() { result, error in
-      guard let data = result?.data as? [[String: Any]] else { return }
-      
-      let localKeywords = self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)")
-      let hasNewKeywords = data.filter { $0["hasNew"] as? Bool ?? false }
-        .compactMap { $0["keyword"] as? String }.sorted()
-      
-      localKeywords.forEach { localKeyword in
-        if hasNewKeywords.contains(localKeyword.keyword) {
-          localKeyword.hasNews = true
-          try! self.realm.write {
-            self.realm.add(localKeyword)
-          }
+    
+    var noNewKeywords: [KeywordRealm] = Array(self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)").filter("notiEnabled = \(true)"))
+    
+    
+    var keywordsDict = Array(noNewKeywords.map({ $0.dict ?? [:]}))
+    let dict = ["timestamp": UserDefaultManager.getFetchNew(), "news": keywordsDict] as [String : Any]
+    
+    functions.httpsCallable("unreadNewsKeywords").call(dict) { result, error in
+      guard let hasNewKeywords: [String] = result?.data as? [String] else { return }
+      noNewKeywords.forEach { noNewKeyword in
+        if hasNewKeywords.contains(noNewKeyword.keyword) {
+          try? self.realm.write({
+            noNewKeyword.hasNews = true
+          })
         }
+      }
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
       }
     }
   }
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     tableView.isEditing = false
+    UserDefaultManager.setFetchNew(timestamp: Date().timeIntervalSince1970)
   }
   func loadRewardedAd() {
     let request = GADRequest()

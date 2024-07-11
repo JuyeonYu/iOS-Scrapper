@@ -81,4 +81,10 @@ struct UserDefaultManager {
   static func getLastReadNewsOriginalLink(keyword: String) -> String? {
     return UserDefaults.standard.string(forKey: keyword)
   }
+  static func setFetchNew(timestamp: Double) {
+    UserDefaults.standard.setValue(timestamp, forKey: "setFetchNewTimestamp")
+  }
+  static func getFetchNew() -> Double {
+    UserDefaults.standard.double(forKey: "setFetchNewTimestamp")
+  }
 }
