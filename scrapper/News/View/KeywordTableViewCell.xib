@@ -34,7 +34,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="12" id="WnT-eX-RZR"/>
                                     <constraint firstItem="q5P-fO-Mve" firstAttribute="leading" secondItem="HHb-7O-gKi" secondAttribute="leading" id="o7a-vL-YZZ"/>
@@ -74,7 +73,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="u4b-6d-R3f" secondAttribute="bottom" constant="10" id="0Al-0s-GO3"/>
                     <constraint firstAttribute="trailing" secondItem="u4b-6d-R3f" secondAttribute="trailing" constant="16" id="Ah8-5P-gLE"/>
@@ -97,9 +96,6 @@
         <namedColor name="Theme">
             <color red="0.71799999475479126" green="0.27000001072883606" blue="0.24799999594688416" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

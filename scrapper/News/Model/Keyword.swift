@@ -19,7 +19,8 @@ struct Keyword: Codable {
 class KeywordRealm: Object {
   @objc dynamic var keyword: String = ""
   @objc dynamic var exceptionKeyword: String = ""
-  @objc dynamic var timestamp: TimeInterval = 0.0
+  @objc dynamic var timestamp: TimeInterval = 0.0 // create_t
+  @objc dynamic var lastReadTimestamp: TimeInterval = 0.0
   @objc dynamic var gourpId: UUID?
   @objc dynamic var notiEnabled: Bool = false
   @objc dynamic var hasNews: Bool = false
@@ -31,7 +32,8 @@ class KeywordRealm: Object {
 //      "user_id": userId,
       "keyword": keyword,
       "noti_enable": notiEnabled,
-      "exception_keyword": exceptionKeyword
+      "exception_keyword": exceptionKeyword,
+      "last_read_t": lastReadTimestamp
     ]
   }
 }

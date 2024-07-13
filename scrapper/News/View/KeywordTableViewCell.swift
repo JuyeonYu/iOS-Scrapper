@@ -41,5 +41,10 @@ class KeywordTableViewCell: UITableViewCell {
     noti.setImage(.init(systemName: keyword.notiEnabled ? "bell.fill" : "bell.slash.fill"), for: .normal)
     noti.tintColor = keyword.notiEnabled ? UIColor(named: "Theme") : UIColor.lightGray
     hasNewBadge.isHidden = !keyword.hasNews
+    if keyword.hasNews {
+      titleLabel.font = .boldSystemFont(ofSize: 17)
+    } else {
+      titleLabel.font = .systemFont(ofSize: 17)
+    }
   }
 }

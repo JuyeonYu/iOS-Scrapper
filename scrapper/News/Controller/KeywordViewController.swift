@@ -113,7 +113,7 @@ class KeywordViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+//    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     // Tableview setting
     tableView.delegate = self
     tableView.dataSource = self
@@ -173,12 +173,12 @@ class KeywordViewController: UIViewController {
     
     var noNewKeywords: [KeywordRealm] = Array(self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)").filter("notiEnabled = \(true)"))
     
-    
     var keywordsDict = Array(noNewKeywords.map({ $0.dict ?? [:]}))
-    let dict = ["timestamp": UserDefaultManager.getFetchNew(), "news": keywordsDict] as [String : Any]
+    let dict = ["timestamp": UserDefaultManager.getFetchNew() * 1000, "news": keywordsDict] as [String : Any]
     
     functions.httpsCallable("unreadNewsKeywords").call(dict) { result, error in
       guard let hasNewKeywords: [String] = result?.data as? [String] else { return }
+      guard !hasNewKeywords.isEmpty else { return }
       noNewKeywords.forEach { noNewKeyword in
         if hasNewKeywords.contains(noNewKeyword.keyword) {
           try? self.realm.write({

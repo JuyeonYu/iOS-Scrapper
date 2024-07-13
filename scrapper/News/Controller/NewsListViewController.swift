@@ -113,7 +113,7 @@ class NewsListViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     try! realm.write({
-      keywordRealm?.timestamp = Date().timeIntervalSince1970
+      keywordRealm?.lastReadTimestamp = Date().timeIntervalSince1970
     })
   }
   
@@ -316,7 +316,7 @@ extension NewsListViewController: UITableViewDataSource {
     
     guard let news = dataList[safe: row] else { return UITableViewCell() }
     matchLastRead = (news.publishTimestamp ?? 0) > keywordRealm?.timestamp ?? 0
-    cell.configure(news: news, isNew: !matchLastRead)
+    cell.configure(news: news, isNew: matchLastRead)
         
     // 이미 읽은 기사를 체크하기 위해
     if !self.realm.objects(ReadNewsRealm.self).filter("title = '\(news.title)'").isEmpty {

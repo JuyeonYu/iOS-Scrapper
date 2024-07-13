@@ -69,6 +69,7 @@
 		D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */; };
 		D67020002C398EAE003B1DE0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFF2C398EAE003B1DE0 /* LottieView.swift */; };
 		D67020022C3C2B4F003B1DE0 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D67020012C3C2B4F003B1DE0 /* FirebaseFunctions */; };
+		D67020042C417395003B1DE0 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D67020032C417395003B1DE0 /* Config.xcconfig */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -165,6 +166,7 @@
 		D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiSetting.swift; sourceTree = "<group>"; };
 		D6701FFF2C398EAE003B1DE0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		D67020032C417395003B1DE0 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D687676F2A5E4D890024574B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D68767712A5E4EBA0024574B /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			children = (
 				D6D207A42B162B130093D59C /* GoogleService-Info.plist */,
 				D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */,
+				D67020032C417395003B1DE0 /* Config.xcconfig */,
 				D68767732A5E52B90024574B /* 뉴스스크랩.storekit */,
 				D661A9F12A519BEE00E1EDBA /* 9733-coin.json */,
 				B5486D9823F23463008A5ABD /* Info.plist */,
@@ -494,6 +497,7 @@
 				D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */,
 				D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */,
 				D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */,
+				D67020042C417395003B1DE0 /* Config.xcconfig in Resources */,
 				D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */,
 				B5460C3923F2B0CA002A199E /* CategoryTableViewCell.xib in Resources */,
 				D661A9D72A4DC52E00E1EDBA /* paywall2.mp4 in Resources */,
@@ -736,6 +740,7 @@
 		};
 		B5486D9C23F23463008A5ABD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D67020032C417395003B1DE0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = scrapper/scrapper.entitlements;
@@ -747,12 +752,12 @@
 				IBSC_MODULE = NewsScrap;
 				INFOPLIST_FILE = "scrapper/Support Files/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8;
+				MARKETING_VERSION = 3.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = NewsScrap;
@@ -764,6 +769,7 @@
 		};
 		B5486D9D23F23463008A5ABD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D67020032C417395003B1DE0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = scrapper/scrapperRelease.entitlements;
@@ -775,12 +781,12 @@
 				IBSC_MODULE = NewsScrap;
 				INFOPLIST_FILE = "scrapper/Support Files/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.8;
+				MARKETING_VERSION = 3.0.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
