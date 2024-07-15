@@ -51,7 +51,12 @@ class NewsListViewController: UIViewController {
   var matchLastRead: Bool = false
   
   override func viewDidLoad() {
-    super.viewDidLoad()
+    super.viewDidLoad()    
+    
+    try! realm.write({
+      keywordRealm?.lastReadTimestamp = Date().timeIntervalSince1970
+    })
+
     tableView.refreshControl = refreshControl
     
     refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -112,9 +117,6 @@ class NewsListViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    try! realm.write({
-      keywordRealm?.lastReadTimestamp = Date().timeIntervalSince1970
-    })
   }
   
   func requestNaverNewsList(keyword: String, start: Int) {
@@ -315,7 +317,7 @@ extension NewsListViewController: UITableViewDataSource {
     }
     
     guard let news = dataList[safe: row] else { return UITableViewCell() }
-    matchLastRead = (news.publishTimestamp ?? 0) > keywordRealm?.timestamp ?? 0
+    matchLastRead = (news.publishTimestamp ?? 0) > keywordRealm?.lastReadTimestamp ?? 0
     cell.configure(news: news, isNew: matchLastRead)
         
     // 이미 읽은 기사를 체크하기 위해

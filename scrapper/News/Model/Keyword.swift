@@ -73,7 +73,7 @@ struct KeywordFirestore {
       "last_push_time": lastPushTime,
     ]
     if let exceptKeyword {
-      dict["except_keyword"] = exceptKeyword
+      dict["exception_keyword"] = exceptKeyword
     }
     return dict
   }
