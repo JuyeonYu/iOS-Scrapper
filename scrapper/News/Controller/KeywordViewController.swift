@@ -171,20 +171,21 @@ class KeywordViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    var noNewKeywords: [KeywordRealm] = Array(self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)").filter("notiEnabled = \(true)"))
+    var noNewKeywords: [KeywordRealm] = Array(self.realm.objects(KeywordRealm.self))
     
     var keywordsDict = Array(noNewKeywords.map({ $0.dict ?? [:]}))
     let dict = ["news": keywordsDict] as [String : Any]
     
     functions.httpsCallable("unreadNewsKeywords").call(dict) { result, error in
       guard let hasNewKeywords: [String] = result?.data as? [String] else { return }
-      guard !hasNewKeywords.isEmpty else { return }
       noNewKeywords.forEach { noNewKeyword in
+        try? self.realm.write({
         if hasNewKeywords.contains(noNewKeyword.keyword) {
-          try? self.realm.write({
             noNewKeyword.hasNews = true
-          })
+        } else {
+          noNewKeyword.hasNews = false
         }
+        })
       }
       DispatchQueue.main.async {
         self.tableView.reloadData()
