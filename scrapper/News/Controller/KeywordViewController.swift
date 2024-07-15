@@ -174,7 +174,7 @@ class KeywordViewController: UIViewController {
     var noNewKeywords: [KeywordRealm] = Array(self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)").filter("notiEnabled = \(true)"))
     
     var keywordsDict = Array(noNewKeywords.map({ $0.dict ?? [:]}))
-    let dict = ["timestamp": UserDefaultManager.getFetchNew() * 1000, "news": keywordsDict] as [String : Any]
+    let dict = ["news": keywordsDict] as [String : Any]
     
     functions.httpsCallable("unreadNewsKeywords").call(dict) { result, error in
       guard let hasNewKeywords: [String] = result?.data as? [String] else { return }
