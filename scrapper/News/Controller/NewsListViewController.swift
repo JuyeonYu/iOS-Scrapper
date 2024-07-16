@@ -114,9 +114,6 @@ class NewsListViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    try! realm.write({
-      keywordRealm?.lastReadTimestamp = Date().timeIntervalSince1970
-    })
   }
   
   func requestNaverNewsList(keyword: String, start: Int) {
