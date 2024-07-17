@@ -116,6 +116,7 @@ class NewsListViewController: UIViewController {
     super.viewWillDisappear(animated)
       
       try! realm.write({
+        keywordRealm?.hasNews = false
           keywordRealm?.lastReadTimestamp = Date().timeIntervalSince1970
       })
   }
