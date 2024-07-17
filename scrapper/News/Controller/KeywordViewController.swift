@@ -166,6 +166,10 @@ class KeywordViewController: UIViewController {
     if let uid = Auth.auth().currentUser?.uid {
       Database.database(url: "https://news-scrap-b64dd-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child(uid).child("keywords").setValue(Array(realm.objects(KeywordRealm.self).map { $0.keyword }))
     }
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name("checkNews"), object: nil, queue: nil) { _ in
+      self.syncHasNews()
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {

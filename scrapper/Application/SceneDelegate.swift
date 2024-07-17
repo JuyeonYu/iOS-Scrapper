@@ -45,6 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func sceneWillEnterForeground(_ scene: UIScene) {
+    NotificationCenter.default.post(name: NSNotification.Name("checkNews"), object: nil)
     // Called as the scene transitions from the background to the foreground.
     // Use this method to undo the changes made on entering the background.
   }
