@@ -1053,9 +1053,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="y1J-mY-Uer">
-                                <rect key="frame" x="89" y="265" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="y1J-mY-Uer">
+                                <rect key="frame" x="117" y="175.33333333333334" width="156" height="156.00000000000003"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="y1J-mY-Uer" secondAttribute="height" multiplier="1:1" id="UOO-wf-UKw"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rnr-L7-1dN">
                                 <rect key="frame" x="16" y="666" width="358" height="64"/>
@@ -1078,12 +1080,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rnr-L7-1dN" firstAttribute="leading" secondItem="kUQ-Ld-Em6" secondAttribute="leading" constant="16" id="4VO-54-ocj"/>
+                            <constraint firstItem="y1J-mY-Uer" firstAttribute="width" secondItem="kUQ-Ld-Em6" secondAttribute="width" multiplier="0.4" id="8Ea-ml-rIh"/>
                             <constraint firstItem="gmt-7N-rhM" firstAttribute="centerX" secondItem="kUQ-Ld-Em6" secondAttribute="centerX" id="J7t-w9-sIv"/>
                             <constraint firstItem="gmt-7N-rhM" firstAttribute="top" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="16" id="VQC-bg-GNo"/>
                             <constraint firstAttribute="trailing" secondItem="Rnr-L7-1dN" secondAttribute="trailing" constant="16" id="igT-PU-WlO"/>
                             <constraint firstItem="cpJ-2A-rkV" firstAttribute="bottom" secondItem="Rnr-L7-1dN" secondAttribute="bottom" constant="80" id="qfK-G4-dqO"/>
+                            <constraint firstItem="y1J-mY-Uer" firstAttribute="centerY" secondItem="kUQ-Ld-Em6" secondAttribute="centerY" multiplier="0.6" id="t1l-rP-Kkl"/>
+                            <constraint firstItem="y1J-mY-Uer" firstAttribute="centerX" secondItem="kUQ-Ld-Em6" secondAttribute="centerX" id="zSS-Du-uMy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logo" destination="y1J-mY-Uer" id="gTj-IJ-Gm6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Sy-LU-uRX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

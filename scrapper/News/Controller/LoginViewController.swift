@@ -16,6 +16,7 @@ import FirebaseAppCheck
 
 class LoginViewController: UIViewController {
   // Unhashed nonce.
+  @IBOutlet weak var logo: UIImageView!
   fileprivate var currentNonce: String?
   
   var firebaseDB: DatabaseReference!
@@ -38,7 +39,8 @@ class LoginViewController: UIViewController {
   }
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
+    logo.layer.cornerRadius = 16
     self.firebaseDB = Database.database(url: "https://news-scrap-b64dd-default-rtdb.asia-southeast1.firebasedatabase.app").reference()
     
     // TODO: app check
