@@ -317,6 +317,7 @@ class KeywordViewController: UIViewController {
         keywordRealm.exceptionKeyword = exceptionKeyword!
         keywordRealm.timestamp = Date().timeIntervalSince1970
         keywordRealm.gourpId = self.noneGroupId
+        keywordRealm.hasNews = true
         try! self.realm.write {
           self.realm.add(keywordRealm)
         }
@@ -341,6 +342,7 @@ class KeywordViewController: UIViewController {
         keywordRealm.exceptionKeyword = exceptionKeyword ?? ""
         keywordRealm.timestamp = Date().timeIntervalSince1970
         keywordRealm.gourpId = group.id
+        keywordRealm.hasNews = true
         FirestoreManager().upsert(keyword: KeywordFirestore(keywordRealm: keywordRealm))
         try! self.realm.write {
           self.realm.add(keywordRealm)
