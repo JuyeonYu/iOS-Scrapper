@@ -119,13 +119,37 @@ extension SettingViewController: UITableViewDelegate {
     }), for: .touchUpInside)
     logout.translatesAutoresizingMaskIntoConstraints = false
     logout.setTitle(isLogin ? "로그아웃" : "로그인", for: .normal)
+    
+    let exit: UIButton = UIButton()
+    exit.contentHorizontalAlignment = .leading
+    exit.titleLabel?.font = .systemFont(ofSize: 12)
+    exit.setTitleColor(UIColor.secondaryLabel, for: .normal)
+    exit.addAction(UIAction(handler: { _ in
+      let alert = UIAlertController(title: "알림", message: "회원 탈퇴하시겠습니까? 구독회원인 경우 환불 처리를 따로 진행하셔야 합니다.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+      alert.addAction(UIAlertAction(title: "회원탈퇴", style: .destructive, handler: { _ in
+        Auth.auth().currentUser?.delete(completion: { _ in
+          (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+        })
+      }))
+
+    }), for: .touchUpInside)
+    exit.translatesAutoresizingMaskIntoConstraints = false
+    exit.setTitle("회원 탈퇴", for: .normal)
+    
     view.addSubview(logout)
+    view.addSubview(exit)
     [logout.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-     logout.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
      logout.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
      logout.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)].forEach {
       $0.isActive = true
     }
+    [exit.leadingAnchor.constraint(equalTo: logout.trailingAnchor, constant: 16),
+     exit.centerYAnchor.constraint(equalTo: logout.centerYAnchor)].forEach {
+      $0.isActive = true
+    }
+    
+    exit.isHidden = !isLogin
     return view
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
