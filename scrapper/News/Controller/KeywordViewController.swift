@@ -404,6 +404,14 @@ extension KeywordViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let keywordRealm = getKeywordRealm(indexPath: indexPath) else { return }
     
+    if keywordRealm.hasNews {
+      self.realm.writeAsync {
+        keywordRealm.hasNews = false
+      } onComplete: { error in
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+      }
+    }
+    
     let vc = self.storyboard?.instantiateViewController(identifier: "NewsListViewController") { coder in
       return NewsListViewController(coder: coder, keyword: keywordRealm.keyword)
     }
