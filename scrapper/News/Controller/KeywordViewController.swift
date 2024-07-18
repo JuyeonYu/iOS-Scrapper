@@ -21,7 +21,7 @@ class KeywordViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   private var rewardedAd: GADRewardedAd?
   let functions = Functions.functions()
-
+  
   func getGroupRealm(section: Int) -> GroupRealm? {
     let groupList = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
     guard section < groupList.count else { return nil }
@@ -113,7 +113,7 @@ class KeywordViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+    //    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     // Tableview setting
     tableView.delegate = self
     tableView.dataSource = self
@@ -177,10 +177,10 @@ class KeywordViewController: UIViewController {
     
     let keywordsDict = Array(noNewKeywords.map({ $0.dict ?? [:]}))
     let dict = ["news": keywordsDict] as [String : Any]
-
+    
     functions.httpsCallable("unreadNewsKeywords").call(dict) { result, error in
       guard let hasNewKeywords: [String] = result?.data as? [String] else { return }
-
+      
       self.realm.writeAsync {
         noNewKeywords.forEach { noNewKeyword in
           if hasNewKeywords.contains(noNewKeyword.keyword) {
@@ -235,7 +235,7 @@ class KeywordViewController: UIViewController {
       print("Ad wasn't ready")
     }
   }
-
+  
   
   func popupAddGroup() {
     let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
@@ -428,7 +428,7 @@ extension KeywordViewController: UITableViewDelegate {
     let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
       
       FirestoreManager().delete(keyword: KeywordFirestore.init(keywordRealm: keywordRealm))
-
+      
       // realm에서 먼저 삭제 한다.
       try! self.realm.write {
         self.realm.delete(keywordRealm)
@@ -575,6 +575,30 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
     }
     
   }
+  
+  fileprivate func updateNoti(indexPath: IndexPath) {
+    guard let keyword = self.getKeywordRealm(indexPath: indexPath) else { return }
+    
+    Task {
+      if await !IAPManager.isPro() && self.realm.objects(KeywordRealm.self).map({ $0.notiEnabled }).filter({ $0 }).count > 0 && !keyword.notiEnabled {
+        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+          CustomAlertViewController(coder: coder, head: "알림", body: "프리미엄 회원되고 무제한 키워드 알림을 받아보세요.", lottieImageName: "18089-gold-coin", okTitle: "확인", useOkDelegate: true, okType: .paywall)
+        }
+        alert.delegate = self
+        alert.modalTransitionStyle = .crossDissolve
+        alert.modalPresentationStyle = .overCurrentContext
+        self.present(alert, animated: true)
+        
+        return
+      }
+      
+      try! self.realm.write({
+        keyword.notiEnabled.toggle()
+      })
+      FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
+      self.tableView.reloadRows(at: [indexPath], with: .none)
+    }
+  }
 }
 
 
@@ -593,11 +617,11 @@ extension KeywordViewController: GADFullScreenContentDelegate {
   /// Tells the delegate that the ad failed to present full screen content.
   func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
   }
-
+  
   /// Tells the delegate that the ad will present full screen content.
   func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
   }
-
+  
   /// Tells the delegate that the ad dismissed full screen content.
   func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
     loadRewardedAd()
@@ -611,26 +635,43 @@ extension KeywordViewController: GADFullScreenContentDelegate {
 
 extension KeywordViewController: KeywordTableViewCellDelegate {
   func onNoti(indexPath: IndexPath) {
-    guard let keyword = getKeywordRealm(indexPath: indexPath) else { return }
-    
-    Task {
-      if await !IAPManager.isPro() && realm.objects(KeywordRealm.self).map({ $0.notiEnabled }).filter({ $0 }).count > 0 && !keyword.notiEnabled {
-        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "알림", body: "프리미엄 회원되고 무제한 키워드 알림을 받아보세요.", lottieImageName: "18089-gold-coin", okTitle: "확인", useOkDelegate: true, okType: .paywall)
-        }
-        alert.delegate = self
-        alert.modalTransitionStyle = .crossDissolve
-        alert.modalPresentationStyle = .overCurrentContext
-        self.present(alert, animated: true)
+    UNUserNotificationCenter.current().getNotificationSettings { settings in
+      switch settings.authorizationStatus {
+      case .authorized:
+        self.updateNoti(indexPath: indexPath)
+      default: UNUserNotificationCenter.current().requestAuthorization { granted, error in
+        guard granted else {
+          let alertController = UIAlertController(
+              title: "알림",
+              message: "알림을 받으시려면 설정에서 알림을 켜주셔야 합니다.",
+              preferredStyle: .alert
+          )
+          
+          let settingsAction = UIAlertAction(title: "알림", style: .default) { _ in
+              guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                  return
+              }
+              if UIApplication.shared.canOpenURL(settingsUrl) {
+                  UIApplication.shared.open(settingsUrl, completionHandler: { success in
+                      print("설정 열기: \(success)") // Prints true
+                  })
+              }
+          }
+          
+          let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+          
+          alertController.addAction(settingsAction)
+          alertController.addAction(cancelAction)
+          
+          DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+          }
 
-        return
+          return
+        }
+        self.updateNoti(indexPath: indexPath)
       }
-      
-      try! realm.write({
-        keyword.notiEnabled.toggle()
-      })
-      FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
-      tableView.reloadRows(at: [indexPath], with: .none)
+      }
     }
   }
 }
