@@ -12,6 +12,7 @@ import MessageUI
 import SafariServices
 import GoogleMobileAds
 import FirebaseAuth
+import FirebaseFunctions
 
 enum RewardType {
   case group
@@ -66,6 +67,8 @@ class SettingViewController: UIViewController {
     }
     )
   }
+    
+    let functions = Functions.functions()
   
   @IBOutlet weak var tableView: UITableView!
   override func viewDidLoad() {
@@ -73,6 +76,8 @@ class SettingViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     loadRewardedAd()
+      
+      functions.useEmulator(withHost: "127.0.0.1", port: 5001)
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -159,6 +164,16 @@ extension SettingViewController: UITableViewDelegate {
       guard let appType = AppType(rawValue: indexPath.row) else { return }
       switch appType {
       case .noti:
+          functions.httpsCallable("test").call { res, err in
+              print(res)
+          }
+          UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {didAllow,Error in
+              if didAllow {
+                  print("Push: 권한 허용")
+              } else {
+                  print("Push: 권한 거부")
+              }
+          })
         break
       case .group:
         Task {
