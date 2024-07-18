@@ -33,7 +33,7 @@ class KeywordRealm: Object {
       "keyword": keyword,
       "noti_enable": notiEnabled,
       "exception_keyword": exceptionKeyword,
-      "last_read_t": lastReadTimestamp
+      "last_read_t": lastReadTimestamp * 1000
     ]
   }
 }
