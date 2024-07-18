@@ -100,25 +100,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       DispatchQueue.main.async {
         UIApplication.shared.windows.first?.rootViewController?.present(pay, animated: true)
       }
-    } else if let data = userInfo["keywords"] as? String{
-        if let jsonData = data.data(using: .utf8) {
-          do {
-              guard let keywordDicts = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String: Any]] else { return }
-              
-              let hasNewsKeywords: [String] = keywordDicts.compactMap { $0["title"] as? String }
-              
-              if hasNewsKeywords.count == 1, let link = keywordDicts[0]["link"] as? String, let newUrl = URL(string: link) {
-                  DispatchQueue.main.async {
-                    let config = SFSafariViewController.Configuration()
-                    config.entersReaderIfAvailable = true
-                    let safariVC = SFSafariViewController(url: newUrl, configuration: config)
-                    UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
-                  }
-              }
-          } catch {
-            print("Error decoding JSON: \(error)")
-          }
-        }
+    } else if let data = userInfo["keywords"] as? String,
+              let link = URL(string: data) {
+      DispatchQueue.main.async {
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        let safariVC = SFSafariViewController(url: link, configuration: config)
+        UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
+      }
     }
     completionHandler()
   }
