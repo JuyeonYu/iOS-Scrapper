@@ -35,7 +35,6 @@ class SettingViewController: UIViewController {
   }
   
   enum AppType: Int, CaseIterable {
-    case noti
     case group
     case keyword
     case exceptPress
@@ -163,18 +162,6 @@ extension SettingViewController: UITableViewDelegate {
     case .app:
       guard let appType = AppType(rawValue: indexPath.row) else { return }
       switch appType {
-      case .noti:
-          functions.httpsCallable("test").call { res, err in
-              print(res)
-          }
-          UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: {didAllow,Error in
-              if didAllow {
-                  print("Push: 권한 허용")
-              } else {
-                  print("Push: 권한 거부")
-              }
-          })
-        break
       case .group:
         Task {
           guard await !IAPManager.isPro() else { return }
@@ -286,10 +273,6 @@ extension SettingViewController: UITableViewDataSource {
     case .app:
       guard let appType = AppType(rawValue: indexPath.row) else { return UITableViewCell() }
       switch appType {
-      case .noti:
-        configuration.text = "알림"
-        cell.accessoryType = .disclosureIndicator
-        configuration.image = UIImage(systemName: "bell")?.withTintColor(.label, renderingMode: .alwaysOriginal)
       case .group:
         let groupCount = realm.objects(GroupRealm.self).count
         let maxCount = UserDefaultManager.getMaxGroupCount()
