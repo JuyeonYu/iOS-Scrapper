@@ -187,14 +187,28 @@ extension Date {
 }
 extension SceneDelegate {
   func setRootViewController() {
-    if UserDefaultManager.getIsUser() {
-      setRootViewController(name: "Main",
-                            identifier: "MainViewController")
-    } else {
-      setRootViewController(name: "Main",
-                            identifier: "OnboardingViewController")
-    }
+      
+      if let currentUser = Auth.auth().currentUser {
+          currentUser.getIDToken(completion: { token, error in
+              if let token {
+                  KeychainHelper.shared.saveString(key: KeychainKey.firebaseAuthToken.rawValue, value: token)
+                  self.decideRootViewController()
+              }
+          })
+      } else {
+          self.decideRootViewController()
+      }
   }
+    
+    private func decideRootViewController() {
+        if UserDefaultManager.getIsUser() {
+            self.setRootViewController(name: "Main",
+                                identifier: "MainViewController")
+        } else {
+            self.setRootViewController(name: "Main",
+                                identifier: "OnboardingViewController")
+        }
+    }
   
   private func setRootViewController(name: String, identifier: String) {
     if let windowScene = self.window?.windowScene {

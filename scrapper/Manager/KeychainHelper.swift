@@ -12,6 +12,7 @@ import Security
 
 enum KeychainKey: String {
   case fcmToken = "fcmToken"
+  case firebaseAuthToken = "firebaseAuthToken"
 }
 
 class KeychainHelper {

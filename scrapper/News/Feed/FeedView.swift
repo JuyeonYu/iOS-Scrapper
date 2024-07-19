@@ -11,11 +11,14 @@ import FirebaseFunctions
 import RealmSwift
 
 struct FeedView: View {
+    @State var urls: [URL]
     let functions: FirebaseFunctions.Functions = Functions.functions()
     var body: some View {
         NavigationView(content: {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-                .navigationTitle("feed")
+            List(urls) { url in
+                Text(url.absoluteString)
+            }
+            .navigationTitle("feed")
         }).task {
             functions.useEmulator(withHost: "127.0.0.1", port: 5001)
             guard let token = KeychainHelper.shared.loadString(key: KeychainKey.firebaseAuthToken.rawValue) else { return }
@@ -28,9 +31,9 @@ struct FeedView: View {
             functions.httpsCallable("feed").call(keywordsJson) { res, error in
                 guard let value = res?.data as? String else { return }
                 guard let data = value.data(using: .utf8) else { return }
-                guard let fed = try? JSONDecoder().decode(([String]).self, from: data) else { return }
-                print(fed)
-
+                guard let strings = try? JSONDecoder().decode(([String]).self, from: data) else { return }
+                let urls = strings.compactMap { URL(string: $0) }
+                self.urls = urls
             }
         }
         
@@ -38,5 +41,13 @@ struct FeedView: View {
 }
 
 #Preview {
-    FeedView()
+    FeedView(urls: [
+        .init(string: "google.com")!,
+        .init(string: "apple.com")!,
+        .init(string: "meta.com")!,
+        .init(string: "amazon.com")!,
+        .init(string: "naver.com")!,
+        .init(string: "kakao.com")!,
+        .init(string: "microsoft.com")!
+    ])
 }
