@@ -28,7 +28,7 @@ class Util {
   }
   func shareNewsList(_ news: [Item]) {
     guard let pubDate = news.first?.pubDate else { return }
-    var newsSuite = news.map { $0.title.htmlStripped + "\n" + $0.originallink  + "\n" }
+    var newsSuite = news.map { $0.title.htmlStripped + "\n" + ($0.originallink ?? "")  + "\n" }
     newsSuite.insert("간추린 뉴스 \(naverTimeFormatToNormal(format: "yyyy-MM-dd", date: pubDate))", at: 0)
     showShareActivity(objectsToShare: newsSuite)
   }

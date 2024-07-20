@@ -113,7 +113,7 @@ class KeywordViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    //    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     // Tableview setting
     tableView.delegate = self
     tableView.dataSource = self
@@ -203,7 +203,8 @@ class KeywordViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     tableView.isEditing = false
-    UserDefaultManager.setFetchNew(timestamp: Date().timeIntervalSince1970)
+    UserDefaultManager.setFetchNew(timestamp: Date().timeIntervalSince1970)  
+
   }
   func loadRewardedAd() {
     let request = GADRequest()
@@ -635,6 +636,28 @@ extension KeywordViewController: GADFullScreenContentDelegate {
 
 extension KeywordViewController: KeywordTableViewCellDelegate {
   func onNoti(indexPath: IndexPath) {
+    guard Auth.auth().currentUser != nil else {
+      let alertController = UIAlertController(
+          title: "알림",
+          message: "로그인이 필요한 서비스 입니다.",
+          preferredStyle: .alert
+      )
+      
+      let settingsAction = UIAlertAction(title: "로그인", style: .default) { _ in
+        UserDefaultManager.setIsUser(false)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
+      }
+      
+      let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+      
+      alertController.addAction(settingsAction)
+      alertController.addAction(cancelAction)
+      
+      DispatchQueue.main.async {
+        self.present(alertController, animated: true, completion: nil)
+      }
+      return
+    }
     UNUserNotificationCenter.current().getNotificationSettings { settings in
       switch settings.authorizationStatus {
       case .authorized:

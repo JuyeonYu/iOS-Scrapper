@@ -14,15 +14,19 @@ struct NaverNews: Codable {
 
 // MARK: - Item
 struct Item: Codable {
+  let keyword: String?
   let title: String
-  let originallink: String
+  let originallink: String?
   let link: String
   let itemDescription, pubDate: String
   
+  var ogImage: URL?
+  
   enum CodingKeys: String, CodingKey {
-    case title, originallink, link
+    case title, originallink, link, keyword
     case itemDescription = "description"
     case pubDate
+    case ogImage
   }
   
   var pubDateTimestamp: TimeInterval? {
@@ -35,4 +39,15 @@ struct Item: Codable {
         return nil
     }
   }
+}
+
+extension Item: Identifiable {
+  var id: UUID {
+    UUID()
+  }
+  
+//  var id: String {
+//    link
+//  }
+//  var id: UUID = UUID()
 }

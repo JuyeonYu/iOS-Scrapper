@@ -14,9 +14,10 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaultManager.setIsUser(true)
-        viewControllers?.insert(UIHostingController(rootView: FeedView()), at: 2)
-        viewControllers?[2].tabBarItem.image = .init(systemName: "f.square.fill")
+        UserDefaultManager.setIsUser(true)    
+
+//        viewControllers?.insert(UIHostingController(rootView: FeedView()), at: 2)
+//        viewControllers?[2].tabBarItem.image = .init(systemName: "f.square.fill")
         Task {
             if await !IAPManager.isPro() && UserDefaultManager.getLastOpenDay() != Date().day ?? 1 {
                 self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
