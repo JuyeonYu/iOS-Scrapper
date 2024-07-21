@@ -14,6 +14,7 @@ import Kingfisher
 struct FeedView: View {
   @StateObject private var viewModel: FeedViewModel
   @State private var selectedNews: Item? = nil
+  @State private var selectedURL: URL? = nil
 
   init() {
     let realm = try! Realm()
@@ -22,56 +23,100 @@ struct FeedView: View {
   
   let functions: FirebaseFunctions.Functions = Functions.functions()
   var body: some View {
-    NavigationView(content: {
-      List {
-        ForEach(viewModel.newsList) { news in
+    if !viewModel.isLogin {
+      VStack {
+        Text("로그인이 필요한 서비스입니다.").font(.headline)
           
-          VStack(alignment: .leading) {
-            Text(news.title)
-              .font(.headline)
-              .foregroundColor(.primary)
-            if let url = news.ogImage {
-              
-//                KFImage(url)
-//                  .placeholder({
-//                    ProgressView()
-//                      .frame(height: 200)
-//                  })
-//                  .resizable()
-//                  .frame(height: 200, alignment: .center)
-              }
-            }
-          Text(news.itemDescription)
-            .font(.subheadline)
-            .foregroundColor(.secondary)
-            .onTapGesture {
-              if let url = URL(string: news.link) {
-                self.selectedNews = news
-              }
-            }
-        }
+        LottieViewEntry(.login)
+          .padding()
+          .frame(height: 300)
         
-      }
-      
-      .navigationTitle("feed")
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar(content: {
         Button(action: {
-          Task {
-            await viewModel.fetchFeed()
-          }
+          UserDefaultManager.setIsUser(false)
+          (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController()
         }, label: {
-          HStack {
-            Text(viewModel.refreshTime)
-              .foregroundColor(.primary)
-            Image(systemName: "arrow.clockwise.circle.fill")
-          }
+          Text("Login")
+              .font(.headline)
+              .foregroundColor(.white)
+              .padding()
+              .background(
+                LinearGradient(gradient: Gradient(colors: [Color.purple, .init("Theme")]), startPoint: .leading, endPoint: .trailing)
+              )
+              .cornerRadius(15)
+              .shadow(color: Color.purple.opacity(0.4), radius: 10, x: 0, y: 10)
+
         })
-      })
-      .sheet(item: $selectedNews) { news in
-        SafariView(url: URL(string: news.link)!)
       }
-    })
+    } else if viewModel.newsList.isEmpty {
+      Text("등록한 키워드에 뉴스가 없습니다.")
+    } else {
+      NavigationView {
+          List {
+              ForEach(viewModel.newsList) { news in
+                  NavigationLink(
+                      destination: SafariView(url: selectedURL ?? URL(string: "https://example.com")!),
+                      isActive: Binding<Bool>(
+                          get: { selectedURL != nil },
+                          set: { isActive in
+                              if isActive {
+                                  // Reset selectedURL only when the link is no longer active
+                                  DispatchQueue.main.async {
+                                      selectedURL = nil
+                                  }
+                              }
+                          }
+                      )
+                  ) {
+                      VStack(alignment: .leading) {
+                          Text(news.title)
+                              .font(.headline)
+                              .foregroundColor(.primary)
+
+                          if let url = news.ogImage {
+                              KFImage(url)
+                                  .placeholder {
+                                      ProgressView()
+                                  }
+                                  .resizable()
+                                  .aspectRatio(contentMode: .fill)
+                                  .frame(height: 150)
+                                  .clipped()
+                          }
+
+                          Text(news.itemDescription)
+                              .font(.subheadline)
+                              .foregroundColor(.secondary)
+                      }
+                      .contentShape(Rectangle())
+                      .onTapGesture {
+                          if let url = URL(string: news.link) {
+                              // Update the URL to activate the NavigationLink
+                              selectedURL = url
+                          }
+                      }
+                  }
+              }
+          }
+          .listStyle(.sidebar)
+          .navigationTitle("Feed")
+          .navigationBarTitleDisplayMode(.inline)
+          .toolbar {
+              Button(action: {
+                  Task {
+                      await viewModel.fetchFeed()
+                  }
+              }) {
+                  HStack {
+                      Text(viewModel.refreshTime)
+                          .foregroundColor(.primary)
+                    Image(systemName: "arrow.clockwise.circle.fill").tint(Color("Theme"))
+                  }
+              }
+          }
+      }
+    }
+    
+
   }
 }
 

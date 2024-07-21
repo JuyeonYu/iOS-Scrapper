@@ -14,11 +14,11 @@ public struct LottieViewEntry: View {
     public let loopMode: LottieLoopMode
     public let speed: CGFloat
     public enum LottieAnimationType: String {
-        case coin
+        case coin, login
         internal var filename: String {
             switch self {
-            case .coin:
-                "9733-coin"
+            case .coin: "9733-coin"
+            case .login: "login"
             }
         }
     }
