@@ -29,14 +29,11 @@ class FeedViewModel: ObservableObject {
       isLogin = true
     }
     
-    
     functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     
     Task {
-      
       await fetchFeed()
     }
-    //      fetchFeed()
   }
   func fetchFeed() async {
     let keywords: [String]
