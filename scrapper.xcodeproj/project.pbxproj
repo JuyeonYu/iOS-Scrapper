@@ -73,6 +73,8 @@
 		D67020062C4AF16C003B1DE0 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67020052C4AF16C003B1DE0 /* FeedViewModel.swift */; };
 		D670200B2C4BF336003B1DE0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D670200A2C4BF336003B1DE0 /* Kingfisher */; };
 		D670200D2C4C05FE003B1DE0 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D670200C2C4C05FE003B1DE0 /* SafariView.swift */; };
+		D67020112C4D2C58003B1DE0 /* Extension+UIapplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67020102C4D2C58003B1DE0 /* Extension+UIapplication.swift */; };
+		D67020132C4D2EAA003B1DE0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67020122C4D2EAA003B1DE0 /* SplashViewController.swift */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -174,6 +176,8 @@
 		D67020032C417395003B1DE0 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D67020052C4AF16C003B1DE0 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		D670200C2C4C05FE003B1DE0 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		D67020102C4D2C58003B1DE0 /* Extension+UIapplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIapplication.swift"; sourceTree = "<group>"; };
+		D67020122C4D2EAA003B1DE0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		D687676F2A5E4D890024574B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D68767712A5E4EBA0024574B /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				B5460C2123F28A20002A199E /* KeywordViewController.swift */,
+				D67020122C4D2EAA003B1DE0 /* SplashViewController.swift */,
 				D6701FED2C357C41003B1DE0 /* LoginViewController.swift */,
 				D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */,
 				D661A9DA2A4F2B6700E1EDBA /* OnboardingViewController.swift */,
@@ -333,6 +338,7 @@
 				B520383A23F3F0DC0025B571 /* RestAPIResponse.swift */,
 				B565A5C023F669FA001055CF /* Util.swift */,
 				D670200C2C4C05FE003B1DE0 /* SafariView.swift */,
+				D67020102C4D2C58003B1DE0 /* Extension+UIapplication.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				B565A5BD23F58726001055CF /* NaverNews.swift in Sources */,
 				B5460C3C23F2B0DA002A199E /* NewsTableViewCell.swift in Sources */,
 				B520383723F3D99A0025B571 /* Constant.swift in Sources */,
+				D67020112C4D2C58003B1DE0 /* Extension+UIapplication.swift in Sources */,
 				D68B1F0C2C49FA4400B8F2D1 /* FeedView.swift in Sources */,
 				B520381123F30A280025B571 /* NetworkManager.swift in Sources */,
 				D661A9BD2A4C1D5F00E1EDBA /* SettingViewController.swift in Sources */,
@@ -591,6 +598,7 @@
 				B5460C3323F2A648002A199E /* NewsListViewController.swift in Sources */,
 				D654E5E22B18E52000BF5EF7 /* DiscountViewController.swift in Sources */,
 				D6701FF62C3597F6003B1DE0 /* KeychainHelper.swift in Sources */,
+				D67020132C4D2EAA003B1DE0 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,7 +793,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = NewsScrap;
@@ -814,7 +822,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
