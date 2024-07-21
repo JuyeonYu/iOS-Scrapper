@@ -113,7 +113,7 @@ class KeywordViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+//        functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     // Tableview setting
     tableView.delegate = self
     tableView.dataSource = self

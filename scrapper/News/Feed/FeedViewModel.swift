@@ -29,8 +29,6 @@ class FeedViewModel: ObservableObject {
       isLogin = true
     }
     
-    functions.useEmulator(withHost: "127.0.0.1", port: 5001)
-    
     Task {
       await fetchFeed()
     }
@@ -52,13 +50,6 @@ class FeedViewModel: ObservableObject {
       await MainActor.run {
         self.newsList = items
       }
-      
-      
-      //        for (index, news)  in self.newsList.enumerated() {
-      //          DispatchQueue.main.async {
-      //              self.newsList[index].ogImage = .init(string: "https://velog.velcdn.com/images/vaping_ape/post/24b6609d-7dc2-405d-a89a-f2133fc4ee16/image.jpg")!
-      //            }
-      //        }
       let urls = items.compactMap { URL(string: $0.link) }
       
       for (index, url) in urls.enumerated() {

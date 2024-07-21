@@ -76,7 +76,7 @@ class SettingViewController: UIViewController {
     tableView.dataSource = self
     loadRewardedAd()
       
-      functions.useEmulator(withHost: "127.0.0.1", port: 5001)
+//      functions.useEmulator(withHost: "127.0.0.1", port: 5001)
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
