@@ -43,8 +43,8 @@ extension SplashViewController {
           currentUser.getIDToken(completion: { token, error in
               if let token {
                   KeychainHelper.shared.saveString(key: KeychainKey.firebaseAuthToken.rawValue, value: token)
-                  self.decideRootViewController()
               }
+            self.decideRootViewController()
           })
       } else {
           self.decideRootViewController()

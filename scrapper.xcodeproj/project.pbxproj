@@ -77,6 +77,7 @@
 		D67020132C4D2EAA003B1DE0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67020122C4D2EAA003B1DE0 /* SplashViewController.swift */; };
 		D67020152C4D4401003B1DE0 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = D67020142C4D4400003B1DE0 /* login.json */; };
 		D67020192C4D4BDE003B1DE0 /* noFeed.json in Resources */ = {isa = PBXBuildFile; fileRef = D67020182C4D4BDE003B1DE0 /* noFeed.json */; };
+		D670201B2C4D5898003B1DE0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D670201A2C4D5898003B1DE0 /* loading.json */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -182,6 +183,7 @@
 		D67020122C4D2EAA003B1DE0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		D67020142C4D4400003B1DE0 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		D67020182C4D4BDE003B1DE0 /* noFeed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = noFeed.json; sourceTree = "<group>"; };
+		D670201A2C4D5898003B1DE0 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		D687676F2A5E4D890024574B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D68767712A5E4EBA0024574B /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				D67020032C417395003B1DE0 /* Config.xcconfig */,
 				D68767732A5E52B90024574B /* 뉴스스크랩.storekit */,
 				D661A9F12A519BEE00E1EDBA /* 9733-coin.json */,
+				D670201A2C4D5898003B1DE0 /* loading.json */,
 				D67020182C4D4BDE003B1DE0 /* noFeed.json */,
 				D67020142C4D4400003B1DE0 /* login.json */,
 				B5486D9823F23463008A5ABD /* Info.plist */,
@@ -542,6 +545,7 @@
 				D661A9D92A4DC52E00E1EDBA /* paywall1.mp4 in Resources */,
 				D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */,
 				D67020192C4D4BDE003B1DE0 /* noFeed.json in Resources */,
+				D670201B2C4D5898003B1DE0 /* loading.json in Resources */,
 				D6D207A52B162B130093D59C /* GoogleService-Info.plist in Resources */,
 				B5872F04247D11F300F12A8F /* Localizable.strings in Resources */,
 				B5486D9423F23463008A5ABD /* Assets.xcassets in Resources */,
@@ -801,7 +805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = NewsScrap;
@@ -830,7 +834,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;

@@ -18,7 +18,8 @@ class FeedViewModel: ObservableObject {
   @Published var refreshTime: String = ""
   @Published var newsList: [Item] = []
   @Published var isLogin: Bool = false
-  
+  @Published var isLoading: Bool = false
+
   init(realm: Realm) {
     self.realm = realm
     
@@ -34,6 +35,13 @@ class FeedViewModel: ObservableObject {
     }
   }
   func fetchFeed() async {
+    guard !isLoading else { return }
+    Task {
+      await MainActor.run {
+        self.isLoading = true
+      }
+    }
+    
     let keywords: [String]
     keywords = await MainActor.run {
       Array(realm.objects(KeywordRealm.self).map { $0.keyword })
@@ -43,6 +51,7 @@ class FeedViewModel: ObservableObject {
     guard let keywordsJson = String(data: keywordsJsonData, encoding: .utf8) else { return }
     
     do {
+      
       let result = try await functions.httpsCallable("feed").call(keywordsJson)
       guard let value = result.data as? String else { return }
       guard let data = value.data(using: .utf8) else { return }
@@ -68,6 +77,11 @@ class FeedViewModel: ObservableObject {
     
     await MainActor.run {
       self.refreshTime = Date().formatted()
+    }
+    Task {
+      await MainActor.run {
+        self.isLoading = false
+      }
     }
   }
   func fetchFeed2() {
