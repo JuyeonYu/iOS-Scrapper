@@ -578,9 +578,14 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
   }
   
   fileprivate func updateNoti(indexPath: IndexPath) {
-    guard let keyword = self.getKeywordRealm(indexPath: indexPath) else { return }
-    
     Task {
+      var keyword: KeywordRealm?
+      await MainActor.run {
+        keyword = self.getKeywordRealm(indexPath: indexPath)
+      }
+      guard let keyword else { return }
+      
+      
       if await !IAPManager.isPro() && self.realm.objects(KeywordRealm.self).map({ $0.notiEnabled }).filter({ $0 }).count > 0 && !keyword.notiEnabled {
         let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
           CustomAlertViewController(coder: coder, head: "알림", body: "프리미엄 회원되고 무제한 키워드 알림을 받아보세요.", lottieImageName: "18089-gold-coin", okTitle: "확인", useOkDelegate: true, okType: .paywall)
@@ -593,9 +598,12 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
         return
       }
       
-      try! self.realm.write({
-        keyword.notiEnabled.toggle()
-      })
+      await MainActor.run {
+        try! self.realm.write({
+          keyword.notiEnabled.toggle()
+        })
+      }
+      
       FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
       self.tableView.reloadRows(at: [indexPath], with: .none)
     }
