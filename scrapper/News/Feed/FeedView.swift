@@ -12,11 +12,13 @@ import RealmSwift
 import Kingfisher
 
 struct FeedView: View {
+  var onNews: ((Item) -> Void)
   @StateObject private var viewModel: FeedViewModel
   @State private var selectedNews: Item? = nil
   @State private var selectedURL: URL? = nil
   
-  init() {
+  init(onNews: @escaping ((Item) -> Void)) {
+    self.onNews = onNews
     let realm = try! Realm()
     _viewModel = StateObject(wrappedValue: FeedViewModel(realm: realm))
   }
@@ -81,20 +83,6 @@ struct FeedView: View {
         } else {
           List {
             ForEach(viewModel.newsList) { news in
-              NavigationLink(
-                destination: SafariView(url: selectedURL ?? URL(string: "https://example.com")!),
-                isActive: Binding<Bool>(
-                  get: { selectedURL != nil },
-                  set: { isActive in
-                    if isActive {
-                      // Reset selectedURL only when the link is no longer active
-                      DispatchQueue.main.async {
-                        selectedURL = nil
-                      }
-                    }
-                  }
-                )
-              ) {
                 HStack {
                   if let url = news.ogImage {
                     KFImage(url)
@@ -120,11 +108,11 @@ struct FeedView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
+                  onNews(news)
                   if let url = URL(string: news.link) {
                     selectedURL = url
                   }
                 }
-              }
             }
           }
           .listStyle(.sidebar)
@@ -150,5 +138,5 @@ struct FeedView: View {
 }
 
 #Preview {
-  FeedView()
+  FeedView { _ in }
 }
