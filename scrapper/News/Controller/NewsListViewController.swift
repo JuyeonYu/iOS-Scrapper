@@ -14,6 +14,7 @@ import GoogleMobileAds
 
 class NewsListViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
+  var selectedURL: URL?
   let refreshControl = UIRefreshControl()
   var newsList: [News] = []
   var searchedNews: [News] = []
@@ -230,13 +231,13 @@ extension NewsListViewController: UITableViewDelegate {
         realm.add(readNewsRealm)
       })
     }
-    
+    let url = URL(string: newsList[indexPath.row].urlString)!
+    selectedURL = url
     if (interstitial != nil && newsViewCount == popupAdNewsViewCount) && !bannerView.isHidden {
       newsViewCount = 0
       interstitial!.present(fromRootViewController: self)
     } else {
-      presentSafari(url: URL(string: newsList[indexPath.row].urlString)!, delegate: self)
-      present(safariVC!, animated: true, completion: nil)
+      presentSafari(url: url, delegate: self)
       newsViewCount += 1
     }
     
@@ -355,6 +356,8 @@ extension NewsListViewController: SFSafariViewControllerDelegate {
 
 extension NewsListViewController: GADFullScreenContentDelegate {
   func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-    present(safariVC!, animated: true, completion: nil)
+    guard let selectedURL else { return }
+    presentSafari(url: selectedURL, delegate: self)
+    self.selectedURL = nil
   }
 }
