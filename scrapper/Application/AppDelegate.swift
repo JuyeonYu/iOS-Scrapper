@@ -55,51 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
 
-    let remoteConfig = RemoteConfig.remoteConfig()
-    let settings = RemoteConfigSettings()
-    settings.minimumFetchInterval = 0
-    remoteConfig.configSettings = settings
-    
-    remoteConfig.fetch() { (status, error) -> Void in
-        if status == .success {
-            remoteConfig.activate() { (changed, error) in
-                print(changed, error)
-              let remoteVersion = remoteConfig["version"].stringValue?.split(separator: ".").compactMap { version in Int(version) } ?? []
-              let currentVersion = Bundle.version.split(separator: ".").compactMap { Int($0)}
-                            
-              guard remoteVersion.count == 3 && currentVersion.count == 3 else { return }
-              
-              guard remoteVersion[0] != currentVersion[0] || remoteVersion[1] != currentVersion[1] || remoteVersion[2] != currentVersion[2] else {
-                return
-              }
-              
-              guard remoteVersion[0] > currentVersion[0] || remoteVersion[1] > currentVersion[1] || remoteVersion[2] > currentVersion[2] else {
-                return
-              }
-              
-              let alert = UIAlertController(title: "알림", message: "새로운 기능이 업데이트 되었습니다. 업데이트가 필요합니다.", preferredStyle: .alert)
-              alert.addAction(UIAlertAction(title: "업데이트", style: .default, handler: { _ in
-                guard let url = URL(string: Constants.appDownloadURL) else {
-                    return
-                }
-                DispatchQueue.main.async {
-                  if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                  }
-                }
-              }))
-              DispatchQueue.main.async {
-                UIApplication.shared.windows.first?.rootViewController?.present(alert: alert)
-              }
-                
-            }
-        } else {
-            print("Error: \(error?.localizedDescription ?? "No error available.")")
-        }
-    }
-
-
-    
     UNUserNotificationCenter.current().delegate = self
     let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
     UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
