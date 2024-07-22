@@ -22,6 +22,8 @@ class FeedViewModel: ObservableObject {
 
   init(realm: Realm) {
     self.realm = realm
+      
+//      functions.useEmulator(withHost: "127.0.0.1", port: 5001)
     
     if Auth.auth().currentUser == nil {
       isLogin = false
@@ -42,11 +44,10 @@ class FeedViewModel: ObservableObject {
       }
     }
     
-    let keywords: [String]
-    keywords = await MainActor.run {
-      Array(realm.objects(KeywordRealm.self).map { $0.keyword })
+    var keywords: [String] = await MainActor.run {
+        Array(realm.objects(KeywordRealm.self).map { $0.keyword })
     }
-    
+      
     guard let keywordsJsonData = try? JSONEncoder().encode(keywords) else { return }
     guard let keywordsJson = String(data: keywordsJsonData, encoding: .utf8) else { return }
     
@@ -58,9 +59,10 @@ class FeedViewModel: ObservableObject {
       guard let items = try? JSONDecoder().decode([Item].self, from: data) else { return }
       await MainActor.run {
         self.newsList = items
+          self.refreshTime = Date().formatted()
+          self.isLoading = false
       }
       let urls = items.compactMap { URL(string: $0.link) }
-      
       for (index, url) in urls.enumerated() {
         await fetchOgTag(for: url) { title, desc, ogImage in
           
@@ -75,14 +77,8 @@ class FeedViewModel: ObservableObject {
       print("Error fetching feed: \(error)")
     }
     
-    await MainActor.run {
-      self.refreshTime = Date().formatted()
-    }
-    Task {
-      await MainActor.run {
-        self.isLoading = false
-      }
-    }
+    
+    
   }
   func fetchFeed2() {
     let realm: Realm = try! Realm()
