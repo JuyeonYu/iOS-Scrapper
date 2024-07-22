@@ -227,3 +227,12 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+
+extension Bundle {
+  static var version: String {
+        guard let dictionary = main.infoDictionary,
+            let version = dictionary["CFBundleShortVersionString"] as? String else { return "" }
+      return version
+  }
+}

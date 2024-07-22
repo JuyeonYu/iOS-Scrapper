@@ -78,6 +78,7 @@
 		D67020152C4D4401003B1DE0 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = D67020142C4D4400003B1DE0 /* login.json */; };
 		D67020192C4D4BDE003B1DE0 /* noFeed.json in Resources */ = {isa = PBXBuildFile; fileRef = D67020182C4D4BDE003B1DE0 /* noFeed.json */; };
 		D670201B2C4D5898003B1DE0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D670201A2C4D5898003B1DE0 /* loading.json */; };
+		D670201D2C4EAC53003B1DE0 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D670201C2C4EAC53003B1DE0 /* FirebaseRemoteConfig */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -220,6 +221,7 @@
 				D6701FF42C35925F003B1DE0 /* FirebaseAppCheck in Frameworks */,
 				D670200B2C4BF336003B1DE0 /* Kingfisher in Frameworks */,
 				D661A9C02A4C5CDE00E1EDBA /* SwiftSoup in Frameworks */,
+				D670201D2C4EAC53003B1DE0 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +453,7 @@
 				D6701FFB2C397C20003B1DE0 /* FirebaseAppCheck */,
 				D67020012C3C2B4F003B1DE0 /* FirebaseFunctions */,
 				D670200A2C4BF336003B1DE0 /* Kingfisher */,
+				D670201C2C4EAC53003B1DE0 /* FirebaseRemoteConfig */,
 			);
 			productName = scrapper;
 			productReference = B5486D8723F23461008A5ABD /* NewsScrap.app */;
@@ -1050,6 +1053,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D67020092C4BF336003B1DE0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		D670201C2C4EAC53003B1DE0 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseRemoteConfig;
 		};
 		D6A13FAD2A3B4F4C002A457B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
