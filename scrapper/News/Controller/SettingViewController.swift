@@ -209,11 +209,9 @@ extension SettingViewController: UITableViewDelegate {
       guard let otherType = OtherType(rawValue: indexPath.row) else { return }
       switch otherType {
       case .terms:
-        let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
-        present(safariVC, animated: true, completion: nil)
+        presentSafari(url: URL(string: Constants.infoURL)!)
       case .policy:
-        let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
-        present(safariVC, animated: true, completion: nil)
+        presentSafari(url: URL(string: Constants.privacyURL)!)
       case .report:
         if MFMailComposeViewController.canSendMail() {
           let compseVC = MFMailComposeViewController()

@@ -231,15 +231,11 @@ extension NewsListViewController: UITableViewDelegate {
       })
     }
     
-    let config = SFSafariViewController.Configuration()
-    config.entersReaderIfAvailable = true
-    safariVC = SFSafariViewController(url: URL(string: newsList[indexPath.row].urlString)!, configuration: config)
-    safariVC?.delegate = self
-    
     if (interstitial != nil && newsViewCount == popupAdNewsViewCount) && !bannerView.isHidden {
       newsViewCount = 0
       interstitial!.present(fromRootViewController: self)
     } else {
+      presentSafari(url: URL(string: newsList[indexPath.row].urlString)!, delegate: self)
       present(safariVC!, animated: true, completion: nil)
       newsViewCount += 1
     }

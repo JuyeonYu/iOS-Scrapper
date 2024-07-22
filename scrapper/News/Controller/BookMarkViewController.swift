@@ -129,9 +129,7 @@ extension BookMarkViewController: UITableViewDelegate {
       })
     }
     
-    let safariVC = SFSafariViewController(url: URL(string: realm.objects(BookMarkNewsRealm.self)[row].urlString)!)
-    safariVC.delegate = self
-    present(safariVC, animated: true, completion: nil)
+    presentSafari(url: URL(string: realm.objects(BookMarkNewsRealm.self)[row].urlString)!, delegate: self)
   }
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     guard !isSelectMode else {

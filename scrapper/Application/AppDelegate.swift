@@ -102,12 +102,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       }
     } else if let data = userInfo["keywords"] as? String,
               let link = URL(string: data) {
-      DispatchQueue.main.async {
-        let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = true
-        let safariVC = SFSafariViewController(url: link, configuration: config)
-        UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
-      }
+      UIApplication.shared.windows.first?.rootViewController?.presentSafari(url: link)
     }
     completionHandler()
   }
@@ -120,4 +115,25 @@ extension AppDelegate: MessagingDelegate {
     KeychainHelper.shared.saveString(key: KeychainKey.fcmToken.rawValue, value: fcmToken)
     FirestoreManager().sync()
   }
+}
+
+
+extension UIViewController {
+    func presentSafari(url: URL, delegate: SFSafariViewControllerDelegate? = nil) {
+        DispatchQueue.main.async {
+            let config = SFSafariViewController.Configuration()
+            config.entersReaderIfAvailable = true
+            let safariVC = SFSafariViewController(url: url, configuration: config)
+            safariVC.delegate = delegate
+
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let rootViewController = scene.windows.first?.rootViewController {
+                    rootViewController.present(safariVC, animated: true, completion: nil)
+                }
+            } else {
+                // For iOS versions before 13.0, fallback to the previous method
+                UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
+            }
+        }
+    }
 }

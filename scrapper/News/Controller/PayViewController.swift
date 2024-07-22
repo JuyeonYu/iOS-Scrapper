@@ -30,12 +30,10 @@ class PayViewController: UIViewController {
     
   }
   @IBAction func onPrivacy(_ sender: Any) {
-    let safariVC = SFSafariViewController(url: URL(string: Constants.privacyURL)!)
-    present(safariVC, animated: true, completion: nil)
+    presentSafari(url: URL(string: Constants.privacyURL)!)
   }
   @IBAction func onTerms(_ sender: Any) {
-    let safariVC = SFSafariViewController(url: URL(string: Constants.infoURL)!)
-    present(safariVC, animated: true, completion: nil)
+    presentSafari(url: URL(string: Constants.infoURL)!)
   }
   @IBAction func onYearlyPay(_ sender: Any) {
     monthlyPay.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
