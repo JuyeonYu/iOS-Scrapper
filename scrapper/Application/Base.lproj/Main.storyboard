@@ -1068,6 +1068,9 @@
                             <constraint firstItem="TCE-FV-bFg" firstAttribute="centerX" secondItem="BlB-pQ-5Dh" secondAttribute="centerX" id="uGq-HZ-vHC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logo" destination="TCE-FV-bFg" id="fi7-fU-Fa8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ZZ-00-hT4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

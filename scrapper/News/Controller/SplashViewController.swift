@@ -10,10 +10,11 @@ import UIKit
 import FirebaseAuth
 
 class SplashViewController: UIViewController {
-
+  @IBOutlet weak var logo: UIImageView!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+      logo.layer.cornerRadius = 16
 //      setRootViewController()
 
         // Do any additional setup after loading the view.
