@@ -19,7 +19,6 @@ class NewsListViewController: UIViewController {
   var newsList: [News] = []
   var searchedNews: [News] = []
   var dataList: [News] = []
-  var newsViewCount: Int = 0
   let popupAdNewsViewCount: Int = 10
   let lastReadNewsOriginalLink: String?
   var keywordRealm: KeywordRealm?
@@ -233,14 +232,14 @@ extension NewsListViewController: UITableViewDelegate {
     }
     let url = URL(string: newsList[indexPath.row].urlString)!
     selectedURL = url
-    if (interstitial != nil && newsViewCount == popupAdNewsViewCount) && !bannerView.isHidden {
-      newsViewCount = 0
+    let newsViewCount = UserDefaults.standard.integer(forKey: "newsViewCount")
+    if (interstitial != nil && UserDefaults.standard.integer(forKey: "newsViewCount") >= popupAdNewsViewCount) && !bannerView.isHidden {
+      UserDefaults.standard.set(0, forKey: "newsViewCount")
       interstitial!.present(fromRootViewController: self)
     } else {
       presentSafari(url: url, delegate: self)
-      newsViewCount += 1
+      UserDefaults.standard.set(newsViewCount + 1, forKey: "newsViewCount")
     }
-    
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
