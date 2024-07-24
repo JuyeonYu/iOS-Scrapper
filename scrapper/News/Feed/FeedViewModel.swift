@@ -37,48 +37,71 @@ class FeedViewModel: ObservableObject {
     }
   }
   func fetchFeed() async {
-    guard !isLoading else { return }
-    Task {
-      await MainActor.run {
-        self.isLoading = true
-      }
-    }
-    
-    var keywords: [String] = await MainActor.run {
-        Array(realm.objects(KeywordRealm.self).map { $0.keyword })
-    }
+      print("x->1 \(Date().timeIntervalSince1970)")
       
-    guard let keywordsJsonData = try? JSONEncoder().encode(keywords) else { return }
-    guard let keywordsJson = String(data: keywordsJsonData, encoding: .utf8) else { return }
-    
-    do {
+      guard !isLoading else { return }
+      await MainActor.run { self.isLoading = true }
       
-      let result = try await functions.httpsCallable("feed").call(keywordsJson)
-      guard let value = result.data as? String else { return }
-      guard let data = value.data(using: .utf8) else { return }
-      guard let items = try? JSONDecoder().decode([Item].self, from: data) else { return }
-      await MainActor.run {
-        self.newsList = items
-          self.refreshTime = Date().formatted()
-          self.isLoading = false
-      }
-      let urls = items.compactMap { URL(string: $0.link) }
-      for (index, url) in urls.enumerated() {
-        await fetchOgTag(for: url) { title, desc, ogImage in
-          
-          Task {
-            await MainActor.run {
-              self.newsList[index].ogImage = ogImage
-            }
+      let keywords = await fetchKeywords()
+    print("x->2 \(Date().timeIntervalSince1970)")
+      
+      guard let keywordsJson = keywords.toJson() else { return }
+      
+      do {
+          let itemCombo = try await fetchFeedItems(with: keywordsJson)
+        print("x->3 \(Date().timeIntervalSince1970)")
+        let items = itemCombo.flatMap({ $0.items })
+          await MainActor.run {
+            self.newsList = items
+            
+            print("x->5 \(items.count)")
+            
+              self.refreshTime = Date().formatted()
+              self.isLoading = false
           }
-        }
+          
+          await fetchAndUpdateOgTags(for: items)
+        print("x->4 \(Date().timeIntervalSince1970)")
+      } catch {
+          print("Error fetching feed: \(error)")
+          await MainActor.run { self.isLoading = false }
       }
-    } catch {
-      print("Error fetching feed: \(error)")
-    }
-    
-    
-    
+  }
+
+  private func fetchKeywords() async -> [String] {
+      let keywords: [String] = await MainActor.run {
+          Array(realm.objects(KeywordRealm.self).map { $0.keyword })
+      }
+      return keywords
+  }
+
+  private func fetchFeedItems(with keywordsJson: String) async throws -> [ItemCombo] {
+      let result = try await functions.httpsCallable("feed").call(keywordsJson)
+    print("x->3-1 \(Date().timeIntervalSince1970)")
+      guard let value = result.data as? String,
+            let data = value.data(using: .utf8) else {
+          throw NSError(domain: "FeedError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid feed data"])
+      }
+    print("x->3-2 \(Date().timeIntervalSince1970)")
+      return try JSONDecoder().decode([ItemCombo].self, from: data)
+  }
+
+  private func fetchAndUpdateOgTags(for items: [Item]) async {
+      let urls = items.compactMap { URL(string: $0.link) }
+      await withTaskGroup(of: (Int, URL, (title: String?, desc: String?, ogImage: URL?)).self) { group in
+          for (index, url) in urls.enumerated() {
+              group.addTask {
+                let (title, desc, ogImage) = await self.fetchOgTag(for: url)
+                  return (index, url, (title, desc, ogImage))
+              }
+          }
+          
+          for await (index, _, ogTag) in group {
+              await MainActor.run {
+                self.newsList[index].ogImage = ogTag.ogImage
+              }
+          }
+      }
   }
   func fetchFeed2() {
     let realm: Realm = try! Realm()
@@ -102,7 +125,7 @@ class FeedViewModel: ObservableObject {
     }
   }
   
-  func fetchOgTag(for url: URL, completion: @escaping (String?, String?, URL?) -> Void) async {
+  func fetchOgTag(for url: URL) async -> (String?, String?, URL?) {
     do {
       let (data, _) = try await URLSession.shared.data(from: url)
       let html = String(data: data, encoding: .utf8)
@@ -113,9 +136,9 @@ class FeedViewModel: ObservableObject {
       let ogImageString = try document.select("meta[property=og:image]").attr("content")
       let ogImage = URL(string: ogImageString)
       
-      completion(ogTitle, ogDescription, ogImage)
+      return (ogTitle, ogDescription, ogImage)
     } catch {
-      completion(nil, nil, nil)
+      return (nil, nil, nil)
     }
   }
   
@@ -139,3 +162,9 @@ class FeedViewModel: ObservableObject {
   }
 }
 
+extension Array where Element == String {
+    func toJson() -> String? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+}
