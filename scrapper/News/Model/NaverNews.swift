@@ -13,6 +13,15 @@ struct NaverNews: Codable {
 }
 
 // MARK: - Item
+struct ItemCombo: Codable {
+  let keyword: String?
+  let items: [Item]
+  
+  enum CodingKeys: String, CodingKey {
+    case keyword, items
+  }
+}
+
 struct Item: Codable {
   let keyword: String?
   let title: String

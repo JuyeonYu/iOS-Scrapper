@@ -42,7 +42,6 @@ class BaseTableView: UITableView {
         noDataView.play()
         noDataView.loopMode = .loop
         
-        lottieParentView.backgroundColor = .red
         addSubview(lottieParentView)
         
         lottieParentView.addSubview(noDataView)
