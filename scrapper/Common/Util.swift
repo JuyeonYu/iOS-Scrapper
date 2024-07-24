@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import Lottie
 
 class Util {
   static let sharedInstance = Util()
@@ -235,4 +236,16 @@ extension Bundle {
             let version = dictionary["CFBundleShortVersionString"] as? String else { return "" }
       return version
   }
+}
+
+
+extension LottieAnimationView {
+    enum LottieAnimationType: String {
+        case coin
+        case loading
+        case noData
+    }
+    convenience init(type: LottieAnimationType) {
+        self.init(name: type.rawValue)
+    }
 }

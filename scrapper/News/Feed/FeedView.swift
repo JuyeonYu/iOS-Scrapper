@@ -61,7 +61,7 @@ struct FeedView: View {
               
             } else {
               Text("등록한 키워드에 뉴스가 없습니다.")
-              LottieViewEntry(.noFeed)
+              LottieViewEntry(.noData)
                 .padding()
                 .frame(height: 300)
             }

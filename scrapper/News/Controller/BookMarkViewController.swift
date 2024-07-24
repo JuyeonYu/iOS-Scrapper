@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import SafariServices
 import GoogleMobileAds
+import Lottie
 
 class BookMarkViewController: UIViewController {
   var selectedNewsRows: Set<Int> = [] {
@@ -30,7 +31,7 @@ class BookMarkViewController: UIViewController {
       }
     }
   }
-  @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: BaseTableView!
   @IBOutlet weak var searchBar: UISearchBar!
   
   lazy var realm:Realm = {
@@ -107,6 +108,7 @@ class BookMarkViewController: UIViewController {
         bannerView.load(GADRequest())
       }
     }
+      tableView.dataFetchStatus = realm.objects(BookMarkNewsRealm.self).isEmpty ? .noData : .hasData
   }
 }
 

@@ -18,7 +18,7 @@ class TodayViewController: UIViewController {
   var shareIssueKeywords: [RSSFeedItem] = []
   @IBOutlet weak var bannerView: GADBannerView!
   @IBOutlet weak var pay: UIBarButtonItem!
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: BaseTableView!
   let refreshControl = UIRefreshControl()
   private var rewardedAd: GADRewardedAd?
   
@@ -154,6 +154,7 @@ class TodayViewController: UIViewController {
       issueKeywords = groupRSSByDay(rss: sorted)
       tableView.refreshControl?.endRefreshing()
       tableView.reloadData()
+        tableView.dataFetchStatus = rss.isEmpty ? .noData : .hasData
     }
   }
   
