@@ -11,7 +11,7 @@ import Lottie
 
 enum DataFetchStatus {
     case loading
-    case noData
+    case noData(message: String?)
     case hasData
 }
 
@@ -23,16 +23,21 @@ class BaseTableView: UITableView {
                 lottieParentView.isHidden = false
                 loadingView.isHidden = false
                 noDataView.isHidden = true
-            case .noData:
+                messageLabel.isHidden = true
+            case .noData(let message):
                 lottieParentView.isHidden = false
                 loadingView.isHidden = true
                 noDataView.isHidden = false
+                messageLabel.text = message
+                messageLabel.isHidden = false
             case .hasData:
                 lottieParentView.isHidden = true
+                messageLabel.isHidden = true
             }
         }
     }
     private let lottieParentView: UIView = UIView()
+    private let messageLabel: UILabel = UILabel()
     private let loadingView: LottieAnimationView = LottieAnimationView(type: .loading)
     private let noDataView: LottieAnimationView = LottieAnimationView(type: .noData)
 
@@ -43,11 +48,20 @@ class BaseTableView: UITableView {
         noDataView.loopMode = .loop
         
         addSubview(lottieParentView)
+        addSubview(messageLabel)
         
         lottieParentView.addSubview(noDataView)
         lottieParentView.addSubview(loadingView)
         
+        messageLabel.textAlignment = .center
+        messageLabel.numberOfLines = 0
         lottieParentView.frame = bounds
+        
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        [messageLabel.centerXAnchor.constraint(equalTo: noDataView.centerXAnchor),
+         messageLabel.bottomAnchor.constraint(equalTo: noDataView.topAnchor, constant: -16)].forEach {
+            $0.isActive = true
+        }
 
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         [loadingView.centerXAnchor.constraint(equalTo: lottieParentView.centerXAnchor),
@@ -60,7 +74,7 @@ class BaseTableView: UITableView {
         
         noDataView.translatesAutoresizingMaskIntoConstraints = false
         [noDataView.centerXAnchor.constraint(equalTo: lottieParentView.centerXAnchor),
-         noDataView.centerYAnchor.constraint(equalTo: lottieParentView.centerYAnchor),
+         noDataView.centerYAnchor.constraint(equalTo: lottieParentView.centerYAnchor, constant: 10),
          noDataView.widthAnchor.constraint(equalToConstant: 300),
          noDataView.heightAnchor.constraint(equalToConstant: 300)
         ].forEach {
