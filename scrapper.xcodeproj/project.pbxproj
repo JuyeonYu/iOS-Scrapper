@@ -85,6 +85,7 @@
 		D68B1F0C2C49FA4400B8F2D1 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B1F0B2C49FA4400B8F2D1 /* FeedView.swift */; };
 		D68B1F0E2C4A4DFD00B8F2D1 /* OpenGraphTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B1F0D2C4A4DFD00B8F2D1 /* OpenGraphTag.swift */; };
 		D68B1F122C507EE800B8F2D1 /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B1F112C507EE800B8F2D1 /* BaseTableView.swift */; };
+		D69E103F2C51D61C00E0C305 /* GoogleAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69E103E2C51D61C00E0C305 /* GoogleAdView.swift */; };
 		D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */; };
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
@@ -192,6 +193,7 @@
 		D68B1F0B2C49FA4400B8F2D1 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		D68B1F0D2C4A4DFD00B8F2D1 /* OpenGraphTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphTag.swift; sourceTree = "<group>"; };
 		D68B1F112C507EE800B8F2D1 /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
+		D69E103E2C51D61C00E0C305 /* GoogleAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdView.swift; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 		D6D207A42B162B130093D59C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				D661A9DC2A4F2CF400E1EDBA /* OnboardingCell.swift */,
 				D661A9DD2A4F2CF400E1EDBA /* OnboardingCell.xib */,
 				D68B1F112C507EE800B8F2D1 /* BaseTableView.swift */,
+				D69E103E2C51D61C00E0C305 /* GoogleAdView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				B5486D8B23F23461008A5ABD /* AppDelegate.swift in Sources */,
 				B520383B23F3F0DC0025B571 /* RestAPIResponse.swift in Sources */,
 				D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */,
+				D69E103F2C51D61C00E0C305 /* GoogleAdView.swift in Sources */,
 				B5460C2223F28A20002A199E /* KeywordViewController.swift in Sources */,
 				D661A9C22A4C5D3D00E1EDBA /* TodayViewController.swift in Sources */,
 				D661A9E32A50442000E1EDBA /* MainViewController.swift in Sources */,
@@ -812,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = NewsScrap;
@@ -841,7 +845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
