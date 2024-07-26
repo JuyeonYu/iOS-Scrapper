@@ -63,13 +63,15 @@ extension SplashViewController {
     }
   
   private func setRootViewController(name: String, identifier: String) {
-    if let windowScene = UIApplication.shared.currentWindow?.windowScene {
-      let window = UIWindow(windowScene: windowScene)
-      let storyboard = UIStoryboard(name: name, bundle: nil)
-      let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
-      window.rootViewController = viewController
-      window.makeKeyAndVisible()
-      (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window = window
+    DispatchQueue.main.async {
+      if let windowScene = UIApplication.shared.currentWindow?.windowScene {
+        let window = UIWindow(windowScene: windowScene)
+        let storyboard = UIStoryboard(name: name, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window = window
+      }
     }
   }
 }
