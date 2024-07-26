@@ -108,8 +108,18 @@ class BookMarkViewController: UIViewController {
         bannerView.load(GADRequest())
       }
     }
-      tableView.dataFetchStatus = realm.objects(BookMarkNewsRealm.self).isEmpty ? .noData : .hasData
   }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkEmpty()
+    }
+    
+    private func checkEmpty() {
+        let noData = realm.objects(BookMarkNewsRealm.self).isEmpty
+        tableView.dataFetchStatus = noData ? .noData(message: "북마크한 뉴스가 없습니다.") : .hasData
+        searchBar.isHidden = noData
+    }
 }
 
 extension BookMarkViewController: UITableViewDelegate {
@@ -154,6 +164,7 @@ extension BookMarkViewController: UITableViewDelegate {
       }
       
       tableView.reloadData()
+        self.checkEmpty()
       success(true)
     })
     deleteAction.backgroundColor = UIColor(named: "Theme")

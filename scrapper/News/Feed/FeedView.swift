@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseFunctions
 import RealmSwift
 import Kingfisher
+import GoogleMobileAds
 
 struct FeedView: View {
   var onNews: ((Item) -> Void)
@@ -29,8 +30,9 @@ struct FeedView: View {
       
       
       NavigationView {
-        if viewModel.isLoading || !viewModel.isLogin || viewModel.newsList.isEmpty {
+        if (viewModel.isLoading || !viewModel.isLogin || viewModel.newsList.isEmpty) {
           VStack {
+              Spacer()
             if viewModel.isLoading {
               LottieViewEntry(.loading)
                 .padding()
@@ -62,9 +64,12 @@ struct FeedView: View {
             } else {
               Text("등록한 키워드에 뉴스가 없습니다.")
               LottieViewEntry(.noData)
+                    .frame(height: 300)
                 .padding()
-                .frame(height: 300)
             }
+              Spacer()
+              GoogleAdView()
+                  .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
           }.navigationTitle("Feed")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -81,40 +86,44 @@ struct FeedView: View {
               }
             }
         } else {
-          List {
-            ForEach(viewModel.newsList) { news in
-                HStack {
-                  if let url = news.ogImage {
-                    KFImage(url)
-                      .placeholder {
-                        ProgressView()
-                      }
-                      .resizable()
-                      .aspectRatio(contentMode: .fill)
-                      .frame(width: 100, height: 80)
-                      .clipped()
-                  } else {
-                    EmptyView()
-                      .frame(height: 0)
-                  }
-                  VStack {
-                    Text(news.title)
-                      .font(.headline)
-                      .foregroundColor(.primary)
-                    Text(news.itemDescription)
-                      .font(.subheadline)
-                      .foregroundColor(.secondary)
-                  }.frame(height: 80)
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  onNews(news)
-                  if let url = URL(string: news.link) {
-                    selectedURL = url
-                  }
+            VStack {
+            List {
+                ForEach(viewModel.newsList) { news in
+                    HStack {
+                        if let url = news.ogImage {
+                            KFImage(url)
+                                .placeholder {
+                                    ProgressView()
+                                }
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 80)
+                                .clipped()
+                        } else {
+                            EmptyView()
+                                .frame(height: 0)
+                        }
+                        VStack {
+                            Text(news.title)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            Text(news.itemDescription)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }.frame(height: 80)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onNews(news)
+                        if let url = URL(string: news.link) {
+                            selectedURL = url
+                        }
+                    }
                 }
             }
-          }
+                GoogleAdView()
+                    .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
+        }
           .listStyle(.sidebar)
           .navigationTitle("Feed")
           .navigationBarTitleDisplayMode(.inline)
