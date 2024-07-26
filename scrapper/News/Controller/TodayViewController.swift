@@ -154,7 +154,7 @@ class TodayViewController: UIViewController {
       issueKeywords = groupRSSByDay(rss: sorted)
       tableView.refreshControl?.endRefreshing()
       tableView.reloadData()
-        tableView.dataFetchStatus = rss.isEmpty ? .noData : .hasData
+        tableView.dataFetchStatus = rss.isEmpty ? .noData(message: "피드는 등록한 키워드로 기반으로 합니다.\n키워드를 등록해주세요") : .hasData
     }
   }
   

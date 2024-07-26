@@ -45,7 +45,10 @@ class FeedViewModel: ObservableObject {
       let keywords = await fetchKeywords()
     print("x->2 \(Date().timeIntervalSince1970)")
     
-    let dict = ["version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, "keywords": keywords] as [String : Any]
+    let dict = [
+        "version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+        "keywords": keywords] 
+      as [String : Any]
     guard let data = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) else { return }
     guard let json = String(data: data, encoding: .utf8) else { return }
       
