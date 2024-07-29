@@ -103,7 +103,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       }
     } else if let data = userInfo["keywords"] as? String,
               let link = URL(string: data) {
-      UIApplication.shared.windows.first?.rootViewController?.presentSafari(url: link)
+      CacheManager.shared.dict[CacheType.openLink.rawValue] = link
+      NotificationCenter.default.post(name: NSNotification.Name(CacheType.openLink.rawValue), object: link)
     }
     completionHandler()
   }

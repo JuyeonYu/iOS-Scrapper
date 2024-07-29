@@ -12,11 +12,20 @@ import UIKit
 
 extension UIApplication {
     var currentWindow: UIWindow? {
+        // Retrieve the active UIWindowScene
+        if let windowScene = connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first(where: { $0.activationState == .foregroundActive }) {
+            // Return the key window if available, otherwise return the first window
+            return windowScene.windows
+                .first(where: { $0.isKeyWindow }) ?? windowScene.windows.first
+        }
+        // Fallback if no active UIWindowScene is found
         return connectedScenes
-            .filter { $0.activationState == .foregroundActive }
-            .compactMap { $0 as? UIWindowScene }
-            .first?.windows
-            .filter { $0.isKeyWindow }
-            .first
+            .compactMap({ $0 as? UIWindowScene })
+            .first?
+            .windows
+            .first(where: { $0.isKeyWindow })
     }
 }
+

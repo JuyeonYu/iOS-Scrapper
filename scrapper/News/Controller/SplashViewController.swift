@@ -15,56 +15,62 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       logo.layer.cornerRadius = 16
-//      setRootViewController()
-
-        // Do any additional setup after loading the view.
     }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    
+    DispatchQueue.main.async {
+      self.process.text = "확인중."
+    }
     setRootViewController()
   }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  @IBOutlet weak var process: UILabel!
 }
 
 extension SplashViewController {
   func setRootViewController() {
       
       if let currentUser = Auth.auth().currentUser {
+        DispatchQueue.main.async {
+          self.process.text = "확인중.."
+        }
           currentUser.getIDToken(completion: { token, error in
               if let token {
+                DispatchQueue.main.async {
+                  self.process.text = "확인중..."
+                }
                   KeychainHelper.shared.saveString(key: KeychainKey.firebaseAuthToken.rawValue, value: token)
               }
             self.decideRootViewController()
+            print("x->-1")
           })
       } else {
           self.decideRootViewController()
+        print("x->9")
       }
   }
     
     private func decideRootViewController() {
+      DispatchQueue.main.async {
+        self.process.text = "확인중...."
+      }
         if UserDefaultManager.getIsUser() {
             self.setRootViewController(name: "Main",
                                 identifier: "MainViewController")
+          print("x->1")
         } else {
             self.setRootViewController(name: "Main",
                                 identifier: "OnboardingViewController")
+          print("x->2")
         }
     }
   
   private func setRootViewController(name: String, identifier: String) {
     DispatchQueue.main.async {
+      DispatchQueue.main.async {
+        self.process.text = "시작"
+      }
       if let windowScene = UIApplication.shared.currentWindow?.windowScene {
         let window = UIWindow(windowScene: windowScene)
         let storyboard = UIStoryboard(name: name, bundle: nil)
@@ -72,6 +78,12 @@ extension SplashViewController {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window = window
+        print("x->3")
+      } else {
+        print("x->4")
+        DispatchQueue.main.async {
+          self.process.text = "대기"
+        }
       }
     }
   }

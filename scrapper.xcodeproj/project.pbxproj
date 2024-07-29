@@ -79,6 +79,7 @@
 		D67020192C4D4BDE003B1DE0 /* noData.json in Resources */ = {isa = PBXBuildFile; fileRef = D67020182C4D4BDE003B1DE0 /* noData.json */; };
 		D670201B2C4D5898003B1DE0 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = D670201A2C4D5898003B1DE0 /* loading.json */; };
 		D670201D2C4EAC53003B1DE0 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D670201C2C4EAC53003B1DE0 /* FirebaseRemoteConfig */; };
+		D670201F2C576C75003B1DE0 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D670201E2C576C75003B1DE0 /* CacheManager.swift */; };
 		D68767702A5E4D890024574B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D687676F2A5E4D890024574B /* StoreKit.framework */; };
 		D68767722A5E4EBA0024574B /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68767712A5E4EBA0024574B /* IAPHelper.swift */; };
 		D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */ = {isa = PBXBuildFile; fileRef = D68767732A5E52B90024574B /* 뉴스스크랩.storekit */; };
@@ -187,6 +188,7 @@
 		D67020142C4D4400003B1DE0 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
 		D67020182C4D4BDE003B1DE0 /* noData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = noData.json; sourceTree = "<group>"; };
 		D670201A2C4D5898003B1DE0 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		D670201E2C576C75003B1DE0 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		D687676F2A5E4D890024574B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D68767712A5E4EBA0024574B /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		D68767732A5E52B90024574B /* 뉴스스크랩.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "뉴스스크랩.storekit"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				D68767712A5E4EBA0024574B /* IAPHelper.swift */,
 				D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */,
 				D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */,
+				D670201E2C576C75003B1DE0 /* CacheManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				D6701FFA2C3967C3003B1DE0 /* FirestoreManager.swift in Sources */,
 				D661A9C72A4C910A00E1EDBA /* PayViewController.swift in Sources */,
 				B5460C3123F2A45B002A199E /* CategortyViewController.swift in Sources */,
+				D670201F2C576C75003B1DE0 /* CacheManager.swift in Sources */,
 				B565A5BD23F58726001055CF /* NaverNews.swift in Sources */,
 				B5460C3C23F2B0DA002A199E /* NewsTableViewCell.swift in Sources */,
 				B520383723F3D99A0025B571 /* Constant.swift in Sources */,
@@ -816,7 +820,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = NewsScrap;
@@ -845,7 +849,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;

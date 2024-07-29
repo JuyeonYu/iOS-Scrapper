@@ -28,6 +28,12 @@ class MainViewController: UITabBarController {
       }
       UserDefaultManager.setLastOpenDay()
     }
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(CacheType.openLink.rawValue), object: nil, queue: nil) { notification in
+      guard let link = notification.object as? URL else { return }
+      UIViewController.topViewController()?.presentSafari(url: link)
+      CacheManager.shared.dict[CacheType.openLink.rawValue] = nil
+    }
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +41,12 @@ class MainViewController: UITabBarController {
     selectedIndex = UserDefaultManager.getSelectedBottomTabBarIndex()
     
     SwiftRater.check()
+    
+    if let link = CacheManager.shared.dict[CacheType.openLink.rawValue] as? URL {
+      UIViewController.topViewController()?.presentSafari(url: link)
+      CacheManager.shared.dict[CacheType.openLink.rawValue] = nil
+      
+    }
   }
   
   
