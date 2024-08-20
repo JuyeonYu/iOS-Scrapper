@@ -68,8 +68,13 @@ struct FeedView: View {
                 .padding()
             }
               Spacer()
+            
+            if viewModel.isPro {
+              EmptyView()
+            } else {
               GoogleAdView()
                   .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
+            }
           }.navigationTitle("Feed")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -121,8 +126,13 @@ struct FeedView: View {
                     }
                 }
             }
+              if viewModel.isPro {
+                EmptyView()
+              } else {
                 GoogleAdView()
                     .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
+              }
+                
         }
           .listStyle(.sidebar)
           .navigationTitle("Feed")
