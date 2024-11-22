@@ -25,9 +25,11 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     if selected {
-      selectImage.image = UIImage(systemName: "circle.inset.filled")
+      selectImage.image = UIImage(systemName: "circle.inset.filled")?.withRenderingMode(.alwaysTemplate)
+      selectImage.tintColor = UIColor(named: "Theme")!
     } else {
-      selectImage.image = UIImage(systemName: "circle.dashed")
+      selectImage.image = UIImage(systemName: "circle")?.withRenderingMode(.alwaysTemplate)
+      selectImage.tintColor = UIColor(named: "Theme")!
     }
   }
   required init?(coder: NSCoder) {
@@ -53,5 +55,13 @@ class NewsTableViewCell: UITableViewCell {
       .replacingOccurrences(of: "&gt;", with: ">")
     self.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
     self.unread.isHidden = !isNew
+  }
+  
+  func configure(group: GroupRealm) {
+    isSelectMode = true
+    selectImage.isHidden = false
+    title.text = group.name
+    publishTime.isHidden = true
+    unread.isHidden = true
   }
 }

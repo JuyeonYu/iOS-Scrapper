@@ -33,6 +33,8 @@
 		D6144B682CF0D9A400F16EE0 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6144B662CF0D9A400F16EE0 /* AddGroupViewController.swift */; };
 		D6144B692CF0D9A400F16EE0 /* AddGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6144B672CF0D9A400F16EE0 /* AddGroupViewController.xib */; };
 		D6144B6B2CF0DFBF00F16EE0 /* group.json in Resources */ = {isa = PBXBuildFile; fileRef = D6144B6A2CF0DFBF00F16EE0 /* group.json */; };
+		D6144B6E2CF0F73100F16EE0 /* SelectGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6144B6C2CF0F73100F16EE0 /* SelectGroupViewController.swift */; };
+		D6144B6F2CF0F73100F16EE0 /* SelectGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6144B6D2CF0F73100F16EE0 /* SelectGroupViewController.xib */; };
 		D618C07D2A8367AE00EA7998 /* PaySpac.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618C07C2A8367AE00EA7998 /* PaySpac.swift */; };
 		D62111102C2E7DEB00C5EA68 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D621110F2C2E7DEB00C5EA68 /* RealmSwift */; };
 		D62111112C2E886900C5EA68 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = D621110F2C2E7DEB00C5EA68 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -167,6 +169,8 @@
 		D6144B662CF0D9A400F16EE0 /* AddGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		D6144B672CF0D9A400F16EE0 /* AddGroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddGroupViewController.xib; sourceTree = "<group>"; };
 		D6144B6A2CF0DFBF00F16EE0 /* group.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = group.json; sourceTree = "<group>"; };
+		D6144B6C2CF0F73100F16EE0 /* SelectGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGroupViewController.swift; sourceTree = "<group>"; };
+		D6144B6D2CF0F73100F16EE0 /* SelectGroupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectGroupViewController.xib; sourceTree = "<group>"; };
 		D617DAFD2A3F37AA000329EF /* scrapperRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scrapperRelease.entitlements; sourceTree = "<group>"; };
 		D617DAFE2A3F37AB000329EF /* scrapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scrapper.entitlements; sourceTree = "<group>"; };
 		D618C07C2A8367AE00EA7998 /* PaySpac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaySpac.swift; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 				D6701FED2C357C41003B1DE0 /* LoginViewController.swift */,
 				D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */,
 				D661A9DA2A4F2B6700E1EDBA /* OnboardingViewController.swift */,
+				D6144B6C2CF0F73100F16EE0 /* SelectGroupViewController.swift */,
+				D6144B6D2CF0F73100F16EE0 /* SelectGroupViewController.xib */,
 				B5460C3023F2A45B002A199E /* CategortyViewController.swift */,
 				B5460C3223F2A648002A199E /* NewsListViewController.swift */,
 				B565A5BE23F64243001055CF /* BookMarkViewController.swift */,
@@ -620,6 +626,7 @@
 				B5460C3923F2B0CA002A199E /* CategoryTableViewCell.xib in Resources */,
 				D661A9D72A4DC52E00E1EDBA /* paywall2.mp4 in Resources */,
 				D661A9D82A4DC52E00E1EDBA /* paywall3.mp4 in Resources */,
+				D6144B6F2CF0F73100F16EE0 /* SelectGroupViewController.xib in Resources */,
 				D661A9D92A4DC52E00E1EDBA /* paywall1.mp4 in Resources */,
 				D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */,
 				D6144B6B2CF0DFBF00F16EE0 /* group.json in Resources */,
@@ -661,6 +668,7 @@
 				D6701FFA2C3967C3003B1DE0 /* FirestoreManager.swift in Sources */,
 				D661A9C72A4C910A00E1EDBA /* PayViewController.swift in Sources */,
 				B5460C3123F2A45B002A199E /* CategortyViewController.swift in Sources */,
+				D6144B6E2CF0F73100F16EE0 /* SelectGroupViewController.swift in Sources */,
 				D670201F2C576C75003B1DE0 /* CacheManager.swift in Sources */,
 				B565A5BD23F58726001055CF /* NaverNews.swift in Sources */,
 				B5460C3C23F2B0DA002A199E /* NewsTableViewCell.swift in Sources */,

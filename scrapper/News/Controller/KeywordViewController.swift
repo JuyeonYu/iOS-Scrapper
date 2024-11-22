@@ -207,6 +207,7 @@ class KeywordViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     syncHasNews()
+    tableView.reloadData()
     
   }
   override func viewWillDisappear(_ animated: Bool) {
@@ -251,6 +252,10 @@ class KeywordViewController: UIViewController {
   }
   
   func popupAddKeyword() {
+    let vc = AddGroupViewController(nibName: "AddGroupViewController", bundle: nil)
+    vc.addType = .keyword
+    navigationController?.pushViewController(vc, animated: true)
+    return
     let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
                                   message: NSLocalizedString("Please enter keyword which make you interting", comment: ""),
                                   preferredStyle: .alert)
