@@ -88,6 +88,15 @@ class KeywordViewController: UIViewController {
     present(alert: alert)
     
   }
+  
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+      super.traitCollectionDidChange(previousTraitCollection)
+
+      if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+          tableView.reloadData()
+      }
+  }
+
   @IBAction func onMinus(_ sender: Any) {
   }
   @IBAction func onEdit(_ sender: Any) {
@@ -499,6 +508,12 @@ extension KeywordViewController: UITableViewDataSource {
     cell.indexPath = indexPath
     cell.config(keyword: keywordRealm)
     cell.delegate = self
+    
+    if tableView.isEditing && UITraitCollection.current.userInterfaceStyle == .dark {
+        cell.contentView.backgroundColor = .systemGray6
+    } else {
+      cell.contentView.backgroundColor = .systemBackground
+    }
     return cell
   }
 }
