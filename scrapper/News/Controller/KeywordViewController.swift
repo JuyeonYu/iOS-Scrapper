@@ -246,48 +246,10 @@ class KeywordViewController: UIViewController {
     }
   }
   
-  
   func popupAddGroup() {
-    let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
-                                  message: NSLocalizedString("Please enter group what you want", comment: ""),
-                                  preferredStyle: .alert)
-    
-    alert.addTextField { (tf) in
-      tf.placeholder = NSLocalizedString("Please enter group what you want", comment: "")
-    }
-    
-    let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
-    let ok = UIAlertAction(title: NSLocalizedString("Add", comment: ""), style: .default) { (_) in
-      let saveKeyword = alert.textFields?[0].text
-      
-      guard let keyword = saveKeyword else {
-        return
-      }
-      
-      // [1.1-NS003] @juyeon / 중복 키워드 방지
-      guard (self.realm.objects(GroupRealm.self).filter("name = '\(keyword)'").isEmpty) else {
-        let alert = UIAlertController(title: NSLocalizedString("Group", comment: ""),
-                                      message: NSLocalizedString("Let's search another one!", comment: ""),
-                                      preferredStyle: .alert)
-        let ok = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
-        alert.addAction(ok)
-        self.present(alert: alert)
-        return
-      }
-      
-      let groupRealm = GroupRealm()
-      groupRealm.name = saveKeyword!
-      groupRealm.id = UUID()
-      groupRealm.timestamp = Date().timeIntervalSince1970
-      try! self.realm.write {
-        self.realm.add(groupRealm)
-      }
-      self.tableView.reloadData()
-    }
-    alert.addAction(cancel)
-    alert.addAction(ok)
-    self.present(alert: alert)
+    navigationController?.pushViewController(AddGroupViewController(nibName: "AddGroupViewController", bundle: nil), animated: true)
   }
+  
   func popupAddKeyword() {
     let alert = UIAlertController(title: NSLocalizedString("Keyword", comment: ""),
                                   message: NSLocalizedString("Please enter keyword which make you interting", comment: ""),

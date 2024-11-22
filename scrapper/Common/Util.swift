@@ -241,9 +241,10 @@ extension Bundle {
 
 extension LottieAnimationView {
     enum LottieAnimationType: String {
-        case coin
-        case loading
-        case noData
+      case coin
+      case loading
+      case noData
+      case group
     }
     convenience init(type: LottieAnimationType) {
         self.init(name: type.rawValue)

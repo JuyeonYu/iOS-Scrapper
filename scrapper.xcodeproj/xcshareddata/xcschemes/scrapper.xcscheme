@@ -39,6 +39,17 @@
                ReferencedContainer = "container:scrapper.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D698C5672CC52D3800B47C70"
+               BuildableName = "NewsScrapUITests.xctest"
+               BlueprintName = "NewsScrapUITests"
+               ReferencedContainer = "container:scrapper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
