@@ -42,7 +42,7 @@ class SelectGroupViewController: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(.init(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsTableViewCell")
-    groups = realm.objects(GroupRealm.self).filter { !$0.name.isEmpty }
+    groups = Array(realm.objects(GroupRealm.self)).sorted { $0.timestamp < $1.timestamp }
   }
 }
 

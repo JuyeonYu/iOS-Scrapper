@@ -60,7 +60,12 @@ class NewsTableViewCell: UITableViewCell {
   func configure(group: GroupRealm) {
     isSelectMode = true
     selectImage.isHidden = false
-    title.text = group.name
+    if group.name.isEmpty {
+      title.text = "기본"
+    } else {
+      title.text = group.name
+    }
+    
     publishTime.isHidden = true
     unread.isHidden = true
   }
