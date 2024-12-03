@@ -88,6 +88,12 @@ class NewsListViewController: UIViewController {
     requestNaverNewsList(keyword: keyword, start: 1)
     
     Task {
+        let showAdTime = UserDefaults.standard.value(forKey: "showAdTime") as? TimeInterval
+        if !Calendar.current.isDateInToday(Date(timeIntervalSince1970: showAdTime ?? 0)) {
+            UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "showAdTime")
+            await showPopupAd(from: self)
+        }
+      
       if await IAPManager.isPro() {
         bannerView.isHidden = true
       } else {

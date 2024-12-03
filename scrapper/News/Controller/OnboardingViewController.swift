@@ -9,13 +9,13 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-  let onboardItems: [OnboardingItem] = [.init(head: "모든 뉴스를 다 볼 수는 없으니까", imageName: "onboarding1-1", foot: "관심있는 키워드를 등록해보세요!"),
-                                        .init(head: "그룹으로 묶고, 즐겨찾고", imageName: "onboarding1-2", foot: "나만의 뉴스를 만들어보세요!"),
-                                        .init(head: "모니터링 해야하는 키워드라며", imageName: "onboarding1-3", foot: "뒤쳐지지 않게 만들어 드릴게요!")
-                                        ]
-  @IBOutlet weak var nextBtn: UIButton!
-  
-  
+    let onboardItems: [OnboardingItem] = [
+        .init(head: "모니터링, 번거로우셨죠?", imageName: "onboarding1-2", foot: "제가 대신 해드릴게요!"),
+        .init(head: "모든 뉴스를 다 볼 수는 없으니까", imageName: "onboarding1-1", foot: "관심있는 키워드를 등록해보세요!"),
+        .init(head: "그룹으로 묶고, 즐겨찾고", imageName: "onboarding1-3", foot: "나만의 뉴스를 만들어보세요!")
+    ]
+    @IBOutlet weak var nextBtn: UIButton!
+    
   var currentPage: Int = 0 {
     didSet {
       pageControl.currentPage = currentPage

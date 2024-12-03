@@ -121,6 +121,24 @@ extension AppDelegate: MessagingDelegate {
 
 
 extension UIViewController {
+    func showPopupAd(from viewController: UIViewController) async {
+        guard !(await IAPManager.isPro()) else { return }
+        do {
+            let rewardedInterstitialAd = try await GADRewardedInterstitialAd.load(
+                withAdUnitID: Constants.googleADModReadNewsID,
+                request: GADRequest()
+            )
+            return await withCheckedContinuation { continuation in
+                rewardedInterstitialAd.present(fromRootViewController: nil) {
+                    continuation.resume()
+                }
+            }
+        } catch {
+            print("Failed to load rewarded interstitial ad: \(error.localizedDescription)")
+            return
+        }
+    }
+    
     func presentSafari(url: URL, delegate: SFSafariViewControllerDelegate? = nil) {
         DispatchQueue.main.async {
             let config = SFSafariViewController.Configuration()
