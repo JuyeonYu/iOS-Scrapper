@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import FirebaseDatabase
+import FirebaseAuth
 
 struct BreakingNewsView: View {
+    @State private var onNoti: Bool = false
     @State private var naviateTitle: String = "속보"
     @State private var news: [[Item]] = []
     @State private var page: Int = 1
@@ -36,13 +39,14 @@ struct BreakingNewsView: View {
                             lowestVisibleSection += 1
                         }
                         guard section + 1 < news.count else { return }
-                        naviateTitle = news[lowestVisibleSection].first?.timeAgo ?? ""
+                        naviateTitle = "속보(\(news[lowestVisibleSection].first?.timeAgo ?? ""))"
                     }
                     .onAppear {
                         if section < lowestVisibleSection {
                             lowestVisibleSection = section
                         }
-                        naviateTitle = news[lowestVisibleSection].first?.timeAgo ?? ""
+                        
+                        naviateTitle = "속보(\(news[lowestVisibleSection].first?.timeAgo ?? ""))"
                         guard section == news.count - 1 else { return }
                         guard !fetching else { return }
                         Task {
@@ -57,6 +61,21 @@ struct BreakingNewsView: View {
             }
             .listStyle(.insetGrouped)
             .navigationTitle(naviateTitle)
+            
+            .navigationBarItems(
+                trailing: HStack {
+                    Image(systemName: onNoti ? "bell.fill" : "bell").tint(Color("Theme"))
+                        .padding(8)
+                        .onTapGesture {
+                            
+                            FirestoreManager().toggleBreakingNewsNoti(on: !onNoti)
+                            onNoti.toggle()
+                            if let uid = Auth.auth().currentUser?.uid {
+                                Database.database(url: "https://news-scrap-b64dd-default-rtdb.asia-southeast1.firebasedatabase.app").reference().child(uid).child("keywords").setValue(["속보"])
+//                                    .setValue(Array(realm.objects(KeywordRealm.self).map { $0.keyword }))
+                            }
+                        }
+                  })
             .refreshable {
                 page = 1
                 Task {
@@ -64,19 +83,22 @@ struct BreakingNewsView: View {
                 }
             }
         }.task {
+            onNoti = await FirestoreManager().getUserReceiveBreakingNews()
             page = 1
             news = await fetchNews()
+            
         }
     }
     
     private func fetchNews() async -> [[Item]] {
         do {
-            return try await NetworkManager.sharedInstance.requestNaverNewsListAsync(
+            let res = try await NetworkManager.sharedInstance.requestNaverNewsListAsync(
                 keyword: "속보",
                 sort: "date",
                 start: page
             )
-            .groupedItems
+            
+            return res.groupedItems
         } catch {
             print(error.localizedDescription)
             return []

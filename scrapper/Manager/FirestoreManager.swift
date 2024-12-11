@@ -35,6 +35,18 @@ struct FirestoreManager {
       }
     }
   }
+    func getUserReceiveBreakingNews() async -> Bool {
+        let firestore = Firestore.firestore()
+        guard let userId = Auth.auth().currentUser?.uid else { return false }
+        let documentRef = firestore.collection(FirestoreCollectionType.user.rawValue).document(userId)
+        do {
+            let res = try await documentRef.getDocument()
+            let on = res.data()?["receive_breaking_news"] as? Bool ?? false
+            return on
+        } catch {
+            return false
+        }
+    }
   func setData(collection: FirestoreCollectionType, documentId: String = UUID().uuidString, dict: [String: Any]) {
     firestore.collection(collection.rawValue).document(documentId).setData(dict)
   }
@@ -77,9 +89,23 @@ struct FirestoreManager {
     guard let fcmToken: String = KeychainHelper.shared.loadString(key: KeychainKey.fcmToken.rawValue) else { return }
     
     upsert(collection: .user, documentId: id, dict: [
-      "fcm_token": fcmToken
+      "fcm_token": fcmToken,
+      "receive_breaking_news" : true
     ])
   }
+    
+    func toggleBreakingNewsNoti(on: Bool) {
+        guard let id: String = Auth.auth().currentUser?.uid else { return }
+        upsert(collection: .user, documentId: id, dict: [
+          "receive_breaking_news": on
+        ])
+    }
+    func getBreakingNewsNoti(on: Bool) {
+        guard let id: String = Auth.auth().currentUser?.uid else { return }
+        upsert(collection: .user, documentId: id, dict: [
+          "receive_breaking_news": on
+        ])
+    }
   
   func sync() {
     guard let userId = Auth.auth().currentUser?.uid else { return }
