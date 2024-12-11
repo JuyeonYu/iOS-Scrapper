@@ -35,13 +35,15 @@ extension NaverNews {
         let polishedItems: [Item] = items.map {
             .init(
                 keyword: $0.keyword,
-                title: $0.title.replacingOccurrences(
+                title: $0.title
+                    .replacingOccurrences(
                     of: "[<b>속보</b>] ",
                     with: ""
                 ).replacingOccurrences(
                     of: "[<b>속보</b>]",
                     with: ""
-                ),
+                )
+                ,
                 originallink: $0.originallink,
                 link: $0.link,
                 itemDescription: $0.itemDescription,
