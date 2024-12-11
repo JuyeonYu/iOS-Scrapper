@@ -16,10 +16,11 @@ class MainViewController: UITabBarController {
     super.viewDidLoad()
     UserDefaultManager.setIsUser(true)
     
-    viewControllers?.insert(UIHostingController(rootView: FeedView(onNews: { news in
-      guard let url = URL(string: news.link) else { return}
-      self.presentSafari(url: url)
-    })), at: 2)
+//    viewControllers?.insert(UIHostingController(rootView: FeedView(onNews: { news in
+//      guard let url = URL(string: news.link) else { return}
+//      self.presentSafari(url: url)
+//    })), at: 2)
+      viewControllers?.insert(UIHostingController(rootView: BreakingNewsView()), at: 2)
     viewControllers?[2].tabBarItem.selectedImage = .init(systemName: "f.square.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.init(named: "Theme")!)
     viewControllers?[2].tabBarItem.image = .init(systemName: "f.square.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.secondaryLabel)
     Task {

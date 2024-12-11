@@ -50,6 +50,28 @@
                ReferencedContainer = "container:scrapper.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D676A3472D01275700078056"
+               BuildableName = "FastlaneSnapshotUITests.xctest"
+               BlueprintName = "FastlaneSnapshotUITests"
+               ReferencedContainer = "container:scrapper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D676A35E2D0130E200078056"
+               BuildableName = "ScrapperUITests.xctest"
+               BlueprintName = "ScrapperUITests"
+               ReferencedContainer = "container:scrapper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
