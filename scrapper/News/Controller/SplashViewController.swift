@@ -8,6 +8,16 @@
 
 import UIKit
 import FirebaseAuth
+import RealmSwift
+
+var forTest: Bool {
+    #if DEBUG
+        return true
+    #else
+        return false
+    #endif
+}
+
 
 class SplashViewController: UIViewController {
   @IBOutlet weak var logo: UIImageView!
@@ -30,6 +40,11 @@ class SplashViewController: UIViewController {
 
 extension SplashViewController {
   func setRootViewController() {
+      if forTest {
+          self.setRootViewController(name: "Main",
+                              identifier: "MainViewController")
+          return
+      }
       
       if let currentUser = Auth.auth().currentUser {
         DispatchQueue.main.async {

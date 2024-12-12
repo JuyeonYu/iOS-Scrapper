@@ -179,7 +179,47 @@ class KeywordViewController: UIViewController {
     NotificationCenter.default.addObserver(forName: NSNotification.Name("checkNews"), object: nil, queue: nil) { _ in
       self.syncHasNews()
     }
+      
+      if forTest {
+          fillMock()
+      }
   }
+    private func addKeyword(keyword: String, groupId: UUID) {
+        let keywordRealm = KeywordRealm()
+        keywordRealm.keyword = keyword
+        keywordRealm.gourpId = groupId
+    //    keywordRealm.exceptionKeyword = textField2.text!
+        keywordRealm.timestamp = Date().timeIntervalSince1970
+        keywordRealm.hasNews = true
+        keywordRealm.notiEnabled = true
+        
+        try! realm.write {
+            realm.add(keywordRealm)
+        }
+    }
+    private func addGroup(name: String) -> UUID {
+        let id = UUID()
+        let groupRealm = GroupRealm()
+        groupRealm.name = name
+        groupRealm.id = id
+        groupRealm.timestamp = Date().timeIntervalSince1970
+        
+        try! realm.write {
+            realm.add(groupRealm)
+        }
+        return id
+    }
+    private func fillMock() {
+        let id1 = addGroup(name: "주식")
+        let id2 = addGroup(name: "부동산")
+        addKeyword(keyword: "급등주", groupId: noneGroupId!)
+        addKeyword(keyword: "반도체클러스터", groupId: noneGroupId!)
+        addKeyword(keyword: "애플", groupId: id1)
+        addKeyword(keyword: "삼성전자", groupId: id1)
+        addKeyword(keyword: "청약", groupId: id2)
+        addKeyword(keyword: "청약 줍줍", groupId: id2)
+        addKeyword(keyword: "서울 청약", groupId: id2)
+    }
   
   private func syncHasNews() {
     let noNewKeywords: [KeywordRealm] = Array(self.realm.objects(KeywordRealm.self).filter("hasNews = \(false)"))
@@ -213,7 +253,7 @@ class KeywordViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     tableView.isEditing = false
-    UserDefaultManager.setFetchNew(timestamp: Date().timeIntervalSince1970)  
+    UserDefaultManager.setFetchNew(timestamp: Date().timeIntervalSince1970)
 
   }
   func loadRewardedAd() {
