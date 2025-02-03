@@ -143,7 +143,7 @@ class NewsListViewController: UIViewController {
       
       let filteredNews =
       naverNews.items
-        .map { News(title: $0.title, urlString: $0.link, originalLink: $0.originallink ?? "", publishTime: $0.pubDate) }
+            .map { News(title: $0.title, itemDescription: $0.itemDescription, urlString: $0.link, originalLink: $0.originallink ?? "", publishTime: $0.pubDate) }
         .filter { news in !exceptKeywords.contains(where: { news.title.contains($0) })}
         .filter { news in !exceptDomains.contains(where: { news.originalLink.contains($0) })}
       

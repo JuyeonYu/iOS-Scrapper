@@ -9,7 +9,8 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
-  @IBOutlet weak var unread: UILabel!
+    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var unread: UILabel!
   @IBOutlet weak var selectImage: UIImageView!
   var isSelectMode: Bool = false
   @IBOutlet weak var publishTime: UILabel!
@@ -53,6 +54,7 @@ class NewsTableViewCell: UITableViewCell {
       .replacingOccurrences(of: "&quot;", with: "\"")
       .replacingOccurrences(of: "&lt;", with: "<")
       .replacingOccurrences(of: "&gt;", with: ">")
+      self.desc.text = news.itemDescription
     self.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
     self.unread.isHidden = !isNew
   }
