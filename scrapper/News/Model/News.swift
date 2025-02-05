@@ -68,6 +68,7 @@ class ReadNewsRealm: Object {
 
 
 let kPressDict: [String: String] = [
+  "www.mbn.co.kr": "MBN",
     "weekly.donga.com" : "주간동아",
     "www.newsis.com" : "뉴시스",
     "www.jeonmae.co.kr" : "전국매일신문",

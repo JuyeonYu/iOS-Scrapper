@@ -41,6 +41,11 @@ class NewsTableViewCell: UITableViewCell {
     super.awakeFromNib()
     selectImage.isHidden = true
     unread.layer.masksToBounds = true
+    
+    title.text = nil
+    desc.text = nil
+    press.text = nil
+    publishTime.text = nil
   }
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -57,15 +62,27 @@ class NewsTableViewCell: UITableViewCell {
       .replacingOccurrences(of: "&gt;", with: ">")
       self.desc.text = news.itemDescription.htmlStripped
     self.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
+    
+    if let publishTimestamp = news.publishTimestamp, let date = Date(timeIntervalSince1970: publishTimestamp) as Date? {
+      let formatedDate = date.timeAgo
+      publishTime.isHidden = false
+      publishTime.text = formatedDate
+    } else {
+      publishTime.isHidden = true
+    }
       
       self.unread.superview?.isHidden = !isNew
       
       if #available(iOS 16.0, *) {
           if let host = URL(string: news.originalLink)?.host() {
-              self.press.text = kPressDict[host] ?? host
+            self.press.text = kPressDict[host] ?? host
+              .replacingOccurrences(of: "www.", with: "")
+              .replacingOccurrences(of: ".co.kr", with: "")
+              .replacingOccurrences(of: ".com", with: "")
+              .replacingOccurrences(of: ".", with: " ")
           }
       } else {
-          self.press.isHidden = true
+          self.press.text = news.originalLink
       }
   }
   
