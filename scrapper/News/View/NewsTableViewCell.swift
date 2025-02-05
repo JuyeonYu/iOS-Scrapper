@@ -9,6 +9,7 @@
 import UIKit
 
 class NewsTableViewCell: UITableViewCell {
+    @IBOutlet weak var press: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var unread: UILabel!
   @IBOutlet weak var selectImage: UIImageView!
@@ -54,9 +55,18 @@ class NewsTableViewCell: UITableViewCell {
       .replacingOccurrences(of: "&quot;", with: "\"")
       .replacingOccurrences(of: "&lt;", with: "<")
       .replacingOccurrences(of: "&gt;", with: ">")
-      self.desc.text = news.itemDescription
+      self.desc.text = news.itemDescription.htmlStripped
     self.publishTime.text = Util.sharedInstance.naverTimeFormatToNormal(date: news.publishTime)
-    self.unread.isHidden = !isNew
+      
+      self.unread.superview?.isHidden = !isNew
+      
+      if #available(iOS 16.0, *) {
+          if let host = URL(string: news.originalLink)?.host() {
+              self.press.text = kPressDict[host] ?? host
+          }
+      } else {
+          self.press.isHidden = true
+      }
   }
   
   func configure(group: GroupRealm) {
