@@ -23,9 +23,9 @@ class MainViewController: UITabBarController {
       viewControllers?.insert(UIHostingController(rootView: BreakingNewsView(onNews: { news in
         guard let url = URL(string: news.link) else { return }
         self.presentSafari(url: url)
-      })), at: 2)
-    viewControllers?[2].tabBarItem.selectedImage = .init(systemName: "f.square.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.init(named: "Theme")!)
-    viewControllers?[2].tabBarItem.image = .init(systemName: "n.square.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.secondaryLabel)
+      })), at: 1)
+    viewControllers?[1].tabBarItem.selectedImage = .init(systemName: "b.square.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.init(named: "Theme")!)
+    viewControllers?[1].tabBarItem.image = .init(systemName: "b.square.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.secondaryLabel)
     Task {
       if await !IAPManager.isPro() && UserDefaultManager.getLastOpenDay() != Date().day ?? 1 {
         self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)

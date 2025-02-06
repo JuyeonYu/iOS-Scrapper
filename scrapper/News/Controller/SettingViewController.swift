@@ -30,10 +30,15 @@ class SettingViewController: UIViewController {
   }()
   
   enum SettingSection: Int, CaseIterable {
+  case my
     case app
     case other
   }
   
+    enum MyType: Int, CaseIterable {
+      case bookmark
+    }
+    
   enum AppType: Int, CaseIterable {
     case group
     case keyword
@@ -88,6 +93,7 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     guard let section = SettingSection(rawValue: section) else { return nil }
     switch section {
+    case .my: return "MY"
     case .app: return "APP"
     case .other: return "OTHER"
     }
@@ -159,6 +165,13 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let section = SettingSection(rawValue: indexPath.section) else { return }
     switch section {
+    case .my:
+        guard let myType = MyType(rawValue: indexPath.row) else { return }
+        switch myType {
+        case .bookmark:
+            let bookMarkViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BookMarkViewController")
+            self.navigationController?.pushViewController(bookMarkViewController, animated: true)
+        }
     case .app:
       guard let appType = AppType(rawValue: indexPath.row) else { return }
       switch appType {
@@ -268,6 +281,13 @@ extension SettingViewController: UITableViewDataSource {
     
     
     switch section {
+    case .my:
+        guard let myType = MyType(rawValue: indexPath.row) else { return UITableViewCell() }
+        switch myType {
+        case .bookmark:
+            configuration.text = "북마크"
+            configuration.image = UIImage(systemName: "bookmark")?.withTintColor(.label, renderingMode: .alwaysOriginal)
+        }
     case .app:
       guard let appType = AppType(rawValue: indexPath.row) else { return UITableViewCell() }
       switch appType {
@@ -363,6 +383,7 @@ extension SettingViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let section = SettingSection(rawValue: section) else { return 0 }
     switch section {
+    case .my: return MyType.allCases.count
     case .app: return AppType.allCases.count
     case .other: return OtherType.allCases.count
     }

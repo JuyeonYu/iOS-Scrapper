@@ -329,7 +329,7 @@ extension NewsListViewController: UITableViewDataSource {
       cell.publishTime.textColor = UIColor.lightGray
     } else {
       cell.title.textColor = UIColor.label
-      cell.publishTime.textColor = UIColor.label
+//      cell.publishTime.textColor = UIColor.label
     }
     return cell
   }

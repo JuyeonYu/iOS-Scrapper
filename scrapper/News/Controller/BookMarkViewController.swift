@@ -75,8 +75,14 @@ class BookMarkViewController: UIViewController {
     self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PayViewController"), animated: true)
   }
   override func viewDidLoad() {
-    super.viewDidLoad()
-    [share, delete].forEach { $0?.isEnabled = !($0!.isEnabled) }
+      super.viewDidLoad()
+      [share, delete].forEach { $0?.isEnabled = !($0!.isEnabled) }
+      [share, delete, edit].forEach {
+          if #available(iOS 16.0, *) {
+              $0?.isHidden = true
+          } else {
+          }
+      }
     /*
      1. realm에서 북마크된 뉴스 목록을 가져온다.
      2. tableview에 1에서 가져온 목록을 뿌린다.
@@ -92,7 +98,6 @@ class BookMarkViewController: UIViewController {
     searchBar.placeholder = NSLocalizedString("Please search news", comment: "")
     
     
-    self.navigationController?.tabBarController?.delegate = self
     
     // MARK: - Navigation setting
     self.navigationItem.title = NSLocalizedString("Bookmark", comment: "")
@@ -225,13 +230,6 @@ extension BookMarkViewController: UITableViewDataSource {
   }
 }
 
-extension BookMarkViewController: UITabBarControllerDelegate {
-  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-    if tabBarController.selectedIndex == 1 {
-      self.tableView.reloadData()
-    }
-  }
-}
 
 extension BookMarkViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

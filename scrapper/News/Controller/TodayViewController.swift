@@ -30,6 +30,8 @@ class TodayViewController: UIViewController {
     tableView.refreshControl = refreshControl
     refreshControl.addTarget(self, action: #selector(fetchRSS), for: .valueChanged)
     
+      
+//      hidesBottomBarWhenPushed = true
     
     Task {
       if await IAPManager.isPro() {
