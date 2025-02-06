@@ -35,6 +35,7 @@ struct BreakingNewsView: View {
             Item
         ) -> Void
     )
+    @State private var mergeSimilar: Bool = true
     @State private var selectedType: TrendingType = .breakingNews
     @State private var onNoti: Bool = false
     @State private var naviateTitle: String = "속보"
@@ -43,11 +44,13 @@ struct BreakingNewsView: View {
     @State private var lowestVisibleSection: Int = 0
     @State private var fetching: Bool = false
     @State private var isPro: Bool = true
+    @State private var lastUpdateTime: Date = Date()
     var body: some View {
         
         NavigationView {
             ZStack {
                 VStack {
+//                    Text("마지막 업데이트: \(lastUpdateTime)")
                     List {
                         ForEach(
                             0..<news.count,
@@ -132,6 +135,20 @@ struct BreakingNewsView: View {
                     .navigationTitle(
                         naviateTitle
                     )
+//                    .toolbar {
+//                        ToolbarItem(placement: .principal) {
+//                            VStack {
+//                                Text("title")
+//                                Text("subtitle")
+//                            }
+//                        }
+//                    }
+                    
+//                    .toolbar(content: {
+//                        Toggle(isOn: $mergeSimilar) {
+//                            Text("유사 기사 병합")
+//                        }
+//                    })
                     .refreshable {
                         page = 1
                         Task {
@@ -178,6 +195,9 @@ struct BreakingNewsView: View {
                 sort: "date",
                 start: page
             )
+            if page == 1 {
+//                lastUpdateTime = res.lastBuildDate
+            }
             
             return res.groupedItems
         } catch {

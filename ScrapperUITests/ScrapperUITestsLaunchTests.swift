@@ -9,6 +9,11 @@
 import XCTest
 
 final class ScrapperUITestsLaunchTests: XCTestCase {
+    override func setUp() {
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        app.launch()
+    }
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

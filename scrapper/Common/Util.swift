@@ -185,6 +185,32 @@ extension Date {
       }
     }
   }
+  
+  var timeAgo: String {
+    
+    let now = Date()
+    let timeInterval = now.timeIntervalSince(self)
+    
+    if timeInterval < 60 {
+      return "최신"
+    } else if timeInterval < 3600 {
+      let minutes = Int(timeInterval / 60)
+      return "\(minutes)분 전"
+    } else if timeInterval < 86400 {
+      let hours = Int(timeInterval / 3600)
+      return "\(hours)시간 전"
+    } else if timeInterval < 2592000 {
+      let days = Int(timeInterval / 86400)
+      return "\(days)일 전"
+    } else if timeInterval < 31536000 {
+      let months = Int(timeInterval / 2592000)
+      return "\(months)달 전"
+    } else {
+      let years = Int(timeInterval / 31536000)
+      return "\(years)년 전"
+    }
+  }
+  
 }
 extension SceneDelegate {
   func setRootViewController() {
