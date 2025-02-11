@@ -1,0 +1,13 @@
+//
+//  Config.xcconfig
+//  scrapper
+//
+//  Created by  유 주연 on 7/15/24.
+//  Copyright © 2024 johnny. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+NaverSearchAPIId = zmO4KBQdHToxqh6FfuDv
+NaverSearchAPISecret = 88YmMc4b62

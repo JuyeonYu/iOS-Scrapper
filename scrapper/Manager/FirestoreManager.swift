@@ -90,7 +90,7 @@ struct FirestoreManager {
     
     upsert(collection: .user, documentId: id, dict: [
       "fcm_token": fcmToken,
-      "receive_breaking_news" : true
+      "login_timestamp": Date().timeIntervalSince1970
     ])
   }
     

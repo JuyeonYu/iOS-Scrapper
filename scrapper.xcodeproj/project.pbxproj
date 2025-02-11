@@ -62,6 +62,7 @@
 		D661A9EB2A50852B00E1EDBA /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */; };
 		D661A9ED2A50868F00E1EDBA /* 18089-gold-coin.json in Resources */ = {isa = PBXBuildFile; fileRef = D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */; };
 		D661A9F22A519BEE00E1EDBA /* 9733-coin.json in Resources */ = {isa = PBXBuildFile; fileRef = D661A9F12A519BEE00E1EDBA /* 9733-coin.json */; };
+		D664739F2D5B86520049A981 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D664739E2D5B86520049A981 /* Config.xcconfig */; };
 		D6701FEC2C3576EB003B1DE0 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FEB2C3576EB003B1DE0 /* GoogleMobileAds */; };
 		D6701FEE2C357C41003B1DE0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FED2C357C41003B1DE0 /* LoginViewController.swift */; };
 		D6701FF02C357EA9003B1DE0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6701FEF2C357EA9003B1DE0 /* FirebaseAuth */; };
@@ -74,7 +75,6 @@
 		D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */; };
 		D67020002C398EAE003B1DE0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6701FFF2C398EAE003B1DE0 /* LottieView.swift */; };
 		D67020022C3C2B4F003B1DE0 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D67020012C3C2B4F003B1DE0 /* FirebaseFunctions */; };
-		D67020042C417395003B1DE0 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D67020032C417395003B1DE0 /* Config.xcconfig */; };
 		D67020062C4AF16C003B1DE0 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67020052C4AF16C003B1DE0 /* FeedViewModel.swift */; };
 		D670200B2C4BF336003B1DE0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D670200A2C4BF336003B1DE0 /* Kingfisher */; };
 		D670200D2C4C05FE003B1DE0 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D670200C2C4C05FE003B1DE0 /* SafariView.swift */; };
@@ -184,12 +184,12 @@
 		D661A9EA2A50852B00E1EDBA /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "18089-gold-coin.json"; sourceTree = "<group>"; };
 		D661A9F12A519BEE00E1EDBA /* 9733-coin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "9733-coin.json"; sourceTree = "<group>"; };
+		D664739E2D5B86520049A981 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D6701FED2C357C41003B1DE0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		D6701FF92C3967C3003B1DE0 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D6701FFD2C398DBD003B1DE0 /* NotiSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiSetting.swift; sourceTree = "<group>"; };
 		D6701FFF2C398EAE003B1DE0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
-		D67020032C417395003B1DE0 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D67020052C4AF16C003B1DE0 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		D670200C2C4C05FE003B1DE0 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		D67020102C4D2C58003B1DE0 /* Extension+UIapplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIapplication.swift"; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 			children = (
 				D6D207A42B162B130093D59C /* GoogleService-Info.plist */,
 				D661A9EC2A50868F00E1EDBA /* 18089-gold-coin.json */,
-				D67020032C417395003B1DE0 /* Config.xcconfig */,
+				D664739E2D5B86520049A981 /* Config.xcconfig */,
 				D68767732A5E52B90024574B /* 뉴스스크랩.storekit */,
 				D6144B6A2CF0DFBF00F16EE0 /* group.json */,
 				D661A9F12A519BEE00E1EDBA /* 9733-coin.json */,
@@ -563,9 +563,9 @@
 				D661A9DF2A4F2CF400E1EDBA /* OnboardingCell.xib in Resources */,
 				D6A13FA72A3B4DA2002A457B /* KeywordTableViewCell.xib in Resources */,
 				D63BEA222A3CC533004DD22A /* KeywordGroupHeader.xib in Resources */,
+				D664739F2D5B86520049A981 /* Config.xcconfig in Resources */,
 				D68767742A5E52B90024574B /* 뉴스스크랩.storekit in Resources */,
 				D67020152C4D4401003B1DE0 /* login.json in Resources */,
-				D67020042C417395003B1DE0 /* Config.xcconfig in Resources */,
 				D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */,
 				B5460C3923F2B0CA002A199E /* CategoryTableViewCell.xib in Resources */,
 				D661A9D72A4DC52E00E1EDBA /* paywall2.mp4 in Resources */,
@@ -823,7 +823,6 @@
 		};
 		B5486D9C23F23463008A5ABD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D67020032C417395003B1DE0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = scrapper/scrapper.entitlements;
@@ -852,7 +851,6 @@
 		};
 		B5486D9D23F23463008A5ABD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D67020032C417395003B1DE0 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = scrapper/scrapperRelease.entitlements;
