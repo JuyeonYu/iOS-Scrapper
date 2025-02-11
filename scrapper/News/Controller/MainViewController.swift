@@ -38,9 +38,6 @@ class MainViewController: UITabBarController {
       UIViewController.topViewController()?.presentSafari(url: link)
       CacheManager.shared.dict[CacheType.openLink.rawValue] = nil
     }
-    
-    
-    FirestoreManager().saveUser()
   }
   
   override func viewDidAppear(_ animated: Bool) {

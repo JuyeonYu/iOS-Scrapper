@@ -244,10 +244,17 @@ class KeywordViewController: UIViewController {
     }
   }
   
+  
+  var keywordNotiDict: [String: Bool] = [:]
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     syncHasNews()
-    tableView.reloadData()
+    
+    Task {
+      keywordNotiDict = await FirestoreManager().getKeywords()
+      tableView.reloadData()
+    }
     
   }
   override func viewWillDisappear(_ animated: Bool) {
@@ -514,6 +521,9 @@ extension KeywordViewController: UITableViewDataSource {
     let cell = self.tableView.dequeueReusableCell(withIdentifier: keywordCellID, for: indexPath) as! KeywordTableViewCell
     cell.indexPath = indexPath
     cell.config(keyword: keywordRealm)
+    
+    cell.noti.setImage(.init(systemName: (keywordNotiDict[keywordRealm.keyword] ?? false) ? "bell.fill" : "bell.slash.fill"), for: .normal)
+    cell.noti.tintColor = (keywordNotiDict[keywordRealm.keyword] ?? false) ? UIColor(named: "Theme") : UIColor.lightGray
     cell.delegate = self
     
     if tableView.isEditing && UITraitCollection.current.userInterfaceStyle == .dark {
