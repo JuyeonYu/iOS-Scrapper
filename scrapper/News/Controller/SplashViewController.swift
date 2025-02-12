@@ -37,29 +37,35 @@ class SplashViewController: UIViewController {
   }
   @IBOutlet weak var process: UILabel!
 }
-
+var gKeywordDict: [String: Bool] = [:]
 extension SplashViewController {
   func setRootViewController() {
-      if forTest {
-          self.setRootViewController(name: "Main",
-                              identifier: "MainViewController")
-          return
-      }
+//      if forTest {
+//          self.setRootViewController(name: "Main",
+//                              identifier: "MainViewController")
+//          return
+//      }
       
       if let currentUser = Auth.auth().currentUser {
         DispatchQueue.main.async {
           self.process.text = "확인중.."
         }
-          currentUser.getIDToken(completion: { token, error in
-              if let token {
-                DispatchQueue.main.async {
-                  self.process.text = "확인중..."
-                }
-                  KeychainHelper.shared.saveString(key: KeychainKey.firebaseAuthToken.rawValue, value: token)
-              }
-            self.decideRootViewController()
-            print("x->-1")
-          })
+          Task {
+              gKeywordDict = await FirestoreManager().getKeywords()
+              
+              currentUser.getIDToken(completion: { token, error in
+                  if let token {
+                    DispatchQueue.main.async {
+                      self.process.text = "확인중..."
+                    }
+                      KeychainHelper.shared.saveString(key: KeychainKey.firebaseAuthToken.rawValue, value: token)
+                  }
+                self.decideRootViewController()
+                print("x->-1")
+              })
+          }
+          
+          
       } else {
           self.decideRootViewController()
         print("x->9")

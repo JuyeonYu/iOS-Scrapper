@@ -183,6 +183,9 @@ class KeywordViewController: UIViewController {
       if forTest {
 //          fillMock()
       }
+      
+      
+      keywordNotiDict = gKeywordDict
   }
     private func addKeyword(keyword: String, groupId: UUID) {
         let keywordRealm = KeywordRealm()
@@ -251,10 +254,7 @@ class KeywordViewController: UIViewController {
     super.viewWillAppear(animated)
     syncHasNews()
     
-    Task {
-      keywordNotiDict = await FirestoreManager().getKeywords()
       tableView.reloadData()
-    }
     
   }
   override func viewWillDisappear(_ animated: Bool) {
