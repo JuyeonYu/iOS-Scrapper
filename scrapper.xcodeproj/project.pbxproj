@@ -96,6 +96,7 @@
 		D6A13FAB2A3B4E47002A457B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */; };
 		D6A13FAE2A3B4F4C002A457B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D6A13FAD2A3B4F4C002A457B /* Alamofire */; };
 		D6B8CF3A2AF91F0F00F6AC63 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = D6B8CF392AF91F0F00F6AC63 /* SwiftRater */; };
+		D6BEAAF62D558CD6003CBB70 /* TTSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BEAAF52D558CD6003CBB70 /* TTSManager.swift */; };
 		D6D207A52B162B130093D59C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6D207A42B162B130093D59C /* GoogleService-Info.plist */; };
 		D6D207A82B162C310093D59C /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A72B162C310093D59C /* FirebaseAnalyticsSwift */; };
 		D6D207AA2B162C310093D59C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D6D207A92B162C310093D59C /* FirebaseCrashlytics */; };
@@ -208,6 +209,7 @@
 		D69E103E2C51D61C00E0C305 /* GoogleAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAdView.swift; sourceTree = "<group>"; };
 		D6A13FA52A3B4DA2002A457B /* KeywordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeywordTableViewCell.xib; sourceTree = "<group>"; };
 		D6A13FA92A3B4E47002A457B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
+		D6BEAAF52D558CD6003CBB70 /* TTSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTSManager.swift; sourceTree = "<group>"; };
 		D6D207A42B162B130093D59C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D6EB0F852D0905A0002BCD63 /* BreakingNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakingNewsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				B520381023F30A280025B571 /* NetworkManager.swift */,
+				D6BEAAF52D558CD6003CBB70 /* TTSManager.swift */,
 				B5619A87250780A600D89694 /* UserDefaultManager.swift */,
 				D68767712A5E4EBA0024574B /* IAPHelper.swift */,
 				D6701FF52C3597F6003B1DE0 /* KeychainHelper.swift */,
@@ -616,6 +619,7 @@
 				D661A9BD2A4C1D5F00E1EDBA /* SettingViewController.swift in Sources */,
 				B5460C2923F28BE2002A199E /* Keyword.swift in Sources */,
 				B5486D8B23F23461008A5ABD /* AppDelegate.swift in Sources */,
+				D6BEAAF62D558CD6003CBB70 /* TTSManager.swift in Sources */,
 				B520383B23F3F0DC0025B571 /* RestAPIResponse.swift in Sources */,
 				D6701FFE2C398DBD003B1DE0 /* NotiSetting.swift in Sources */,
 				D6144B682CF0D9A400F16EE0 /* AddGroupViewController.swift in Sources */,
@@ -839,7 +843,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.8;
+				MARKETING_VERSION = 3.0.11;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
 				PRODUCT_NAME = NewsScrap;
@@ -867,7 +871,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.8;
+				MARKETING_VERSION = 3.0.11;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnny.scrapper;
