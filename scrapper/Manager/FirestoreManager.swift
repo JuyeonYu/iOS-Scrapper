@@ -51,6 +51,20 @@ struct FirestoreManager {
     firestore.collection(collection.rawValue).document(documentId).setData(dict)
   }
   
+  func getKeywords() async -> [String: Bool] {
+    guard let uid: String = Auth.auth().currentUser?.uid else { return  [:] }
+    let snapshots = try? await firestore.collection(FirestoreCollectionType.keyword.rawValue).whereField("user_id", isEqualTo: uid).getDocuments().documents
+    var result: [String: Bool] = [:]
+    for snapshot in snapshots ?? [] {
+      let notiEnable = snapshot.data()["noti_enable"] as? Bool ?? false
+      if let keyword = snapshot.data()["keyword"] as? String {
+        result[keyword] = notiEnable
+      }
+    }
+    
+    return result
+  }
+  
   
   func delete(collection: FirestoreCollectionType, documentId: String) {
     firestore.collection(collection.rawValue).document(documentId).delete()
@@ -88,10 +102,15 @@ struct FirestoreManager {
     guard let id: String = Auth.auth().currentUser?.uid else { return }
     guard let fcmToken: String = KeychainHelper.shared.loadString(key: KeychainKey.fcmToken.rawValue) else { return }
     
-    upsert(collection: .user, documentId: id, dict: [
-      "fcm_token": fcmToken,
-      "receive_breaking_news" : true
-    ])
+    Task {
+      let isPro = await IAPManager.isPro()
+      upsert(collection: .user, documentId: id, dict: [
+        "fcm_token": fcmToken,
+        "login_timestamp": Date().timeIntervalSince1970,
+        "is_paid": isPro
+      ])
+    }
+    
   }
     
     func toggleBreakingNewsNoti(on: Bool) {
