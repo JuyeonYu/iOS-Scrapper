@@ -616,19 +616,29 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
         keyword = self.getKeywordRealm(indexPath: indexPath)
       }
       guard let keyword else { return }
-      
-      
-      if await !IAPManager.isPro() && self.realm.objects(KeywordRealm.self).map({ $0.notiEnabled }).filter({ $0 }).count > 0 && !keyword.notiEnabled {
-        let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
-          CustomAlertViewController(coder: coder, head: "알림", body: "프리미엄 회원되고 무제한 키워드 알림을 받아보세요.", lottieImageName: "18089-gold-coin", okTitle: "확인", useOkDelegate: true, okType: .paywall)
+        if await !IAPManager.isPro() && keywordNotiDict[keyword.keyword] == false && keywordNotiDict.values.filter({ $0 }).count > 0 {
+            let alert = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CustomAlertViewController") { coder in
+              CustomAlertViewController(coder: coder, head: "알림", body: "프리미엄 회원되고 무제한 키워드 알림을 받아보세요.", lottieImageName: "18089-gold-coin", okTitle: "확인", useOkDelegate: true, okType: .paywall)
+            }
+            alert.delegate = self
+            alert.modalTransitionStyle = .crossDissolve
+            alert.modalPresentationStyle = .overCurrentContext
+            self.present(alert, animated: true)
+        } else {
+            let toggle = !(keywordNotiDict[keyword.keyword] ?? false)
+            await MainActor.run {
+              try! self.realm.write({
+                keyword.notiEnabled.toggle()
+              })
+            }
+            FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: toggle)
+              self.keywordNotiDict[keyword.keyword] = toggle
+            self.tableView.reloadRows(at: [indexPath], with: .none)
         }
-        alert.delegate = self
-        alert.modalTransitionStyle = .crossDissolve
-        alert.modalPresentationStyle = .overCurrentContext
-        self.present(alert, animated: true)
-        
-        return
-      }
+      
+        if keywordNotiDict[keyword.keyword] == true {
+            
+        }
       
       await MainActor.run {
         try! self.realm.write({
@@ -636,8 +646,6 @@ extension KeywordViewController: KeywordGroupHeaderDelegate {
         })
       }
       
-      FirestoreManager().updateKeywordNoti(keyword: keyword.keyword, enable: keyword.notiEnabled)
-      self.tableView.reloadRows(at: [indexPath], with: .none)
     }
   }
 }
